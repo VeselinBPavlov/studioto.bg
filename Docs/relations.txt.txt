@@ -1,0 +1,8 @@
+1. Client -> Location (One-to-Many)
+2. Location -> Employee (One-to-Many)
+3. Appointment -> Location (Many-to-One)
+4. Appointment -> Employee (Many-to-One)
+5. Appointment -> Service(Many-to-One)
+6. Service -> Employee (Many-to-Many)
+7. Service -> Location (Many-to-Many)
+8. User -> Appointment (One-to-Many)
