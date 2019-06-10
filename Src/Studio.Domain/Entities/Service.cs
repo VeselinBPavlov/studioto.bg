@@ -13,6 +13,6 @@
 
         public int Name { get; set; }
 
-        public IEnumerable<LocationService> LocationServices { get; private set; }
+        public ICollection<LocationService> LocationServices { get; private set; }
     }
 }

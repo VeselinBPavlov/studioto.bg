@@ -27,6 +27,6 @@
 
         public UserRole Role { get; set; }
 
-        public IEnumerable<Appointment> Appointments { get; private set; }
+        public ICollection<Appointment> Appointments { get; private set; }
     }
 }

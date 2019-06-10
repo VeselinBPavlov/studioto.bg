@@ -21,10 +21,10 @@
         public int LocationMapDataId { get; set; }
         public LocationMapData LocationMapData { get; set; }
 
-        public IEnumerable<Employee> Employees { get; private set; }
+        public ICollection<Employee> Employees { get; private set; }
 
-        public IEnumerable<LocationService> LocationServices { get; private set; }
+        public ICollection<LocationService> LocationServices { get; private set; }
 
-        public IEnumerable<Appointment> Appointments { get; private set; }
+        public ICollection<Appointment> Appointments { get; private set; }
     }
 }
