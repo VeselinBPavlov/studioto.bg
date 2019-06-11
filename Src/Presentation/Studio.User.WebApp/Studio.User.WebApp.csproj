@@ -8,6 +8,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
@@ -15,7 +16,9 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Studio.Common\Studio.Common.csproj" />
     <ProjectReference Include="..\..\Core\Studio.Domain\Studio.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Studio.Infrastructure\Studio.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Studio.Persistence\Studio.Persistence.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,7 @@
 ﻿namespace Studio.User.WebApp
 {
+    using System.Reflection;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -10,15 +12,16 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Application.Interfaces.Infrastructure;
+    using AutoMapper;
+    using MediatR;
+
     using Common;
     using Domain.Entities;
     using Infrastructure;
     using Persistence.Context;
-    using System.Reflection;
+    using Application.Interfaces.Infrastructure;
     using Application.Infrastructure.AutoMapper;
-
-    using AutoMapper;
+    using Application.Infrastructure.Logger;   
 
     public class Startup
     {
@@ -39,6 +42,10 @@
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IDateTime, MachineDateTime>();
 
+            // MediatR
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -54,6 +61,7 @@
                 .AddEntityFrameworkStores<StudioDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
