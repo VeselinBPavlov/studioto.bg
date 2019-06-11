@@ -9,7 +9,10 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Studio.Application.Interfaces.Infrastructure;
+    using Studio.Common;
     using Studio.Domain.Entities;
+    using Studio.Infrastructure;
     using Studio.Persistence.Context;
 
     public class Startup
@@ -24,6 +27,11 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Framework Serices.
+            services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IDateTime, MachineDateTime>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
