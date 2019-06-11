@@ -26,6 +26,16 @@
                    .HasForeignKey(e => e.UserId)
                    .IsRequired()
                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(e => e.FirstName)
+                   .HasMaxLength(50)
+                   .IsUnicode()
+                   .IsRequired();
+
+            builder.Property(e => e.LastName)
+                   .HasMaxLength(50)
+                   .IsUnicode()
+                   .IsRequired();
         }
     }
 }

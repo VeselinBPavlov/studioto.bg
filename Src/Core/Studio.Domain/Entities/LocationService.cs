@@ -2,8 +2,6 @@
 {
     public class LocationService
     {
-        public int Id { get; set; }
-
         public bool IsActive { get; set; }
 
         public decimal Price { get; set; }
