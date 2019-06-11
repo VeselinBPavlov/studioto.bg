@@ -332,14 +332,12 @@ namespace Studio.Persistence.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true);
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true);
 

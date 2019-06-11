@@ -29,13 +29,11 @@
 
             builder.Property(e => e.FirstName)
                    .HasMaxLength(50)
-                   .IsUnicode()
-                   .IsRequired();
+                   .IsUnicode();
 
             builder.Property(e => e.LastName)
                    .HasMaxLength(50)
-                   .IsUnicode()
-                   .IsRequired();
+                   .IsUnicode();
         }
     }
 }
