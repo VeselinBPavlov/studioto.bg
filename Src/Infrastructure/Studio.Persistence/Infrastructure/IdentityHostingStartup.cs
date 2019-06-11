@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 
-[assembly: HostingStartup(typeof(Studio.Persistence.IdentityHostingStartup))]
-namespace Studio.Persistence
+[assembly: HostingStartup(typeof(Studio.Persistence.Infrastructure.IdentityHostingStartup))]
+namespace Studio.Persistence.Infrastructure
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -14,12 +14,12 @@ namespace Studio.Persistence
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<StudioDBContext>(options =>
+                services.AddDbContext<StudioDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("StudioDBContextConnection")));
+                        context.Configuration.GetConnectionString("StudioDBConnection")));
 
                 services.AddDefaultIdentity<StudioUser>()
-                    .AddEntityFrameworkStores<StudioDBContext>();
+                    .AddEntityFrameworkStores<StudioDbContext>();
             });
         }
     }

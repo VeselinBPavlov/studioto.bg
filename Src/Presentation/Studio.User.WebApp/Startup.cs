@@ -31,12 +31,12 @@
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<StudioDBContext>(options =>
+            services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("StudioDBConnection")));
             services.AddDefaultIdentity<StudioUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<StudioDBContext>();
+                .AddEntityFrameworkStores<StudioDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
