@@ -9,11 +9,16 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Studio.Application.Interfaces.Infrastructure;
-    using Studio.Common;
-    using Studio.Domain.Entities;
-    using Studio.Infrastructure;
-    using Studio.Persistence.Context;
+
+    using Application.Interfaces.Infrastructure;
+    using Common;
+    using Domain.Entities;
+    using Infrastructure;
+    using Persistence.Context;
+    using System.Reflection;
+    using Application.Infrastructure.AutoMapper;
+
+    using AutoMapper;
 
     public class Startup
     {
@@ -27,6 +32,8 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // AutoMapper
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
             // Framework Serices.
             services.AddTransient<INotificationService, NotificationService>();
