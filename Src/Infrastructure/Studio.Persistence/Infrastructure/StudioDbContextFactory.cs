@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Studio.Persistence.Context;
 
 namespace Studio.Persistence.Infrastructure
 {

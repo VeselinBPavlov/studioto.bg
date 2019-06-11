@@ -8,6 +8,7 @@ namespace Studio.Persistence.Infrastructure
     using Microsoft.Extensions.DependencyInjection;
 
     using Domain.Entities;
+    using Studio.Persistence.Context;
 
     public class IdentityHostingStartup : IHostingStartup
     {

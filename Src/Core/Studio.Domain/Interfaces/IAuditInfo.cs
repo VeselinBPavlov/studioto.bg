@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Interfaces.Persistence
+﻿namespace Studio.Domain.Interfaces
 {
     using System;
 

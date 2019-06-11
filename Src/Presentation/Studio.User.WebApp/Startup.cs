@@ -10,7 +10,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Studio.Domain.Entities;
-    using Studio.Persistence;
+    using Studio.Persistence.Context;
 
     public class Startup
     {
