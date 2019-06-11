@@ -13,6 +13,6 @@
         public Employee Employee { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public StudioUser User { get; set; }
     }
 }
