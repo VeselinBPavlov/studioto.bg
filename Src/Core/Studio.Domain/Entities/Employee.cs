@@ -19,8 +19,8 @@
         public int LocationId { get; set; }
         public Location Location { get; set; }
 
-        public ICollection<EmployeeService> EmployeeServices { get; private set; }
+        public virtual ICollection<EmployeeService> EmployeeServices { get; private set; }
 
-        public ICollection<Appointment> Appointments { get; private set; }
+        public virtual ICollection<Appointment> Appointments { get; private set; }
     }
 }

@@ -29,12 +29,12 @@
 
         public DateTime? DeletedOn { get; set; }
 
-        public ICollection<Appointment> Appointments { get; private set; }
+        public virtual ICollection<Appointment> Appointments { get; private set; }
 
-        public ICollection<IdentityUserRole<string>> Roles { get; private set; }
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; private set; }
 
-        public ICollection<IdentityUserClaim<string>> Claims { get; private set; }
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; private set; }
 
-        public ICollection<IdentityUserLogin<string>> Logins { get; private set; }
+        public virtual ICollection<IdentityUserLogin<string>> Logins { get; private set; }
     }
 }

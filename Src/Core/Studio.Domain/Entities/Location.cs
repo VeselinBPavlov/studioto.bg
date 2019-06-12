@@ -21,10 +21,10 @@
         public int LocationMapDataId { get; set; }
         public LocationMapData LocationMapData { get; set; }
 
-        public ICollection<Employee> Employees { get; private set; }
+        public virtual ICollection<Employee> Employees { get; private set; }
 
-        public ICollection<LocationService> LocationServices { get; private set; }
+        public virtual ICollection<LocationService> LocationServices { get; private set; }
 
-        public ICollection<Appointment> Appointments { get; private set; }
+        public virtual ICollection<Appointment> Appointments { get; private set; }
     }
 }

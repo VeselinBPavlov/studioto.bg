@@ -13,6 +13,6 @@
 
         public int Name { get; set; }
 
-        public ICollection<LocationService> LocationServices { get; private set; }
+        public virtual ICollection<LocationService> LocationServices { get; private set; }
     }
 }
