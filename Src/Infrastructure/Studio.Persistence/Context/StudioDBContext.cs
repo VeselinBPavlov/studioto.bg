@@ -18,15 +18,31 @@
     public class StudioDbContext : IdentityDbContext<StudioUser, StudioRole, string>, IStudioDbContext
     {
         public DbSet<Setting> Settings { get; set; }
+
         public DbSet<Appointment> Appointments { get; set; }
+
         public DbSet<Client> Clients { get; set; }
+
         public DbSet<Employee> Employees { get; set; }
+
         public DbSet<EmployeeService> EmployeeServices { get; set; }
+
         public DbSet<Location> Locations { get; set; }
+
         public DbSet<LocationMapData> LocationsMapData { get; set; }
+
         public DbSet<LocationService> LocationServices { get; set; }
+
         public DbSet<Service> Services { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
         public DbSet<StudioRole> StudioRoles { get; set; }
+
         public DbSet<StudioUser> StudioUsers { get; set; }
 
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =

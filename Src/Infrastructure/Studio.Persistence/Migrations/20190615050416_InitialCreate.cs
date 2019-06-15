@@ -63,11 +63,37 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Industry = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LocationsMapData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocationsMapData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +234,26 @@ namespace Studio.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    CountryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cities_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Locations",
                 columns: table => new
                 {
@@ -224,6 +270,53 @@ namespace Studio.Persistence.Migrations
                         name: "FK_Locations_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Locations_LocationsMapData_LocationMapDataId",
+                        column: x => x.LocationMapDataId,
+                        principalTable: "LocationsMapData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Apartment = table.Column<string>(nullable: true),
+                    Floor = table.Column<string>(maxLength: 20, nullable: true),
+                    Number = table.Column<string>(maxLength: 20, nullable: false),
+                    Street = table.Column<string>(maxLength: 200, nullable: false),
+                    District = table.Column<string>(maxLength: 100, nullable: true),
+                    PostalCode = table.Column<string>(maxLength: 100, nullable: true),
+                    Latitude = table.Column<decimal>(nullable: false),
+                    Longitude = table.Column<decimal>(nullable: false),
+                    CityId = table.Column<int>(nullable: false),
+                    ClientId = table.Column<int>(nullable: true),
+                    LocationId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -271,25 +364,6 @@ namespace Studio.Persistence.Migrations
                         name: "FK_LocationServices_Services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LocationsMapData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LocationId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LocationsMapData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LocationsMapData_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -353,6 +427,25 @@ namespace Studio.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CityId",
+                table: "Addresses",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_ClientId",
+                table: "Addresses",
+                column: "ClientId",
+                unique: true,
+                filter: "[ClientId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_LocationId",
+                table: "Addresses",
+                column: "LocationId",
+                unique: true,
+                filter: "[LocationId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Appointments_EmployeeId",
                 table: "Appointments",
                 column: "EmployeeId");
@@ -407,6 +500,11 @@ namespace Studio.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cities_CountryId",
+                table: "Cities",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_LocationId",
                 table: "Employees",
                 column: "LocationId");
@@ -422,19 +520,22 @@ namespace Studio.Persistence.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Locations_LocationMapDataId",
+                table: "Locations",
+                column: "LocationMapDataId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LocationServices_ServiceId",
                 table: "LocationServices",
                 column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LocationsMapData_LocationId",
-                table: "LocationsMapData",
-                column: "LocationId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Addresses");
+
             migrationBuilder.DropTable(
                 name: "Appointments");
 
@@ -460,10 +561,10 @@ namespace Studio.Persistence.Migrations
                 name: "LocationServices");
 
             migrationBuilder.DropTable(
-                name: "LocationsMapData");
+                name: "Settings");
 
             migrationBuilder.DropTable(
-                name: "Settings");
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -478,10 +579,16 @@ namespace Studio.Persistence.Migrations
                 name: "Services");
 
             migrationBuilder.DropTable(
+                name: "Countries");
+
+            migrationBuilder.DropTable(
                 name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "LocationsMapData");
         }
     }
 }

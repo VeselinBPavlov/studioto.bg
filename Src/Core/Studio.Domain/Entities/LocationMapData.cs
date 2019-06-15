@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
 
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public Location Location { get; set; }        
     }
 }

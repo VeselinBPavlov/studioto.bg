@@ -1,6 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-namespace Studio.Persistence.Configurations
+﻿namespace Studio.Persistence.Configurations
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -17,10 +15,10 @@ namespace Studio.Persistence.Configurations
                    .HasMaxLength(100)
                    .IsUnicode()
                    .IsRequired();
-
-            builder.HasOne(l => l.LocationMapData)
-                   .WithOne(lmd => lmd.Location)
-                   .HasForeignKey<Location>(l => l.LocationMapDataId);
+            
+            builder.HasOne(l => l.Address)
+                   .WithOne(a => a.Location)
+                   .HasForeignKey<Address>(l => l.LocationId);
         }
     }
 }

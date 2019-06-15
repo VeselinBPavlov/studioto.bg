@@ -20,6 +20,8 @@
 
         public int LocationMapDataId { get; set; }
         public LocationMapData LocationMapData { get; set; }
+        
+        public Address Address { get; set; }
 
         public virtual ICollection<Employee> Employees { get; private set; }
 

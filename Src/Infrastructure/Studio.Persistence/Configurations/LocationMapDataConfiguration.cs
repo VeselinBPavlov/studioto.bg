@@ -13,7 +13,7 @@
 
             builder.HasOne(lmd => lmd.Location)
                    .WithOne(l => l.LocationMapData)
-                   .HasForeignKey<LocationMapData>(lmd => lmd.LocationId);
+                   .HasForeignKey<Location>(lmd => lmd.LocationMapDataId);
         }
     }
 }

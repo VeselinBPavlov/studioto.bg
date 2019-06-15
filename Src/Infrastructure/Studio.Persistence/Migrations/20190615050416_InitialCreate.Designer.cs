@@ -10,7 +10,7 @@ using Studio.Persistence.Context;
 namespace Studio.Persistence.Migrations
 {
     [DbContext(typeof(StudioDbContext))]
-    [Migration("20190611105054_InitialCreate")]
+    [Migration("20190615050416_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,61 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Apartment");
+
+                    b.Property<int>("CityId");
+
+                    b.Property<int?>("ClientId");
+
+                    b.Property<string>("District")
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("Floor")
+                        .HasMaxLength(20)
+                        .IsUnicode(true);
+
+                    b.Property<decimal>("Latitude");
+
+                    b.Property<int?>("LocationId");
+
+                    b.Property<decimal>("Longitude");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(true);
+
+                    b.Property<string>("PostalCode")
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique()
+                        .HasFilter("[ClientId] IS NOT NULL");
+
+                    b.HasIndex("LocationId")
+                        .IsUnique()
+                        .HasFilter("[LocationId] IS NOT NULL");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.Appointment", b =>
                 {
                     b.Property<int>("Id")
@@ -135,11 +190,33 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountryId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Industry");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -149,6 +226,22 @@ namespace Studio.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Studio.Domain.Entities.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Employee", b =>
@@ -208,6 +301,9 @@ namespace Studio.Persistence.Migrations
 
                     b.HasIndex("ClientId");
 
+                    b.HasIndex("LocationMapDataId")
+                        .IsUnique();
+
                     b.ToTable("Locations");
                 });
 
@@ -217,12 +313,7 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("LocationId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("LocationId")
-                        .IsUnique();
 
                     b.ToTable("LocationsMapData");
                 });
@@ -426,6 +517,22 @@ namespace Studio.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Studio.Domain.Entities.City", "City")
+                        .WithMany("Addresses")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Studio.Domain.Entities.Client", "Client")
+                        .WithOne("Address")
+                        .HasForeignKey("Studio.Domain.Entities.Address", "ClientId");
+
+                    b.HasOne("Studio.Domain.Entities.Location", "Location")
+                        .WithOne("Address")
+                        .HasForeignKey("Studio.Domain.Entities.Address", "LocationId");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.Appointment", b =>
                 {
                     b.HasOne("Studio.Domain.Entities.Employee", "Employee")
@@ -441,6 +548,14 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.StudioUser", "User")
                         .WithMany("Appointments")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Studio.Domain.Entities.City", b =>
+                {
+                    b.HasOne("Studio.Domain.Entities.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Employee", b =>
@@ -470,13 +585,10 @@ namespace Studio.Persistence.Migrations
                         .WithMany("Locations")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
 
-            modelBuilder.Entity("Studio.Domain.Entities.LocationMapData", b =>
-                {
-                    b.HasOne("Studio.Domain.Entities.Location", "Location")
-                        .WithOne("LocationMapData")
-                        .HasForeignKey("Studio.Domain.Entities.LocationMapData", "LocationId")
+                    b.HasOne("Studio.Domain.Entities.LocationMapData", "LocationMapData")
+                        .WithOne("Location")
+                        .HasForeignKey("Studio.Domain.Entities.Location", "LocationMapDataId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
