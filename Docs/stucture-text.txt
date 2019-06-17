@@ -14,3 +14,12 @@
 8. Логин страница 
 9. Регистър страница
 10. Админ панел
+
+
+Industry -> Services
+Address -> value object
+Address -> clientId remove
+Location -> IsOffice add
+Address -> WorkTime one to one relation
+LocationMapData has one to one key with Location
+Location has one to one key with Address
