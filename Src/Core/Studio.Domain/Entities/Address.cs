@@ -1,20 +1,12 @@
 ﻿namespace Studio.Domain.Entities
 {
+    using Studio.Domain.ValueObjects;
+
     public class Address
     {
         public int Id { get; set; }
 
-        public string Apartment { get; set; }
-
-        public string Floor { get; set; }
-
-        public string Number { get; set; }
-
-        public string Street { get; set; }
-
-        public string District { get; set; } 
-
-        public string PostalCode { get; set; }
+        public AddressFormat AddressFormated { get; set; }
 
         public decimal Latitude { get; set; }
 
