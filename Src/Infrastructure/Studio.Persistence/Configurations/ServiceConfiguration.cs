@@ -15,6 +15,10 @@
                    .HasMaxLength(100)
                    .IsUnicode()
                    .IsRequired();
+
+            builder.HasOne(s => s.Industry)
+                   .WithMany(i => i.Services)
+                   .HasForeignKey(s => s.IndustryId);
         }
     }
 }

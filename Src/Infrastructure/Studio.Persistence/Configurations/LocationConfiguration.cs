@@ -18,7 +18,7 @@
             
             builder.HasOne(l => l.Address)
                    .WithOne(a => a.Location)
-                   .HasForeignKey<Address>(l => l.LocationId);
+                   .HasForeignKey<Location>(l => l.AddressId);
         }
     }
 }

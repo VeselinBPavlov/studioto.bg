@@ -23,10 +23,6 @@
         public int CityId { get; set; }
         public City City { get; set; }
 
-        public int? ClientId { get; set; }
-        public Client Client { get; set; }
-
-        public int? LocationId { get; set; }
         public Location Location { get; set; }
     }
 }
