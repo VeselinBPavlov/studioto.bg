@@ -15,10 +15,6 @@
                    .HasMaxLength(100)
                    .IsUnicode()
                    .IsRequired();
-
-            builder.HasOne(c => c.Address)
-                   .WithOne(a => a.Client)
-                   .HasForeignKey<Address>(c => c.ClientId);
         }
     }
 }

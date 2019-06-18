@@ -55,7 +55,7 @@
 
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("StudioDBConnection")));
+                    Configuration.GetConnectionString("StudioDBConnectionWork")));
             services.AddDefaultIdentity<StudioUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<StudioDbContext>();

@@ -45,6 +45,8 @@
 
         public DbSet<StudioUser> StudioUsers { get; set; }
 
+        public DbSet<Industry> Industries { get; set;}
+
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
             typeof(StudioDbContext).GetMethod(nameof(SetIsDeletedQueryFilter), BindingFlags.NonPublic | BindingFlags.Static);
 

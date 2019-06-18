@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-Studio.User.WebApp-302494B4-63D5-403C-828A-99291626F836</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
 
 

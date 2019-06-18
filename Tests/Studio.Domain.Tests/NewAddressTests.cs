@@ -14,15 +14,13 @@ namespace Studio.Domain.Tests
                 Id = 1,
                 Apartment = "22",
                 Floor = "2",
-                Number = "3Ж",
-                Street = "Васил Левски",
+                Number = "3пїЅ",
+                Street = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ",
                 District = null,
                 PostalCode = null,
                 Latitude = 40.545M,
                 Longitude = 40.214M,
-                CityId = 1,
-                ClientId = null,
-                LocationId = null
+                CityId = 1
             };
 
             Assert.NotNull(address);
