@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using System.Reflection;
 
 namespace Studio.Application.Infrastructure.AutoMapper
 {
+    using System.Reflection;
 
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
-            LoadStandardMappings();
-            LoadCustomMappings();
-            LoadConverters();
+            this.LoadStandardMappings();
+            this.LoadCustomMappings();
+            this.LoadConverters();
         }
 
         private void LoadConverters()

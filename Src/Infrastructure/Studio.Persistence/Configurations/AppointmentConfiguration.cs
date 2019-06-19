@@ -1,9 +1,8 @@
 ﻿namespace Studio.Persistence.Configurations
 {
+    using Domain.Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-    using Domain.Entities;
 
     public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
     {

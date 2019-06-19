@@ -1,8 +1,8 @@
 ﻿namespace Studio.Persistence.Configurations
 {
+    using Domain.ValueObjects;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Domain.ValueObjects;
 
     public class AddressFormatConfiguration : IEntityTypeConfiguration<AddressFormat>
     {

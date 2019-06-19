@@ -1,10 +1,8 @@
 ﻿namespace Studio.Persistence.Context
 {
     using System;
-    
-    using Microsoft.EntityFrameworkCore;
-
     using Application.Interfaces.Persistence;
+    using Microsoft.EntityFrameworkCore;
 
     public class DbQueryRunner : IDbQueryRunner
     {

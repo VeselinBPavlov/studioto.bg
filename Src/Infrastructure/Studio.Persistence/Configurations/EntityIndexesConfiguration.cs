@@ -1,9 +1,8 @@
 ﻿namespace Studio.Persistence.Configurations
 {
-    using System.Linq;    
+    using System.Linq;
+    using Domain.Interfaces;
     using Microsoft.EntityFrameworkCore;
-
-    using Studio.Domain.Interfaces;
 
     internal static class EntityIndexesConfiguration
     {

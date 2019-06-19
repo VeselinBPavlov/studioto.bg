@@ -1,9 +1,8 @@
 ﻿namespace Studio.Domain.Entities
 {
     using System;
-    using Microsoft.AspNetCore.Identity;
-
     using Interfaces;
+    using Microsoft.AspNetCore.Identity;
 
     public class StudioRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

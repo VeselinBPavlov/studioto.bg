@@ -1,9 +1,7 @@
 ﻿namespace Studio.Application.Interfaces.Persistence
 {
-    using Microsoft.EntityFrameworkCore;
-
     using Domain.Entities;
-    using System.Reflection;
+    using Microsoft.EntityFrameworkCore;
 
     public interface IStudioDbContext
     {

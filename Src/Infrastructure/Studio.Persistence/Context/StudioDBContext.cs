@@ -1,22 +1,28 @@
 ﻿namespace Studio.Persistence.Context
 {
-    using System.Reflection;
-    using System.Threading.Tasks;
-    using System.Threading;
-    using System.Linq;
-    using Studio.Domain.Interfaces;
     using System;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;  
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    using Infrastructure;
-
-    using Domain.Entities;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Application.Interfaces.Persistence;
+    using Domain.Entities;
+    using Domain.Interfaces;
+    using Infrastructure;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Migrations;
 
     public class StudioDbContext : IdentityDbContext<StudioUser, StudioRole, string>, IStudioDbContext
     {
+        private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
+            typeof(StudioDbContext).GetMethod(nameof(SetIsDeletedQueryFilter), BindingFlags.NonPublic | BindingFlags.Static);
+
+        public StudioDbContext(DbContextOptions<StudioDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Appointment> Appointments { get; set; }
@@ -45,22 +51,31 @@
 
         public DbSet<StudioUser> StudioUsers { get; set; }
 
-        public DbSet<Industry> Industries { get; set;}
+        public DbSet<Industry> Industries { get; set; }
 
-        private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
-            typeof(StudioDbContext).GetMethod(nameof(SetIsDeletedQueryFilter), BindingFlags.NonPublic | BindingFlags.Static);
+        public override int SaveChanges() => this.SaveChanges(true);
 
-        public StudioDbContext(DbContextOptions<StudioDbContext> options)
-            : base(options)
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-        }               
+            this.ApplyAuditInfoRules();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+            this.SaveChangesAsync(true, cancellationToken);
+
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfigurationsFromAssembly(typeof(StudioDbContext).Assembly);            
-            
+            builder.ApplyConfigurationsFromAssembly(typeof(StudioDbContext).Assembly);
+
             var entityTypes = builder.Model.GetEntityTypes().ToList();
 
             // Set global query filter for not deleted entities only
@@ -85,23 +100,6 @@
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.ReplaceService<IMigrationsSqlGenerator, CustomSqlServerMigrationsSqlGenerator>();
-        }
-
-        public override int SaveChanges() => this.SaveChanges(true);
-
-        public override int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            this.ApplyAuditInfoRules();
-            return base.SaveChanges(acceptAllChangesOnSuccess);
-        }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
-            this.SaveChangesAsync(true, cancellationToken);
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
-        {
-            this.ApplyAuditInfoRules();
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

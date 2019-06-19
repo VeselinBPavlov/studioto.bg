@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Studio.Domain.Entities
+﻿namespace Studio.Domain.Entities
 {
+    using System.Collections.Generic;
+
     public class Industry
     {
         public int Id { get; set; }

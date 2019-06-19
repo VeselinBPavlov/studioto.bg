@@ -2,13 +2,16 @@ namespace Studio.Domain.ValueObjects
 {
     using System;
     using System.Collections.Generic;
-
-    using Infrastructure;
-    using Exceptions;
     using System.Text;
+    using Exceptions;
+    using Infrastructure;
 
     public class AddressFormat : ValueObject<AddressFormat>
     {
+        private AddressFormat()
+        {
+        }
+
         public string Street { get; set; }
 
         public string Number { get; set; }
@@ -23,21 +26,17 @@ namespace Studio.Domain.ValueObjects
 
         public string District { get; set; }
 
-        private AddressFormat()
-        {
-        }
-
         public static AddressFormat For(string addressString)
         {
-            var addressComponents = new Dictionary<int, string>() 
+            var addressComponents = new Dictionary<int, string>()
             {
-                {0, ""},
-                {1, ""},
-                {2, ""},
-                {3, ""},
-                {4, ""},
-                {5, ""},
-                {6, ""}  
+               { 0, string.Empty },
+               { 1, string.Empty },
+               { 2, string.Empty },
+               { 3, string.Empty },
+               { 4, string.Empty },
+               { 5, string.Empty },
+               { 6, string.Empty }
             };
 
             var address = new AddressFormat();
@@ -121,15 +120,16 @@ namespace Studio.Domain.ValueObjects
 
             return sb.ToString().TrimEnd();
         }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return Street;
-            yield return Number;
-            yield return Building;
-            yield return Entrance;
-            yield return Floor;
-            yield return Apartment;
-            yield return District;
+            yield return this.Street;
+            yield return this.Number;
+            yield return this.Building;
+            yield return this.Entrance;
+            yield return this.Floor;
+            yield return this.Apartment;
+            yield return this.District;
         }
     }
 }

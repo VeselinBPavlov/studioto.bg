@@ -1,10 +1,10 @@
 ﻿namespace Studio.Persistence.Infrastructure
 {
+    using System;
+    using System.IO;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
-    using System;
-    using System.IO;
 
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
          IDesignTimeDbContextFactory<TContext> where TContext : DbContext
@@ -15,7 +15,7 @@
         public TContext CreateDbContext(string[] args)
         {
             var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}..{0}Presentation{0}Studio.User.WebApp", Path.DirectorySeparatorChar);
-            return Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
+            return this.Create(basePath, Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
         }
 
         protected abstract TContext CreateNewInstance(DbContextOptions<TContext> options);
@@ -32,7 +32,7 @@
 
             var connectionString = configuration.GetConnectionString(ConnectionStringName);
 
-            return Create(connectionString);
+            return this.Create(connectionString);
         }
 
         private TContext Create(string connectionString)
@@ -48,7 +48,7 @@
 
             optionsBuilder.UseSqlServer(connectionString);
 
-            return CreateNewInstance(optionsBuilder.Options);
+            return this.CreateNewInstance(optionsBuilder.Options);
         }
     }
 }

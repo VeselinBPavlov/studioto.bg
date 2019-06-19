@@ -17,6 +17,7 @@
         public string LastName { get; set; }
 
         public int LocationId { get; set; }
+
         public Location Location { get; set; }
 
         public virtual ICollection<EmployeeService> EmployeeServices { get; private set; }

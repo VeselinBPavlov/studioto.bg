@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Studio.Domain.Entities
+﻿namespace Studio.Domain.Entities
 {
+    using System.Collections.Generic;
+
     public class City
     {
         public City()
@@ -14,6 +14,7 @@ namespace Studio.Domain.Entities
         public string Name { get; set; }
 
         public int CountryId { get; set; }
+
         public Country Country { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }

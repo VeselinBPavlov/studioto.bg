@@ -4,15 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
     using Interfaces.Mapping;
-
-    public sealed class Map
-    {
-        public Type Source { get; set; }
-        public Type Destination { get; set; }
-    }
-
+       
     public static class MapperProfileHelper
     {
         public static IList<Map> LoadStandardMappings(Assembly rootAssembly)

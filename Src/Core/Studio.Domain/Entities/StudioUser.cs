@@ -2,9 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.AspNetCore.Identity;
-
     using Interfaces;
+    using Microsoft.AspNetCore.Identity;
 
     public class StudioUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

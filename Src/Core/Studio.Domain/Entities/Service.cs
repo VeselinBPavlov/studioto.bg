@@ -14,6 +14,7 @@
         public int Name { get; set; }
 
         public int IndustryId { get; set; }
+
         public Industry Industry { get; set; }
 
         public virtual ICollection<LocationService> LocationServices { get; private set; }

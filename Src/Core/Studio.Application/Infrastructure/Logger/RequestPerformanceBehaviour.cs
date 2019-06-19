@@ -8,29 +8,29 @@
 
     public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        private readonly Stopwatch _timer;
-        private readonly ILogger<TRequest> _logger;
+        private readonly Stopwatch timer;
+        private readonly ILogger<TRequest> logger;
 
         public RequestPerformanceBehaviour(ILogger<TRequest> logger)
         {
-            _timer = new Stopwatch();
+            this.timer = new Stopwatch();
 
-            _logger = logger;
+            this.logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            _timer.Start();
+            this.timer.Start();
 
             var response = await next();
 
-            _timer.Stop();
+            this.timer.Stop();
 
-            if (_timer.ElapsedMilliseconds > 500)
+            if (this.timer.ElapsedMilliseconds > 500)
             {
                 var name = typeof(TRequest).Name;
-                
-                _logger.LogWarning("Studio Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, _timer.ElapsedMilliseconds, request);
+
+                this.logger.LogWarning("Studio Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, this.timer.ElapsedMilliseconds, request);
             }
 
             return response;

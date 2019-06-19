@@ -4,8 +4,8 @@
 
     public abstract class BaseCommand
     {
-        private IMediator _mediator;
+        //private IMediator _mediator;
 
-        protected IMediator Mediator;
+        //protected IMediator Mediator;
     }
 }

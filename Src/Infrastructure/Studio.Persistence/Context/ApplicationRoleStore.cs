@@ -1,10 +1,9 @@
 ﻿namespace Studio.Persistence.Context
 {
-    using System.Security.Claims;    
+    using System.Security.Claims;
+    using Domain.Entities;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
-    using Domain.Entities;
 
     public class ApplicationRoleStore : RoleStore<StudioRole, StudioDbContext, string, IdentityUserRole<string>,
         IdentityRoleClaim<string>>

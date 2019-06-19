@@ -2,23 +2,23 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Extensions.Logging;
     using MediatR.Pipeline;
+    using Microsoft.Extensions.Logging;
 
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {
-        private readonly ILogger _logger;
+        private readonly ILogger logger;
 
         public RequestLogger(ILogger<TRequest> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var name = typeof(TRequest).Name;
-            
-            _logger.LogInformation("Studio Request: {Name} {@Request}", name, request);
+
+            this.logger.LogInformation("Studio Request: {Name} {@Request}", name, request);
 
             return Task.CompletedTask;
         }
