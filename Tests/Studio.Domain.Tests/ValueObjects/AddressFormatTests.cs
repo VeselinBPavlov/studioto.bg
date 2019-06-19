@@ -62,7 +62,7 @@ namespace Studio.Domain.Tests.ValueObjects
         }
 
         [Fact]
-        public void ShouldThrowAdAccountInvalidExceptionForInvalidAdAccount()
+        public void ShouldThrowAdAccountInvalidExceptionForInvalidAddress()
         {
             addressData.Number = null;
             Assert.Throws<AdAccountInvalidException>(() => (AddressFormat) addressData);          
