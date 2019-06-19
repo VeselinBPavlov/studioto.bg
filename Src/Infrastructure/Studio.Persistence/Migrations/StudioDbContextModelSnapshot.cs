@@ -15,7 +15,7 @@ namespace Studio.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -111,35 +111,11 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apartment");
-
                     b.Property<int>("CityId");
-
-                    b.Property<string>("District")
-                        .HasMaxLength(100)
-                        .IsUnicode(true);
-
-                    b.Property<string>("Floor")
-                        .HasMaxLength(20)
-                        .IsUnicode(true);
 
                     b.Property<decimal>("Latitude");
 
                     b.Property<decimal>("Longitude");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(true);
-
-                    b.Property<string>("PostalCode")
-                        .HasMaxLength(100)
-                        .IsUnicode(true);
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .IsUnicode(true);
 
                     b.HasKey("Id");
 
@@ -534,6 +510,52 @@ namespace Studio.Persistence.Migrations
                         .WithMany("Addresses")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.OwnsOne("Studio.Domain.ValueObjects.AddressFormat", "AddressFormated", b1 =>
+                        {
+                            b1.Property<int>("AddressId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("Apartment")
+                                .HasMaxLength(10)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("Building")
+                                .HasMaxLength(10)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("District")
+                                .HasMaxLength(100)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("Entrance")
+                                .HasMaxLength(10)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("Floor")
+                                .HasMaxLength(10)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .IsUnicode(true);
+
+                            b1.HasKey("AddressId");
+
+                            b1.ToTable("Addresses");
+
+                            b1.HasOne("Studio.Domain.Entities.Address")
+                                .WithOne("AddressFormated")
+                                .HasForeignKey("Studio.Domain.ValueObjects.AddressFormat", "AddressId")
+                                .OnDelete(DeleteBehavior.Restrict);
+                        });
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Appointment", b =>

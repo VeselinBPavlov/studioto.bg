@@ -17,7 +17,7 @@ namespace Studio.Persistence.Infrastructure
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<StudioDbContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("StudioDBConnectionWork")));
+                        context.Configuration.GetConnectionString("StudioDBConnectionHome")));
 
                 services.AddDefaultIdentity<StudioUser>()
                     .AddEntityFrameworkStores<StudioDbContext>();

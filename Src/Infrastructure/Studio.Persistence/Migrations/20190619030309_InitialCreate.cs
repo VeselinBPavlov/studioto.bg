@@ -266,12 +266,13 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Apartment = table.Column<string>(nullable: true),
-                    Floor = table.Column<string>(maxLength: 20, nullable: true),
-                    Number = table.Column<string>(maxLength: 20, nullable: false),
-                    Street = table.Column<string>(maxLength: 200, nullable: false),
-                    District = table.Column<string>(maxLength: 100, nullable: true),
-                    PostalCode = table.Column<string>(maxLength: 100, nullable: true),
+                    AddressFormated_Street = table.Column<string>(maxLength: 200, nullable: false),
+                    AddressFormated_Number = table.Column<string>(maxLength: 10, nullable: false),
+                    AddressFormated_Building = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormated_Entrance = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormated_Floor = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormated_Apartment = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormated_District = table.Column<string>(maxLength: 100, nullable: true),
                     Latitude = table.Column<decimal>(nullable: false),
                     Longitude = table.Column<decimal>(nullable: false),
                     CityId = table.Column<int>(nullable: false)
