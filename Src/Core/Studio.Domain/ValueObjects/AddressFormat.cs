@@ -8,6 +8,7 @@ namespace Studio.Domain.ValueObjects
 
     public class AddressFormat : ValueObject<AddressFormat>
     {
+        private const string Separator = "<BREAK>";
         private AddressFormat()
         {
         }
@@ -41,39 +42,28 @@ namespace Studio.Domain.ValueObjects
 
             var address = new AddressFormat();
 
-            try
+            string[] addressData = addressString.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+            int counter = 0;
+
+            if (addressData.Length < 2) 
             {
-                int index = -1;
-                int next = 0;
-                int counter = 0;
-
-                while (true) 
-                {
-                    index = addressString.IndexOf("\\", index + 1);
-
-                    if (index == -1)
-                    {
-                        break;
-                    }
-
-                    addressComponents[counter] = addressString.Substring(next, index);
-                    next = index;
-                    counter++;
-                }
-
-                address.Street = addressComponents[0];
-                address.Number = addressComponents[1];
-                address.Building = addressComponents[2];
-                address.Entrance = addressComponents[3];
-                address.Floor = addressComponents[4];
-                address.Apartment = addressComponents[5];
-                address.District = addressComponents[6];
-            }
-            catch (Exception ex)
-            {
-                throw new AdAccountInvalidException(addressString, ex);
+                throw new AdAccountInvalidException(addressString, new ArgumentException("Ivalid address format!"));
             }
 
+            foreach (var data in addressData) 
+            {                   
+                addressComponents[counter] = data;                   
+                counter++;
+            }
+
+            address.Street = addressComponents[0];
+            address.Number = addressComponents[1];
+            address.Building = addressComponents[2];
+            address.Entrance = addressComponents[3];
+            address.Floor = addressComponents[4];
+            address.Apartment = addressComponents[5];
+            address.District = addressComponents[6];
+            
             return address;
         }
 
@@ -91,31 +81,31 @@ namespace Studio.Domain.ValueObjects
         {
             var sb = new StringBuilder();
 
-            sb.Append($"ул. {this.Street}\\ №{this.Number}\\");
+            sb.Append($"ул. {this.Street} №{this.Number}");
 
-            if (this.Building != null)
+            if (this.Building != string.Empty)
             {
-                sb.Append($"бл. {this.Building}\\");
+                sb.Append($", бл.{this.Building}");
             }
 
-            if (this.Entrance != null)
+            if (this.Entrance != string.Empty)
             {
-                sb.Append($"вх. {this.Entrance}\\");
+                sb.Append($", вх.{this.Entrance}");
             }
 
-            if (this.Floor != null)
+            if (this.Floor != string.Empty)
             {
-                sb.Append($"ет. {this.Floor}\\");
+                sb.Append($", ет.{this.Floor}");
             }
 
-            if (this.Apartment != null)
+            if (this.Apartment != string.Empty)
             {
-                sb.Append($"ап. {this.Apartment}\\");
+                sb.Append($", ап.{this.Apartment}");
             }
 
-            if (this.District != null)
+            if (this.District != string.Empty)
             {
-                sb.Append($"кв. {this.District}\\");
+                sb.Append($", кв. {this.District}");
             }
 
             return sb.ToString().TrimEnd();
