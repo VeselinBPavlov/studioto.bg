@@ -7,8 +7,7 @@ namespace Studio.Domain.ValueObjects
     using Infrastructure;
 
     public class AddressFormat : ValueObject<AddressFormat>
-    {
-        private const string Separator = "<BREAK>";
+    { 
         private AddressFormat()
         {
         }
@@ -27,42 +26,23 @@ namespace Studio.Domain.ValueObjects
 
         public string District { get; set; }
 
-        public static AddressFormat For(string addressString)
-        {
-            var addressComponents = new Dictionary<int, string>()
+        public static AddressFormat For(InputAddressData addressData)
+        {   
+            if (addressData.Street == null || addressData.Number == null) 
             {
-               { 0, string.Empty },
-               { 1, string.Empty },
-               { 2, string.Empty },
-               { 3, string.Empty },
-               { 4, string.Empty },
-               { 5, string.Empty },
-               { 6, string.Empty }
-            };
-
-            var address = new AddressFormat();
-
-            string[] addressData = addressString.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
-            int counter = 0;
-
-            if (addressData.Length < 2) 
-            {
-                throw new AdAccountInvalidException(addressString, new ArgumentException("Ivalid address format!"));
+                throw new AdAccountInvalidException(addressData.Street ?? addressData.Number, new ArgumentException("Street and number are required!"));
             }
 
-            foreach (var data in addressData) 
-            {                   
-                addressComponents[counter] = data;                   
-                counter++;
-            }
-
-            address.Street = addressComponents[0];
-            address.Number = addressComponents[1];
-            address.Building = addressComponents[2];
-            address.Entrance = addressComponents[3];
-            address.Floor = addressComponents[4];
-            address.Apartment = addressComponents[5];
-            address.District = addressComponents[6];
+            var address = new AddressFormat()
+            {
+                Street = addressData.Street,
+                Number =  addressData.Number,
+                Building =  addressData.Building,
+                Entrance =  addressData.Entrance,
+                Floor =  addressData.Floor,
+                Apartment =  addressData.Apartment,
+                District =  addressData.District
+            };          
             
             return address;
         }
@@ -72,9 +52,9 @@ namespace Studio.Domain.ValueObjects
             return address.ToString();
         }
 
-        public static explicit operator AddressFormat(string addressString)
+        public static explicit operator AddressFormat(InputAddressData addressData)
         {
-            return For(addressString);
+            return For(addressData);
         }
 
         public override string ToString()
@@ -83,27 +63,27 @@ namespace Studio.Domain.ValueObjects
 
             sb.Append($"ул. {this.Street} №{this.Number}");
 
-            if (this.Building != string.Empty)
+            if (this.Building != null)
             {
                 sb.Append($", бл.{this.Building}");
             }
 
-            if (this.Entrance != string.Empty)
+            if (this.Entrance != null)
             {
                 sb.Append($", вх.{this.Entrance}");
             }
 
-            if (this.Floor != string.Empty)
+            if (this.Floor != null)
             {
                 sb.Append($", ет.{this.Floor}");
             }
 
-            if (this.Apartment != string.Empty)
+            if (this.Apartment != null)
             {
                 sb.Append($", ап.{this.Apartment}");
             }
 
-            if (this.District != string.Empty)
+            if (this.District != null)
             {
                 sb.Append($", кв. {this.District}");
             }
@@ -121,5 +101,23 @@ namespace Studio.Domain.ValueObjects
             yield return this.Apartment;
             yield return this.District;
         }
+    }
+
+    // For tests.
+    public class InputAddressData 
+    {
+        public string Street { get; set; }
+
+        public string Number { get; set; }
+
+        public string Building { get; set; }
+
+        public string Entrance { get; set; }
+
+        public string Floor { get; set; }
+
+        public string Apartment { get; set; }
+
+        public string District { get; set; }
     }
 }
