@@ -15,7 +15,7 @@
             this.Mediator = (IMediator)Mock.Object;
         }
         
-        [CollectionDefinition("CreateEntities")]
+        [CollectionDefinition("CommandCollection")]
         public class CreateEntity : ICollectionFixture<CommandTestFixture> { }
     }
 }
