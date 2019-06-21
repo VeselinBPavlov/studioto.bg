@@ -29,9 +29,9 @@ namespace Studio.Domain.Tests.ValueObjects
             Assert.Equal(Number, address.Number);
             Assert.Equal(Building, address.Building);
             Assert.Equal(Entrance, address.Entrance);
-            Assert.Equal(null, address.Floor);
-            Assert.Equal(null, address.Apartment);
-            Assert.Equal(null, address.District);
+            Assert.Null(address.Floor);
+            Assert.Null(address.Apartment);
+            Assert.Null(address.District);
         }
 
         [Fact]

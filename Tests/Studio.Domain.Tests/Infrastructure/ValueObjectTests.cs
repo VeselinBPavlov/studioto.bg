@@ -1,4 +1,4 @@
-namespace Northwind.Domain.Tests.Infrastructure
+namespace Studio.Domain.Tests.Infrastructure
 {
     using System.Collections.Generic;
     using Studio.Domain.Infrastructure;

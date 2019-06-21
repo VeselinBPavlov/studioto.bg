@@ -15,4 +15,10 @@
     <ProjectReference Include="..\Studio.Domain\Studio.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Industries\Commands\Delete\" />
+    <Folder Include="Industries\Commands\Update\" />
+    <Folder Include="Industries\Queries\" />
+  </ItemGroup>
+
 </Project>
