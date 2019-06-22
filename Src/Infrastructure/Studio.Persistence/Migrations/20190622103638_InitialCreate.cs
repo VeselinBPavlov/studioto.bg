@@ -1,9 +1,9 @@
-﻿namespace Studio.Persistence.Migrations
-{
-    using System;
-    using Microsoft.EntityFrameworkCore.Metadata;
-    using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
+namespace Studio.Persistence.Migrations
+{
     public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -246,7 +246,7 @@
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<int>(maxLength: 100, nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     IndustryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

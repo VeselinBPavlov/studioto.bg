@@ -1,6 +1,5 @@
 ﻿namespace Studio.Application.Tests.Infrastructure
 {
-    using Studio.Application.Tests.Infrastructure;
     using Xunit;
 
     [CollectionDefinition("CommandCollection")]

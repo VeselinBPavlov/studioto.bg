@@ -24,7 +24,6 @@
 
             if (industry == null)
             {
-                // TODO: Add functional test for this behaviour.
                 throw new NotFoundException(nameof(Industry), request.Id);
             }
 
@@ -32,7 +31,6 @@
 
             if (hasServices)
             {
-                // TODO: Add functional test for this behaviour.
                 throw new DeleteFailureException(nameof(Service), request.Id, "There are existing services associated with this industry.");
             }
 

@@ -1,9 +1,8 @@
 ﻿namespace Studio.Application.Tests.Industries.Commands
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using MediatR;
-    using Shouldly;
     using Studio.Application.Industries.Commands.Create;
     using Studio.Application.Tests.Infrastructure;
     using Xunit;
@@ -21,10 +20,11 @@
         {
             var sut = new CreateIndustryCommandHandler(Fixture.Context, Fixture.Mediator);
 
-            var result = await sut.Handle(new CreateIndustryCommand { Name = "Hairstyle" }, CancellationToken.None);
+            var status = Record.ExceptionAsync(async () => await sut.Handle(new CreateIndustryCommand { Name = "Hairstyle" }, CancellationToken.None));
 
-            result.ShouldBeOfType<Unit>();
-            result.ShouldNotBeNull();
+            Assert.Null(status.Exception);
+            Assert.Equal("RanToCompletion", status.Status.ToString());
+            Assert.Equal(1, this.Fixture.Context.Industries.Count());
         }
     }
 }

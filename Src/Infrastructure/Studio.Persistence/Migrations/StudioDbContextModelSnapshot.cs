@@ -326,7 +326,8 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("IndustryId");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
 

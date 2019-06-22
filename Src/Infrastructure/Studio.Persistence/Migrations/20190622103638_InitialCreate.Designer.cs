@@ -10,7 +10,7 @@ using Studio.Persistence.Context;
 namespace Studio.Persistence.Migrations
 {
     [DbContext(typeof(StudioDbContext))]
-    [Migration("20190619030309_InitialCreate")]
+    [Migration("20190622103638_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -328,7 +328,8 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("IndustryId");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
 

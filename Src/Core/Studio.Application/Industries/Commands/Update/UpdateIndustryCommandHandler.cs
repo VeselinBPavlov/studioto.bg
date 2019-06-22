@@ -24,7 +24,6 @@
 
             if (industry == null)
             {
-                // TODO: Add functional test for this behaviour.
                 throw new NotFoundException(nameof(Industry), request.Id);
             }
 
