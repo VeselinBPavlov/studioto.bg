@@ -6,7 +6,7 @@
     {
         public int Id { get; set; }
 
-        public AddressFormat AddressFormated { get; set; }
+        public virtual AddressFormat AddressFormated { get; set; }
 
         public decimal Latitude { get; set; }
 
@@ -14,8 +14,8 @@
 
         public int CityId { get; set; }
 
-        public City City { get; set; }
+        public virtual City City { get; set; }
 
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

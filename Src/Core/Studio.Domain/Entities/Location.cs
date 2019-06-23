@@ -19,13 +19,13 @@
 
         public int ClientId { get; set; }
 
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
 
-        public LocationMapData LocationMapData { get; set; }
+        public virtual LocationMapData LocationMapData { get; set; }
 
         public int AddressId { get; set; }
 
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
 
         public virtual ICollection<Employee> Employees { get; private set; }
 

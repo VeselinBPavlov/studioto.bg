@@ -8,10 +8,10 @@
 
         public int LocationId { get; set; }
 
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public int ServiceId { get; set; }
 
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

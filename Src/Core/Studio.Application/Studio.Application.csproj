@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Industries\Queries\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
