@@ -3,20 +3,16 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using MediatR;
     using Studio.Application.Industries.Commands.Delete;
     using Studio.Application.Tests.Infrastructure;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using Xunit;
 
     [CollectionDefinition("CommandCollection")]
     public class DeleteIndustryCommandHandlerTests : BaseCommandTests
     {
-        private const int InvalidId = 100;
-        private const int ValidId = 1;
-        private const string ServiceName = "Haircut";
-        private string NotFoundExceptionMessage = "Entity \"Industry\" ({0}) was not found.";
-        private string DeleteFalueExceptionMessage = "Deletion of entity \"Service\" ({0}) failed. There are existing services associated with this industry.";
-
         public DeleteIndustryCommandHandlerTests(CommandTestFixture fixture) 
             : base(fixture)
         {
@@ -25,43 +21,42 @@
         [Fact]
         public async Task ShouldDeleteIndustry()
         {
-            var industry = new Industry { Name = "Hairstyle" };
+            var industry = new Industry { Name = GlobalConstants.IndustryValidName };
 
             this.Fixture.Context.Industries.Add(industry);
             await this.Fixture.Context.SaveChangesAsync();
 
-            var industryId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == "Hairstyle").Id;
+            var industryId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
 
             var sut = new DeleteIndustryCommandHandler(this.Fixture.Context);
 
-            var status = Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
-            Assert.Equal("RanToCompletion", status.Status.ToString());
+            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
             Assert.Equal(0, this.Fixture.Context.Industries.Count());
         }
 
         [Fact]
         public async Task ShouldТhrowDeleteFailureException()
         {
-            var industry = new Industry { Name = "Fitness" };
+            var industry = new Industry { Name = GlobalConstants.IndustrySecondValidName };
 
             this.Fixture.Context.Industries.Add(industry);
             await this.Fixture.Context.SaveChangesAsync();
 
-            var industryId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == "Fitness").Id;
+            var industryId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustrySecondValidName).Id;
 
-            var service = new Service { Name = ServiceName, IndustryId = industryId };
+            var service = new Service { Name = GlobalConstants.ServiceValidName, IndustryId = industryId };
             this.Fixture.Context.Services.Add(service);
             await this.Fixture.Context.SaveChangesAsync();
 
             var sut = new DeleteIndustryCommandHandler(this.Fixture.Context);
             
-            var status = Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
-            var message = status.Result.Message;
-
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
+            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(DeleteFalueExceptionMessage, industryId), message);
+            Assert.Equal(string.Format(GlobalConstants.IndustryDeleteFalueExceptionMessage, industryId), status.Message);
             Assert.Equal(1, this.Fixture.Context.Industries.Count());
         }
 
@@ -70,11 +65,10 @@
         {
             var sut = new DeleteIndustryCommandHandler(this.Fixture.Context);           
 
-            var status = Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = InvalidId }, CancellationToken.None));
-            var message = status.Result.Message;
-                      
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+           
             Assert.NotNull(status);
-            Assert.Equal(string.Format(NotFoundExceptionMessage, InvalidId), message);
+            Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
             Assert.Equal(0, this.Fixture.Context.Industries.Count());
         }
     }

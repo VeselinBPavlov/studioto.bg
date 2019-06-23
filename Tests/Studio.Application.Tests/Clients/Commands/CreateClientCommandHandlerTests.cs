@@ -1,6 +1,5 @@
 ﻿namespace Studio.Application.Tests.Industries.Commands
 {
-    using System;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -11,23 +10,23 @@
     using Xunit;
 
     [CollectionDefinition("CommandCollection")]
-    public class CreateIndustryCommandHandlerTests : BaseCommandTests
+    public class CreateClientCommandHandlerTests : BaseCommandTests
     {
-        public CreateIndustryCommandHandlerTests(CommandTestFixture fixture) 
+        public CreateClientCommandHandlerTests(CommandTestFixture fixture) 
             : base(fixture)
         {
         }
 
         [Fact]
-        public async Task ShouldCreateIndustry()
+        public async Task ShouldCreateClient()
         {
-            var sut = new CreateIndustryCommandHandler(Fixture.Context, Fixture.Mediator);
+            var sut = new CreateClientCommandHandler(Fixture.Context, Fixture.Mediator);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateIndustryCommand { Name = GlobalConstants.IndustryValidName }, CancellationToken.None));
-           
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateClientCommand { Name = GlobalConstants.ClientValidName }, CancellationToken.None));
+
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, this.Fixture.Context.Industries.Count());
+            Assert.Equal(1, this.Fixture.Context.Clients.Count());
         }
     }
 }

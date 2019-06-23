@@ -2,6 +2,7 @@
 {
     using FluentValidation.TestHelper;
     using Studio.Application.Industries.Commands.Update;
+    using Studio.Common;
     using Xunit;
 
     public class UpdateIndustryCommandValidatorTests
@@ -18,7 +19,7 @@
         [Fact]
         public void ShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.Name, "Hairstyle");
+            validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.IndustryValidName);
         }
 
         [Fact]
@@ -30,7 +31,7 @@
         [Fact]
         public void ShouldReturnErrorIfNameLongerThan100Characters()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, new string('A', 101));
+            validator.ShouldHaveValidationErrorFor(command => command.Name, GlobalConstants.InvalidName);
         }
 
         [Fact]

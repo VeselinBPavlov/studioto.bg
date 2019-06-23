@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Clients\Commands\Update\" />
+    <Folder Include="Clients\Queries\" />
     <Folder Include="Industries\Queries\" />
     <Folder Include="Services\" />
   </ItemGroup>

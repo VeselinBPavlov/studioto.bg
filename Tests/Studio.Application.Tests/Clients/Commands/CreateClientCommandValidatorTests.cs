@@ -5,21 +5,21 @@
     using Studio.Common;
     using Xunit;
 
-    public class CreateIndustryCommandValidatorTests
+    public class CreateClientCommandValidatorTests
     {
-        private CreateIndustryCommandValidator validator;
-        private CreateIndustryCommand command;
+        private CreateClientCommandValidator validator;
+        private CreateClientCommand command;
 
-        public CreateIndustryCommandValidatorTests()
+        public CreateClientCommandValidatorTests()
         {
-            this.validator = new CreateIndustryCommandValidator();
-            this.command = new CreateIndustryCommand();
+            this.validator = new CreateClientCommandValidator();
+            this.command = new CreateClientCommand();
         }
 
         [Fact]
         public void ShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.IndustryValidName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.ClientValidName);
         }
 
         [Fact]
