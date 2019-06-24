@@ -46,8 +46,7 @@
             await this.Fixture.Context.SaveChangesAsync();
 
             var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.Name == GlobalConstants.ClientSecondValidName).Id;
-
-
+            
             var location = new Location
             {
                 Name = GlobalConstants.LocationValidName,
@@ -76,7 +75,7 @@
             
             Assert.NotNull(status);
             Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
-            Assert.Equal(0, this.Fixture.Context.Industries.Count());
+            Assert.Equal(0, this.Fixture.Context.Clients.Count());
         }
     }
 }

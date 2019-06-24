@@ -4,6 +4,7 @@
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
     using Studio.Domain.Entities;
+    using System;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -34,10 +35,11 @@
                 throw new DeleteFailureException(nameof(Location), request.Id, "There are existing locations associated with this client.");
             }
 
-            this.context.Clients.Remove(client);
+            client.DeletedOn = DateTime.UtcNow;
+            client.IsDeleted = true;
 
             await this.context.SaveChangesAsync(cancellationToken);
-
+            
             return Unit.Value;
         }
     }

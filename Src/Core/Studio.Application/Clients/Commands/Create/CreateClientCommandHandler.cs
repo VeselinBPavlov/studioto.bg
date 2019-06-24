@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Studio.Domain.Entities;
+    using System;
 
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Unit>
     {
@@ -21,7 +22,9 @@
         {
             var client = new Client
             {
-                Name = request.Name
+                Name = request.Name,
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Clients.Add(client);
