@@ -10,7 +10,7 @@ using Studio.Persistence.Context;
 namespace Studio.Persistence.Migrations
 {
     [DbContext(typeof(StudioDbContext))]
-    [Migration("20190625060844_InitialCreate")]
+    [Migration("20190625063442_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,6 +268,8 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("ServiceId");
 
+                    b.Property<decimal>("Price");
+
                     b.HasKey("EmployeeId", "ServiceId");
 
                     b.HasIndex("ServiceId");
@@ -318,6 +320,25 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.LocationIndustry", b =>
+                {
+                    b.Property<int>("LocationId");
+
+                    b.Property<int>("IndustryId");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .IsUnicode(true);
+
+                    b.Property<bool>("IsActive");
+
+                    b.HasKey("LocationId", "IndustryId");
+
+                    b.HasIndex("IndustryId");
+
+                    b.ToTable("LocationIndustries");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.LocationMapData", b =>
                 {
                     b.Property<int>("Id")
@@ -332,23 +353,6 @@ namespace Studio.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("LocationsMapData");
-                });
-
-            modelBuilder.Entity("Studio.Domain.Entities.LocationService", b =>
-                {
-                    b.Property<int>("LocationId");
-
-                    b.Property<int>("ServiceId");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<decimal>("Price");
-
-                    b.HasKey("LocationId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("LocationServices");
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Service", b =>
@@ -639,7 +643,7 @@ namespace Studio.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Studio.Domain.Entities.Service", "Service")
-                        .WithMany()
+                        .WithMany("LocationServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
@@ -657,24 +661,24 @@ namespace Studio.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.LocationIndustry", b =>
+                {
+                    b.HasOne("Studio.Domain.Entities.Industry", "Industry")
+                        .WithMany("LocationIndustries")
+                        .HasForeignKey("IndustryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Studio.Domain.Entities.Location", "Location")
+                        .WithMany("LocationIndustries")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.LocationMapData", b =>
                 {
                     b.HasOne("Studio.Domain.Entities.Location", "Location")
                         .WithOne("LocationMapData")
                         .HasForeignKey("Studio.Domain.Entities.LocationMapData", "LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Studio.Domain.Entities.LocationService", b =>
-                {
-                    b.HasOne("Studio.Domain.Entities.Location", "Location")
-                        .WithMany("LocationServices")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Studio.Domain.Entities.Service", "Service")
-                        .WithMany("LocationServices")
-                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

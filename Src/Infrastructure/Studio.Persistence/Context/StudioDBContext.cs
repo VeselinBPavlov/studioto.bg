@@ -35,7 +35,7 @@
 
         public DbSet<LocationMapData> LocationsMapData { get; set; }
 
-        public DbSet<LocationService> LocationServices { get; set; }
+        public DbSet<LocationIndustry> LocationIndustries { get; set; }
 
         public DbSet<Service> Services { get; set; }
 

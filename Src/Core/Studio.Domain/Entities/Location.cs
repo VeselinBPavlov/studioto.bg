@@ -7,7 +7,7 @@
         public Location()
         {
             this.Employees = new HashSet<Employee>();
-            this.LocationServices = new HashSet<LocationService>();
+            this.LocationIndustries = new HashSet<LocationIndustry>();
             this.Appointments = new HashSet<Appointment>();
         }
 
@@ -29,7 +29,7 @@
 
         public virtual ICollection<Employee> Employees { get; private set; }
 
-        public virtual ICollection<LocationService> LocationServices { get; private set; }
+        public virtual ICollection<LocationIndustry> LocationIndustries { get; private set; }
 
         public virtual ICollection<Appointment> Appointments { get; private set; }
     }

@@ -19,7 +19,7 @@
 
         DbSet<LocationMapData> LocationsMapData { get; set; }
 
-        DbSet<LocationService> LocationServices { get; set; }
+        DbSet<LocationIndustry> LocationIndustries { get; set; }
 
         DbSet<Service> Services { get; set; }
 

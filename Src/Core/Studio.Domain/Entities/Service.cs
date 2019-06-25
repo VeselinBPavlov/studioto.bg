@@ -6,7 +6,7 @@
     {
         public Service()
         {
-            this.LocationServices = new HashSet<LocationService>();
+            this.LocationServices = new HashSet<EmployeeService>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@
 
         public virtual Industry Industry { get; set; }
 
-        public virtual ICollection<LocationService> LocationServices { get; private set; }
+        public virtual ICollection<EmployeeService> LocationServices { get; private set; }
     }
 }

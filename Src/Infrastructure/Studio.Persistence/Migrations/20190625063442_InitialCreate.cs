@@ -328,27 +328,27 @@ namespace Studio.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LocationServices",
+                name: "LocationIndustries",
                 columns: table => new
                 {
                     LocationId = table.Column<int>(nullable: false),
-                    ServiceId = table.Column<int>(nullable: false),
+                    IndustryId = table.Column<int>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Description = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LocationServices", x => new { x.LocationId, x.ServiceId });
+                    table.PrimaryKey("PK_LocationIndustries", x => new { x.LocationId, x.IndustryId });
                     table.ForeignKey(
-                        name: "FK_LocationServices_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
+                        name: "FK_LocationIndustries_Industries_IndustryId",
+                        column: x => x.IndustryId,
+                        principalTable: "Industries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_LocationServices_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
+                        name: "FK_LocationIndustries_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -414,7 +414,8 @@ namespace Studio.Persistence.Migrations
                 columns: table => new
                 {
                     EmployeeId = table.Column<int>(nullable: false),
-                    ServiceId = table.Column<int>(nullable: false)
+                    ServiceId = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -508,6 +509,11 @@ namespace Studio.Persistence.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LocationIndustries_IndustryId",
+                table: "LocationIndustries",
+                column: "IndustryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Locations_AddressId",
                 table: "Locations",
                 column: "AddressId",
@@ -517,11 +523,6 @@ namespace Studio.Persistence.Migrations
                 name: "IX_Locations_ClientId",
                 table: "Locations",
                 column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LocationServices_ServiceId",
-                table: "LocationServices",
-                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationsMapData_LocationId",
@@ -559,7 +560,7 @@ namespace Studio.Persistence.Migrations
                 name: "EmployeeServices");
 
             migrationBuilder.DropTable(
-                name: "LocationServices");
+                name: "LocationIndustries");
 
             migrationBuilder.DropTable(
                 name: "LocationsMapData");
