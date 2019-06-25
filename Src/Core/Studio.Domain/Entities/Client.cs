@@ -1,6 +1,7 @@
 ﻿namespace Studio.Domain.Entities
 {
     using Studio.Domain.Interfaces;
+    using Studio.Domain.ValueObjects;
     using System;
     using System.Collections.Generic;
 
@@ -13,7 +14,13 @@
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string CompanyName { get; set; }
+
+        public string VatNumber { get; set; }
+
+        public Manager Manager { get; set; }
+
+        public string Phone { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

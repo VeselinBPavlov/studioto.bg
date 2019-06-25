@@ -6,7 +6,7 @@
     {
         public int Id { get; set; }
 
-        public virtual AddressFormat AddressFormated { get; set; }
+        public virtual AddressFormat AddressFormat { get; set; }
 
         public decimal Latitude { get; set; }
 

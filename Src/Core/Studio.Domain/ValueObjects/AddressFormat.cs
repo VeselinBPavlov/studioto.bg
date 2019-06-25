@@ -30,7 +30,7 @@ namespace Studio.Domain.ValueObjects
         {   
             if (addressData.Street == null || addressData.Number == null) 
             {
-                throw new AdAccountInvalidException(addressData.Street ?? addressData.Number, new ArgumentException("Street and number are required!"));
+                throw new AddressFormatInvalidException(addressData.Street ?? addressData.Number, new ArgumentException("Street and number are required!"));
             }
 
             var address = new AddressFormat()
