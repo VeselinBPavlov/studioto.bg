@@ -8,6 +8,7 @@
     using Exceptions;
     using Interfaces.Persistence;
     using System;
+    using Studio.Domain.ValueObjects;
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, Unit>
     {
@@ -28,7 +29,12 @@
                 throw new NotFoundException(nameof(Client), request.Id);
             }
 
-            client.Name = request.Name;
+            var manager = Manager.For($"{request.ManagerFirstName} {request.ManagerLastName}");
+
+            client.CompanyName = request.CompanyName;
+            client.VatNumber = request.VatNumber;
+            client.Phone = request.Phone;
+            client.Manager = manager;
             client.ModifiedOn = DateTime.UtcNow;
 
             this.context.Clients.Update(client);

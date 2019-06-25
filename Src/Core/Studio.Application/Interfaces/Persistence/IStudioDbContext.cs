@@ -7,8 +7,6 @@
 
     public interface IStudioDbContext
     {
-        DbSet<Setting> Settings { get; set; }
-
         DbSet<Appointment> Appointments { get; set; }
 
         DbSet<Client> Clients { get; set; }

@@ -21,12 +21,12 @@
         [Fact]
         public async Task ShouldDeleteClient()
         {
-            var client = new Client { Name = GlobalConstants.ClientValidName };
+            var client = new Client { CompanyName = GlobalConstants.ClientValidName };
 
             this.Fixture.Context.Clients.Add(client);
             await this.Fixture.Context.SaveChangesAsync();
 
-            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.Name == GlobalConstants.ClientValidName).Id;
+            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
 
             var sut = new DeleteClientCommandHandler(this.Fixture.Context);
 
@@ -40,12 +40,12 @@
         [Fact]
         public async Task ShouldТhrowDeleteFailureException()
         {
-            var client = new Client { Name = GlobalConstants.ClientSecondValidName };
+            var client = new Client { CompanyName = GlobalConstants.ClientSecondValidName };
 
             this.Fixture.Context.Clients.Add(client);
             await this.Fixture.Context.SaveChangesAsync();
 
-            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.Name == GlobalConstants.ClientSecondValidName).Id;
+            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
             
             var location = new Location
             {

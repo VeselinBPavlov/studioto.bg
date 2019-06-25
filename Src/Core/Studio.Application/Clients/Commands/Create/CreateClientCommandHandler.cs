@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Studio.Domain.Entities;
     using System;
+    using Studio.Domain.ValueObjects;
 
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Unit>
     {
@@ -20,9 +21,14 @@
 
         public async Task<Unit> Handle(CreateClientCommand request, CancellationToken cancellationToken)
         {
+            var manager = Manager.For($"{request.ManagerFirstName} {request.ManagerLastName}");
+
             var client = new Client
             {
-                Name = request.Name,
+                CompanyName = request.CompanyName,
+                VatNumber = request.VatNumber,
+                Phone = request.Phone,
+                Manager = manager,
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false
             };

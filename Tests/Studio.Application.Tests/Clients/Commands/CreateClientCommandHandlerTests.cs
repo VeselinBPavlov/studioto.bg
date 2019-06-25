@@ -22,7 +22,7 @@
         {
             var sut = new CreateClientCommandHandler(Fixture.Context, Fixture.Mediator);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateClientCommand { Name = GlobalConstants.ClientValidName }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = GlobalConstants.ClientValidName }, CancellationToken.None));
 
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());

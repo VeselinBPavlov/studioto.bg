@@ -22,9 +22,7 @@
             : base(options)
         {
         }
-
-        public DbSet<Setting> Settings { get; set; }
-
+        
         public DbSet<Appointment> Appointments { get; set; }
 
         public DbSet<Client> Clients { get; set; }

@@ -20,19 +20,19 @@
         [Fact]
         public async void ShouldUpdateCorrect()
         {
-            var client = new Client { Name = GlobalConstants.ClientValidName };
+            var client = new Client { CompanyName = GlobalConstants.ClientValidName };
 
             this.Fixture.Context.Clients.Add(client);
             await this.Fixture.Context.SaveChangesAsync();
 
-            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.Name == GlobalConstants.ClientValidName).Id;
+            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
 
             var sut = new UpdateClientCommandHandler(this.Fixture.Context);
-            var updatedClient = new UpdateClientCommand { Id = clientId, Name = GlobalConstants.ClientSecondValidName };
+            var updatedClient = new UpdateClientCommand { Id = clientId, CompanyName = GlobalConstants.ClientSecondValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedClient, CancellationToken.None));
 
-            var resultId = this.Fixture.Context.Clients.SingleOrDefault(x => x.Name == GlobalConstants.ClientSecondValidName).Id;
+            var resultId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
 
             Assert.Equal(clientId, resultId);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
@@ -43,7 +43,7 @@
         public async void ShouldThrowNotFoundException()
         {
             var sut = new UpdateClientCommandHandler(this.Fixture.Context);
-            var updatedClient = new UpdateClientCommand { Id = GlobalConstants.InvalidId, Name = GlobalConstants.ClientSecondValidName };
+            var updatedClient = new UpdateClientCommand { Id = GlobalConstants.InvalidId, CompanyName = GlobalConstants.ClientSecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedClient, CancellationToken.None));
                         

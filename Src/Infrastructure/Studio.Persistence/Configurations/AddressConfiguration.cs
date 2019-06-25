@@ -10,7 +10,7 @@
         {
             builder.HasKey(a => a.Id);
 
-            builder.OwnsOne(a => a.AddressFormated);            
+            builder.OwnsOne(a => a.AddressFormat);            
 
             builder.HasOne(a => a.City)
                    .WithMany(c => c.Addresses)

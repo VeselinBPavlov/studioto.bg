@@ -63,7 +63,15 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                    CompanyName = table.Column<string>(maxLength: 100, nullable: false),
+                    VatNumber = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    Manager_FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    Manager_LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(unicode: false, maxLength: 20, nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,24 +102,6 @@ namespace Studio.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Industries", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,13 +256,13 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AddressFormated_Street = table.Column<string>(maxLength: 200, nullable: false),
-                    AddressFormated_Number = table.Column<string>(maxLength: 10, nullable: false),
-                    AddressFormated_Building = table.Column<string>(maxLength: 10, nullable: true),
-                    AddressFormated_Entrance = table.Column<string>(maxLength: 10, nullable: true),
-                    AddressFormated_Floor = table.Column<string>(maxLength: 10, nullable: true),
-                    AddressFormated_Apartment = table.Column<string>(maxLength: 10, nullable: true),
-                    AddressFormated_District = table.Column<string>(maxLength: 100, nullable: true),
+                    AddressFormat_Street = table.Column<string>(maxLength: 200, nullable: false),
+                    AddressFormat_Number = table.Column<string>(maxLength: 10, nullable: false),
+                    AddressFormat_Building = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormat_Entrance = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormat_Floor = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormat_Apartment = table.Column<string>(maxLength: 10, nullable: true),
+                    AddressFormat_District = table.Column<string>(maxLength: 100, nullable: true),
                     Latitude = table.Column<decimal>(nullable: false),
                     Longitude = table.Column<decimal>(nullable: false),
                     CityId = table.Column<int>(nullable: false)
@@ -388,7 +378,10 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 250, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(maxLength: 100, nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(maxLength: 100, nullable: false),
                     LocationId = table.Column<int>(nullable: false),
                     EmployeeId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
@@ -570,9 +563,6 @@ namespace Studio.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocationsMapData");
-
-            migrationBuilder.DropTable(
-                name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

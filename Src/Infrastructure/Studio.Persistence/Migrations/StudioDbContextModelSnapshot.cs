@@ -15,7 +15,7 @@ namespace Studio.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -130,14 +130,27 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
                     b.Property<int>("EmployeeId");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
 
                     b.Property<int>("LocationId");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .IsUnicode(true);
+                        .HasMaxLength(100);
 
                     b.Property<string>("UserId");
 
@@ -178,10 +191,28 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
+
+                    b.Property<string>("VatNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(false);
 
                     b.HasKey("Id");
 
@@ -338,29 +369,6 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("Studio.Domain.Entities.Setting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime?>("DeletedOn");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Settings");
-                });
-
             modelBuilder.Entity("Studio.Domain.Entities.StudioRole", b =>
                 {
                     b.Property<string>("Id")
@@ -512,7 +520,7 @@ namespace Studio.Persistence.Migrations
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.OwnsOne("Studio.Domain.ValueObjects.AddressFormat", "AddressFormated", b1 =>
+                    b.OwnsOne("Studio.Domain.ValueObjects.AddressFormat", "AddressFormat", b1 =>
                         {
                             b1.Property<int>("AddressId")
                                 .ValueGeneratedOnAdd()
@@ -553,7 +561,7 @@ namespace Studio.Persistence.Migrations
                             b1.ToTable("Addresses");
 
                             b1.HasOne("Studio.Domain.Entities.Address")
-                                .WithOne("AddressFormated")
+                                .WithOne("AddressFormat")
                                 .HasForeignKey("Studio.Domain.ValueObjects.AddressFormat", "AddressId")
                                 .OnDelete(DeleteBehavior.Restrict);
                         });
@@ -582,6 +590,35 @@ namespace Studio.Persistence.Migrations
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Studio.Domain.Entities.Client", b =>
+                {
+                    b.OwnsOne("Studio.Domain.ValueObjects.Manager", "Manager", b1 =>
+                        {
+                            b1.Property<int>("ClientId")
+                                .ValueGeneratedOnAdd()
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .IsUnicode(true);
+
+                            b1.Property<string>("LastName")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .IsUnicode(true);
+
+                            b1.HasKey("ClientId");
+
+                            b1.ToTable("Clients");
+
+                            b1.HasOne("Studio.Domain.Entities.Client")
+                                .WithOne("Manager")
+                                .HasForeignKey("Studio.Domain.ValueObjects.Manager", "ClientId")
+                                .OnDelete(DeleteBehavior.Restrict);
+                        });
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Employee", b =>
