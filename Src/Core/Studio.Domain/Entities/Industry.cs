@@ -14,6 +14,8 @@
 
         public string Name { get; set; }
 
+        public string Possition { get; set; }
+
         public virtual ICollection<Service> Services { get; private set; }
 
         public virtual ICollection<LocationIndustry> LocationIndustries { get; private set; }

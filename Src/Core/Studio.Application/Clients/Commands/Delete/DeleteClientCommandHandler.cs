@@ -28,11 +28,16 @@
                 throw new NotFoundException(nameof(Client), request.Id);
             }
 
+            if (client.IsDeleted)
+            {
+                throw new DeleteFailureException(nameof(Client), request.Id, "Client is already deleted.");
+            }            
+
             var hasLocations = this.context.Locations.Any(s => s.ClientId == client.Id);
 
             if (hasLocations)
             {
-                throw new DeleteFailureException(nameof(Location), request.Id, "There are existing locations associated with this client.");
+                throw new DeleteFailureException(nameof(Client), request.Id, "There are existing locations associated with this client.");
             }
 
             client.DeletedOn = DateTime.UtcNow;

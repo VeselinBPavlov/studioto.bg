@@ -9,10 +9,7 @@
         public void Configure(EntityTypeBuilder<LocationIndustry> builder)
         {
             builder.HasKey(ls => new { ls.LocationId, ls.IndustryId });
-
-            builder.Property(ls => ls.IsActive)
-                   .IsRequired();
-
+            
             builder.Property(ls => ls.Description)
                    .IsUnicode()
                    .IsRequired();

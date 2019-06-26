@@ -14,6 +14,11 @@
                    .HasMaxLength(100)
                    .IsRequired()
                    .IsUnicode();
+
+            builder.Property(i => i.Possition)
+                   .HasMaxLength(100)
+                   .IsRequired()
+                   .IsUnicode();
         }
     }
 }

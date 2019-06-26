@@ -21,7 +21,8 @@
         {
             var industry = new Industry
             {
-                Name = request.Name
+                Name = request.Name,
+                Possition = request.Possition
             };
 
             context.Industries.Add(industry);

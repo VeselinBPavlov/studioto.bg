@@ -31,7 +31,7 @@
 
             if (hasServices)
             {
-                throw new DeleteFailureException(nameof(Service), request.Id, "There are existing services associated with this industry.");
+                throw new DeleteFailureException(nameof(Industry), request.Id, "There are existing services associated with this industry.");
             }
 
             this.context.Industries.Remove(industry);

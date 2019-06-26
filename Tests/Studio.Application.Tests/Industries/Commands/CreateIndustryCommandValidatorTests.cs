@@ -20,24 +20,28 @@
         public void ShouldNotReturnError()
         {
             validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.IndustryValidName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.Possition, GlobalConstants.IndustryPossition);
         }
 
         [Fact]
         public void ShouldReturnErrorIfNameIsNull()
         {
             validator.ShouldHaveValidationErrorFor(command => command.Name, null as string);
+            validator.ShouldHaveValidationErrorFor(command => command.Possition, null as string);
         }
 
         [Fact]
         public void ShouldReturnErrorIfNameLongerThan100Characters()
         {
             validator.ShouldHaveValidationErrorFor(command => command.Name, GlobalConstants.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.Possition, GlobalConstants.InvalidName);
         }
 
         [Fact]
         public void ShouldReturnErrorIfNameIsEmptyString()
         {
             validator.ShouldHaveValidationErrorFor(command => command.Name, string.Empty);
+            validator.ShouldHaveValidationErrorFor(command => command.Possition, string.Empty);
         }
     }
 }

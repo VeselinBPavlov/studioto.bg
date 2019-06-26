@@ -18,6 +18,10 @@
             builder.HasOne(l => l.Address)
                    .WithOne(a => a.Location)
                    .HasForeignKey<Location>(l => l.AddressId);
+
+            builder.HasOne(l => l.Client)
+                   .WithMany(c => c.Locations)
+                   .HasForeignKey(l => l.ClientId);
         }
     }
 }

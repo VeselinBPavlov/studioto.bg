@@ -16,9 +16,7 @@
         DbSet<EmployeeService> EmployeeServices { get; set; }
 
         DbSet<Location> Locations { get; set; }
-
-        DbSet<LocationMapData> LocationsMapData { get; set; }
-
+        
         DbSet<LocationIndustry> LocationIndustries { get; set; }
 
         DbSet<Service> Services { get; set; }

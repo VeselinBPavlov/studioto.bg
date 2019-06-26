@@ -77,5 +77,24 @@
             Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
             Assert.Equal(0, this.Fixture.Context.Clients.Count());
         }
+
+        [Fact]
+        public async Task ShouldТhrowExceptionOnDeleteAlreadyDeletedObject()
+        {
+            var client = new Client { Id = 13, CompanyName = GlobalConstants.ClientThirdValidName, IsDeleted = true };
+
+            this.Fixture.Context.Clients.Add(client);
+            await this.Fixture.Context.SaveChangesAsync();
+
+            var clientId = 13;
+
+            var sut = new DeleteClientCommandHandler(this.Fixture.Context);
+
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = clientId }, CancellationToken.None));
+            
+            Assert.NotNull(status);
+            Assert.Equal(string.Format(GlobalConstants.ClientDeleteFalueIsDeletedTrue, clientId), status.Message);
+            Assert.Equal(1, this.Fixture.Context.Clients.Count());
+        }
     }
 }

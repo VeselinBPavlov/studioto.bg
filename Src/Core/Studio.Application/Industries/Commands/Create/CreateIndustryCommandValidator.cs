@@ -7,6 +7,7 @@
         public CreateIndustryCommandValidator()
         {
             RuleFor(i => i.Name).MaximumLength(100).NotEmpty();
+            RuleFor(i => i.Possition).MaximumLength(100).NotEmpty();
         }
     }
 }

@@ -5,5 +5,7 @@
     public class CreateIndustryCommand : IRequest
     {
         public string Name { get; set; }
+
+        public string Possition { get; set; }
     }
 }

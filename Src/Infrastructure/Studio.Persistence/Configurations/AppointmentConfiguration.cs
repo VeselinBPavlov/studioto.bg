@@ -28,9 +28,9 @@
                    .HasMaxLength(100)
                    .IsRequired();
 
-            builder.HasOne(a => a.Location)
-                   .WithMany(l => l.Appointments)
-                   .HasForeignKey(a => a.LocationId);
+            builder.Property(a => a.Comment)
+                   .HasMaxLength(450)
+                   .IsUnicode();
 
             builder.HasOne(a => a.Employee)
                    .WithMany(e => e.Appointments)
