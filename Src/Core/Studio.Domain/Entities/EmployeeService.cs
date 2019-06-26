@@ -1,8 +1,19 @@
 ﻿namespace Studio.Domain.Entities
 {
-    public class EmployeeService
+    using System;
+    using Studio.Domain.Interfaces;
+
+    public class EmployeeService : IAuditInfo, IDeletableEntity
     {
         public decimal Price { get; set; }
+
+         public DateTime CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
         
         public int EmployeeId { get; set; }
 

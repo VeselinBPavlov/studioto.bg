@@ -10,7 +10,7 @@ using Studio.Persistence.Context;
 namespace Studio.Persistence.Migrations
 {
     [DbContext(typeof(StudioDbContext))]
-    [Migration("20190625063442_InitialCreate")]
+    [Migration("20190626063644_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,9 +115,17 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("CityId");
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<decimal>("Latitude");
 
                     b.Property<decimal>("Longitude");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.HasKey("Id");
 
@@ -132,6 +140,14 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comment")
+                        .HasMaxLength(450)
+                        .IsUnicode(true);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -143,16 +159,22 @@ namespace Studio.Persistence.Migrations
                         .HasMaxLength(100)
                         .IsUnicode(true);
 
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
 
-                    b.Property<int>("LocationId");
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(100);
+
+                    b.Property<DateTime>("ReservationTime");
+
+                    b.Property<int>("ServiceId");
 
                     b.Property<string>("UserId");
 
@@ -160,7 +182,7 @@ namespace Studio.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("ServiceId");
 
                     b.HasIndex("UserId");
 
@@ -174,6 +196,14 @@ namespace Studio.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CountryId");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -221,11 +251,62 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.ContactForm", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .IsUnicode(true);
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Topic")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .IsUnicode(true);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactForm");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -243,10 +324,16 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(true);
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -254,6 +341,8 @@ namespace Studio.Persistence.Migrations
                         .IsUnicode(true);
 
                     b.Property<int>("LocationId");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.HasKey("Id");
 
@@ -267,6 +356,14 @@ namespace Studio.Persistence.Migrations
                     b.Property<int>("EmployeeId");
 
                     b.Property<int>("ServiceId");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<decimal>("Price");
 
@@ -283,7 +380,20 @@ namespace Studio.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(true);
+
+                    b.Property<string>("Possition")
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
@@ -303,7 +413,15 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("ClientId");
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<bool>("IsOffice");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -326,11 +444,19 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<int>("IndustryId");
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .IsUnicode(true);
 
                     b.Property<bool>("IsActive");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.HasKey("LocationId", "IndustryId");
 
@@ -339,29 +465,21 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("LocationIndustries");
                 });
 
-            modelBuilder.Entity("Studio.Domain.Entities.LocationMapData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LocationId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId")
-                        .IsUnique();
-
-                    b.ToTable("LocationsMapData");
-                });
-
             modelBuilder.Entity("Studio.Domain.Entities.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<int>("IndustryId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -580,9 +698,9 @@ namespace Studio.Persistence.Migrations
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Studio.Domain.Entities.Location", "Location")
-                        .WithMany("Appointments")
-                        .HasForeignKey("LocationId")
+                    b.HasOne("Studio.Domain.Entities.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Studio.Domain.Entities.StudioUser", "User")
@@ -671,14 +789,6 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Location", "Location")
                         .WithMany("LocationIndustries")
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Studio.Domain.Entities.LocationMapData", b =>
-                {
-                    b.HasOne("Studio.Domain.Entities.Location", "Location")
-                        .WithOne("LocationMapData")
-                        .HasForeignKey("Studio.Domain.Entities.LocationMapData", "LocationId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
