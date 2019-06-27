@@ -7,6 +7,7 @@
     using Microsoft.EntityFrameworkCore;
     using Exceptions;
     using Interfaces.Persistence;
+    using System;
 
     public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand, Unit>
     {
@@ -29,6 +30,7 @@
 
             industry.Name = request.Name;
             industry.Possition = request.Possition;
+            industry.ModifiedOn = DateTime.UtcNow;
 
             this.context.Industries.Update(industry);
 
