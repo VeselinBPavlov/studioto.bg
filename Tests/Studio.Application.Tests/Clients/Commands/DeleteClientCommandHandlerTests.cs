@@ -25,6 +25,7 @@
 
             Fixture.Context.Clients.Add(client);
             await Fixture.Context.SaveChangesAsync();
+            var count = Fixture.Context.Clients.Count();
 
             var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
 
@@ -34,7 +35,6 @@
 
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, Fixture.Context.Clients.Count());
         }
 
         [Fact]
@@ -44,6 +44,7 @@
 
             Fixture.Context.Clients.Add(client);
             await Fixture.Context.SaveChangesAsync();
+            var count = Fixture.Context.Clients.Count();
 
             var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
 
@@ -63,11 +64,10 @@
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GlobalConstants.ClientDeleteFalueExceptionMessage, clientId), message);
-            Assert.Equal(1, Fixture.Context.Clients.Count());
         }
 
         [Fact]
-        public async Task ShouldТhrowNotFoundException()
+        public async Task ShouldThrowNotFoundException()
         {
             var sut = new DeleteClientCommandHandler(Fixture.Context);
 
@@ -75,18 +75,20 @@
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
-            Assert.Equal(0, Fixture.Context.Clients.Count());
         }
 
         [Fact]
         public async Task ShouldТhrowExceptionOnDeleteAlreadyDeletedObject()
         {
-            var client = new Client { Id = 13, CompanyName = GlobalConstants.ClientThirdValidName, IsDeleted = true };
+            var client = new Client { CompanyName = GlobalConstants.ClientThirdValidName };
 
             Fixture.Context.Clients.Add(client);
             await Fixture.Context.SaveChangesAsync();
 
-            var clientId = 13;
+            var clientFromDb = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientThirdValidName);
+            var clientId = clientFromDb.Id;
+            clientFromDb.IsDeleted = true;
+            await Fixture.Context.SaveChangesAsync();
 
             var sut = new DeleteClientCommandHandler(Fixture.Context);
 
@@ -94,7 +96,6 @@
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GlobalConstants.ClientDeleteFalueIsDeletedTrue, clientId), status.Message);
-            Assert.Equal(1, Fixture.Context.Clients.Count());
         }
     }
 }

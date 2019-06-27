@@ -4,6 +4,7 @@
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
     using Studio.Domain.Entities;
+    using System;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -34,8 +35,16 @@
                 throw new DeleteFailureException(nameof(Industry), request.Id, "There are existing services associated with this industry.");
             }
 
-            this.context.Industries.Remove(industry);
+            var hasLocations = this.context.LocationIndustries.Any(li => li.IndustryId == industry.Id);
 
+            if (hasLocations)
+            {
+                throw new DeleteFailureException(nameof(Industry), request.Id, "There are existing locations associated with this industry.");
+            }
+
+            industry.DeletedOn = DateTime.UtcNow;
+            industry.IsDeleted = true;
+            
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

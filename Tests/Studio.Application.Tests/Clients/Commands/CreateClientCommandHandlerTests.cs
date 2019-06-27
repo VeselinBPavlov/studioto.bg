@@ -28,8 +28,7 @@
             var status = Task.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = GlobalConstants.ClientValidName }, CancellationToken.None));
 
             var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
-
-            //this.Fixture.Mock.Verify(m => m.Publish(It.Is<CreateClientCommandNotification>(c => c.ClientId == clientId), It.IsAny<CancellationToken>()), Times.Once);
+            
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, Fixture.Context.Clients.Count());
