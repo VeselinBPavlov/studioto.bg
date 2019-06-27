@@ -28,6 +28,7 @@
             }
 
             industry.Name = request.Name;
+            industry.Possition = request.Possition;
 
             this.context.Industries.Update(industry);
 

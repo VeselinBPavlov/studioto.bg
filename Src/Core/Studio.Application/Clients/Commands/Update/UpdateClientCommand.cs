@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Industries.Commands.Update
+﻿namespace Studio.Application.Clients.Commands.Update
 {
     using MediatR;
 
@@ -13,7 +13,7 @@
         public string ManagerFirstName { get; set; }
 
         public string ManagerLastName { get; set; }
-        
+
         public string Phone { get; set; }
     }
 }

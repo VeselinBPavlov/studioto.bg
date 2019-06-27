@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Industries.Commands.Update
+﻿namespace Studio.Application.Clients.Commands.Update
 {
     using Studio.Domain.Entities;
     using System.Threading;
@@ -9,6 +9,7 @@
     using Interfaces.Persistence;
     using System;
     using Studio.Domain.ValueObjects;
+    using Studio.Application.Clients.Commands.Update;
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, Unit>
     {
@@ -21,7 +22,7 @@
 
         public async Task<Unit> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
-            var client = await this.context.Clients
+            var client = await context.Clients
                 .SingleOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (client == null)
@@ -37,9 +38,9 @@
             client.Manager = manager;
             client.ModifiedOn = DateTime.UtcNow;
 
-            this.context.Clients.Update(client);
+            context.Clients.Update(client);
 
-            await this.context.SaveChangesAsync(cancellationToken);
+            await context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

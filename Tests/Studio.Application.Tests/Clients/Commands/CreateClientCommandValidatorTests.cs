@@ -1,7 +1,7 @@
-﻿namespace Studio.Application.Tests.Industries.Commands
+﻿namespace Studio.Application.Tests.Clients.Commands
 {
     using FluentValidation.TestHelper;
-    using Studio.Application.Industries.Commands.Create;
+    using Studio.Application.Clients.Commands.Create;
     using Studio.Common;
     using Xunit;
 
@@ -12,8 +12,8 @@
 
         public CreateClientCommandValidatorTests()
         {
-            this.validator = new CreateClientCommandValidator();
-            this.command = new CreateClientCommand();
+            validator = new CreateClientCommandValidator();
+            command = new CreateClientCommand();
         }
 
         [Fact]

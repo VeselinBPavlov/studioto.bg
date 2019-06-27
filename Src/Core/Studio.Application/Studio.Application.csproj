@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Countries\Commands\Delete\" />
+    <Folder Include="Countries\Commands\Update\" />
+    <Folder Include="Countries\Queries\" />
     <Folder Include="Clients\Queries\" />
     <Folder Include="Industries\Queries\" />
     <Folder Include="Services\" />

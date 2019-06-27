@@ -1,7 +1,7 @@
-﻿namespace Studio.Application.Tests.Industries.Commands
+﻿namespace Studio.Application.Tests.Clients.Commands
 {
     using MediatR;
-    using Studio.Application.Industries.Commands.Update;
+    using Studio.Application.Clients.Commands.Update;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using Studio.Domain.Entities;
@@ -11,8 +11,8 @@
     using Xunit;
 
     public class UpdateClientCommandHandlerTests : BaseCommandTests
-    {        
-        public UpdateClientCommandHandlerTests(CommandTestFixture fixture) 
+    {
+        public UpdateClientCommandHandlerTests(CommandTestFixture fixture)
             : base(fixture)
         {
         }
@@ -22,33 +22,33 @@
         {
             var client = new Client { CompanyName = GlobalConstants.ClientValidName };
 
-            this.Fixture.Context.Clients.Add(client);
-            await this.Fixture.Context.SaveChangesAsync();
+            Fixture.Context.Clients.Add(client);
+            await Fixture.Context.SaveChangesAsync();
 
-            var clientId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
 
-            var sut = new UpdateClientCommandHandler(this.Fixture.Context);
+            var sut = new UpdateClientCommandHandler(Fixture.Context);
             var updatedClient = new UpdateClientCommand { Id = clientId, CompanyName = GlobalConstants.ClientSecondValidName };
 
-            var status = Task<Unit>.FromResult(await sut.Handle(updatedClient, CancellationToken.None));
+            var status = Task.FromResult(await sut.Handle(updatedClient, CancellationToken.None));
 
-            var resultId = this.Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
+            var resultId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
 
             Assert.Equal(clientId, resultId);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, this.Fixture.Context.Clients.Count());
+            Assert.Equal(1, Fixture.Context.Clients.Count());
         }
 
         [Fact]
         public async void ShouldThrowNotFoundException()
         {
-            var sut = new UpdateClientCommandHandler(this.Fixture.Context);
+            var sut = new UpdateClientCommandHandler(Fixture.Context);
             var updatedClient = new UpdateClientCommand { Id = GlobalConstants.InvalidId, CompanyName = GlobalConstants.ClientSecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedClient, CancellationToken.None));
-                        
+
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
         }
     }
 }

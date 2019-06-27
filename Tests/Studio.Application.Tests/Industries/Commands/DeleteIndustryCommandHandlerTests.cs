@@ -34,11 +34,11 @@
                         
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(0, this.Fixture.Context.Industries.Count());
+            Assert.Equal(1, this.Fixture.Context.Industries.Count());
         }
 
         [Fact]
-        public async Task ShouldТhrowDeleteFailureException()
+        public async Task IndustryShouldТhrowDeleteFailureException()
         {
             var industry = new Industry { Name = GlobalConstants.IndustrySecondValidName };
 
@@ -61,7 +61,7 @@
         }
 
         [Fact]
-        public async Task ShouldТhrowNotFoundException()
+        public async Task IndustryShouldТhrowNotFoundException()
         {
             var sut = new DeleteIndustryCommandHandler(this.Fixture.Context);           
 
@@ -69,7 +69,7 @@
            
             Assert.NotNull(status);
             Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
-            Assert.Equal(0, this.Fixture.Context.Industries.Count());
+            Assert.Equal(1, this.Fixture.Context.Industries.Count());
         }
     }
 }

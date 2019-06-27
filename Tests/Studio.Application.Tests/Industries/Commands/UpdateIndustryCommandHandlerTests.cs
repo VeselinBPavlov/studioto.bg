@@ -18,7 +18,7 @@
         }
 
         [Fact]
-        public async void ShouldUpdateCorrect()
+        public async void IndustryShouldUpdateCorrect()
         {
             var industry = new Industry { Name = GlobalConstants.IndustryValidName };
 
@@ -40,7 +40,7 @@
         }
 
         [Fact]
-        public async void ShouldThrowNotFoundException()
+        public async void IndustryShouldThrowNotFoundException()
         {
             var sut = new UpdateIndustryCommandHandler(this.Fixture.Context);
             var updatedIndustry = new UpdateIndustryCommand { Id = 100, Name = GlobalConstants.IndustrySecondValidName };

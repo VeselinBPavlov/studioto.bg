@@ -1,7 +1,7 @@
-﻿namespace Studio.Application.Tests.Industries.Commands
+﻿namespace Studio.Application.Tests.Clients.Commands
 {
     using FluentValidation.TestHelper;
-    using Studio.Application.Industries.Commands.Update;
+    using Studio.Application.Clients.Commands.Update;
     using Studio.Common;
     using Xunit;
 
@@ -12,8 +12,8 @@
 
         public UpdateClientCommandValidatorTests()
         {
-            this.validator = new UpdateClientCommandValidator();
-            this.command = new UpdateClientCommand();
+            validator = new UpdateClientCommandValidator();
+            command = new UpdateClientCommand();
         }
 
         [Fact]

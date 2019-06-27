@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Industries.Commands.Create
+﻿namespace Studio.Application.Clients.Commands.Create
 {
     using MediatR;
     using Interfaces.Persistence;

@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Industries.Commands.Create
+﻿namespace Studio.Application.Clients.Commands.Create
 {
     using System.Threading;
     using System.Threading.Tasks;

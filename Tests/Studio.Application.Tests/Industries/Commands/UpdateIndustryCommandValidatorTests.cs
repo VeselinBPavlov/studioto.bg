@@ -7,37 +7,41 @@
 
     public class UpdateIndustryCommandValidatorTests
     {
-        private UpdateIndustryCommandValidator validator;
-        private UpdateIndustryCommand command;
+        private UpdateIndustryCommandValidator updateValidator;
+        private UpdateIndustryCommand updateCommand;
 
         public UpdateIndustryCommandValidatorTests()
         {
-            this.validator = new UpdateIndustryCommandValidator();
-            this.command = new UpdateIndustryCommand();
+            this.updateValidator = new UpdateIndustryCommandValidator();
+            this.updateCommand = new UpdateIndustryCommand();
         }
 
         [Fact]
-        public void ShouldNotReturnError()
+        public void IndustryShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.IndustryValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.IndustryValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Possition, GlobalConstants.IndustryPossition);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameIsNull()
+        public void IndustryShouldReturnErrorIfNameIsNull()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Possition, null as string);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameLongerThan100Characters()
+        public void IndustryShouldReturnErrorIfNameLongerThan100Characters()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, GlobalConstants.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Possition, GlobalConstants.InvalidName);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameIsEmptyString()
+        public void IndustryShouldReturnErrorIfNameIsEmptyString()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Possition, string.Empty);
         }
     }
 }

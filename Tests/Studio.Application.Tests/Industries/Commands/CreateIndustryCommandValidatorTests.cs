@@ -7,41 +7,41 @@
 
     public class CreateIndustryCommandValidatorTests
     {
-        private CreateIndustryCommandValidator validator;
-        private CreateIndustryCommand command;
+        private CreateIndustryCommandValidator createValidator;
+        private CreateIndustryCommand createCommand;
 
         public CreateIndustryCommandValidatorTests()
         {
-            this.validator = new CreateIndustryCommandValidator();
-            this.command = new CreateIndustryCommand();
+            this.createValidator = new CreateIndustryCommandValidator();
+            this.createCommand = new CreateIndustryCommand();
         }
 
         [Fact]
-        public void ShouldNotReturnError()
+        public void IndustryShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.Name, GlobalConstants.IndustryValidName);
-            validator.ShouldNotHaveValidationErrorFor(command => command.Possition, GlobalConstants.IndustryPossition);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.IndustryValidName);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Possition, GlobalConstants.IndustryPossition);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameIsNull()
+        public void IndustryShouldReturnErrorIfNameIsNull()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, null as string);
-            validator.ShouldHaveValidationErrorFor(command => command.Possition, null as string);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, null as string);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Possition, null as string);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameLongerThan100Characters()
+        public void IndustryShouldReturnErrorIfNameLongerThan100Characters()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, GlobalConstants.InvalidName);
-            validator.ShouldHaveValidationErrorFor(command => command.Possition, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Possition, GlobalConstants.InvalidName);
         }
 
         [Fact]
-        public void ShouldReturnErrorIfNameIsEmptyString()
+        public void IndustryShouldReturnErrorIfNameIsEmptyString()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.Name, string.Empty);
-            validator.ShouldHaveValidationErrorFor(command => command.Possition, string.Empty);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, string.Empty);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Possition, string.Empty);
         }
     }
 }

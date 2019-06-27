@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.Industries.Commands.Create
+﻿namespace Studio.Application.Clients.Commands.Create
 {
     using MediatR;
     using System;
@@ -12,8 +12,8 @@
         public string ManagerFirstName { get; set; }
 
         public string ManagerLastName { get; set; }
-        
+
         public string Phone { get; set; }
-        
+
     }
 }

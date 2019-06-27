@@ -1,6 +1,7 @@
-﻿namespace Studio.Application.Industries.Commands.Delete
+﻿namespace Studio.Application.Clients.Commands.Delete
 {
     using MediatR;
+    using Studio.Application.Clients.Commands.Delete;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
     using Studio.Domain.Entities;
@@ -31,9 +32,9 @@
             if (client.IsDeleted)
             {
                 throw new DeleteFailureException(nameof(Client), request.Id, "Client is already deleted.");
-            }            
+            }
 
-            var hasLocations = this.context.Locations.Any(s => s.ClientId == client.Id);
+            var hasLocations = context.Locations.Any(s => s.ClientId == client.Id);
 
             if (hasLocations)
             {
@@ -43,8 +44,8 @@
             client.DeletedOn = DateTime.UtcNow;
             client.IsDeleted = true;
 
-            await this.context.SaveChangesAsync(cancellationToken);
-            
+            await context.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }
