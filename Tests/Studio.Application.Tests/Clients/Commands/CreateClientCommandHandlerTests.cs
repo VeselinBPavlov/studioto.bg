@@ -12,7 +12,7 @@
     using System;
     using Studio.Application.Clients.Commands.Create;
 
-    [CollectionDefinition("CommandCollection")]
+    [CollectionDefinition("ClientCollection")]
     public class CreateClientCommandHandlerTests : BaseCommandTests
     {
         public CreateClientCommandHandlerTests(CommandTestFixture fixture)

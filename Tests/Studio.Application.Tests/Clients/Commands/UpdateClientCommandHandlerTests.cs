@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using Xunit;
 
+    [CollectionDefinition("ClientCollection")]
     public class UpdateClientCommandHandlerTests : BaseCommandTests
     {
         public UpdateClientCommandHandlerTests(CommandTestFixture fixture)

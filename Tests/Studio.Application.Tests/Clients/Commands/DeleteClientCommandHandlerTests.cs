@@ -10,7 +10,7 @@
     using Studio.Domain.Entities;
     using Xunit;
 
-    [CollectionDefinition("CommandCollection")]
+    [CollectionDefinition("ClientCollection")]
     public class DeleteClientCommandHandlerTests : BaseCommandTests
     {
         public DeleteClientCommandHandlerTests(CommandTestFixture fixture)

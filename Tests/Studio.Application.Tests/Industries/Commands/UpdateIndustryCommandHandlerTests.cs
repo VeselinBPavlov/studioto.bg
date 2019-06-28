@@ -10,6 +10,7 @@
     using System.Threading.Tasks;
     using Xunit;
 
+    [CollectionDefinition("CommandCollection")]
     public class UpdateIndustryCommandHandlerTests : BaseCommandTests
     {        
         public UpdateIndustryCommandHandlerTests(CommandTestFixture fixture) 

@@ -35,8 +35,7 @@
             {
                 throw new UpdateFailureException(nameof(Country), request.Name, "There are existing country with the same name.");
             }
-
-
+            
             country.Name = request.Name;
             country.ModifiedOn = DateTime.UtcNow;
 
