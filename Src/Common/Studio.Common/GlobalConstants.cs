@@ -38,7 +38,7 @@
         // Countries
         public const string CountryValidName = "Bulgaria";
         public const string CountrySecondValidName = "Greece";
-        public const string CountryDeleteFalueExceptionMessage = "Deletion of entity \"Country\" ({0}) failed. There are existing cities associated with this client.";
+        public const string CountryDeleteFalueExceptionMessage = "Deletion of entity \"Country\" ({0}) failed. There are existing cities associated with this country.";
         public const string CountryNotFoundExceptionMessage = "Entity \"Country\" ({0}) was not found.";
         public const string CreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
         public const string UpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";

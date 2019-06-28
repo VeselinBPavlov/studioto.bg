@@ -10,8 +10,7 @@
     using Xunit;
     using System.Data;
     using System;
-    using Studio.Application.Clients.Commands.Create;
-    using Moq;
+    using Studio.Application.Clients.Commands.Create;    
 
     public class CreateClientCommandHandlerTests : CommandTestBase
     {

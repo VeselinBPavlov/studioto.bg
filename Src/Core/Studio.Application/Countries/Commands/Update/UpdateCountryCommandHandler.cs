@@ -31,7 +31,7 @@
 
             bool isCountryUnique = context.Countries.Any(x => x.Name == request.Name);
 
-            if (!isCountryUnique)
+            if (isCountryUnique)
             {
                 throw new UpdateFailureException(nameof(Country), request.Name, "There are existing country with the same name.");
             }
