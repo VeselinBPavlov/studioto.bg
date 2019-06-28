@@ -7,6 +7,7 @@
     using Studio.Domain.Entities;
     using System.Linq;
     using Studio.Application.Exceptions;
+    using System;
 
     public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, Unit>
     {
@@ -30,7 +31,8 @@
 
             var country = new Country
             {
-                Name = request.Name
+                Name = request.Name,
+                CreatedOn = DateTime.UtcNow
             };
 
             context.Countries.Add(country);

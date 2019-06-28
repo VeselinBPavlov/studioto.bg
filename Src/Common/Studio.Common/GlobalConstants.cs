@@ -40,11 +40,11 @@
         public const string CountrySecondValidName = "Greece";
         public const string CountryDeleteFalueExceptionMessage = "Deletion of entity \"Country\" ({0}) failed. There are existing cities associated with this country.";
         public const string CountryNotFoundExceptionMessage = "Entity \"Country\" ({0}) was not found.";
-        public const string CreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
-        public const string UpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";
+        public const string CountryCreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
+        public const string CountryUpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";
 
         // Cities
-        public const string CityValidName = "Bulgaria";
+        public const string CityValidName = "Sofia";
 
 
 

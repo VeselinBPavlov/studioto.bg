@@ -11,7 +11,7 @@
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Name)
-                   .HasMaxLength(200)
+                   .HasMaxLength(100)
                    .IsRequired()
                    .IsUnicode();
 

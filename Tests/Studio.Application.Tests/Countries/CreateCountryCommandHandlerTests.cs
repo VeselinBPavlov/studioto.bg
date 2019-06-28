@@ -10,6 +10,7 @@
     using Studio.Common;
     using Xunit;
     using Moq;
+    using Studio.Domain.Entities;
 
     public class CreateCountryCommandHandlerTests : CommandTestBase
     {
@@ -24,6 +25,25 @@
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Countries.Count());
+        }
+
+        [Fact]
+        public async Task ShouldThrowCreateFailureException()
+        {
+             var country = new Country { Name = "Beauty" };
+
+            context.Countries.Add(country);
+            await context.SaveChangesAsync();
+
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == "Beauty").Id;
+            
+            var mediator = new Mock<IMediator>();
+            var sut = new CreateCountryCommandHandler(context, mediator.Object);
+
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = "Beauty" }, CancellationToken.None));
+           
+            Assert.NotNull(status);
+            Assert.Equal(string.Format(GlobalConstants.CountryCreateFailureExceptionMessage, "Beauty"), status.Message);
         }
     }
 }
