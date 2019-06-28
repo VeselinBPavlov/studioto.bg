@@ -21,12 +21,12 @@
 
         public async Task<Unit> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
-            var country = await this.context.Industries
+            var country = await this.context.Countries
                 .SingleOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
 
             if (country == null)
             {
-                throw new NotFoundException(nameof(Industry), request.Id);
+                throw new NotFoundException(nameof(Country), request.Id);
             }
 
             bool isCountryUnique = context.Countries.Any(x => x.Name == request.Name);
@@ -39,7 +39,7 @@
             country.Name = request.Name;
             country.ModifiedOn = DateTime.UtcNow;
 
-            this.context.Industries.Update(country);
+            this.context.Countries.Update(country);
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

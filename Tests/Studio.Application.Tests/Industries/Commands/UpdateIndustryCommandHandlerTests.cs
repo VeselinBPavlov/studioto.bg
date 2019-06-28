@@ -10,47 +10,40 @@
     using System.Threading.Tasks;
     using Xunit;
 
-    [CollectionDefinition("CommandCollection")]
-    public class UpdateIndustryCommandHandlerTests : BaseCommandTests
-    {        
-        public UpdateIndustryCommandHandlerTests(CommandTestFixture fixture) 
-            : base(fixture)
-        {
-        }
-
+    public class UpdateIndustryCommandHandlerTests : CommandTestBase
+    {   
         [Fact]
         public async void IndustryShouldUpdateCorrect()
         {
             var industry = new Industry { Name = GlobalConstants.IndustryValidName };
 
-            this.Fixture.Context.Industries.Add(industry);
-            await this.Fixture.Context.SaveChangesAsync();
+            context.Industries.Add(industry);
+            await context.SaveChangesAsync();
 
-            var industryId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
 
-            var sut = new UpdateIndustryCommandHandler(this.Fixture.Context);
+            var sut = new UpdateIndustryCommandHandler(context);
             var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GlobalConstants.IndustrySecondValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedIndustry, CancellationToken.None));
 
-            var resultId = this.Fixture.Context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustrySecondValidName).Id;
+            var resultId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustrySecondValidName).Id;
 
             Assert.Equal(industryId, resultId);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, this.Fixture.Context.Industries.Count());
+            Assert.Equal(1, context.Industries.Count());
         }
 
         [Fact]
         public async void IndustryShouldThrowNotFoundException()
         {
-            var sut = new UpdateIndustryCommandHandler(this.Fixture.Context);
+            var sut = new UpdateIndustryCommandHandler(context);
             var updatedIndustry = new UpdateIndustryCommand { Id = 100, Name = GlobalConstants.IndustrySecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedIndustry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, 100), status.Message);
-            
+            Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, 100), status.Message);            
         }
     }
 }

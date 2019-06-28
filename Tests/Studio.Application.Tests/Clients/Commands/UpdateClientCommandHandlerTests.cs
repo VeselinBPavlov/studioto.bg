@@ -9,41 +9,35 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Xunit;
-
-    [CollectionDefinition("ClientCollection")]
-    public class UpdateClientCommandHandlerTests : BaseCommandTests
+  
+    public class UpdateClientCommandHandlerTests : CommandTestBase
     {
-        public UpdateClientCommandHandlerTests(CommandTestFixture fixture)
-            : base(fixture)
-        {
-        }
-
         [Fact]
         public async void ShouldUpdateCorrect()
         {
             var client = new Client { CompanyName = GlobalConstants.ClientValidName };
 
-            Fixture.Context.Clients.Add(client);
-            await Fixture.Context.SaveChangesAsync();
+            context.Clients.Add(client);
+            await context.SaveChangesAsync();
 
-            var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
 
-            var sut = new UpdateClientCommandHandler(Fixture.Context);
+            var sut = new UpdateClientCommandHandler(context);
             var updatedClient = new UpdateClientCommand { Id = clientId, CompanyName = GlobalConstants.ClientSecondValidName };
 
             var status = Task.FromResult(await sut.Handle(updatedClient, CancellationToken.None));
 
-            var resultId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
+            var resultId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
 
             Assert.Equal(clientId, resultId);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, Fixture.Context.Clients.Count());
+            Assert.Equal(1, context.Clients.Count());
         }
 
         [Fact]
         public async void ShouldThrowNotFoundException()
         {
-            var sut = new UpdateClientCommandHandler(Fixture.Context);
+            var sut = new UpdateClientCommandHandler(context);
             var updatedClient = new UpdateClientCommand { Id = GlobalConstants.InvalidId, CompanyName = GlobalConstants.ClientSecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedClient, CancellationToken.None));

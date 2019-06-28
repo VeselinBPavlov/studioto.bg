@@ -45,6 +45,7 @@
             industry.DeletedOn = DateTime.UtcNow;
             industry.IsDeleted = true;
             
+            this.context.Industries.Update(industry);
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

@@ -5,7 +5,7 @@ namespace Studio.Application.Tests.Infrastructure
 
     public class CommandTestBase : IDisposable
     {
-        protected readonly StudioDbContext context;
+        protected readonly StudioDbContext context;     
 
         public CommandTestBase()
         {

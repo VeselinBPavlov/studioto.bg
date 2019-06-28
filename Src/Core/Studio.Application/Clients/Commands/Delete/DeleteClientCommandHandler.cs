@@ -44,6 +44,7 @@
             client.DeletedOn = DateTime.UtcNow;
             client.IsDeleted = true;
 
+            context.Clients.Update(client);
             await context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

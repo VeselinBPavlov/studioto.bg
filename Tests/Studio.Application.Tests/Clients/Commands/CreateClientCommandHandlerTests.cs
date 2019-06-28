@@ -11,27 +11,23 @@
     using System.Data;
     using System;
     using Studio.Application.Clients.Commands.Create;
+    using Moq;
 
-    [CollectionDefinition("ClientCollection")]
-    public class CreateClientCommandHandlerTests : BaseCommandTests
+    public class CreateClientCommandHandlerTests : CommandTestBase
     {
-        public CreateClientCommandHandlerTests(CommandTestFixture fixture)
-            : base(fixture)
-        {
-        }
-
         [Fact]
         public async Task ShouldCreateClient()
         {
-            var sut = new CreateClientCommandHandler(Fixture.Context, Fixture.Mediator);
+            var mediator = new Mock<IMediator>();
+            var sut = new CreateClientCommandHandler(context, mediator.Object);
 
             var status = Task.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = GlobalConstants.ClientValidName }, CancellationToken.None));
 
-            var clientId = Fixture.Context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
             
             Assert.Null(status.Exception);
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, Fixture.Context.Clients.Count());
+            Assert.Equal(1, context.Clients.Count());
         }
     }
 }

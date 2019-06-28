@@ -38,6 +38,7 @@
             country.DeletedOn = DateTime.UtcNow;
             country.IsDeleted = true;
             
+            this.context.Countries.Update(country);
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
