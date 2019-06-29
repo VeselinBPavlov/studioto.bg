@@ -41,13 +41,16 @@
         public const string CountryDeleteFalueExceptionMessage = "Deletion of entity \"Country\" ({0}) failed. There are existing cities associated with this country.";
         public const string CountryNotFoundExceptionMessage = "Entity \"Country\" ({0}) was not found.";
         public const string CountryCreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
+        public const string CountryCreateFailureExceptionMessageIsDeleted = "Creation of entity \"Country\" ({0}) failed. Country with id {0} is deleted.";
         public const string CountryUpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";
 
         // Cities
         public const string CityValidName = "Sofia";
-
-
-
+        public const string CityCreateFailureExceptionMessageIsNull = "Creation of entity \"City\" ({0}) failed. There are no existing country with id {1}.";
+        public const string CityCreateFailureExceptionMessageIsDeleted = "Creation of entity \"City\" ({0}) failed. Country with id {1} is deleted.";
+        public const string CityDeleteFalueExceptionMessage = "Deletion of entity \"City\" ({0}) failed. There are existing address associated with this city.";
+        public const string CityNotFoundExceptionMessage = "Entity \"City\" ({0}) was not found.";
+        public const string CityDeleteFalueExceptionMessageIsDeleted = "Deletion of entity \"City\" ({0}) failed. City is already deleted.";
         #endregion
 
     }

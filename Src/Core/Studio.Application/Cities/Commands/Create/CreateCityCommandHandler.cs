@@ -22,9 +22,9 @@
 
         public async Task<Unit> Handle(CreateCityCommand request, CancellationToken cancellationToken)
         {
-            bool isCountryExists = this.context.Countries.Any(c => c.Id == request.CountryId);
+            var country = await this.context.Countries.FindAsync(request.CountryId);
 
-            if (isCountryExists == false) 
+            if (country == null) 
             {
                 throw new CreateFailureException(nameof(City), request.Name, $"There are no existing country with id {request.CountryId}.");
             }

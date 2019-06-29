@@ -31,5 +31,18 @@
             Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Cities.Count());
         }
+
+
+        [Fact]
+        public async Task ShouldThrowCreateFailureExceptionForDeletedCountry()
+        {
+            var mediator = new Mock<IMediator>();
+            var sut = new CreateCityCommandHandler(context, mediator.Object);
+
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCityCommand { Name = "Sofia", CountryId = GlobalConstants.InvalidId }, CancellationToken.None));
+
+            Assert.NotNull(status);
+            Assert.Equal(string.Format(GlobalConstants.CityCreateFailureExceptionMessageIsNull, "Sofia", GlobalConstants.InvalidId), status.Message);
+        }
     }
 }

@@ -4,6 +4,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
+    using Studio.Application.Cities.Commands.Delete;
     using Studio.Application.Industries.Commands.Delete;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
