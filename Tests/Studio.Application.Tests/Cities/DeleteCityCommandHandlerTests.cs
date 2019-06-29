@@ -52,26 +52,6 @@
             Assert.Equal(string.Format(GlobalConstants.CityDeleteFalueExceptionMessage, cityId), status.Message);
         }
 
-        //[Fact]
-        //public async Task CityShouldТhrowDeleteFailureExceptionIsDeleted()
-        //{
-        //    var city = new City { Name = "Lesovo", IsDeleted = true };
-
-        //    context.Cities.Add(city);
-        //    await context.SaveChangesAsync();
-
-        //    var cityId = context.Cities.SingleOrDefault(x => x.Name == "Lesovo").Id;
-
-
-        //    var sut = new DeleteCityCommandHandler(context);
-
-        //    var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
-
-        //    Assert.NotNull(status);
-        //    Assert.Equal(string.Format(GlobalConstants.CityDeleteFalueExceptionMessageIsDeleted, cityId), status.Message);
-        //}
-
-
         [Fact]
         public async Task CityShouldТhrowNotFoundException()
         {

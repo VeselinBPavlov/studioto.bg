@@ -51,6 +51,13 @@
         public const string CityDeleteFalueExceptionMessage = "Deletion of entity \"City\" ({0}) failed. There are existing address associated with this city.";
         public const string CityNotFoundExceptionMessage = "Entity \"City\" ({0}) was not found.";
         public const string CityDeleteFalueExceptionMessageIsDeleted = "Deletion of entity \"City\" ({0}) failed. City is already deleted.";
+
+        public const string AddressFromatExceptionMessage = "Address is invalid.";
+        public const string AddressCreateFailureExceptionMessageCityNotFound = "Creation of entity \"Address\" ({0}) failed. There are no existing city with id {1}.";
+        public const string AddressUpdateFailureExceptionCityInvalidId = "Update of entity \"Address\" ({0}) failed. There are no existing city with this id {1}.";
+        public const string AddressNotFoundExceptionMessage = "Entity \"Address\" ({0}) was not found.";
+        public const string AddressDeleteFailureExceptionMessage = "Deletion of entity \"Address\" ({0}) failed. There are existing location associated with this address.";
+
         #endregion
 
     }

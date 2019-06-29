@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Addresses\Commands\Create\" />
     <Folder Include="Addresses\Queries\" />
     <Folder Include="Countries\Commands\Delete\" />
     <Folder Include="Countries\Commands\Update\" />

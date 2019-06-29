@@ -5,7 +5,7 @@ namespace Studio.Domain.Exceptions
     public class AddressFormatInvalidException : Exception
     {
         public AddressFormatInvalidException(string address, Exception ex)
-            : base($"Address \"{address}\" is invalid.", ex)
+            : base($"Address is invalid.", ex)
         {
         }
     }
