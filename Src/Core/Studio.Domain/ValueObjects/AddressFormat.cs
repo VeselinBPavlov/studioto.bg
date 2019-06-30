@@ -5,6 +5,7 @@ namespace Studio.Domain.ValueObjects
     using System.Text;
     using Exceptions;
     using Infrastructure;
+    using Studio.Common;
 
     public class AddressFormat : ValueObject<AddressFormat>
     { 
@@ -30,7 +31,7 @@ namespace Studio.Domain.ValueObjects
         {   
             if (addressData.Street == null || addressData.Number == null) 
             {
-                throw new AddressFormatInvalidException(addressData.Street ?? addressData.Number, new ArgumentException("Street and number are required!"));
+                throw new AddressFormatInvalidException(new ArgumentException(GlobalConstants.AddressFormatException));
             }
 
             var address = new AddressFormat()

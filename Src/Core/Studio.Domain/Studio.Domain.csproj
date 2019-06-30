@@ -13,4 +13,8 @@
     <Folder Include="Enumerations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Studio.Common\Studio.Common.csproj" />
+  </ItemGroup>
+
 </Project>

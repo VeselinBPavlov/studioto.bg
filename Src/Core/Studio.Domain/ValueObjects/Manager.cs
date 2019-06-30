@@ -1,5 +1,6 @@
 ﻿namespace Studio.Domain.ValueObjects
 {
+    using Studio.Common;
     using Studio.Domain.Exceptions;
     using Studio.Domain.Infrastructure;
     using System;
@@ -21,9 +22,9 @@
                 manager.FirstName = accountString.Substring(0, index);
                 manager.LastName = accountString.Substring(index + 1);
             }
-            catch (Exception ex)
+            catch (ArgumentException)
             {
-                throw new ManagerInvalidException(accountString, ex);
+                throw new ManagerInvalidException(new ArgumentException(GlobalConstants.ManagerException));
             }
 
             return manager;

@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using FluentValidation.Results;
+    using Studio.Common;
 
     public class ValidationException : Exception
     {
         public ValidationException()
-            : base("One or more validation failures have occurred.")
+            : base(GlobalConstants.BaseException)
         {
             this.Failures = new Dictionary<string, string[]>();
         }

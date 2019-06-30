@@ -1,11 +1,14 @@
 namespace Studio.Application.Exceptions
 {
+    using Studio.Common;
     using System;
     
     public class UpdateFailureException : Exception
     {
+        public const string Update = "Update";
+
         public UpdateFailureException(string name, object key, string message)
-            : base($"Update of entity \"{name}\" ({key}) failed. {message}")
+            : base(string.Format(GlobalConstants.FailureException, Update, name, key, message))
         {
         }        
     }

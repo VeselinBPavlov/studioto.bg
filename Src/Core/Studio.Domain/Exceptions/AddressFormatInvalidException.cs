@@ -4,8 +4,10 @@ namespace Studio.Domain.Exceptions
 
     public class AddressFormatInvalidException : Exception
     {
-        public AddressFormatInvalidException(string address, Exception ex)
-            : base($"Address is invalid.", ex)
+        private const string Address = "Address";
+
+        public AddressFormatInvalidException(Exception ex)
+            : base(string.Format("{0} is invalid.", Address), ex)
         {
         }
     }

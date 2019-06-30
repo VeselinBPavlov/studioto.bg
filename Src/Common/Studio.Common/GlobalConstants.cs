@@ -2,6 +2,21 @@
 {
     public static class GlobalConstants
     {
+        #region Studio.Application.Core
+
+        public const string BaseException = "One or more validation failures have occurred.";
+        public const string FailureException = "{0} of entity \"{1}\" ({2}) failed. {3}";
+        public const string NotFoundException = "Entity \"{0}\" ({1}) was not found.";
+
+        #endregion
+
+        #region Studio.Application.Domain
+
+        public const string ValueObjectException = "{0} is invalid.";
+        public const string AddressFormatException = "Street and number are required!";
+        public const string ManagerException = "First and last name are with incorrect format!";
+        #endregion
+
         #region Studio.Application.Tests
 
         // Valid for all entities
