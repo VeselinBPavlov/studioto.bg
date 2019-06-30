@@ -19,6 +19,11 @@
         
         // Service
         public const string ServiceValidName = "Haircut";
+        public const string ServiceCreateFailureExceptionMessageIsNull = "Creation of entity \"Service\" ({0}) failed. There are no existing industry with id {1}.";
+        public const string ServiceNotFoundExceptionMessage = "Entity \"Service\" ({0}) was not found.";
+        public const string ServiceDeleteFalueExceptionMessageAppointment = "Deletion of entity \"Service\" ({0}) failed. There are existing appointments associated with this service.";
+        public const string ServiceDeleteFalueExceptionMessageEmployee = "Deletion of entity \"Service\" ({0}) failed. There are existing employees associated with this service.";
+
 
         // Client
         public const string ClientValidName = "VND Group";
@@ -52,6 +57,7 @@
         public const string CityNotFoundExceptionMessage = "Entity \"City\" ({0}) was not found.";
         public const string CityDeleteFalueExceptionMessageIsDeleted = "Deletion of entity \"City\" ({0}) failed. City is already deleted.";
 
+        // Address
         public const string AddressFromatExceptionMessage = "Address is invalid.";
         public const string AddressCreateFailureExceptionMessageCityNotFound = "Creation of entity \"Address\" ({0}) failed. There are no existing city with id {1}.";
         public const string AddressUpdateFailureExceptionCityInvalidId = "Update of entity \"Address\" ({0}) failed. There are no existing city with this id {1}.";

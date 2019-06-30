@@ -22,7 +22,7 @@
     <Folder Include="Countries\Queries\" />
     <Folder Include="Clients\Queries\" />
     <Folder Include="Industries\Queries\" />
-    <Folder Include="Services\" />
+    <Folder Include="Services\Queries\" />
   </ItemGroup>
 
 </Project>
