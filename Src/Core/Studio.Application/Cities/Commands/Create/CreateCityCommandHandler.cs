@@ -27,7 +27,7 @@
 
             if (country == null) 
             {
-                throw new CreateFailureException(nameof(City), request.Name, string.Format(GlobalConstants.RefereceException, "country", request.CountryId));
+                throw new CreateFailureException(GConst.City, request.Name, string.Format(GConst.RefereceException, GConst.CountryLower, request.CountryId));
             }
 
             var city = new City

@@ -27,14 +27,14 @@
 
             if (client == null)
             {
-                throw new NotFoundException(nameof(Client), request.Id);
+                throw new NotFoundException(GConst.Client, request.Id);
             }
 
             var hasLocations = context.Locations.Any(s => s.ClientId == client.Id);
 
             if (hasLocations)
             {
-                throw new DeleteFailureException(nameof(Client), request.Id, string.Format(GlobalConstants.DeleteException, "locations", "client"));
+                throw new DeleteFailureException(GConst.Client, request.Id, string.Format(GConst.DeleteException, GConst.Locations, GConst.ClientLower));
             }
 
             client.DeletedOn = DateTime.UtcNow;

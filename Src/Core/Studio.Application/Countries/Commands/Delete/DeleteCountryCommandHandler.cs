@@ -26,14 +26,14 @@
 
             if (country == null)
             {
-                throw new NotFoundException(nameof(Country), request.Id);
+                throw new NotFoundException(GConst.Country, request.Id);
             }
 
             var hasCities = this.context.Cities.Any(c => c.CountryId == country.Id);
 
             if (hasCities)
             {
-                throw new DeleteFailureException(nameof(Country), request.Id, string.Format(GlobalConstants.DeleteException, "cities", "country"));
+                throw new DeleteFailureException(GConst.Country, request.Id, string.Format(GConst.DeleteException, GConst.Cities, GConst.CountryLower));
             }
 
             country.DeletedOn = DateTime.UtcNow;

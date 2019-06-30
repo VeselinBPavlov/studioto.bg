@@ -27,14 +27,14 @@
 
             if (service == null)
             {
-                throw new NotFoundException(nameof(Service), request.Id);
+                throw new NotFoundException(GConst.Service, request.Id);
             }
 
             var industry = await this.context.Industries.FindAsync(request.IndustryId);
 
             if (industry == null)
             {
-                throw new CreateFailureException(nameof(Service), request.Name, string.Format(GlobalConstants.RefereceException, "industry", request.IndustryId));
+                throw new UpdateFailureException(GConst.Service, request.Id, string.Format(GConst.RefereceException, GConst.IndustryLower, request.IndustryId));
             }
 
             service.Name = request.Name;

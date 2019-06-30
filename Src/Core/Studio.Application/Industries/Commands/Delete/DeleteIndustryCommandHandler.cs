@@ -26,21 +26,21 @@
 
             if (industry == null)
             {
-                throw new NotFoundException(nameof(Industry), request.Id);
+                throw new NotFoundException(GConst.Industry, request.Id);
             }
 
             var hasServices = this.context.Services.Any(s => s.IndustryId == industry.Id);
 
             if (hasServices)
             {
-                throw new DeleteFailureException(nameof(Industry), request.Id, string.Format(GlobalConstants.DeleteException, "services", "industry"));
+                throw new DeleteFailureException(GConst.Industry, request.Id, string.Format(GConst.DeleteException, GConst.Services, GConst.IndustryLower));
             }
 
             var hasLocations = this.context.LocationIndustries.Any(li => li.IndustryId == industry.Id);
 
             if (hasLocations)
             {
-                throw new DeleteFailureException(nameof(Industry), request.Id, string.Format(GlobalConstants.DeleteException, "locations", "industry"));
+                throw new DeleteFailureException(GConst.Industry, request.Id, string.Format(GConst.DeleteException, GConst.Locations, GConst.IndustryLower));
             }
 
             industry.DeletedOn = DateTime.UtcNow;

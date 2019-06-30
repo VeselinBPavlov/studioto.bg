@@ -17,18 +17,18 @@
         [Fact]
         public async Task ShouldCreateCity()
         {
-            var country = new Country { Name = GlobalConstants.CountryValidName };
+            var country = new Country { Name = Common.GConst.CountryValidName };
             context.Countries.Add(country);
             this.context.SaveChanges();
-            var countryId = context.Countries.SingleOrDefault(x => x.Name ==  GlobalConstants.CountryValidName).Id;
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == Common.GConst.CountryValidName).Id;
             
             var mediator = new Mock<IMediator>();
             var sut = new CreateCityCommandHandler(context, mediator.Object);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCityCommand { Name = GlobalConstants.CityValidName, CountryId = countryId }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCityCommand { Name = Common.GConst.CityValidName, CountryId = countryId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(Common.GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Cities.Count());
         }
 
@@ -39,10 +39,10 @@
             var mediator = new Mock<IMediator>();
             var sut = new CreateCityCommandHandler(context, mediator.Object);
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCityCommand { Name = "Sofia", CountryId = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCityCommand { Name = "Sofia", CountryId = Common.GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CityCreateFailureExceptionMessageIsNull, "Sofia", GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(Common.GConst.ReferenceExceptionMessage, "Creation", nameof(Domain.Entities.City), "Sofia", "country", Common.GConst.InvalidId), status.Message);
         }
     }
 }

@@ -19,7 +19,7 @@
         [Fact]
         public void CountryShouldNotReturnError()
         {
-            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.CountryValidName);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.CountryValidName);
         }
 
         [Fact]
@@ -31,7 +31,7 @@
         [Fact]
         public void CountryShouldReturnErrorIfNameLongerThan100Characters()
         {
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, GConst.InvalidName);
         }
 
         [Fact]

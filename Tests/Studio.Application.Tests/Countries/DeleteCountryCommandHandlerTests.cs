@@ -15,19 +15,19 @@
         [Fact]
         public async Task ShouldDeleteCountry()
         {
-            var country = new Country { Name = GlobalConstants.CountryValidName };
+            var country = new Country { Name = GConst.CountryValidName };
 
             context.Countries.Add(country);
             await context.SaveChangesAsync();
 
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GlobalConstants.CountryValidName).Id;
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
 
             var sut = new DeleteCountryCommandHandler(context);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
         }
 
         [Fact]
@@ -40,7 +40,7 @@
 
             var countryId = context.Countries.SingleOrDefault(x => x.Name == "Beauty").Id;
 
-            var city = new City { Name = GlobalConstants.CityValidName, CountryId = countryId };
+            var city = new City { Name = GConst.CityValidName, CountryId = countryId };
             context.Cities.Add(city);
             await context.SaveChangesAsync();
 
@@ -49,7 +49,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Country), countryId, "cities", "country"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Country), countryId, "cities", "country"), status.Message);
         }
         
 
@@ -58,10 +58,10 @@
         {
             var sut = new DeleteCountryCommandHandler(context);           
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Country), GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Country), GConst.InvalidId), status.Message);
         }
     }
 }

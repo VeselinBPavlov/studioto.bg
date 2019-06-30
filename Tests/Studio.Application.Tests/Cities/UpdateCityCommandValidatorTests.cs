@@ -19,7 +19,7 @@
         [Fact]
         public void CityShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.CityValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.CityValidName);
         }
 
         [Fact]
@@ -31,7 +31,7 @@
         [Fact]
         public void CityShouldReturnErrorIfNameLongerThan100Characters()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.InvalidName);
         }
 
         [Fact]

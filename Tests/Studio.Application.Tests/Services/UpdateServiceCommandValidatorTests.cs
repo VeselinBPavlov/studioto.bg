@@ -19,7 +19,7 @@
         [Fact]
         public void ServiceShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.ServiceValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.ServiceValidName);
         }
 
         [Fact]
@@ -31,7 +31,7 @@
         [Fact]
         public void ServiceShouldReturnErrorIfNameLongerThan100Characters()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GlobalConstants.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.InvalidName);
         }
 
         [Fact]

@@ -15,16 +15,16 @@ namespace Studio.Application.Tests.Services.Commands
         [Fact]
         public void ShouldRaiseServiceCreatedNotification()
         {
-            var industry = new Industry { Name = GlobalConstants.IndustryValidName };
+            var industry = new Industry { Name = GConst.IndustryValidName };
             context.Industries.Add(industry);
             this.context.SaveChanges();
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustryValidName).Id;
 
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateServiceCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateServiceCommand { Name = GlobalConstants.ServiceValidName, IndustryId = industryId }, CancellationToken.None);
-            var ServiceId = context.Services.SingleOrDefault(x => x.Name == GlobalConstants.ServiceValidName).Id;
+            var result = sut.Handle(new CreateServiceCommand { Name = GConst.ServiceValidName, IndustryId = industryId }, CancellationToken.None);
+            var ServiceId = context.Services.SingleOrDefault(x => x.Name == GConst.ServiceValidName).Id;
 
             mediatorMock.Verify(m => m.Publish(It.Is<CreateServiceCommandNotification>(c => c.ServiceId == ServiceId), It.IsAny<CancellationToken>()), Times.Once);
         }

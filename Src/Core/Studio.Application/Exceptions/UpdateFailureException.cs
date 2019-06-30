@@ -8,7 +8,7 @@ namespace Studio.Application.Exceptions
         public const string Update = "Update";
 
         public UpdateFailureException(string name, object key, string message)
-            : base(string.Format(GlobalConstants.FailureException, Update, name, key, message))
+            : base(string.Format(Common.GConst.FailureException, Update, name, key, message))
         {
         }        
     }

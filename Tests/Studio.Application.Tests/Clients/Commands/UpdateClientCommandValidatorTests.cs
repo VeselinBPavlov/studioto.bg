@@ -19,11 +19,11 @@
         [Fact]
         public void ShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.CompanyName, GlobalConstants.ClientValidName);
-            validator.ShouldNotHaveValidationErrorFor(command => command.VatNumber, GlobalConstants.ClientValidVatNumber);
-            validator.ShouldNotHaveValidationErrorFor(command => command.Phone, GlobalConstants.ClientValidPhone);
-            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerFirstName, GlobalConstants.ClientValidManagerFirstName);
-            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerLastName, GlobalConstants.ClientValidManagerLastName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.CompanyName, GConst.ClientValidName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.VatNumber, GConst.ValidVatNumber);
+            validator.ShouldNotHaveValidationErrorFor(command => command.Phone, GConst.ValidPhone);
+            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerFirstName, GConst.ClientValidManagerFirstName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerLastName, GConst.ClientValidManagerLastName);
         }
 
         [Fact]
@@ -39,11 +39,11 @@
         [Fact]
         public void ShouldReturnErrorIfNameLongerThan100Characters()
         {
-            validator.ShouldHaveValidationErrorFor(command => command.CompanyName, GlobalConstants.InvalidName);
-            validator.ShouldHaveValidationErrorFor(command => command.VatNumber, GlobalConstants.InvalidName);
-            validator.ShouldHaveValidationErrorFor(command => command.Phone, GlobalConstants.InvalidName);
-            validator.ShouldHaveValidationErrorFor(command => command.ManagerFirstName, GlobalConstants.InvalidName);
-            validator.ShouldHaveValidationErrorFor(command => command.ManagerLastName, GlobalConstants.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.CompanyName, GConst.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.VatNumber, GConst.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.Phone, GConst.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.ManagerFirstName, GConst.InvalidName);
+            validator.ShouldHaveValidationErrorFor(command => command.ManagerLastName, GConst.InvalidName);
         }
 
         [Fact]

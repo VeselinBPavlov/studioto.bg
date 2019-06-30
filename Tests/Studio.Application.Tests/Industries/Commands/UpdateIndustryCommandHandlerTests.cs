@@ -15,22 +15,22 @@
         [Fact]
         public async void IndustryShouldUpdateCorrect()
         {
-            var industry = new Industry { Name = GlobalConstants.IndustryValidName };
+            var industry = new Industry { Name = GConst.IndustryValidName };
 
             context.Industries.Add(industry);
             await context.SaveChangesAsync();
 
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustryValidName).Id;
 
             var sut = new UpdateIndustryCommandHandler(context);
-            var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GlobalConstants.IndustrySecondValidName };
+            var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GConst.IndustrySecondValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedIndustry, CancellationToken.None));
 
-            var resultId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustrySecondValidName).Id;
+            var resultId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustrySecondValidName).Id;
 
             Assert.Equal(industryId, resultId);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Industries.Count());
         }
 
@@ -38,12 +38,12 @@
         public async void IndustryShouldThrowNotFoundException()
         {
             var sut = new UpdateIndustryCommandHandler(context);
-            var updatedIndustry = new UpdateIndustryCommand { Id = GlobalConstants.InvalidId, Name = GlobalConstants.IndustrySecondValidName };
+            var updatedIndustry = new UpdateIndustryCommand { Id = GConst.InvalidId, Name = GConst.IndustrySecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedIndustry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Industry), GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Industry), GConst.InvalidId), status.Message);            
         }
     }
 }

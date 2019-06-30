@@ -27,14 +27,14 @@
 
             if (city == null)
             {
-                throw new NotFoundException(nameof(City), request.Id);
+                throw new NotFoundException(GConst.City, request.Id);
             }
 
             var country = await this.context.Countries.FindAsync(request.CountryId);
 
             if (country == null)
             {
-                throw new CreateFailureException(nameof(City), request.Name, string.Format(GlobalConstants.RefereceException, "country", request.CountryId));
+                throw new UpdateFailureException(GConst.City, request.Id, string.Format(GConst.RefereceException, GConst.CountryLower, request.CountryId));
             }
 
             city.Name = request.Name;

@@ -17,8 +17,8 @@ namespace Studio.Application.Tests.Clients.Commands
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateClientCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateClientCommand { CompanyName = GlobalConstants.ClientValidName}, CancellationToken.None);
-            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var result = sut.Handle(new CreateClientCommand { CompanyName = GConst.ClientValidName}, CancellationToken.None);
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GConst.ClientValidName).Id;
 
             mediatorMock.Verify(m => m.Publish(It.Is<CreateClientCommandNotification>(c => c.ClientId == clientId), It.IsAny<CancellationToken>()), Times.Once);
         }

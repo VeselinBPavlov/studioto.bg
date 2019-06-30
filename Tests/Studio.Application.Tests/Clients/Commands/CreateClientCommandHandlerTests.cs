@@ -20,12 +20,12 @@
             var mediator = new Mock<IMediator>();
             var sut = new CreateClientCommandHandler(context, mediator.Object);
 
-            var status = Task.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = GlobalConstants.ClientValidName }, CancellationToken.None));
+            var status = Task.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = Common.GConst.ClientValidName }, CancellationToken.None));
 
-            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == Common.GConst.ClientValidName).Id;
             
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(Common.GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Clients.Count());
         }
     }

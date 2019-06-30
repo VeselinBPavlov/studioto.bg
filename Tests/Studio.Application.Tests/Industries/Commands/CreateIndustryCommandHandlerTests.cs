@@ -19,10 +19,10 @@
             var mediator = new Mock<IMediator>();
             var sut = new CreateIndustryCommandHandler(context, mediator.Object);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateIndustryCommand { Name = GlobalConstants.IndustryValidName }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateIndustryCommand { Name = Common.GConst.IndustryValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(Common.GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Industries.Count());
         }
     }

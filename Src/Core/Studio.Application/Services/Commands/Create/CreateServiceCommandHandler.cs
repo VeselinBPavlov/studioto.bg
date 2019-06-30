@@ -27,7 +27,7 @@
 
             if (industry == null) 
             {
-                throw new CreateFailureException(nameof(Service), request.Name, string.Format(GlobalConstants.RefereceException, "industry", request.IndustryId));
+                throw new CreateFailureException(GConst.Service, request.Name, string.Format(GConst.RefereceException, GConst.IndustryLower, request.IndustryId));
             }
 
             var service = new Service

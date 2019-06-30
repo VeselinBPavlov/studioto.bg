@@ -28,14 +28,14 @@
 
             if (address == null)
             {
-                throw new NotFoundException(nameof(Address), request.Id);
+                throw new NotFoundException(GConst.Address, request.Id);
             }
 
             var city = await this.context.Cities.FindAsync(request.CityId);
 
             if (city == null)
             {
-                throw new UpdateFailureException(nameof(Address), request.Id, string.Format(GlobalConstants.RefereceException, "city", request.CityId));
+                throw new UpdateFailureException(GConst.Address, request.Street, string.Format(GConst.RefereceException, GConst.CityLower, request.CityId));
             }
 
             var inputAddressData = new InputAddressData

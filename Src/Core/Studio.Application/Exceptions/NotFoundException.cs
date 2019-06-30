@@ -6,7 +6,7 @@
     public class NotFoundException : Exception
     {
         public NotFoundException(string name, object key)
-            : base(string.Format(GlobalConstants.NotFoundException, name, key))
+            : base(string.Format(Common.GConst.NotFoundException, name, key))
         {
         }
     }

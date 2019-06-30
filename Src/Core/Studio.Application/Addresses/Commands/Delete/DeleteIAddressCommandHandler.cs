@@ -25,14 +25,14 @@
 
             if (address == null)
             {
-                throw new NotFoundException(nameof(Address), request.Id);
+                throw new NotFoundException(GConst.Address, request.Id);
             }
 
             var hasLocation = this.context.Locations.Any(s => s.AddressId == address.Id);
 
             if (hasLocation)
             {
-                throw new DeleteFailureException(nameof(Address), request.Id, string.Format(GlobalConstants.DeleteException, "location", "address"));
+                throw new DeleteFailureException(GConst.Address, request.Id, string.Format(GConst.DeleteException, GConst.LocationLower, GConst.AddressLower));
             }            
 
             address.DeletedOn = DateTime.UtcNow;

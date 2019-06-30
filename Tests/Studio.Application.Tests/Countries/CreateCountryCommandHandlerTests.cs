@@ -20,10 +20,10 @@
             var mediator = new Mock<IMediator>();
             var sut = new CreateCountryCommandHandler(context, mediator.Object);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCountryCommand { Name = GlobalConstants.CountryValidName }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCountryCommand { Name = Common.GConst.CountryValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(Common.GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Countries.Count());
         }
 
@@ -43,7 +43,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = "Beauty" }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CountryCreateFailureExceptionMessage, "Beauty"), status.Message);
+            Assert.Equal(string.Format(Common.GConst.UniqueNameExceptionMessage, "Creation", nameof(Domain.Entities.Country),  "Beauty", "country"), status.Message);
         }
     }
 }

@@ -8,7 +8,7 @@
         private const string Manager = "Manager";
 
         public ManagerInvalidException(Exception ex)
-            : base(string.Format(GlobalConstants.ValueObjectException, Manager), ex)
+            : base(string.Format(Studio.Common.GConst.ValueObjectException, Manager), ex)
         {
         }
     }

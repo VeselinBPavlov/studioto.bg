@@ -16,10 +16,10 @@
         [Fact]
         public async Task ShouldUpdateAddress()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var city = new City { Name = GConst.CityValidName };
             context.Cities.Add(city);
             await this.context.SaveChangesAsync();
-            var cityId = context.Cities.SingleOrDefault(x => x.Name ==  GlobalConstants.CityValidName).Id;
+            var cityId = context.Cities.SingleOrDefault(x => x.Name ==  GConst.CityValidName).Id;
 
             var inputAddressData = new InputAddressData
             {
@@ -38,7 +38,7 @@
             var status = Task<Unit>.FromResult(await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = "Benkovski", Number = "1", CityId = cityId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Addresses.Count());
         }
 
@@ -47,19 +47,19 @@
         {           
             var sut = new UpdateAddressCommandHandler(context);
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Address), GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Address), GConst.InvalidId), status.Message);
         }
 
         [Fact]
         public async Task ShouldThrowUpdateFailureException()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var city = new City { Name = GConst.CityValidName };
             context.Cities.Add(city);
             await this.context.SaveChangesAsync();
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GlobalConstants.CityValidName).Id;
+            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
 
             var inputAddressData = new InputAddressData
             {
@@ -75,19 +75,19 @@
 
             var sut = new UpdateAddressCommandHandler(context);
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = "Benkovski", Number = "1", CityId = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = "Benkovski", Number = "1", CityId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.UpdateFailureExceptionMessage, nameof(Address), addressId, "city", GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.ReferenceExceptionMessage, "Update", nameof(Address), "Benkovski", "city", GConst.InvalidId), status.Message);
         }
 
         [Fact]
         public async Task ShouldThrowAddressFormatError()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var city = new City { Name = GConst.CityValidName };
             context.Cities.Add(city);
             this.context.SaveChanges();
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GlobalConstants.CityValidName).Id;
+            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
 
             var inputAddressData = new InputAddressData
             {
@@ -106,7 +106,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, CityId = cityId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(GlobalConstants.AddressFromatExceptionMessage, status.Message);
+            Assert.Equal(string.Format(GConst.ValueObjectExceptionMessage, nameof(Address)), status.Message);
         }
     }
 }

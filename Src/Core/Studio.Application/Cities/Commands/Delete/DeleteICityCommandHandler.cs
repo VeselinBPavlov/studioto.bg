@@ -25,14 +25,14 @@
 
             if (city == null)
             {
-                throw new NotFoundException(nameof(City), request.Id);
+                throw new NotFoundException(GConst.City, request.Id);
             }
 
             var hasAddresses = this.context.Addresses.Any(s => s.CityId == city.Id);
 
             if (hasAddresses)
             {
-                throw new DeleteFailureException(nameof(City), request.Id, string.Format(GlobalConstants.DeleteException, "addresses", "city"));
+                throw new DeleteFailureException(Common.GConst.City, request.Id, string.Format(GConst.DeleteException, GConst.Addresses, GConst.CityLower));
             }            
 
             city.DeletedOn = DateTime.UtcNow;

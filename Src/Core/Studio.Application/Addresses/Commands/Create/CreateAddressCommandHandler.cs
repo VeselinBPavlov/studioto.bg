@@ -28,7 +28,7 @@
 
             if (city == null) 
             {
-                throw new CreateFailureException(nameof(Address), request.Street, string.Format(GlobalConstants.RefereceException, "city", request.CityId));
+                throw new CreateFailureException(GConst.Address, request.Street, string.Format(GConst.RefereceException, GConst.CityLower, request.CityId));
             }
 
             var inputAddressData = new InputAddressData

@@ -1,6 +1,6 @@
 ﻿namespace Studio.Common
 {
-    public static class GlobalConstants
+    public static class GConst
     {
         #region Studio.Application.Core
 
@@ -18,6 +18,33 @@
         public const string ValueObjectException = "{0} is invalid.";
         public const string AddressFormatException = "Street and number are required!";
         public const string ManagerException = "First and last name are with incorrect format!";
+        public const string Industry = "Industry";
+        public const string Country = "Country";
+        public const string City = "City";
+        public const string Address = "Address";
+        public const string Location = "Location";
+        public const string Manager = "Manager";
+        public const string Client = "Client";
+        public const string Service = "Service";
+        public const string Employee = "Employee";
+        public const string Appointment = "Appointment";
+        public const string IndustryLower = "industry";
+        public const string CountryLower = "country";
+        public const string CityLower = "city";
+        public const string AddressLower = "address";
+        public const string LocationLower = "location";
+        public const string ManagerLower = "manager";
+        public const string ClientLower = "client";
+        public const string ServiceLower = "service";
+        public const string EmployeeLower = "employee";
+        public const string AppointmentLower = "appointment";
+        public const string Addresses = "addresses";
+        public const string Locations = "locations";
+        public const string Employees = "employees";
+        public const string Cities = "cities";
+        public const string Services = "services";
+        public const string Appointments = "appointments";
+
 
         #endregion
 
@@ -31,60 +58,44 @@
         public const string FirstValidName = "Fitness";
         public const string SecondValidName = "Haircut";
         public const string ThirdValidName = "CET";
+        public const string ValidVatNumber = "BG114564897";
+        public const string ValidPhone = "+359887889884";
+        public const string ValidAddressNumber = "1";
         public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
-        public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";
-        public const string UpdateFailureExceptionMessage = "Update of entity \"{0}\" ({1}) failed. There are no existing {2} with id {3}.";
+        public const string ReferenceExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are no existing {3} with id {4}.";
+        public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";       
+        public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
+        public const string ValueObjectExceptionMessage = "{0} is invalid.";
 
-        // Industry
+
+        // Industry 
         public const string IndustryValidName = "Hairstyle";
         public const string IndustrySecondValidName = "Fitness";
         public const string IndustryPossition = "Hairstyler";
-       
-        
-        
+
         // Service
         public const string ServiceValidName = "Haircut";
-        public const string ServiceCreateFailureExceptionMessageIsNull = "Creation of entity \"Service\" ({0}) failed. There are no existing industry with id {1}.";
-        
-        
-
 
         // Client
         public const string ClientValidName = "VND Group";
         public const string ClientSecondValidName = "CET";
         public const string ClientThirdValidName = "Beauty";
-        public const string ClientValidVatNumber = "BG114564897";
-        public const string ClientValidPhone = "+359887889884";
+
         public const string ClientValidManagerFirstName = "Ivan";
-        public const string ClientValidManagerLastName = "Ivanov";      
-        
-        
-                     
+        public const string ClientValidManagerLastName = "Ivanov";
+
         // Location
         public const string LocationValidName = "CentralStudio";
 
         // Countries
         public const string CountryValidName = "Bulgaria";
         public const string CountrySecondValidName = "Greece";
-        
-        
-        public const string CountryCreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
-        public const string CountryCreateFailureExceptionMessageIsDeleted = "Creation of entity \"Country\" ({0}) failed. Country with id {0} is deleted.";
-        public const string CountryUpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";
+
 
         // Cities
         public const string CityValidName = "Sofia";
-        public const string CityCreateFailureExceptionMessageIsNull = "Creation of entity \"City\" ({0}) failed. There are no existing country with id {1}.";
-        public const string CityCreateFailureExceptionMessageIsDeleted = "Creation of entity \"City\" ({0}) failed. Country with id {1} is deleted.";
-        
-        public const string CityDeleteFalueExceptionMessageIsDeleted = "Deletion of entity \"City\" ({0}) failed. City is already deleted.";
 
         // Address
-        public const string AddressFromatExceptionMessage = "Address is invalid.";
-        public const string AddressCreateFailureExceptionMessageCityNotFound = "Creation of entity \"Address\" ({0}) failed. There are no existing city with id {1}.";
-        
-        
-        
 
         #endregion
 

@@ -27,7 +27,7 @@
 
             if (isCountryUnique)
             {
-                throw new CreateFailureException(nameof(Country), request.Name, string.Format(GlobalConstants.UniqueNameException, "country"));
+                throw new CreateFailureException(GConst.Country, request.Name, string.Format(GConst.UniqueNameException, GConst.CountryLower));
             }
 
             var country = new Country

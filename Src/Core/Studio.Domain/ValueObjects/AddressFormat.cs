@@ -31,7 +31,7 @@ namespace Studio.Domain.ValueObjects
         {   
             if (addressData.Street == null || addressData.Number == null) 
             {
-                throw new AddressFormatInvalidException(new ArgumentException(GlobalConstants.AddressFormatException));
+                throw new AddressFormatInvalidException(new ArgumentException(Studio.Common.GConst.AddressFormatException));
             }
 
             var address = new AddressFormat()

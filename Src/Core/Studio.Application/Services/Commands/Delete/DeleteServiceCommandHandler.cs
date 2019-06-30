@@ -25,21 +25,21 @@
 
             if (service == null)
             {
-                throw new NotFoundException(nameof(Service), request.Id);
+                throw new NotFoundException(GConst.Service, request.Id);
             }
 
             var hasAppointments = this.context.Appointments.Any(s => s.ServiceId == service.Id);
 
             if (hasAppointments)
             {
-                throw new DeleteFailureException(nameof(Service), request.Id, string.Format(GlobalConstants.DeleteException, "appointments", "service"));
+                throw new DeleteFailureException(GConst.Service, request.Id, string.Format(GConst.DeleteException, GConst.Appointments, GConst.ServiceLower));
             }
 
             var hasEmployees = this.context.EmployeeServices.Any(s => s.ServiceId == service.Id);
 
             if (hasEmployees)
             {
-                throw new DeleteFailureException(nameof(Service), request.Id, string.Format(GlobalConstants.DeleteException, "employees", "service"));
+                throw new DeleteFailureException(GConst.Service, request.Id, string.Format(GConst.DeleteException, GConst.Employees, GConst.ServiceLower));
             }
 
             service.DeletedOn = DateTime.UtcNow;

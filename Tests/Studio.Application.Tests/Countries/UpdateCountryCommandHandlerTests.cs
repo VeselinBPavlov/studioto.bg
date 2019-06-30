@@ -15,12 +15,12 @@
         [Fact]
         public async void CountryShouldUpdateCorrect()
         {
-            var country = new Country { Name = GlobalConstants.CountryValidName };
+            var country = new Country { Name = GConst.CountryValidName };
 
             context.Countries.Add(country);
             await context.SaveChangesAsync();
 
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GlobalConstants.CountryValidName).Id;
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
 
             var sut = new UpdateCountryCommandHandler(context);
             var updatedCountry = new UpdateCountryCommand { Id = countryId, Name = "Mars" };
@@ -30,7 +30,7 @@
             var resultId = context.Countries.SingleOrDefault(x => x.Name == "Mars").Id;
 
             Assert.Equal(countryId, resultId);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
             Assert.Equal(1, context.Countries.Count());
         }
 
@@ -38,12 +38,12 @@
         public async void CountryShouldThrowNotFoundException()
         {
             var sut = new UpdateCountryCommandHandler(context);
-            var updatedCountry = new UpdateCountryCommand { Id = GlobalConstants.InvalidId, Name = GlobalConstants.CountrySecondValidName };
+            var updatedCountry = new UpdateCountryCommand { Id = GConst.InvalidId, Name = GConst.CountrySecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCountry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Country), GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Country), GConst.InvalidId), status.Message);            
         }
     }
 }

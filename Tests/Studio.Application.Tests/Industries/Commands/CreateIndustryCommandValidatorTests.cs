@@ -19,8 +19,8 @@
         [Fact]
         public void IndustryShouldNotReturnError()
         {
-            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.IndustryValidName);
-            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Possition, GlobalConstants.IndustryPossition);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.IndustryValidName);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Possition, GConst.IndustryPossition);
         }
 
         [Fact]
@@ -33,8 +33,8 @@
         [Fact]
         public void IndustryShouldReturnErrorIfNameLongerThan100Characters()
         {
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Possition, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Name, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Possition, GConst.InvalidName);
         }
 
         [Fact]

@@ -15,10 +15,10 @@ namespace Studio.Application.Tests.Addresses.Commands
         [Fact]
         public void ShouldRaiseAddressCreatedNotification()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var city = new City { Name = GConst.CityValidName };
             context.Cities.Add(city);
             this.context.SaveChanges();
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GlobalConstants.CityValidName).Id;
+            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
 
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateAddressCommandHandler(context, mediatorMock.Object);

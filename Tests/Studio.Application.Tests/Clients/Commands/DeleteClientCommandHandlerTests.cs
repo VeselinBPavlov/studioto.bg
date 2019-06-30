@@ -15,12 +15,12 @@
         [Fact]
         public async Task ShouldDeleteClient()
         {
-            var client = new Client { CompanyName = GlobalConstants.ClientValidName };
+            var client = new Client { CompanyName = GConst.ClientValidName };
 
             context.Clients.Add(client);
             await context.SaveChangesAsync();
 
-            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientValidName).Id;
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GConst.ClientValidName).Id;
 
             var sut = new DeleteClientCommandHandler(context);
 
@@ -28,23 +28,23 @@
             var resultCount = context.Clients.Count();
 
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
         }
 
         [Fact]
         public async Task ShouldТhrowDeleteFailureException()
         {
-            var client = new Client { CompanyName = GlobalConstants.ClientSecondValidName };
+            var client = new Client { CompanyName = GConst.ClientSecondValidName };
 
             context.Clients.Add(client);
             await context.SaveChangesAsync();
             var count = context.Clients.Count();
 
-            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientSecondValidName).Id;
+            var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GConst.ClientSecondValidName).Id;
 
             var location = new Location
             {
-                Name = GlobalConstants.LocationValidName,
+                Name = GConst.LocationValidName,
                 ClientId = clientId
             };
 
@@ -57,7 +57,7 @@
             var message = status.Message;
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Client), clientId, "locations", "client"), message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Client), clientId, "locations", "client"), message);
         }
 
         [Fact]
@@ -65,10 +65,10 @@
         {
             var sut = new DeleteClientCommandHandler(context);
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Client), GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Client), GConst.InvalidId), status.Message);
         }
     }
 }

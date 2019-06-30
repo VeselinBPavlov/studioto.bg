@@ -27,14 +27,14 @@
 
             if (country == null)
             {
-                throw new NotFoundException(nameof(Country), request.Id);
+                throw new NotFoundException(GConst.Country, request.Id);
             }
 
             bool isCountryUnique = context.Countries.Any(x => x.Name == request.Name);
 
             if (isCountryUnique)
             {
-                throw new UpdateFailureException(nameof(Country), request.Name, string.Format(GlobalConstants.UniqueNameException, "country"));
+                throw new UpdateFailureException(GConst.Country, request.Name, string.Format(GConst.UniqueNameException, GConst.CountryLower));
             }
             
             country.Name = request.Name;

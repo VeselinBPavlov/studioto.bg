@@ -34,7 +34,7 @@
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteAddressCommand { Id = addressId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
         }
 
         [Fact]
@@ -62,7 +62,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = addressId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Address), addressId, "location", "address"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Address), addressId, "location", "address"), status.Message);
         }
 
         [Fact]
@@ -70,10 +70,10 @@
         {
             var sut = new DeleteAddressCommandHandler(context);           
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Address), GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Address), GConst.InvalidId), status.Message);
         }
     }
 }

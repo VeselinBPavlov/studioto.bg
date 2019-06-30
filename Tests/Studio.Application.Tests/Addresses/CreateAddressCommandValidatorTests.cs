@@ -39,8 +39,8 @@
         [Fact]
         public void AddressShouldReturnErrorIfStreetOrDistinctLongerThan100Characters()
         {
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Street, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.District, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Street, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.District, GConst.InvalidName);
         }
 
         [Fact]
@@ -53,11 +53,11 @@
         [Fact]
         public void AddressShouldReturnErrorIfNumberBuildingEntranceFloorApartmentAreLongerThan10Chars()
         {
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Number, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Building, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Entrance, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Floor, GlobalConstants.InvalidName);
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Apartment, GlobalConstants.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Number, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Building, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Entrance, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Floor, GConst.InvalidName);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Apartment, GConst.InvalidName);
         }
     }
 }

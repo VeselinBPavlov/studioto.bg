@@ -10,6 +10,7 @@
     using System;
     using Studio.Domain.ValueObjects;
     using Studio.Application.Clients.Commands.Update;
+    using Studio.Common;
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, Unit>
     {
@@ -27,7 +28,7 @@
 
             if (client == null)
             {
-                throw new NotFoundException(nameof(Client), request.Id);
+                throw new NotFoundException(GConst.Client, request.Id);
             }
 
             var manager = Manager.For($"{request.ManagerFirstName} {request.ManagerLastName}");

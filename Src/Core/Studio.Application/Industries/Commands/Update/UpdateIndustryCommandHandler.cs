@@ -8,6 +8,7 @@
     using Exceptions;
     using Interfaces.Persistence;
     using System;
+    using Studio.Common;
 
     public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand, Unit>
     {
@@ -25,7 +26,7 @@
 
             if (industry == null)
             {
-                throw new NotFoundException(nameof(Industry), request.Id);
+                throw new NotFoundException(GConst.Industry, request.Id);
             }
 
             industry.Name = request.Name;

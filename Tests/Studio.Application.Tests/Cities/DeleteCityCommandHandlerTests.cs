@@ -15,19 +15,19 @@
         [Fact]
         public async Task ShouldDeleteCity()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var city = new City { Name = GConst.CityValidName };
 
             context.Cities.Add(city);
             await context.SaveChangesAsync();
 
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GlobalConstants.CityValidName).Id;
+            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
 
             var sut = new DeleteCityCommandHandler(context);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
-            Assert.Equal(GlobalConstants.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
         }
 
         [Fact]
@@ -49,7 +49,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(City), cityId, "addresses", "city"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(City), cityId, "addresses", "city"), status.Message);
         }
 
         [Fact]
@@ -57,10 +57,10 @@
         {
             var sut = new DeleteCityCommandHandler(context);           
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(City), GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(City), GConst.InvalidId), status.Message);
         }
     }
 }

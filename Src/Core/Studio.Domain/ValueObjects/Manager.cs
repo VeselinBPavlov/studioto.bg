@@ -24,7 +24,7 @@
             }
             catch (ArgumentException)
             {
-                throw new ManagerInvalidException(new ArgumentException(GlobalConstants.ManagerException));
+                throw new ManagerInvalidException(new ArgumentException(Studio.Common.GConst.ManagerException));
             }
 
             return manager;

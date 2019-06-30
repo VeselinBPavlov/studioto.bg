@@ -9,7 +9,7 @@
     public class ValidationException : Exception
     {
         public ValidationException()
-            : base(GlobalConstants.BaseException)
+            : base(Common.GConst.BaseException)
         {
             this.Failures = new Dictionary<string, string[]>();
         }
