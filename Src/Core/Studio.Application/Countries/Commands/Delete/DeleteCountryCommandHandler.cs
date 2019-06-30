@@ -3,6 +3,7 @@
     using MediatR;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using System;
     using System.Linq;
@@ -32,7 +33,7 @@
 
             if (hasCities)
             {
-                throw new DeleteFailureException(nameof(Country), request.Id, "There are existing cities associated with this country.");
+                throw new DeleteFailureException(nameof(Country), request.Id, string.Format(GlobalConstants.DeleteException, "cities", "country"));
             }
 
             country.DeletedOn = DateTime.UtcNow;

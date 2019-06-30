@@ -9,6 +9,7 @@
     using Interfaces.Persistence;
     using System;
     using System.Linq;
+    using Studio.Common;
 
     public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, Unit>
     {
@@ -33,7 +34,7 @@
 
             if (isCountryUnique)
             {
-                throw new UpdateFailureException(nameof(Country), request.Name, "There are existing country with the same name.");
+                throw new UpdateFailureException(nameof(Country), request.Name, string.Format(GlobalConstants.UniqueNameException, "country"));
             }
             
             country.Name = request.Name;

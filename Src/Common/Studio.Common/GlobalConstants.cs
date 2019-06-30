@@ -7,7 +7,10 @@
         public const string BaseException = "One or more validation failures have occurred.";
         public const string FailureException = "{0} of entity \"{1}\" ({2}) failed. {3}";
         public const string NotFoundException = "Entity \"{0}\" ({1}) was not found.";
-
+        public const string DeleteException = "There are existing {0} associated with this {1}.";
+        public const string RefereceException = "There are no existing {0} with id {1}.";
+        public const string UniqueNameException = "There are existing {0} with the same name.";
+               
         #endregion
 
         #region Studio.Application.Domain
@@ -15,6 +18,7 @@
         public const string ValueObjectException = "{0} is invalid.";
         public const string AddressFormatException = "Street and number are required!";
         public const string ManagerException = "First and last name are with incorrect format!";
+
         #endregion
 
         #region Studio.Application.Tests
@@ -23,21 +27,26 @@
         public const string SuccessStatus = "RanToCompletion";
         public const string InvalidName = "AbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghij";
         public const int InvalidId = 100;
+        public const int ValidId = 1;
+        public const string FirstValidName = "Fitness";
+        public const string SecondValidName = "Haircut";
+        public const string ThirdValidName = "CET";
+        public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
+        public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";
+        public const string UpdateFailureExceptionMessage = "Update of entity \"{0}\" ({1}) failed. There are no existing {2} with id {3}.";
 
         // Industry
         public const string IndustryValidName = "Hairstyle";
         public const string IndustrySecondValidName = "Fitness";
         public const string IndustryPossition = "Hairstyler";
-        public const string IndustryNotFoundExceptionMessage = "Entity \"Industry\" ({0}) was not found.";
-        public const string IndustryDeleteFalueExceptionMessageService = "Deletion of entity \"Industry\" ({0}) failed. There are existing services associated with this industry.";
-        public const string IndustryDeleteFalueExceptionMessageLocation = "Deletion of entity \"Industry\" ({0}) failed. There are existing locations associated with this industry.";
+       
+        
         
         // Service
         public const string ServiceValidName = "Haircut";
         public const string ServiceCreateFailureExceptionMessageIsNull = "Creation of entity \"Service\" ({0}) failed. There are no existing industry with id {1}.";
-        public const string ServiceNotFoundExceptionMessage = "Entity \"Service\" ({0}) was not found.";
-        public const string ServiceDeleteFalueExceptionMessageAppointment = "Deletion of entity \"Service\" ({0}) failed. There are existing appointments associated with this service.";
-        public const string ServiceDeleteFalueExceptionMessageEmployee = "Deletion of entity \"Service\" ({0}) failed. There are existing employees associated with this service.";
+        
+        
 
 
         // Client
@@ -48,9 +57,8 @@
         public const string ClientValidPhone = "+359887889884";
         public const string ClientValidManagerFirstName = "Ivan";
         public const string ClientValidManagerLastName = "Ivanov";      
-        public const string ClientNotFoundExceptionMessage = "Entity \"Client\" ({0}) was not found.";
-        public const string ClientDeleteFalueExceptionMessage = "Deletion of entity \"Client\" ({0}) failed. There are existing locations associated with this client.";
-        public const string ClientDeleteFalueIsDeletedTrue = "Deletion of entity \"Client\" ({0}) failed. Client is already deleted.";
+        
+        
                      
         // Location
         public const string LocationValidName = "CentralStudio";
@@ -58,8 +66,8 @@
         // Countries
         public const string CountryValidName = "Bulgaria";
         public const string CountrySecondValidName = "Greece";
-        public const string CountryDeleteFalueExceptionMessage = "Deletion of entity \"Country\" ({0}) failed. There are existing cities associated with this country.";
-        public const string CountryNotFoundExceptionMessage = "Entity \"Country\" ({0}) was not found.";
+        
+        
         public const string CountryCreateFailureExceptionMessage = "Creation of entity \"Country\" ({0}) failed. There are existing country with the same name.";
         public const string CountryCreateFailureExceptionMessageIsDeleted = "Creation of entity \"Country\" ({0}) failed. Country with id {0} is deleted.";
         public const string CountryUpdateFailureExceptionMessage = "Update of entity \"Country\" ({0}) failed. There are existing country with the same name.";
@@ -68,16 +76,15 @@
         public const string CityValidName = "Sofia";
         public const string CityCreateFailureExceptionMessageIsNull = "Creation of entity \"City\" ({0}) failed. There are no existing country with id {1}.";
         public const string CityCreateFailureExceptionMessageIsDeleted = "Creation of entity \"City\" ({0}) failed. Country with id {1} is deleted.";
-        public const string CityDeleteFalueExceptionMessage = "Deletion of entity \"City\" ({0}) failed. There are existing address associated with this city.";
-        public const string CityNotFoundExceptionMessage = "Entity \"City\" ({0}) was not found.";
+        
         public const string CityDeleteFalueExceptionMessageIsDeleted = "Deletion of entity \"City\" ({0}) failed. City is already deleted.";
 
         // Address
         public const string AddressFromatExceptionMessage = "Address is invalid.";
         public const string AddressCreateFailureExceptionMessageCityNotFound = "Creation of entity \"Address\" ({0}) failed. There are no existing city with id {1}.";
-        public const string AddressUpdateFailureExceptionCityInvalidId = "Update of entity \"Address\" ({0}) failed. There are no existing city with this id {1}.";
-        public const string AddressNotFoundExceptionMessage = "Entity \"Address\" ({0}) was not found.";
-        public const string AddressDeleteFailureExceptionMessage = "Deletion of entity \"Address\" ({0}) failed. There are existing location associated with this address.";
+        
+        
+        
 
         #endregion
 

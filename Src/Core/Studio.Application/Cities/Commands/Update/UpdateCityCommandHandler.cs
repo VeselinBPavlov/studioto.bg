@@ -9,6 +9,7 @@
     using Interfaces.Persistence;
     using System;
     using System.Linq;
+    using Studio.Common;
 
     public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, Unit>
     {
@@ -28,8 +29,16 @@
             {
                 throw new NotFoundException(nameof(City), request.Id);
             }
-            
+
+            var country = await this.context.Countries.FindAsync(request.CountryId);
+
+            if (country == null)
+            {
+                throw new CreateFailureException(nameof(City), request.Name, string.Format(GlobalConstants.RefereceException, "country", request.CountryId));
+            }
+
             city.Name = request.Name;
+            city.CountryId = request.CountryId;
             city.ModifiedOn = DateTime.UtcNow;
 
             this.context.Cities.Update(city);

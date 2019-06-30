@@ -3,6 +3,7 @@
     using MediatR;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using System;
     using System.Linq;
@@ -27,16 +28,11 @@
                 throw new NotFoundException(nameof(City), request.Id);
             }
 
-            if (city.IsDeleted)
-            {
-                throw new DeleteFailureException(nameof(City), request.Id, "City is already deleted.");
-            }
-
             var hasAddresses = this.context.Addresses.Any(s => s.CityId == city.Id);
 
             if (hasAddresses)
             {
-                throw new DeleteFailureException(nameof(City), request.Id, "There are existing address associated with this city.");
+                throw new DeleteFailureException(nameof(City), request.Id, string.Format(GlobalConstants.DeleteException, "addresses", "city"));
             }            
 
             city.DeletedOn = DateTime.UtcNow;

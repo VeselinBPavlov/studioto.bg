@@ -9,6 +9,7 @@
     using Studio.Application.Exceptions;
     using System;
     using Studio.Domain.ValueObjects;
+    using Studio.Common;
 
     public class CreateAddressCommandHandler : IRequestHandler<CreateAddressCommand, Unit>
     {
@@ -27,7 +28,7 @@
 
             if (city == null) 
             {
-                throw new CreateFailureException(nameof(Address), request.Street, $"There are no existing city with id {request.CityId}.");
+                throw new CreateFailureException(nameof(Address), request.Street, string.Format(GlobalConstants.RefereceException, "city", request.CityId));
             }
 
             var inputAddressData = new InputAddressData

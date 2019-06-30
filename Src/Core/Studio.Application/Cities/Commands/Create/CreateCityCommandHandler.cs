@@ -8,6 +8,7 @@
     using System.Linq;
     using Studio.Application.Exceptions;
     using System;
+    using Studio.Common;
 
     public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Unit>
     {
@@ -26,7 +27,7 @@
 
             if (country == null) 
             {
-                throw new CreateFailureException(nameof(City), request.Name, $"There are no existing country with id {request.CountryId}.");
+                throw new CreateFailureException(nameof(City), request.Name, string.Format(GlobalConstants.RefereceException, "country", request.CountryId));
             }
 
             var city = new City

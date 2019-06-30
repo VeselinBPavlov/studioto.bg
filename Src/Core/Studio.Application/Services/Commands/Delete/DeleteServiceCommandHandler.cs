@@ -3,6 +3,7 @@
     using MediatR;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using System;
     using System.Linq;
@@ -31,14 +32,14 @@
 
             if (hasAppointments)
             {
-                throw new DeleteFailureException(nameof(Service), request.Id, "There are existing appointments associated with this service.");
+                throw new DeleteFailureException(nameof(Service), request.Id, string.Format(GlobalConstants.DeleteException, "appointments", "service"));
             }
 
             var hasEmployees = this.context.EmployeeServices.Any(s => s.ServiceId == service.Id);
 
             if (hasEmployees)
             {
-                throw new DeleteFailureException(nameof(Service), request.Id, "There are existing employees associated with this service.");
+                throw new DeleteFailureException(nameof(Service), request.Id, string.Format(GlobalConstants.DeleteException, "employees", "service"));
             }
 
             service.DeletedOn = DateTime.UtcNow;

@@ -15,7 +15,14 @@
         [Fact]
         public async void ServiceShouldUpdateCorrect()
         {
-            var service = new Service { Name = GlobalConstants.ServiceValidName };
+            var industry = new Industry { Name = GlobalConstants.IndustryValidName };
+
+            context.Industries.Add(industry);
+            await context.SaveChangesAsync();
+
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GlobalConstants.IndustryValidName).Id;
+            
+            var service = new Service { Name = GlobalConstants.ServiceValidName, IndustryId = industryId };
 
             context.Services.Add(service);
             await context.SaveChangesAsync();
@@ -23,7 +30,7 @@
             var serviceId = context.Services.SingleOrDefault(x => x.Name == GlobalConstants.ServiceValidName).Id;
 
             var sut = new UpdateServiceCommandHandler(context);
-            var updatedService = new UpdateServiceCommand { Id = serviceId, Name = "Mars" };
+            var updatedService = new UpdateServiceCommand { Id = serviceId, Name = "Mars", IndustryId = industryId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedService, CancellationToken.None));
 
@@ -43,7 +50,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedService, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ServiceNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Service), GlobalConstants.InvalidId), status.Message);            
         }
     }
 }

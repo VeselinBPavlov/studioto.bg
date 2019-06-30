@@ -8,6 +8,7 @@
     using System.Linq;
     using Studio.Application.Exceptions;
     using System;
+    using Studio.Common;
 
     public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, Unit>
     {
@@ -26,7 +27,7 @@
 
             if (isCountryUnique)
             {
-                throw new CreateFailureException(nameof(Country), request.Name, "There are existing country with the same name.");
+                throw new CreateFailureException(nameof(Country), request.Name, string.Format(GlobalConstants.UniqueNameException, "country"));
             }
 
             var country = new Country

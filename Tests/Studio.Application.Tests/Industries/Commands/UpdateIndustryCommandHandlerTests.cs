@@ -38,12 +38,12 @@
         public async void IndustryShouldThrowNotFoundException()
         {
             var sut = new UpdateIndustryCommandHandler(context);
-            var updatedIndustry = new UpdateIndustryCommand { Id = 100, Name = GlobalConstants.IndustrySecondValidName };
+            var updatedIndustry = new UpdateIndustryCommand { Id = GlobalConstants.InvalidId, Name = GlobalConstants.IndustrySecondValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedIndustry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, 100), status.Message);            
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Industry), GlobalConstants.InvalidId), status.Message);            
         }
     }
 }

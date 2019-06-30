@@ -9,6 +9,7 @@
     using Interfaces.Persistence;
     using System;
     using System.Linq;
+    using Studio.Common;
 
     public class UpdateServiceCommandHandler : IRequestHandler<UpdateServiceCommand, Unit>
     {
@@ -28,7 +29,14 @@
             {
                 throw new NotFoundException(nameof(Service), request.Id);
             }
-            
+
+            var industry = await this.context.Industries.FindAsync(request.IndustryId);
+
+            if (industry == null)
+            {
+                throw new CreateFailureException(nameof(Service), request.Name, string.Format(GlobalConstants.RefereceException, "industry", request.IndustryId));
+            }
+
             service.Name = request.Name;
             service.ModifiedOn = DateTime.UtcNow;
 

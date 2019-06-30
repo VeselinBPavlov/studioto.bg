@@ -4,6 +4,7 @@
     using Studio.Application.Clients.Commands.Delete;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using System;
     using System.Linq;
@@ -29,16 +30,11 @@
                 throw new NotFoundException(nameof(Client), request.Id);
             }
 
-            if (client.IsDeleted)
-            {
-                throw new DeleteFailureException(nameof(Client), request.Id, "Client is already deleted.");
-            }
-
             var hasLocations = context.Locations.Any(s => s.ClientId == client.Id);
 
             if (hasLocations)
             {
-                throw new DeleteFailureException(nameof(Client), request.Id, "There are existing locations associated with this client.");
+                throw new DeleteFailureException(nameof(Client), request.Id, string.Format(GlobalConstants.DeleteException, "locations", "client"));
             }
 
             client.DeletedOn = DateTime.UtcNow;

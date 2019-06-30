@@ -15,7 +15,14 @@
         [Fact]
         public async void CityShouldUpdateCorrect()
         {
-            var city = new City { Name = GlobalConstants.CityValidName };
+            var country = new Country { Name = GlobalConstants.CountryValidName };
+
+            context.Countries.Add(country);
+            await context.SaveChangesAsync();
+
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == GlobalConstants.CountryValidName).Id;
+
+            var city = new City { Name = GlobalConstants.CityValidName, CountryId = countryId };
 
             context.Cities.Add(city);
             await context.SaveChangesAsync();
@@ -23,7 +30,7 @@
             var cityId = context.Cities.SingleOrDefault(x => x.Name == GlobalConstants.CityValidName).Id;
 
             var sut = new UpdateCityCommandHandler(context);
-            var updatedCity = new UpdateCityCommand { Id = cityId, Name = "Mars" };
+            var updatedCity = new UpdateCityCommand { Id = cityId, Name = "Mars", CountryId = countryId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedCity, CancellationToken.None));
 
@@ -43,7 +50,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCity, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CityNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(City), GlobalConstants.InvalidId), status.Message);            
         }
     }
 }

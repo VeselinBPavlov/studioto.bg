@@ -8,6 +8,7 @@
     using System.Linq;
     using Studio.Application.Exceptions;
     using System;
+    using Studio.Common;
 
     public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand, Unit>
     {
@@ -26,7 +27,7 @@
 
             if (industry == null) 
             {
-                throw new CreateFailureException(nameof(Service), request.Name, $"There are no existing industry with id {request.IndustryId}.");
+                throw new CreateFailureException(nameof(Service), request.Name, string.Format(GlobalConstants.RefereceException, "industry", request.IndustryId));
             }
 
             var service = new Service

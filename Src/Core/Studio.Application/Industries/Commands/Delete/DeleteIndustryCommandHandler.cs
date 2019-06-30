@@ -3,6 +3,7 @@
     using MediatR;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
+    using Studio.Common;
     using Studio.Domain.Entities;
     using System;
     using System.Linq;
@@ -32,14 +33,14 @@
 
             if (hasServices)
             {
-                throw new DeleteFailureException(nameof(Industry), request.Id, "There are existing services associated with this industry.");
+                throw new DeleteFailureException(nameof(Industry), request.Id, string.Format(GlobalConstants.DeleteException, "services", "industry"));
             }
 
             var hasLocations = this.context.LocationIndustries.Any(li => li.IndustryId == industry.Id);
 
             if (hasLocations)
             {
-                throw new DeleteFailureException(nameof(Industry), request.Id, "There are existing locations associated with this industry.");
+                throw new DeleteFailureException(nameof(Industry), request.Id, string.Format(GlobalConstants.DeleteException, "locations", "industry"));
             }
 
             industry.DeletedOn = DateTime.UtcNow;

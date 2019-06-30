@@ -57,7 +57,7 @@
             var message = status.Message;
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ClientDeleteFalueExceptionMessage, clientId), message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Client), clientId, "locations", "client"), message);
         }
 
         [Fact]
@@ -68,28 +68,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
-        }
-
-        [Fact]
-        public async Task ShouldТhrowExceptionOnDeleteAlreadyDeletedObject()
-        {
-            var client = new Client { CompanyName = GlobalConstants.ClientThirdValidName };
-
-            context.Clients.Add(client);
-            await context.SaveChangesAsync();
-
-            var clientFromDb = context.Clients.SingleOrDefault(x => x.CompanyName == GlobalConstants.ClientThirdValidName);
-            var clientId = clientFromDb.Id;
-            clientFromDb.IsDeleted = true;
-            await context.SaveChangesAsync();
-
-            var sut = new DeleteClientCommandHandler(context);
-
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = clientId }, CancellationToken.None));
-
-            Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ClientDeleteFalueIsDeletedTrue, clientId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Client), GlobalConstants.InvalidId), status.Message);
         }
     }
 }

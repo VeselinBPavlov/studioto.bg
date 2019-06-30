@@ -49,7 +49,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ServiceDeleteFalueExceptionMessageAppointment, serviceId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Service), serviceId, "appointments", "service"), status.Message);
         }
 
         [Fact]
@@ -71,7 +71,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ServiceDeleteFalueExceptionMessageEmployee, serviceId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Service), serviceId, "employees", "service"), status.Message);
         }
 
         [Fact]
@@ -82,7 +82,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ServiceNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Service), GlobalConstants.InvalidId), status.Message);
         }
     }
 }

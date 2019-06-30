@@ -50,7 +50,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.AddressNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Address), GlobalConstants.InvalidId), status.Message);
         }
 
         [Fact]
@@ -78,7 +78,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = "Benkovski", Number = "1", CityId = GlobalConstants.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.AddressUpdateFailureExceptionCityInvalidId, "Benkovski", GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.UpdateFailureExceptionMessage, nameof(Address), addressId, "city", GlobalConstants.InvalidId), status.Message);
         }
 
         [Fact]

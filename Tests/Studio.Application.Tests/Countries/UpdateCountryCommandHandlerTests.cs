@@ -43,7 +43,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCountry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CountryNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Country), GlobalConstants.InvalidId), status.Message);            
         }
     }
 }

@@ -50,7 +50,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.IndustryDeleteFalueExceptionMessageService, industryId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Industry), industryId, "services", "industry"), status.Message);
         }
 
         [Fact]
@@ -78,7 +78,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.IndustryDeleteFalueExceptionMessageLocation, industryId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(Industry), industryId, "locations", "industry"), status.Message);
         }
 
         [Fact]
@@ -89,7 +89,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.IndustryNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Industry), GlobalConstants.InvalidId), status.Message);
         }
     }
 }

@@ -49,7 +49,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CityDeleteFalueExceptionMessage, cityId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.DeleteFailureExceptionMessage, nameof(City), cityId, "addresses", "city"), status.Message);
         }
 
         [Fact]
@@ -60,7 +60,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = GlobalConstants.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.CityNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(City), GlobalConstants.InvalidId), status.Message);
         }
     }
 }

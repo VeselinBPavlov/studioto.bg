@@ -43,7 +43,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedClient, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GlobalConstants.ClientNotFoundExceptionMessage, GlobalConstants.InvalidId), status.Message);
+            Assert.Equal(string.Format(GlobalConstants.NotFoundExceptionMessage, nameof(Client), GlobalConstants.InvalidId), status.Message);
         }
     }
 }

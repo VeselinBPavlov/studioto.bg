@@ -10,6 +10,7 @@
     using System;
     using System.Linq;
     using Studio.Domain.ValueObjects;
+    using Studio.Common;
 
     public class UpdateAddressCommandHandler : IRequestHandler<UpdateAddressCommand, Unit>
     {
@@ -34,7 +35,7 @@
 
             if (city == null)
             {
-                throw new UpdateFailureException(nameof(Address), request.Street, $"There are no existing city with this id {request.CityId}.");
+                throw new UpdateFailureException(nameof(Address), request.Id, string.Format(GlobalConstants.RefereceException, "city", request.CityId));
             }
 
             var inputAddressData = new InputAddressData
