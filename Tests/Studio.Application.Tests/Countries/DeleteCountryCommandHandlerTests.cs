@@ -15,12 +15,7 @@
         [Fact]
         public async Task ShouldDeleteCountry()
         {
-            var country = new Country { Name = GConst.CountryValidName };
-
-            context.Countries.Add(country);
-            await context.SaveChangesAsync();
-
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
+            var countryId = GetCountryId();
 
             var sut = new DeleteCountryCommandHandler(context);
 
@@ -33,23 +28,16 @@
         [Fact]
         public async Task CountryShouldТhrowDeleteFailureException()
         {
-            var country = new Country { Name = "Beauty" };
+            var countryId = GetCountryId();
 
-            context.Countries.Add(country);
-            await context.SaveChangesAsync();
-
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == "Beauty").Id;
-
-            var city = new City { Name = GConst.CityValidName, CountryId = countryId };
-            context.Cities.Add(city);
-            await context.SaveChangesAsync();
+            GetCityId(countryId);
 
             var sut = new DeleteCountryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Country), countryId, "cities", "country"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.Country, countryId, GConst.Cities, GConst.CountryLower), status.Message);
         }
         
 
@@ -61,7 +49,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Country), GConst.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Country, GConst.InvalidId), status.Message);
         }
     }
 }

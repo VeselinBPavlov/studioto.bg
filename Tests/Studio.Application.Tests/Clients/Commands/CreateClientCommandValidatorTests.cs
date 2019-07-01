@@ -19,11 +19,11 @@
         [Fact]
         public void ShouldNotReturnError()
         {
-            validator.ShouldNotHaveValidationErrorFor(command => command.CompanyName, GConst.ClientValidName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.CompanyName, GConst.ValidName);
             validator.ShouldNotHaveValidationErrorFor(command => command.VatNumber, GConst.ValidVatNumber);
             validator.ShouldNotHaveValidationErrorFor(command => command.Phone, GConst.ValidPhone);
-            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerFirstName, GConst.ClientValidManagerFirstName);
-            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerLastName, GConst.ClientValidManagerLastName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerFirstName, GConst.ValidName);
+            validator.ShouldNotHaveValidationErrorFor(command => command.ManagerLastName, GConst.ValidName);
         }
 
         [Fact]

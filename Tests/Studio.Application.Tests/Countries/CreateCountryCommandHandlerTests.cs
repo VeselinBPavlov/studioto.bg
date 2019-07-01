@@ -20,30 +20,25 @@
             var mediator = new Mock<IMediator>();
             var sut = new CreateCountryCommandHandler(context, mediator.Object);
 
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCountryCommand { Name = Common.GConst.CountryValidName }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateCountryCommand { Name = GConst.ValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);
-            Assert.Equal(Common.GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, context.Countries.Count());
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.ValidCount, context.Countries.Count());
         }
 
         [Fact]
         public async Task ShouldThrowCreateFailureException()
         {
-             var country = new Country { Name = "Beauty" };
-
-            context.Countries.Add(country);
-            await context.SaveChangesAsync();
-
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == "Beauty").Id;
+            var countryId = GetCountryId();
             
             var mediator = new Mock<IMediator>();
             var sut = new CreateCountryCommandHandler(context, mediator.Object);
 
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = "Beauty" }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = GConst.ValidName }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(Common.GConst.UniqueNameExceptionMessage, "Creation", nameof(Domain.Entities.Country),  "Beauty", "country"), status.Message);
+            Assert.Equal(string.Format(GConst.UniqueNameExceptionMessage, GConst.Create, GConst.Country,  GConst.ValidName, GConst.CountryLower), status.Message);
         }
     }
 }

@@ -16,12 +16,12 @@
         [Fact]
         public async Task ShouldDeleteIndustry()
         {
-            var industry = new Industry { Name = GConst.IndustryValidName };
+            var industry = new Industry { Name = GConst.ValidName };
 
             context.Industries.Add(industry);
             await context.SaveChangesAsync();
 
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustryValidName).Id;
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             var sut = new DeleteIndustryCommandHandler(context);
 
@@ -34,51 +34,33 @@
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailureExceptionForConnectedService()
         {
-            var industry = new Industry { Name = "Beauty" };
+            var industryId = GetIndustryId();
 
-            context.Industries.Add(industry);
-            await context.SaveChangesAsync();
-
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == "Beauty").Id;
-
-            var service = new Service { Name = GConst.ServiceValidName, IndustryId = industryId };
-            context.Services.Add(service);
-            await context.SaveChangesAsync();
+            GetServiceId(industryId);
 
             var sut = new DeleteIndustryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Industry), industryId, "services", "industry"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.Industry, industryId, GConst.Services, GConst.IndustryLower), status.Message);
         }
 
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailueExceptionForConnectedLocation()
         {
-            var industry = new Industry { Name = GConst.IndustrySecondValidName };
+            var industryId = GetIndustryId();
 
-            context.Industries.Add(industry);
-            await context.SaveChangesAsync();
+            var locationId = GetLocationId(null, null);
 
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustrySecondValidName).Id;
-
-            var location = new Location { Name = "Location" };
-            context.Locations.Add(location);
-            await context.SaveChangesAsync();
-
-            var locationId = context.Locations.SingleOrDefault(x => x.Name == "Location").Id;
-
-            var locationIndustry = new LocationIndustry { IndustryId = industryId, LocationId = locationId };
-            context.LocationIndustries.Add(locationIndustry);
-            await context.SaveChangesAsync();
+            AddLocationIndustry(industryId, locationId);
 
             var sut = new DeleteIndustryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Industry), industryId, "locations", "industry"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.Industry, industryId, GConst.Locations, GConst.IndustryLower), status.Message);
         }
 
         [Fact]
@@ -89,7 +71,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Industry), GConst.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Industry, GConst.InvalidId), status.Message);
         }
     }
 }

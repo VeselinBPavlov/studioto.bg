@@ -15,16 +15,14 @@ namespace Studio.Application.Tests.Cities.Commands
         [Fact]
         public void ShouldRaiseCityCreatedNotification()
         {
-            var country = new Country { Name = GConst.CountryValidName };
-            context.Countries.Add(country);
-            this.context.SaveChanges();
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
+            var countryId = GetCountryId();
 
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateCityCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateCityCommand { Name = GConst.CityValidName, CountryId = countryId }, CancellationToken.None);
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
+            var result = sut.Handle(new CreateCityCommand { Name = GConst.ValidName, CountryId = countryId }, CancellationToken.None);
+
+            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             mediatorMock.Verify(m => m.Publish(It.Is<CreateCityCommandNotification>(c => c.CityId == cityId), It.IsAny<CancellationToken>()), Times.Once);
         }

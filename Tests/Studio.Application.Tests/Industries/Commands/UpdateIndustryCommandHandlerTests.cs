@@ -15,35 +15,30 @@
         [Fact]
         public async void IndustryShouldUpdateCorrect()
         {
-            var industry = new Industry { Name = GConst.IndustryValidName };
-
-            context.Industries.Add(industry);
-            await context.SaveChangesAsync();
-
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustryValidName).Id;
+            var industryId = GetIndustryId();
 
             var sut = new UpdateIndustryCommandHandler(context);
-            var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GConst.IndustrySecondValidName };
+            var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GConst.ValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedIndustry, CancellationToken.None));
 
-            var resultId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustrySecondValidName).Id;
+            var resultId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             Assert.Equal(industryId, resultId);
             Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, context.Industries.Count());
+            Assert.Equal(GConst.ValidCount, context.Industries.Count());
         }
 
         [Fact]
         public async void IndustryShouldThrowNotFoundException()
         {
             var sut = new UpdateIndustryCommandHandler(context);
-            var updatedIndustry = new UpdateIndustryCommand { Id = GConst.InvalidId, Name = GConst.IndustrySecondValidName };
+            var updatedIndustry = new UpdateIndustryCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedIndustry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Industry), GConst.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Industry, GConst.InvalidId), status.Message);            
         }
     }
 }

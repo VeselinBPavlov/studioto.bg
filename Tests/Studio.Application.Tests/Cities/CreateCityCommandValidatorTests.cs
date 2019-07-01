@@ -19,7 +19,7 @@
         [Fact]
         public void CityShouldNotReturnError()
         {
-            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.CityValidName);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.ValidName);
         }
 
         [Fact]

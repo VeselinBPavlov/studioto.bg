@@ -15,12 +15,7 @@
         [Fact]
         public async Task ShouldDeleteCity()
         {
-            var city = new City { Name = GConst.CityValidName };
-
-            context.Cities.Add(city);
-            await context.SaveChangesAsync();
-
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.CityValidName).Id;
+            var cityId = GetCityId(null);
 
             var sut = new DeleteCityCommandHandler(context);
 
@@ -33,23 +28,16 @@
         [Fact]
         public async Task CityShouldТhrowDeleteFailureException()
         {
-            var city = new City { Name = "Beauty" };
+            var cityId = GetCityId(null);
 
-            context.Cities.Add(city);
-            await context.SaveChangesAsync();
-
-            var cityId = context.Cities.SingleOrDefault(x => x.Name == "Beauty").Id;
-
-            var address = new Address { Longitude = 40.00M, CityId = cityId };
-            context.Addresses.Add(address);
-            await context.SaveChangesAsync();
+            GetAddressId(cityId);
 
             var sut = new DeleteCityCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(City), cityId, "addresses", "city"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.City, cityId, GConst.Addresses, GConst.CityLower), status.Message);
         }
 
         [Fact]
@@ -60,7 +48,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(City), GConst.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.City, GConst.InvalidId), status.Message);
         }
     }
 }

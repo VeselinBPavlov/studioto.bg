@@ -15,35 +15,30 @@
         [Fact]
         public async void CountryShouldUpdateCorrect()
         {
-            var country = new Country { Name = GConst.CountryValidName };
-
-            context.Countries.Add(country);
-            await context.SaveChangesAsync();
-
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
+            var countryId = GetCountryId();
 
             var sut = new UpdateCountryCommandHandler(context);
-            var updatedCountry = new UpdateCountryCommand { Id = countryId, Name = "Mars" };
+            var updatedCountry = new UpdateCountryCommand { Id = countryId, Name = GConst.UpdatedName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedCountry, CancellationToken.None));
 
-            var resultId = context.Countries.SingleOrDefault(x => x.Name == "Mars").Id;
+            var resultId = context.Countries.SingleOrDefault(x => x.Name == GConst.UpdatedName).Id;
 
             Assert.Equal(countryId, resultId);
             Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, context.Countries.Count());
+            Assert.Equal(GConst.ValidCount, context.Countries.Count());
         }
 
         [Fact]
         public async void CountryShouldThrowNotFoundException()
         {
             var sut = new UpdateCountryCommandHandler(context);
-            var updatedCountry = new UpdateCountryCommand { Id = GConst.InvalidId, Name = GConst.CountrySecondValidName };
+            var updatedCountry = new UpdateCountryCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCountry, CancellationToken.None));
                         
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Country), GConst.InvalidId), status.Message);            
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Country, GConst.InvalidId), status.Message);            
         }
     }
 }

@@ -19,7 +19,7 @@
         [Fact]
         public void ServiceShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.ServiceValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.ValidName);
         }
 
         [Fact]

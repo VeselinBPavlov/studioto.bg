@@ -17,8 +17,8 @@ namespace Studio.Application.Tests.Industries.Commands
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateIndustryCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateIndustryCommand { Name = GConst.IndustryValidName}, CancellationToken.None);
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.IndustryValidName).Id;
+            var result = sut.Handle(new CreateIndustryCommand { Name = GConst.ValidName}, CancellationToken.None);
+            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             mediatorMock.Verify(m => m.Publish(It.Is<CreateIndustryCommandNotification>(c => c.IndustryId == industryId), It.IsAny<CancellationToken>()), Times.Once);
         }

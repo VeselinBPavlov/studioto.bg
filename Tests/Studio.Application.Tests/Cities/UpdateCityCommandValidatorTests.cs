@@ -19,7 +19,7 @@
         [Fact]
         public void CityShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.CityValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.ValidName);
         }
 
         [Fact]

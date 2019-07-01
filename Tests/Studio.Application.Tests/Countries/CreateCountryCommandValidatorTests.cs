@@ -19,7 +19,7 @@
         [Fact]
         public void CountryShouldNotReturnError()
         {
-            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.CountryValidName);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Name, GConst.ValidName);
         }
 
         [Fact]

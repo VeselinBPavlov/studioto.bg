@@ -15,12 +15,7 @@
         [Fact]
         public async Task ShouldDeleteService()
         {
-            var service = new Service { Name = GConst.ServiceValidName };
-
-            context.Services.Add(service);
-            await context.SaveChangesAsync();
-
-            var serviceId = context.Services.SingleOrDefault(x => x.Name == GConst.ServiceValidName).Id;
+            var serviceId = GetServiceId(null);
 
             var sut = new DeleteServiceCommandHandler(context);
 
@@ -33,45 +28,33 @@
         [Fact]
         public async Task ServiceShouldТhrowDeleteFailureException()
         {
-            var service = new Service { Name = "Beauty" };
+            var serviceId = GetServiceId(null);
 
-            context.Services.Add(service);
-            await context.SaveChangesAsync();
-
-            var serviceId = context.Services.SingleOrDefault(x => x.Name == "Beauty").Id;
-
-            var appointment = new Appointment { ServiceId = serviceId };
-            context.Appointments.Add(appointment);
-            await context.SaveChangesAsync();
+            AddAppointment(serviceId);
 
             var sut = new DeleteServiceCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
             
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Service), serviceId, "appointments", "service"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.Service, serviceId, GConst.Appointments, GConst.ServiceLower), status.Message);
         }
 
         [Fact]
         public async Task ServiceShouldТhrowDeleteFailureExceptionEmployee()
         {
-            var service = new Service { Name = "Beauty" };
+            var serviceId = GetServiceId(null);
 
-            context.Services.Add(service);
-            await context.SaveChangesAsync();
+            var employeeId = GetEmployeeId();
 
-            var serviceId = context.Services.SingleOrDefault(x => x.Name == "Beauty").Id;
-
-            var employeeService = new EmployeeService { ServiceId = serviceId, EmployeeId = 1 };
-            context.EmployeeServices.Add(employeeService);
-            await context.SaveChangesAsync();
+            AddEmployeeService(serviceId, employeeId);
 
             var sut = new DeleteServiceCommandHandler(context);
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, nameof(Service), serviceId, "employees", "service"), status.Message);
+            Assert.Equal(string.Format(GConst.DeleteFailureExceptionMessage, GConst.Service, serviceId, GConst.Employees, GConst.ServiceLower), status.Message);
         }
 
         [Fact]
@@ -82,7 +65,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, nameof(Service), GConst.InvalidId), status.Message);
+            Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Service, GConst.InvalidId), status.Message);
         }
     }
 }

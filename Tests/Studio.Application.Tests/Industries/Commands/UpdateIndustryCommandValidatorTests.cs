@@ -19,8 +19,8 @@
         [Fact]
         public void IndustryShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.IndustryValidName);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Possition, GConst.IndustryPossition);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.ValidName);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Possition, GConst.ValidName);
         }
 
         [Fact]

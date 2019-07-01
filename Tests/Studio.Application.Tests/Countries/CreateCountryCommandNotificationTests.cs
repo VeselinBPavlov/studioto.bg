@@ -17,8 +17,8 @@ namespace Studio.Application.Tests.Countries.Commands
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateCountryCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateCountryCommand { Name = GConst.CountryValidName}, CancellationToken.None);
-            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.CountryValidName).Id;
+            var result = sut.Handle(new CreateCountryCommand { Name = GConst.ValidName}, CancellationToken.None);
+            var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             mediatorMock.Verify(m => m.Publish(It.Is<CreateCountryCommandNotification>(c => c.CountryId == countryId), It.IsAny<CancellationToken>()), Times.Once);
         }

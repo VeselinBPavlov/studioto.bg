@@ -44,20 +44,21 @@
         public const string Cities = "cities";
         public const string Services = "services";
         public const string Appointments = "appointments";
-
+        public const string Create = "Creation";
+        public const string Delete = "Deletion";
+        public const string Update = "Update";
 
         #endregion
 
         #region Studio.Application.Tests
 
-        // Valid for all entities
         public const string SuccessStatus = "RanToCompletion";
         public const string InvalidName = "AbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghijAbcdefghij";
         public const int InvalidId = 100;
         public const int ValidId = 1;
-        public const string FirstValidName = "Fitness";
-        public const string SecondValidName = "Haircut";
-        public const string ThirdValidName = "CET";
+        public const int ValidCount = 1;
+        public const string ValidName = "CETech";
+        public const string UpdatedName = "Mars";
         public const string ValidVatNumber = "BG114564897";
         public const string ValidPhone = "+359887889884";
         public const string ValidAddressNumber = "1";
@@ -66,36 +67,6 @@
         public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";       
         public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
         public const string ValueObjectExceptionMessage = "{0} is invalid.";
-
-
-        // Industry 
-        public const string IndustryValidName = "Hairstyle";
-        public const string IndustrySecondValidName = "Fitness";
-        public const string IndustryPossition = "Hairstyler";
-
-        // Service
-        public const string ServiceValidName = "Haircut";
-
-        // Client
-        public const string ClientValidName = "VND Group";
-        public const string ClientSecondValidName = "CET";
-        public const string ClientThirdValidName = "Beauty";
-
-        public const string ClientValidManagerFirstName = "Ivan";
-        public const string ClientValidManagerLastName = "Ivanov";
-
-        // Location
-        public const string LocationValidName = "CentralStudio";
-
-        // Countries
-        public const string CountryValidName = "Bulgaria";
-        public const string CountrySecondValidName = "Greece";
-
-
-        // Cities
-        public const string CityValidName = "Sofia";
-
-        // Address
 
         #endregion
 
