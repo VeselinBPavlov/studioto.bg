@@ -28,6 +28,7 @@
         public const string Service = "Service";
         public const string Employee = "Employee";
         public const string Appointment = "Appointment";
+        public const string User = "User";
         public const string IndustryLower = "industry";
         public const string CountryLower = "country";
         public const string CityLower = "city";
@@ -38,12 +39,14 @@
         public const string ServiceLower = "service";
         public const string EmployeeLower = "employee";
         public const string AppointmentLower = "appointment";
+        public const string UserLower = "user";
         public const string Addresses = "addresses";
         public const string Locations = "locations";
         public const string Employees = "employees";
         public const string Cities = "cities";
         public const string Services = "services";
         public const string Appointments = "appointments";
+        public const string Users = "users";
         public const string Create = "Creation";
         public const string Delete = "Deletion";
         public const string Update = "Update";

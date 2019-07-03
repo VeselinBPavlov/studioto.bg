@@ -38,7 +38,8 @@
 
             builder.HasOne(a => a.User)
                    .WithMany(u => u.Appointments)
-                   .HasForeignKey(a => a.UserId);
+                   .HasForeignKey(a => a.UserId)
+                   .IsRequired(false);
         }
     }
 }
