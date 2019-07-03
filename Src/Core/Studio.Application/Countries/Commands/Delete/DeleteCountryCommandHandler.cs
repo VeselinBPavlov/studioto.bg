@@ -24,12 +24,12 @@
             var country = await context.Countries
                 .FindAsync(request.Id);
 
-            if (country == null)
+            if (country == null || country.IsDeleted == true)
             {
                 throw new NotFoundException(GConst.Country, request.Id);
             }
 
-            var hasCities = this.context.Cities.Any(c => c.CountryId == country.Id);
+            var hasCities = this.context.Cities.Any(c => c.CountryId == country.Id && c.Country.IsDeleted == false);
 
             if (hasCities)
             {

@@ -22,7 +22,7 @@
         public async Task<Unit> Handle(UpdateIndustryCommand request, CancellationToken cancellationToken)
         {
             var industry = await this.context.Industries
-                .SingleOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(i => i.Id == request.Id && i.IsDeleted != true, cancellationToken);
 
             if (industry == null)
             {

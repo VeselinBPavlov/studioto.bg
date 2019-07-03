@@ -25,7 +25,7 @@
         {
             var industry = await this.context.Industries.FindAsync(request.IndustryId);
 
-            if (industry == null) 
+            if (industry == null || industry.IsDeleted == true) 
             {
                 throw new CreateFailureException(GConst.Service, request.Name, string.Format(GConst.RefereceException, GConst.IndustryLower, request.IndustryId));
             }
@@ -34,7 +34,8 @@
             {
                 Name = request.Name,
                 IndustryId = request.IndustryId,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Services.Add(service);

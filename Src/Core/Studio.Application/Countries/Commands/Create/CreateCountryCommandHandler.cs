@@ -23,7 +23,7 @@
 
         public async Task<Unit> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
-            bool isCountryUnique = context.Countries.Any(x => x.Name == request.Name);
+            bool isCountryUnique = context.Countries.Any(c => c.Name == request.Name && c.IsDeleted != true);
 
             if (isCountryUnique)
             {
@@ -33,7 +33,8 @@
             var country = new Country
             {
                 Name = request.Name,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Countries.Add(country);

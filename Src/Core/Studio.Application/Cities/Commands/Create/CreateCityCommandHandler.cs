@@ -25,7 +25,7 @@
         {
             var country = await this.context.Countries.FindAsync(request.CountryId);
 
-            if (country == null) 
+            if (country == null || country.IsDeleted == true) 
             {
                 throw new CreateFailureException(GConst.City, request.Name, string.Format(GConst.RefereceException, GConst.CountryLower, request.CountryId));
             }
@@ -34,7 +34,8 @@
             {
                 Name = request.Name,
                 CountryId = request.CountryId,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Cities.Add(city);

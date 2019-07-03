@@ -23,7 +23,7 @@
         public async Task<Unit> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
             var city = await this.context.Cities
-                .SingleOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(c => c.Id == request.Id && c.IsDeleted != true, cancellationToken);
 
             if (city == null)
             {
@@ -32,7 +32,7 @@
 
             var country = await this.context.Countries.FindAsync(request.CountryId);
 
-            if (country == null)
+            if (country == null || country.IsDeleted == true)
             {
                 throw new UpdateFailureException(GConst.City, request.Id, string.Format(GConst.RefereceException, GConst.CountryLower, request.CountryId));
             }

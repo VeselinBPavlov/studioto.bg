@@ -23,14 +23,14 @@
         public async Task<Unit> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
             var country = await this.context.Countries
-                .SingleOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(c => c.Id == request.Id && c.IsDeleted != true, cancellationToken);
 
             if (country == null)
             {
                 throw new NotFoundException(GConst.Country, request.Id);
             }
 
-            bool isCountryUnique = context.Countries.Any(x => x.Name == request.Name);
+            bool isCountryUnique = context.Countries.Any(c => c.Name == request.Name && c.IsDeleted == false);
 
             if (isCountryUnique)
             {

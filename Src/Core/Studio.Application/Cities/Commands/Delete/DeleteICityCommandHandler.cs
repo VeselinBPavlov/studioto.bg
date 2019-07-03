@@ -23,12 +23,12 @@
         {
             var city = await context.Cities.FindAsync(request.Id);
 
-            if (city == null)
+            if (city == null || city.IsDeleted == true)
             {
                 throw new NotFoundException(GConst.City, request.Id);
             }
 
-            var hasAddresses = this.context.Addresses.Any(s => s.CityId == city.Id);
+            var hasAddresses = this.context.Addresses.Any(a => a.CityId == city.Id && a.City.IsDeleted == false);
 
             if (hasAddresses)
             {

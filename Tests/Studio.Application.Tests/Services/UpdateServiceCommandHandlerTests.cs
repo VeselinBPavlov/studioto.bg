@@ -14,31 +14,21 @@
     {   
         [Fact]
         public async void ServiceShouldUpdateCorrect()
-        {
-            var industry = new Industry { Name = GConst.ValidName };
+         {
+            var industryId = GetIndustryId();
 
-            context.Industries.Add(industry);
-            await context.SaveChangesAsync();
-
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
-            
-            var service = new Service { Name = GConst.ValidName, IndustryId = industryId };
-
-            context.Services.Add(service);
-            await context.SaveChangesAsync();
-
-            var serviceId = context.Services.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
+            var serviceId = GetServiceId(industryId);
 
             var sut = new UpdateServiceCommandHandler(context);
-            var updatedService = new UpdateServiceCommand { Id = serviceId, Name = "Mars", IndustryId = industryId };
+            var updatedService = new UpdateServiceCommand { Id = serviceId, Name = GConst.ValidName, IndustryId = industryId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedService, CancellationToken.None));
 
-            var resultId = context.Services.SingleOrDefault(x => x.Name == "Mars").Id;
+            var resultId = context.Services.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
             Assert.Equal(serviceId, resultId);
             Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(1, context.Services.Count());
+            Assert.Equal(GConst.ValidCount, context.Services.Count());
         }
 
         [Fact]

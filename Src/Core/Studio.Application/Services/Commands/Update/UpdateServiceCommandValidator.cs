@@ -6,7 +6,7 @@
     {
         public UpdateServiceCommandValidator()
         {
-            RuleFor(i => i.Name).MaximumLength(100).NotEmpty();
+            RuleFor(s => s.Name).MaximumLength(100).NotEmpty();
         }
     }
 }

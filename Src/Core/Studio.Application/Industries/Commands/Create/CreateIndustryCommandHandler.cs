@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Studio.Domain.Entities;
+    using System;
 
     public class CreateIndustryCommandHandler : IRequestHandler<CreateIndustryCommand, Unit>
     {
@@ -22,7 +23,9 @@
             var industry = new Industry
             {
                 Name = request.Name,
-                Possition = request.Possition
+                Possition = request.Possition,
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Industries.Add(industry);

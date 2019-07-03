@@ -26,7 +26,7 @@
         {
             var city = await this.context.Cities.FindAsync(request.CityId);
 
-            if (city == null) 
+            if (city == null || city.IsDeleted == true) 
             {
                 throw new CreateFailureException(GConst.Address, request.Street, string.Format(GConst.RefereceException, GConst.CityLower, request.CityId));
             }
@@ -48,7 +48,8 @@
                 Latitude = request.Latitude,
                 Longitude = request.Longitude,
                 CityId = request.CityId,
-                CreatedOn = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false
             };
 
             context.Addresses.Add(address);

@@ -24,7 +24,7 @@
         public async Task<Unit> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
             var client = await context.Clients
-                .SingleOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(c => c.Id == request.Id && c.IsDeleted != true, cancellationToken);
 
             if (client == null)
             {

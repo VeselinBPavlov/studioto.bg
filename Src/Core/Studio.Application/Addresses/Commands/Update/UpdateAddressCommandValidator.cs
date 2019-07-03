@@ -6,13 +6,13 @@
     {
         public UpdateAddressCommandValidator()
         {
-            RuleFor(i => i.Street).MaximumLength(100).NotEmpty();
-            RuleFor(i => i.Number).MaximumLength(10).NotEmpty();
-            RuleFor(i => i.Building).MaximumLength(10);
-            RuleFor(i => i.Entrance).MaximumLength(10);
-            RuleFor(i => i.Floor).MaximumLength(10);
-            RuleFor(i => i.Apartment).MaximumLength(10);
-            RuleFor(i => i.District).MaximumLength(100);
+            RuleFor(а => а.Street).MaximumLength(100).NotEmpty();
+            RuleFor(а => а.Number).MaximumLength(10).NotEmpty();
+            RuleFor(а => а.Building).MaximumLength(10);
+            RuleFor(а => а.Entrance).MaximumLength(10);
+            RuleFor(а => а.Floor).MaximumLength(10);
+            RuleFor(а => а.Apartment).MaximumLength(10);
+            RuleFor(а => а.District).MaximumLength(100);
         }
     }
 }

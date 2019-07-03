@@ -23,12 +23,12 @@
         {
             var address = await context.Addresses.FindAsync(request.Id);
 
-            if (address == null)
+            if (address == null || address.IsDeleted == true)
             {
                 throw new NotFoundException(GConst.Address, request.Id);
             }
 
-            var hasLocation = this.context.Locations.Any(s => s.AddressId == address.Id);
+            var hasLocation = this.context.Locations.Any(l => l.AddressId == address.Id && l.Address.IsDeleted == false);
 
             if (hasLocation)
             {

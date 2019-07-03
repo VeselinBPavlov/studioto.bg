@@ -25,12 +25,12 @@
             var client = await context.Clients
                 .FindAsync(request.Id);
 
-            if (client == null)
+            if (client == null || client.IsDeleted == true)
             {
                 throw new NotFoundException(GConst.Client, request.Id);
             }
 
-            var hasLocations = context.Locations.Any(s => s.ClientId == client.Id);
+            var hasLocations = context.Locations.Any(l => l.ClientId == client.Id && l.Client.IsDeleted == false);
 
             if (hasLocations)
             {

@@ -6,7 +6,7 @@
     {
         public UpdateCityCommandValidator()
         {
-            RuleFor(i => i.Name).MaximumLength(100).NotEmpty();
+            RuleFor(c => c.Name).MaximumLength(100).NotEmpty();
         }
     }
 }

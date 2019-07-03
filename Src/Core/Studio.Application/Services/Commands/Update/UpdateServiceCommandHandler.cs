@@ -23,7 +23,7 @@
         public async Task<Unit> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
         {
             var service = await this.context.Services
-                .SingleOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(s => s.Id == request.Id && s.IsDeleted != true, cancellationToken);
 
             if (service == null)
             {
@@ -32,7 +32,7 @@
 
             var industry = await this.context.Industries.FindAsync(request.IndustryId);
 
-            if (industry == null)
+            if (industry == null || industry.IsDeleted == true)
             {
                 throw new UpdateFailureException(GConst.Service, request.Id, string.Format(GConst.RefereceException, GConst.IndustryLower, request.IndustryId));
             }

@@ -24,7 +24,7 @@
         public async Task<Unit> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
             var address = await this.context.Addresses
-                .SingleOrDefaultAsync(i => i.Id == request.Id, cancellationToken);
+                .SingleOrDefaultAsync(a => a.Id == request.Id && a.IsDeleted != true, cancellationToken);
 
             if (address == null)
             {
@@ -33,7 +33,7 @@
 
             var city = await this.context.Cities.FindAsync(request.CityId);
 
-            if (city == null)
+            if (city == null || city.IsDeleted == true)
             {
                 throw new UpdateFailureException(GConst.Address, request.Street, string.Format(GConst.RefereceException, GConst.CityLower, request.CityId));
             }
