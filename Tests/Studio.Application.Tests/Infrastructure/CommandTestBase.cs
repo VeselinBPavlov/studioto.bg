@@ -145,10 +145,14 @@ namespace Studio.Application.Tests.Infrastructure
             return serviceId;
         }
 
-        public int GetEmployeeId()
+        public int GetEmployeeId(int? locationId)
         {
-            var employee = new Employee { FirstName = GConst.ValidName };
-            
+            var employee = new Employee { FirstName = GConst.ValidName };            
+
+            if (locationId != null) 
+            {
+                employee.LocationId = locationId.Value;
+            }
 
             context.Employees.Add(employee);
             context.SaveChangesAsync();
@@ -165,9 +169,22 @@ namespace Studio.Application.Tests.Infrastructure
             context.SaveChanges();
         }
 
-        public void AddAppointment(int serviceId)
+        public void GetAppointmentId(int? serviceId, int? employeeId, string userId)
         {
-            var appointment = new Appointment { ServiceId = serviceId };
+            Appointment appointment = new Appointment { FirstName = GConst.ValidName };
+            if (serviceId != null) 
+            {
+                appointment.ServiceId = serviceId.Value;
+            }
+            else if (employeeId != null) 
+            {
+                appointment.EmployeeId = employeeId.Value;                
+            }
+            else if (userId != null) 
+            {
+                appointment.UserId = userId;  
+            }
+
             context.Appointments.Add(appointment);
             context.SaveChanges();
         }

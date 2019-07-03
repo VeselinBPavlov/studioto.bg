@@ -30,7 +30,7 @@
         {
             var serviceId = GetServiceId(null);
 
-            AddAppointment(serviceId);
+            GetAppointmentId(serviceId, null, null);
 
             var sut = new DeleteServiceCommandHandler(context);
             
@@ -45,7 +45,7 @@
         {
             var serviceId = GetServiceId(null);
 
-            var employeeId = GetEmployeeId();
+            var employeeId = GetEmployeeId(null);
 
             AddEmployeeService(serviceId, employeeId);
 
