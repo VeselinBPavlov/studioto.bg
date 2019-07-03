@@ -33,6 +33,8 @@
 
         DbSet<Industry> Industries { get; set; }
 
+        DbSet<ContactForm> ContactForms { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

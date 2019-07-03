@@ -26,7 +26,7 @@ namespace Studio.Persistence.Configurations
                    .IsRequired();
 
             builder.Property(c => c.Topic)
-                   .HasMaxLength(50)
+                   .HasMaxLength(100)
                    .IsUnicode()
                    .IsRequired();
 

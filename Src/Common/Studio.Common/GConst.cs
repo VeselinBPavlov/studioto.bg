@@ -58,6 +58,8 @@
         public const int ValidId = 1;
         public const int ValidCount = 1;
         public const string ValidName = "CETech";
+
+        public const string ValidEmail = "steve@gmail.com";
         public const string UpdatedName = "Mars";
         public const string ValidVatNumber = "BG114564897";
         public const string ValidPhone = "+359887889884";
