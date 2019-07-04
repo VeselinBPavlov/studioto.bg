@@ -1,6 +1,7 @@
 ﻿namespace Studio.Application.Appointments.Commands.Create
 {
     using MediatR;
+    using System;
 
     public class CreateAppointmentCommand : IRequest
     {
@@ -12,7 +13,7 @@
 
         public string Phone { get; set; }
 
-        public string ReservetionTime { get; set; }
+        public DateTime ReservetionTime { get; set; }
 
         public string Comment { get; set; }
 

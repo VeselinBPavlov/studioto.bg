@@ -169,7 +169,7 @@ namespace Studio.Application.Tests.Infrastructure
             context.SaveChanges();
         }
 
-        public void GetAppointmentId(int? serviceId, int? employeeId, string userId)
+        public int GetAppointmentId(int? serviceId, int? employeeId, string userId)
         {
             Appointment appointment = new Appointment { FirstName = GConst.ValidName };
             if (serviceId != null) 
@@ -187,6 +187,10 @@ namespace Studio.Application.Tests.Infrastructure
 
             context.Appointments.Add(appointment);
             context.SaveChanges();
+
+            var appointmentId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
+
+            return appointmentId;
         }
 
         public void AddEmployeeService(int serviceId, int employeeId)
@@ -194,6 +198,19 @@ namespace Studio.Application.Tests.Infrastructure
             var employeeService = new EmployeeService { ServiceId = serviceId, EmployeeId = employeeId};
             context.EmployeeServices.Add(employeeService);
             context.SaveChanges();
+        }
+
+        public string GetUserId()
+        {
+            var user = new StudioUser { UserName = GConst.ValidName };
+
+            context.StudioUsers.Add(user);
+            context.SaveChanges();
+
+
+            var userId = context.StudioUsers.SingleOrDefault(x => x.UserName == GConst.ValidName).Id;
+
+            return userId;
         }
     }
 }

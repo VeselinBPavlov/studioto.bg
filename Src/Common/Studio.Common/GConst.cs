@@ -1,4 +1,7 @@
-﻿namespace Studio.Common
+﻿using System;
+using System.Globalization;
+
+namespace Studio.Common
 {
     public static class GConst
     {
@@ -72,6 +75,7 @@
         public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";       
         public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
         public const string ValueObjectExceptionMessage = "{0} is invalid.";
+        
 
         #endregion
 

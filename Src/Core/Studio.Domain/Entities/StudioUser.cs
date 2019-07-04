@@ -20,6 +20,8 @@
 
         public string LastName { get; set; }
 
+        public bool IsTemporary { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
