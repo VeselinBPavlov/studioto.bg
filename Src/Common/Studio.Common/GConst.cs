@@ -31,6 +31,8 @@ namespace Studio.Common
         public const string Service = "Service";
         public const string Employee = "Employee";
         public const string Appointment = "Appointment";
+        public const string EmployeeService = "Employee-Service relation";
+        public const string LocationIndustry = "Location-Industry relation";
         public const string User = "User";
         public const string IndustryLower = "industry";
         public const string CountryLower = "country";
@@ -64,7 +66,10 @@ namespace Studio.Common
         public const int ValidId = 1;
         public const int ValidCount = 1;
         public const string ValidName = "CETech";
-
+        public const decimal ValidPrice = 2.10M;
+        public const decimal ZeroPrice = 0.00M;
+        public const decimal InvalidPrice = -2.30M;
+        public const int ZeroId = 0;
         public const string ValidEmail = "steve@gmail.com";
         public const string UpdatedName = "Mars";
         public const string ValidVatNumber = "BG114564897";

@@ -38,7 +38,6 @@
                         FirstName = request.FirstName,
                         LastName = request.LastName,
                         Email = request.Email,
-                        NormalizedEmail = request.Email.ToUpper(),
                         PhoneNumber = request.Phone,
                         CreatedOn = DateTime.UtcNow,
                         IsDeleted = false,

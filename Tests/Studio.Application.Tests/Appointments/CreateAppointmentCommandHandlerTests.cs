@@ -63,5 +63,38 @@
             Assert.NotNull(status);
             Assert.Equal(string.Format(GConst.ReferenceExceptionMessage, GConst.Create, GConst.Appointment, GConst.InvalidId, GConst.EmployeeLower, GConst.InvalidId), status.Message);
         }
+
+        [Fact]
+        public async Task ShouldNotThrowCreateFailureExceptionForEmptyUser()
+        {
+            var serviceId = GetServiceId(null);
+            var employeeId = GetEmployeeId(null);
+
+            var mediator = new Mock<IMediator>();
+            var sut = new CreateAppointmentCommandHandler(context, mediator.Object);
+
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateAppointmentCommand { FirstName = GConst.ValidName, EmployeeId = employeeId, ServiceId = serviceId }, CancellationToken.None));
+           
+            Assert.Null(status.Exception);
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.ValidCount, context.Appointments.Count());
+        }
+
+        [Fact]
+        public async Task ShouldNotThrowCreateFailureExceptionAndFindUserByEmail()
+        {
+            var serviceId = GetServiceId(null);
+            var employeeId = GetEmployeeId(null);
+            var userId = GetUserId();
+
+            var mediator = new Mock<IMediator>();
+            var sut = new CreateAppointmentCommandHandler(context, mediator.Object);
+
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateAppointmentCommand { FirstName = GConst.ValidName, Email = GConst.ValidEmail, EmployeeId = employeeId, ServiceId = serviceId }, CancellationToken.None));
+           
+            Assert.Null(status.Exception);
+            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
+            Assert.Equal(GConst.ValidCount, context.Appointments.Count());
+        }
     }
 }

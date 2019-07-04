@@ -202,7 +202,7 @@ namespace Studio.Application.Tests.Infrastructure
 
         public string GetUserId()
         {
-            var user = new StudioUser { UserName = GConst.ValidName };
+            var user = new StudioUser { UserName = GConst.ValidName, Email = GConst.ValidEmail };
 
             context.StudioUsers.Add(user);
             context.SaveChanges();
