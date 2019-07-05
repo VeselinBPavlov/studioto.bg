@@ -51,6 +51,8 @@
 
         public DbSet<ContactForm> ContactForms { get; set; }
 
+        public DbSet<Administration> Administrations { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 

@@ -25,6 +25,8 @@
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Email, GConst.ValidEmail);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.ValidPhone);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservetionTime, DateTime.UtcNow.AddDays(1));
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservetionDate, DateTime.UtcNow.AddDays(1));
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, GConst.ValidName);
         }
 
         [Fact]
@@ -34,6 +36,7 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, null as string);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, null as string);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, null as string);
         }
 
         [Fact]
@@ -42,7 +45,7 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.FirstName, GConst.InvalidName);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, GConst.InvalidName);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, GConst.InvalidName);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.InvalidName);            
         }
 
         [Fact]
@@ -52,12 +55,14 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, string.Empty);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, string.Empty);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, string.Empty);
         }
 
                 [Fact]
         public void AppointmentShouldReturnErrorIfReservationDateIsPassed()
         {
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservetionTime, DateTime.UtcNow.AddDays(-1));
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservetionDate, DateTime.UtcNow.AddDays(-1));
         }
     }
 }

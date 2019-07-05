@@ -35,6 +35,8 @@
 
         DbSet<ContactForm> ContactForms { get; set; }
 
+        DbSet<Administration> Administrations { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

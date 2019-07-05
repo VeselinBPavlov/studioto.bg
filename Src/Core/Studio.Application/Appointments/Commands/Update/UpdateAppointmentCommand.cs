@@ -15,7 +15,11 @@
 
         public string Phone { get; set; }
 
+        public DateTime ReservetionDate { get; set; }
+
         public DateTime ReservetionTime { get; set; }
+
+        public string TimeBlockHelper { get; set; }
 
         public string Comment { get; set; }
 

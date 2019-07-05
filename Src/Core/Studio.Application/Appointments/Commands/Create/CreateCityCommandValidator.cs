@@ -12,6 +12,8 @@
             RuleFor(cf => cf.Email).MaximumLength(100).Matches(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$").NotEmpty();
             RuleFor(c => c.Phone).Matches(@"^(\+359|0)(\d{9})$").NotEmpty();
             RuleFor(c => c.ReservetionTime).NotEmpty().Must(BeValidDate);
+            RuleFor(c => c.ReservetionDate).NotEmpty().Must(BeValidDate);
+            RuleFor(c => c.TimeBlockHelper).NotEmpty();
         }
 
         private bool BeValidDate(DateTime reservationTime)

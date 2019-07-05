@@ -26,6 +26,8 @@
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Email, GConst.ValidEmail);
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Phone, GConst.ValidPhone);
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.ReservetionTime, DateTime.UtcNow.AddDays(1));
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.ReservetionDate, DateTime.UtcNow.AddDays(1));
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.TimeBlockHelper, GConst.ValidName);
         }
 
         [Fact]
@@ -35,6 +37,7 @@
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.LastName, null as string);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Email, null as string);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Phone, null as string);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.TimeBlockHelper, null as string);
         }
 
         [Fact]
@@ -53,12 +56,14 @@
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.LastName, string.Empty);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Email, string.Empty);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Phone, string.Empty);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.TimeBlockHelper, string.Empty);
         }
 
         [Fact]
         public void AppointmentShouldReturnErrorIfReservationDateIsPassed()
         {
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.ReservetionTime, DateTime.UtcNow.AddDays(-1));
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.ReservetionDate, DateTime.UtcNow.AddDays(-1));
         }
     }
 }
