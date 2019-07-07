@@ -11,6 +11,7 @@
     using Studio.Common;
     using System.Globalization;
     using Microsoft.EntityFrameworkCore;
+    using Itenso.TimePeriod;
 
     public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, Unit>
     {
@@ -67,13 +68,38 @@
                 throw new CreateFailureException(GConst.Appointment, request.EmployeeId, string.Format(GConst.RefereceException, GConst.EmployeeLower, request.EmployeeId));
             }
 
+            if (request.TimeBlockHelper == GConst.AllHoursBusy)
+            {
+                throw new CreateFailureException(GConst.Appointment, request.Email, string.Format(GConst.NotAvalableHours, request.ReservationDate.ToShortDateString()));
+            }
+
+            //Set Time
+            request.ReservationTime = DateTime.Parse(request.TimeBlockHelper);
+
+            //CheckWorkingHours
+            DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
+            DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.Administrations.Find(1).Value));
+            if (!(IsInWorkingHours(start, end)))
+            {
+                throw new CreateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value)));
+            }
+
+            //Check Appointment Clash
+            string check = ValidateNoAppoinmentClash(request);
+            if (check != "")
+            {
+                throw new CreateFailureException(GConst.Appointment, request.Email, check);
+            }
+
             var appointment = new Appointment
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
                 Phone = request.Phone,
-                ReservationTime = request.ReservetionTime,
+                ReservationTime = request.ReservationTime,
+                ReservationDate = request.ReservationDate,
+                TimeBlockHelper = request.TimeBlockHelper,
                 Comment = request.Comment,
                 ServiceId = request.ServiceId,
                 EmployeeId = request.EmployeeId,
@@ -89,6 +115,38 @@
             await mediator.Publish(new CreateAppointmentCommandNotification { AppointmentId = appointment.Id }, cancellationToken);
 
             return Unit.Value;
+        }
+
+        private bool IsInWorkingHours(DateTime start, DateTime end)
+        {
+            // check Not Saturday or Sunday
+            if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return false;
+            }
+
+            TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(start, int.Parse(context.Administrations.Find(3).Value)));
+            return workingHours.HasInside(new TimeRange(start, end));
+        }
+
+        private string ValidateNoAppoinmentClash(CreateAppointmentCommand appointment)
+        {
+            var apps = context.Appointments.ToList();
+            var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId).ToList();
+
+            foreach (var item in appointments)
+            {
+                if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
+                {
+                    string errorMessage = String.Format(
+                        GConst.ReservedHourException,
+                        item.Employee.FirstName,
+                        item.ReservationDate.ToShortDateString(),
+                        item.ReservationTime.ToShortTimeString());
+                    return errorMessage;
+                }
+            }
+            return String.Empty;
         }
     }
 }

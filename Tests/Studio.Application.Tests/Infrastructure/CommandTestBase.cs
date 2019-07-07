@@ -1,6 +1,7 @@
 namespace Studio.Application.Tests.Infrastructure
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Persistence.Context;
     using Studio.Common;
@@ -171,19 +172,29 @@ namespace Studio.Application.Tests.Infrastructure
 
         public int GetAppointmentId(int? serviceId, int? employeeId, string userId)
         {
-            Appointment appointment = new Appointment { FirstName = GConst.ValidName };
+            Appointment appointment = new Appointment
+            {
+                FirstName = GConst.ValidName,
+                ReservationDate = new DateTime(2019, 09, 09),
+                TimeBlockHelper = GConst.ValidHour,
+            };
+        
             if (serviceId != null) 
             {
                 appointment.ServiceId = serviceId.Value;
             }
-            else if (employeeId != null) 
+
+            if (employeeId != null) 
             {
                 appointment.EmployeeId = employeeId.Value;                
             }
-            else if (userId != null) 
+
+            if (userId != null) 
             {
                 appointment.UserId = userId;  
             }
+
+            appointment.ReservationTime = DateTime.Parse(appointment.TimeBlockHelper);
 
             context.Appointments.Add(appointment);
             context.SaveChanges();
@@ -211,6 +222,19 @@ namespace Studio.Application.Tests.Infrastructure
             var userId = context.StudioUsers.SingleOrDefault(x => x.UserName == GConst.ValidName).Id;
 
             return userId;
+        }
+
+        public void AddAdministration()
+        {
+            var admins = new List<Administration>
+            {
+                 new Administration { Id = 1, Name = "Appointment Duration in Minutes [Default:30]",   Value = "30"},
+                 new Administration { Id = 2, Name = "Working Hours Start in 24-Hour Format [Default:8]",   Value = "8"},
+                 new Administration { Id = 3, Name = "Working Hours End in 24-Hour Format [Default:18]",   Value = "18"},
+            };
+
+            context.Administrations.AddRange(admins);
+            context.SaveChanges();
         }
     }
 }

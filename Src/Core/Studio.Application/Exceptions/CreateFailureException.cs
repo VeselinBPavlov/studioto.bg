@@ -5,10 +5,8 @@
 
     public class CreateFailureException : Exception
     {
-        private const string Create = "Creation";
-
         public CreateFailureException(string name, object key, string message)
-            : base(string.Format(Common.GConst.FailureException, Create, name, key, message))
+            : base(string.Format(GConst.FailureException, GConst.Create, name, key, message))
         {
         }
     }

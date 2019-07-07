@@ -24,8 +24,8 @@
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.LastName, GConst.ValidName);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Email, GConst.ValidEmail);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.ValidPhone);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservetionTime, DateTime.UtcNow.AddDays(1));
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservetionDate, DateTime.UtcNow.AddDays(1));
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservationTime, DateTime.UtcNow.AddDays(1));
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservationDate, DateTime.UtcNow.AddDays(1));
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, GConst.ValidName);
         }
 
@@ -61,8 +61,8 @@
                 [Fact]
         public void AppointmentShouldReturnErrorIfReservationDateIsPassed()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservetionTime, DateTime.UtcNow.AddDays(-1));
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservetionDate, DateTime.UtcNow.AddDays(-1));
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservationTime, DateTime.UtcNow.AddDays(-1));
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservationDate, DateTime.UtcNow.AddDays(-1));
         }
     }
 }

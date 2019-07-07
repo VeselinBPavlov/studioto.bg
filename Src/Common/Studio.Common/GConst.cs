@@ -13,7 +13,9 @@ namespace Studio.Common
         public const string DeleteException = "There are existing {0} associated with this {1}.";
         public const string RefereceException = "There are no existing {0} with id {1}.";
         public const string UniqueNameException = "There are existing {0} with the same name.";
-               
+        public const string InvalidAppointmentHourException = "Location Working Hours are from {0} to {1}.";
+        public const string ReservedHourException = "{0} already has an appointment on {1} on {2}.";
+
         #endregion
 
         #region Studio.Application.Domain
@@ -69,18 +71,23 @@ namespace Studio.Common
         public const decimal ValidPrice = 2.10M;
         public const decimal ZeroPrice = 0.00M;
         public const decimal InvalidPrice = -2.30M;
+        public const string InvalidHourBefore = "6:00";
+        public const string InvalidHourAfter = "22:00";        
         public const int ZeroId = 0;
         public const string ValidEmail = "steve@gmail.com";
         public const string UpdatedName = "Mars";
         public const string ValidVatNumber = "BG114564897";
         public const string ValidPhone = "+359887889884";
         public const string ValidAddressNumber = "1";
+        public const string ValidHour = "08:00";
+        public const string AllHoursBusy = "busy";
         public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
         public const string ReferenceExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are no existing {3} with id {4}.";
         public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";       
         public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
         public const string ValueObjectExceptionMessage = "{0} is invalid.";
-        
+        public const string NotAvalableHours = "No Appointments Available for {0}";
+
 
         #endregion
 

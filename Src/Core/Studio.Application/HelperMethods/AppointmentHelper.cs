@@ -53,7 +53,6 @@ namespace Studio.Application.HelperMethods
                 }
             }
             return String.Empty;
-
         }
 
         public static List<SelectListItem> AvailableAppointments(IStudioDbContext context, int employeeId, DateTime date)

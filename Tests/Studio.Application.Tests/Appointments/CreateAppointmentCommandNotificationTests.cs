@@ -1,5 +1,6 @@
 namespace Studio.Application.Tests.Appointments.Commands
 {
+    using System;
     using System.Linq;
     using System.Threading;
     using MediatR;
@@ -15,6 +16,8 @@ namespace Studio.Application.Tests.Appointments.Commands
         [Fact]
         public void ShouldRaiseAppointmentCreatedNotification()
         {
+            AddAdministration();
+
             var userId = GetUserId();
 
             var serviceId = GetServiceId(null);
@@ -24,7 +27,15 @@ namespace Studio.Application.Tests.Appointments.Commands
             var mediatorMock = new Mock<IMediator>();
             var sut = new CreateAppointmentCommandHandler(context, mediatorMock.Object);
 
-            var result = sut.Handle(new CreateAppointmentCommand { FirstName = GConst.ValidName, EmployeeId = employeeId, ServiceId = serviceId, UserId = userId }, CancellationToken.None);
+            var result = sut.Handle(new CreateAppointmentCommand
+            {
+                FirstName = GConst.ValidName,
+                ReservationDate = new DateTime(2019, 09, 09),
+                TimeBlockHelper = GConst.ValidHour,
+                EmployeeId = employeeId,
+                ServiceId = serviceId,
+                UserId = userId
+            }, CancellationToken.None);
 
             var appointmentId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
 
