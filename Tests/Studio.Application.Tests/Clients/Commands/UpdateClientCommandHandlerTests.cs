@@ -12,12 +12,18 @@
   
     public class UpdateClientCommandHandlerTests : CommandTestBase
     {
+        private int clientId;
+        private UpdateClientCommandHandler sut;
+
+        public UpdateClientCommandHandlerTests()
+        {
+            clientId = GetClientId();
+            sut = new UpdateClientCommandHandler(context);
+        }
+
         [Fact]
         public async void ShouldUpdateCorrect()
-        {
-            var clientId = GetClientId();
-
-            var sut = new UpdateClientCommandHandler(context);
+        {           
             var updatedClient = new UpdateClientCommand { Id = clientId, CompanyName = GConst.ValidName };
 
             var status = Task.FromResult(await sut.Handle(updatedClient, CancellationToken.None));
@@ -31,8 +37,7 @@
 
         [Fact]
         public async void ShouldThrowNotFoundException()
-        {
-            var sut = new UpdateClientCommandHandler(context);
+        {           
             var updatedClient = new UpdateClientCommand { Id = GConst.InvalidId, CompanyName = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedClient, CancellationToken.None));

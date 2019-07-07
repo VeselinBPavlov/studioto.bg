@@ -12,13 +12,18 @@
 
     public class DeleteClientCommandHandlerTests : CommandTestBase
     {
+        private int clientId;
+        private DeleteClientCommandHandler sut;
+
+        public DeleteClientCommandHandlerTests()
+        {
+            clientId = GetClientId();
+            sut = new DeleteClientCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteClient()
-        {
-            var clientId = GetClientId();
-
-            var sut = new DeleteClientCommandHandler(context);
-
+        {            
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteClientCommand { Id = clientId }, CancellationToken.None));            
 
             Assert.Null(status.Exception);
@@ -29,11 +34,7 @@
         [Fact]
         public async Task ShouldТhrowDeleteFailureException()
         {
-            var clientId = GetClientId();
-
-            GetLocationId(clientId, null);
-
-            var sut = new DeleteClientCommandHandler(context);
+            GetLocationId(clientId, null);           
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = clientId }, CancellationToken.None));
             var message = status.Message;
@@ -45,8 +46,6 @@
         [Fact]
         public async Task ShouldThrowNotFoundException()
         {
-            var sut = new DeleteClientCommandHandler(context);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);

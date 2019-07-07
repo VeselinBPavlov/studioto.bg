@@ -11,15 +11,21 @@
     using Xunit;
 
     public class UpdateServiceCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int industryId;
+        private int serviceId;
+        private UpdateServiceCommandHandler sut;
+
+        public UpdateServiceCommandHandlerTests()
+        {
+            industryId = GetIndustryId();
+            serviceId = GetServiceId(industryId);
+            sut = new UpdateServiceCommandHandler(context);
+        }
+
         [Fact]
         public async void ServiceShouldUpdateCorrect()
          {
-            var industryId = GetIndustryId();
-
-            var serviceId = GetServiceId(industryId);
-
-            var sut = new UpdateServiceCommandHandler(context);
             var updatedService = new UpdateServiceCommand { Id = serviceId, Name = GConst.ValidName, IndustryId = industryId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedService, CancellationToken.None));
@@ -34,11 +40,6 @@
         [Fact]
         public async void ServiceShouldThrowRefereceException()
         {
-            var industryId = GetIndustryId();
-
-            var serviceId = GetServiceId(industryId);
-
-            var sut = new UpdateServiceCommandHandler(context);
             var updatedService = new UpdateServiceCommand { Id = serviceId, Name = GConst.UpdatedName, IndustryId = GConst.InvalidId};
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedService, CancellationToken.None));
@@ -50,7 +51,6 @@
         [Fact]
         public async void ServiceShouldThrowNotFoundException()
         {
-            var sut = new UpdateServiceCommandHandler(context);
             var updatedService = new UpdateServiceCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedService, CancellationToken.None));

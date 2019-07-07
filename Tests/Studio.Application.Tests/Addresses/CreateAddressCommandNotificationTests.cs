@@ -12,18 +12,24 @@ namespace Studio.Application.Tests.Addresses.Commands
 
     public class CreateAddressCommandNotificationTests : CommandTestBase
     {
+        private int cityId;
+        private Mock<IMediator> mediator;
+        private CreateAddressCommandHandler sut;
+
+        public CreateAddressCommandNotificationTests()
+        {
+            cityId = GetCityId(null);
+            this.mediator = new Mock<IMediator>();
+            this.sut = new CreateAddressCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseAddressCreatedNotification()
         {
-            int cityId = GetCityId(null);
-
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateAddressCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateAddressCommand { Street = GConst.ValidName, Number = GConst.ValidAddressNumber, Latitude = 40.00M, CityId = cityId }, CancellationToken.None);
             var addressId = context.Addresses.SingleOrDefault(x => x.Latitude == 40.00M).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateAddressCommandNotification>(c => c.AddressId == addressId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateAddressCommandNotification>(c => c.AddressId == addressId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

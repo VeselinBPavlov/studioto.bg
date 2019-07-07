@@ -6,19 +6,23 @@ namespace Studio.Domain.Tests.ValueObjects
 
     public class ManagerTests
     {
+        private const string FirstName = "Ivan";
+        private const string LastName = "Ivanov";
+        private const string InvalidName = "IvanIvanov";
+
         [Fact]
         public void ShouldHaveCorrectFirstAndLastName()
         {
-            var manager = Manager.For("Ivan Ivanov");
+            var manager = Manager.For($"{FirstName} {LastName}");
 
-            Assert.Equal("Ivan", manager.FirstName);
-            Assert.Equal("Ivanov", manager.LastName);
+            Assert.Equal(FirstName, manager.FirstName);
+            Assert.Equal(LastName, manager.LastName);
         }
 
         [Fact]
         public void ToStringReturnsCorrectFormat()
         {
-            const string value = "Ivan Ivanov";
+            string value = $"{FirstName} {LastName}";
 
             var manager = Manager.For(value);
 
@@ -28,7 +32,7 @@ namespace Studio.Domain.Tests.ValueObjects
         [Fact]
         public void ImplicitConversionToStringResultsInCorrectString()
         {
-            const string value = "Ivan Ivanov";
+            string value = $"{FirstName} {LastName}";
 
             var manager = Manager.For(value);
 
@@ -40,16 +44,16 @@ namespace Studio.Domain.Tests.ValueObjects
         [Fact]
         public void ExplicitConversionFromStringSetsFirstAndLastName()
         {
-            var manager = (Manager) "Ivan Ivanov";
+            var manager = (Manager) $"{FirstName} {LastName}";
 
-            Assert.Equal("Ivan", manager.FirstName);
-            Assert.Equal("Ivanov", manager.LastName);
+            Assert.Equal(FirstName, manager.FirstName);
+            Assert.Equal(LastName, manager.LastName);
         }
 
         [Fact]
         public void ShouldThrowManagerInvalidExceptionForInvalidAdAccount()
         {
-            Assert.Throws<ManagerInvalidException>(() => (Manager) "IvanIvanov");
+            Assert.Throws<ManagerInvalidException>(() => (Manager) InvalidName);
         }
     }
 }

@@ -14,12 +14,18 @@
 
     public class CreateCountryCommandHandlerTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateCountryCommandHandler sut;
+
+        public CreateCountryCommandHandlerTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateCountryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateCountry()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateCountryCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateCountryCommand { Name = GConst.ValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -31,9 +37,6 @@
         public async Task ShouldThrowCreateFailureException()
         {
             var countryId = GetCountryId();
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateCountryCommandHandler(context, mediator.Object);
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = GConst.ValidName }, CancellationToken.None));
            

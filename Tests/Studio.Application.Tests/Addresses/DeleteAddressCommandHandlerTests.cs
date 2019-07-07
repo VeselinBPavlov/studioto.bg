@@ -10,13 +10,18 @@
 
     public class DeleteAddressCommandHandlerTests : CommandTestBase
     {
+        private int addressId;
+        private DeleteAddressCommandHandler sut;
+
+        public DeleteAddressCommandHandlerTests()
+        {
+            addressId = GetAddressId(null);
+            sut = new DeleteAddressCommandHandler(context);            
+        }
+
         [Fact]
         public async Task ShouldDeleteAddress()
         {
-            var addressId = GetAddressId(null);
-
-            var sut = new DeleteAddressCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteAddressCommand { Id = addressId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -26,12 +31,7 @@
         [Fact]
         public async Task AddressShouldТhrowDeleteFailureException()
         {
-            var addressId = GetAddressId(null);
-
             GetLocationId(null, addressId);
-
-            var sut = new DeleteAddressCommandHandler(context);
-            
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = addressId }, CancellationToken.None));
             
             Assert.NotNull(status);
@@ -41,8 +41,6 @@
         [Fact]
         public async Task AddressShouldТhrowNotFoundException()
         {
-            var sut = new DeleteAddressCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

@@ -13,18 +13,18 @@
 
     public class DeleteIndustryCommandHandlerTests : CommandTestBase
     {
+        private int industryId;
+        private DeleteIndustryCommandHandler sut;
+
+        public DeleteIndustryCommandHandlerTests()
+        {
+            industryId = GetIndustryId();
+            sut = new DeleteIndustryCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteIndustry()
         {
-            var industry = new Industry { Name = GConst.ValidName };
-
-            context.Industries.Add(industry);
-            await context.SaveChangesAsync();
-
-            var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
-
-            var sut = new DeleteIndustryCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -34,11 +34,7 @@
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailureExceptionForConnectedService()
         {
-            var industryId = GetIndustryId();
-
             GetServiceId(industryId);
-
-            var sut = new DeleteIndustryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
@@ -49,13 +45,9 @@
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailueExceptionForConnectedLocation()
         {
-            var industryId = GetIndustryId();
-
             var locationId = GetLocationId(null, null);
 
             AddLocationIndustry(industryId, locationId);
-
-            var sut = new DeleteIndustryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
@@ -66,8 +58,6 @@
         [Fact]
         public async Task IndustryShouldТhrowNotFoundException()
         {
-            var sut = new DeleteIndustryCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

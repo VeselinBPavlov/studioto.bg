@@ -11,16 +11,22 @@ namespace Studio.Application.Tests.Countries.Commands
 
     public class CreateCountryCommandNotificationTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateCountryCommandHandler sut;
+
+        public CreateCountryCommandNotificationTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateCountryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseCountryCreatedNotification()
         {
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateCountryCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateCountryCommand { Name = GConst.ValidName}, CancellationToken.None);
             var countryId = context.Countries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateCountryCommandNotification>(c => c.CountryId == countryId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateCountryCommandNotification>(c => c.CountryId == countryId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

@@ -11,15 +11,21 @@
     using Xunit;
 
     public class UpdateCityCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int countryId;
+        private int cityId;
+        private UpdateCityCommandHandler sut;
+
+        public UpdateCityCommandHandlerTests()
+        {
+            countryId = GetCountryId();
+            cityId = GetCityId(countryId);
+            sut = new UpdateCityCommandHandler(context);
+        }
+
         [Fact]
         public async void CityShouldUpdateCorrect()
         {
-            var countryId = GetCountryId();
-
-            var cityId = GetCityId(countryId);
-
-            var sut = new UpdateCityCommandHandler(context);
             var updatedCity = new UpdateCityCommand { Id = cityId, Name = GConst.ValidName, CountryId = countryId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedCity, CancellationToken.None));
@@ -34,11 +40,6 @@
         [Fact]
         public async void CityShouldThrowReferenceException()
         {
-            var countryId = GetCountryId();
-
-            var cityId = GetCityId(countryId);
-
-            var sut = new UpdateCityCommandHandler(context);
             var updatedCity = new UpdateCityCommand { Id = cityId, Name = GConst.ValidName, CountryId = GConst.InvalidId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCity, CancellationToken.None));
@@ -50,7 +51,6 @@
         [Fact]
         public async void CityShouldThrowNotFoundException()
         {
-            var sut = new UpdateCityCommandHandler(context);
             var updatedCity = new UpdateCityCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCity, CancellationToken.None));

@@ -1,24 +1,27 @@
 ﻿namespace Studio.Application.Tests.Appointments.Commands
 {
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using MediatR;
     using Studio.Application.Appointments.Commands.Delete;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
-    using Studio.Domain.Entities;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class DeleteAppointmentCommandHandlerTests : CommandTestBase
     {
+        private int appointmentId;
+        private DeleteAppointmentCommandHandler sut;
+
+        public DeleteAppointmentCommandHandlerTests()
+        {
+            appointmentId = GetAppointmentId(null, null, null);
+            sut = new DeleteAppointmentCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteAppointment()
         {
-            var appointmentId = GetAppointmentId(null, null, null);
-
-            var sut = new DeleteAppointmentCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteAppointmentCommand { Id = appointmentId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -29,8 +32,6 @@
         [Fact]
         public async Task AppointmentShouldТhrowNotFoundException()
         {
-            var sut = new DeleteAppointmentCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAppointmentCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

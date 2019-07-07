@@ -14,14 +14,20 @@
 
     public class CreateAddressCommandHandlerTests : CommandTestBase
     {
+        private int cityId;
+        private Mock<IMediator> mediator;
+        private CreateAddressCommandHandler sut;
+
+        public CreateAddressCommandHandlerTests()
+        {
+            cityId = GetCityId(null);
+            this.mediator = new Mock<IMediator>();
+            this.sut = new CreateAddressCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateAddress()
         {
-            int cityId = GetCityId(null);
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateAddressCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateAddressCommand { Street = GConst.ValidName, Number = GConst.ValidAddressNumber, CityId = cityId }, CancellationToken.None));
 
             Assert.Null(status.Exception);
@@ -32,11 +38,6 @@
         [Fact]
         public async Task ShouldThrowAddressFormatError()
         {
-            var cityId = GetCityId(null);
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateAddressCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAddressCommand { CityId = cityId }, CancellationToken.None));
 
             Assert.NotNull(status);
@@ -46,9 +47,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureException()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateAddressCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAddressCommand { Street = GConst.ValidName, Number = GConst.ValidAddressNumber, CityId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);

@@ -12,15 +12,21 @@
 
     public class DeleteEmployeeServiceCommandHandlerTests : CommandTestBase
     {
+        private int employeeId;
+        private int serviceId;
+        private DeleteEmployeeServiceCommandHandler sut;
+
+        public DeleteEmployeeServiceCommandHandlerTests()
+        {
+            employeeId = GetEmployeeId(null);
+            serviceId = GetServiceId(null);
+            sut = new DeleteEmployeeServiceCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteEmployeeService()
         {
-            var employeeId = GetEmployeeId(null);
-            var serviceId = GetServiceId(null);
-
             AddEmployeeService(serviceId, employeeId);
-
-            var sut = new DeleteEmployeeServiceCommandHandler(context);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteEmployeeServiceCommand { EmployeeId = employeeId, ServiceId = serviceId }, CancellationToken.None));
                         
@@ -31,8 +37,6 @@
         [Fact]
         public async Task EmployeeServiceShouldТhrowNotFoundException()
         {
-            var sut = new DeleteEmployeeServiceCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeServiceCommand { EmployeeId = GConst.InvalidId, ServiceId = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

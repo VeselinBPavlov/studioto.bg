@@ -13,12 +13,18 @@
 
     public class CreateContactFormCommandHandlerTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateContactFormCommandHandler sut;
+
+        public CreateContactFormCommandHandlerTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateContactFormCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateContactForm()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateContactFormCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateContactFormCommand { FirstName = GConst.ValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);

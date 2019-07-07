@@ -14,15 +14,22 @@
 
     public class CreateEmployeeServiceCommandHandlerTests : CommandTestBase
     {
+        private int employeeId;
+        private int serviceId;
+        private Mock<IMediator> mediator;
+        private CreateEmployeeServiceCommandHandler sut;
+
+        public CreateEmployeeServiceCommandHandlerTests()
+        {
+            employeeId = GetEmployeeId(null);
+            serviceId = GetServiceId(null);
+            mediator = new Mock<IMediator>();
+            sut = new CreateEmployeeServiceCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateEmployeeService()
         {
-            var employeeId = GetEmployeeId(null);
-            var serviceId = GetServiceId(null);
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateEmployeeServiceCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateEmployeeServiceCommand { Price = GConst.ValidPrice, EmployeeId = employeeId, ServiceId = serviceId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -34,11 +41,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidServiceId()
         {
-            var employeeId = GetEmployeeId(null);
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateEmployeeServiceCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateEmployeeServiceCommand { Price = GConst.ValidPrice, EmployeeId = employeeId, ServiceId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
@@ -48,11 +50,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidEmployeeId()
         {
-            var serviceId = GetServiceId(null);
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateEmployeeServiceCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateEmployeeServiceCommand { Price = GConst.ValidPrice, EmployeeId = GConst.InvalidId , ServiceId = serviceId }, CancellationToken.None));
 
             Assert.NotNull(status);

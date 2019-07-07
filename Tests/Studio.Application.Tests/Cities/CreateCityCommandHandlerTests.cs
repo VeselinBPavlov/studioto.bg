@@ -14,14 +14,20 @@
 
     public class CreateCityCommandHandlerTests : CommandTestBase
     {
+        private int countryId;
+        private Mock<IMediator> mediator;
+        private CreateCityCommandHandler sut;
+
+        public CreateCityCommandHandlerTests()
+        {
+            countryId = GetCountryId();
+            mediator = new Mock<IMediator>();
+            sut = new CreateCityCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateCity()
         {
-            var countryId = GetCountryId();
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateCityCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateCityCommand { Name = GConst.ValidName, CountryId = countryId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -33,9 +39,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForDeletedCountry()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateCityCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCityCommand { Name = GConst.ValidName, CountryId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);

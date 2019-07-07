@@ -14,15 +14,22 @@
 
     public class CreateLocationIndustryCommandHandlerTests : CommandTestBase
     {
+        private int locationId;
+        private int industryId;
+        private Mock<IMediator> mediator;
+        private CreateLocationIndustryCommandHandler sut;
+
+        public CreateLocationIndustryCommandHandlerTests()
+        {
+           locationId = GetLocationId(null, null);
+           industryId = GetIndustryId();
+           mediator = new Mock<IMediator>();
+           sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateLocationIndustry()
         {
-            var locationId = GetLocationId(null, null);
-            var industryId = GetIndustryId();
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateLocationIndustryCommand { Description = GConst.ValidName, LocationId = locationId, IndustryId = industryId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -30,15 +37,9 @@
             Assert.Equal(GConst.ValidCount, context.LocationIndustries.Count());
         }
 
-
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidIndustryId()
         {
-            var locationId = GetLocationId(null, null);
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateLocationIndustryCommand { Description = GConst.ValidName, LocationId = locationId, IndustryId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
@@ -48,11 +49,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidLocationId()
         {
-            var industryId = GetIndustryId();
-
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateLocationIndustryCommand { Description = GConst.ValidName, LocationId = GConst.InvalidId , IndustryId = industryId }, CancellationToken.None));
 
             Assert.NotNull(status);

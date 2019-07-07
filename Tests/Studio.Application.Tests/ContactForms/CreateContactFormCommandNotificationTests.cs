@@ -11,16 +11,22 @@ namespace Studio.Application.Tests.ContactForms.Commands
 
     public class CreateContactFormCommandNotificationTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateContactFormCommandHandler sut;
+
+        public CreateContactFormCommandNotificationTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateContactFormCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseContactFormCreatedNotification()
         {
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateContactFormCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateContactFormCommand { FirstName = GConst.ValidName}, CancellationToken.None);
             var ContactFormId = context.ContactForms.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateContactFormCommandNotification>(c => c.ContactFormId == ContactFormId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateContactFormCommandNotification>(c => c.ContactFormId == ContactFormId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

@@ -12,13 +12,18 @@
 
     public class DeleteCityCommandHandlerTests : CommandTestBase
     {
+        private int cityId;
+        private DeleteCityCommandHandler sut;
+
+        public DeleteCityCommandHandlerTests()
+        {
+            cityId = GetCityId(null);
+            sut = new DeleteCityCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteCity()
         {
-            var cityId = GetCityId(null);
-
-            var sut = new DeleteCityCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -28,11 +33,7 @@
         [Fact]
         public async Task CityShouldТhrowDeleteFailureException()
         {
-            var cityId = GetCityId(null);
-
             GetAddressId(cityId);
-
-            var sut = new DeleteCityCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
             
@@ -43,8 +44,6 @@
         [Fact]
         public async Task CityShouldТhrowNotFoundException()
         {
-            var sut = new DeleteCityCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

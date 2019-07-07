@@ -12,13 +12,20 @@
 
     public class DeleteEmployeeCommandHandlerTests : CommandTestBase
     {
+        private int employeeId;
+        private int serviceId;
+        private DeleteEmployeeCommandHandler sut;
+
+        public DeleteEmployeeCommandHandlerTests()
+        {
+            employeeId = GetEmployeeId(null);
+            serviceId = GetServiceId(null);
+            sut = new DeleteEmployeeCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteEmployee()
         {
-            var employeeId = GetEmployeeId(null);
-
-            var sut = new DeleteEmployeeCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteEmployeeCommand { Id = employeeId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -28,12 +35,8 @@
         [Fact]
         public async Task EmployeeShouldТhrowDeleteFailureExceptionReferenceAppointments()
         {
-            var employeeId = GetEmployeeId(null);
-
             GetAppointmentId(null, employeeId, null);
-
-            var sut = new DeleteEmployeeCommandHandler(context);
-            
+                        
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeCommand { Id = employeeId }, CancellationToken.None));
             
             Assert.NotNull(status);
@@ -43,13 +46,7 @@
         [Fact]
         public async Task EmployeeShouldТhrowDeleteFailureExceptionReferenceServices()
         {
-            var employeeId = GetEmployeeId(null);
-
-            var serviceId = GetServiceId(null);
-
             AddEmployeeService(serviceId, employeeId);
-
-            var sut = new DeleteEmployeeCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeCommand { Id = employeeId }, CancellationToken.None));
             
@@ -59,9 +56,7 @@
 
         [Fact]
         public async Task EmployeeShouldТhrowNotFoundException()
-        {
-            var sut = new DeleteEmployeeCommandHandler(context);           
-
+        {         
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

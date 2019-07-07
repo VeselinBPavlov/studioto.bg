@@ -12,22 +12,28 @@ namespace Studio.Application.Tests.LocationIndustries.Commands
 
     public class CreateLocationIndustryCommandNotificationTests : CommandTestBase
     {
+        private int locationId;
+        private int industryId;
+        private Mock<IMediator> mediator;
+        private CreateLocationIndustryCommandHandler sut;
+
+        public CreateLocationIndustryCommandNotificationTests()
+        {
+            locationId = GetLocationId(null, null);
+            industryId = GetIndustryId();
+            mediator = new Mock<IMediator>();
+            sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseLocationIndustryCreatedNotification()
         {
-            var locationId = GetLocationId(null, null);
-            var industryId = GetIndustryId();
-
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateLocationIndustryCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateLocationIndustryCommand { Description = GConst.ValidName, LocationId = locationId, IndustryId = industryId }, CancellationToken.None);
 
             locationId = context.LocationIndustries.SingleOrDefault(x => x.Description == GConst.ValidName).LocationId;
             industryId = context.LocationIndustries.SingleOrDefault(x => x.Description == GConst.ValidName).IndustryId;
 
-
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateLocationIndustryCommandNotification>(c => c.LocationId == locationId && c.IndustryId == industryId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateLocationIndustryCommandNotification>(c => c.LocationId == locationId && c.IndustryId == industryId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

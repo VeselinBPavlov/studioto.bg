@@ -12,19 +12,25 @@ namespace Studio.Application.Tests.Employees.Commands
 
     public class CreateEmployeeCommandNotificationTests : CommandTestBase
     {
+        private int locationId;
+        private Mock<IMediator> mediator;
+        private CreateEmployeeCommandHandler sut;
+
+        public CreateEmployeeCommandNotificationTests()
+        {
+            locationId = GetLocationId(null, null);
+            mediator = new Mock<IMediator>();
+            sut = new CreateEmployeeCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseEmployeeCreatedNotification()
         {
-            var locationId = GetLocationId(null, null);
-
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateEmployeeCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateEmployeeCommand { FirstName = GConst.ValidName, LastName = GConst.ValidName, LocationId = locationId }, CancellationToken.None);
 
             var employeeId = context.Employees.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateEmployeeCommandNotification>(c => c.EmployeeId == employeeId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateEmployeeCommandNotification>(c => c.EmployeeId == employeeId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

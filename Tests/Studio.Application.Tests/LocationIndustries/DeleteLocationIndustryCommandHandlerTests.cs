@@ -12,15 +12,21 @@
 
     public class DeleteLocationIndustryCommandHandlerTests : CommandTestBase
     {
+        private int locationId;
+        private int industryId;
+        private DeleteLocationIndustryCommandHandler sut;
+
+        public DeleteLocationIndustryCommandHandlerTests()
+        {
+            locationId = GetLocationId(null, null);
+            industryId = GetIndustryId();
+            sut = new DeleteLocationIndustryCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteLocationIndustry()
         {
-            var locationId = GetLocationId(null, null);
-            var industryId = GetIndustryId();
-
             AddLocationIndustry(industryId, locationId);
-
-            var sut = new DeleteLocationIndustryCommandHandler(context);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteLocationIndustryCommand { LocationId = locationId, IndustryId = industryId }, CancellationToken.None));
                         
@@ -31,8 +37,6 @@
         [Fact]
         public async Task LocationIndustrieshouldТhrowNotFoundException()
         {
-            var sut = new DeleteLocationIndustryCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteLocationIndustryCommand { LocationId = GConst.InvalidId, IndustryId = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

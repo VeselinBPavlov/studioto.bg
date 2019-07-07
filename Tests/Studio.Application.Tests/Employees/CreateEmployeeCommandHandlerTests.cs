@@ -14,14 +14,20 @@
 
     public class CreateEmployeeCommandHandlerTests : CommandTestBase
     {
+        private int locationId;
+        private Mock<IMediator> mediator;
+        private CreateEmployeeCommandHandler sut;
+
+        public CreateEmployeeCommandHandlerTests()
+        {
+            locationId = GetLocationId(null, null);
+            mediator = new Mock<IMediator>();
+            sut = new CreateEmployeeCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateEmployee()
         {
-            var locationId = GetLocationId(null, null);
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateEmployeeCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateEmployeeCommand { FirstName = GConst.ValidName, LastName = GConst.ValidName, LocationId = locationId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -33,9 +39,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForDeletedLocation()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateEmployeeCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateEmployeeCommand { FirstName = GConst.ValidName, LastName = GConst.ValidName, LocationId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);

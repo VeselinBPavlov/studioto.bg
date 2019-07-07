@@ -11,16 +11,22 @@ namespace Studio.Application.Tests.Industries.Commands
 
     public class CreateIndustryCommandNotificationTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateIndustryCommandHandler sut;
+
+        public CreateIndustryCommandNotificationTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateIndustryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseIndustryCreatedNotification()
         {
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateIndustryCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateIndustryCommand { Name = GConst.ValidName}, CancellationToken.None);
             var industryId = context.Industries.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateIndustryCommandNotification>(c => c.IndustryId == industryId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateIndustryCommandNotification>(c => c.IndustryId == industryId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

@@ -14,12 +14,18 @@
 
     public class CreateClientCommandHandlerTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateClientCommandHandler sut;
+
+        public CreateClientCommandHandlerTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateClientCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateClient()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateClientCommandHandler(context, mediator.Object);
-
             var status = Task.FromResult(await sut.Handle(new CreateClientCommand { CompanyName = GConst.ValidName }, CancellationToken.None));
 
             var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GConst.ValidName).Id;

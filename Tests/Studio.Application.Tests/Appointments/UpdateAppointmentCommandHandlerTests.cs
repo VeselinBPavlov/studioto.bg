@@ -11,16 +11,23 @@
     using Xunit;
 
     public class UpdateAppointmentCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int serviceId;
+        private int employeeId;
+        private int appointmentId;
+        private UpdateAppointmentCommandHandler sut;
+
+        public UpdateAppointmentCommandHandlerTests()
+        {
+            serviceId = GetServiceId(null);
+            employeeId = GetEmployeeId(null);
+            appointmentId = GetAppointmentId(serviceId, employeeId, null);
+            sut = new UpdateAppointmentCommandHandler(context);
+        }
+
         [Fact]
         public async void AppointmentShouldUpdateCorrect()
         {
-            var serviceId = GetServiceId(null);
-            var employeeId = GetEmployeeId(null);
-
-            var appointmentId = GetAppointmentId(serviceId, employeeId, null);
-
-            var sut = new UpdateAppointmentCommandHandler(context);
             var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, FirstName = GConst.ValidName, ServiceId = serviceId, EmployeeId = employeeId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedAppointment, CancellationToken.None));
@@ -35,12 +42,6 @@
         [Fact]
         public async void AppointmentShouldThrowReferenceExceptionForInvalidServiceId()
         {
-           var serviceId = GetServiceId(null);
-           var employeeId = GetEmployeeId(null);
-
-            var appointmentId = GetAppointmentId(serviceId, employeeId, null);
-
-            var sut = new UpdateAppointmentCommandHandler(context);
             var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, FirstName = GConst.ValidName, ServiceId = GConst.InvalidId, EmployeeId = employeeId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
@@ -52,12 +53,6 @@
         [Fact]
         public async void AppointmentShouldThrowReferenceExceptionForInvalidEmployeeId()
         {
-           var serviceId = GetServiceId(null);
-           var employeeId = GetEmployeeId(null);
-
-            var appointmentId = GetAppointmentId(serviceId, employeeId, null);
-
-            var sut = new UpdateAppointmentCommandHandler(context);
             var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, FirstName = GConst.ValidName, ServiceId = serviceId, EmployeeId = GConst.InvalidId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
@@ -69,7 +64,6 @@
         [Fact]
         public async void AppointmentShouldThrowNotFoundException()
         {
-            var sut = new UpdateAppointmentCommandHandler(context);
             var updatedAppointment = new UpdateAppointmentCommand { Id = GConst.InvalidId, FirstName = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));

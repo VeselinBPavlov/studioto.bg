@@ -11,15 +11,21 @@
     using Xunit;
 
     public class UpdateEmployeeCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int locationId;
+        private int employeeId;
+        private UpdateEmployeeCommandHandler sut;
+
+        public UpdateEmployeeCommandHandlerTests()
+        {
+            locationId = GetLocationId(null, null);
+            employeeId = GetEmployeeId(locationId);
+            sut = new UpdateEmployeeCommandHandler(context);
+        }
+
         [Fact]
         public async void EmployeeShouldUpdateCorrect()
         {
-            var locationId = GetLocationId(null, null);
-
-            var employeeId = GetEmployeeId(locationId);
-
-            var sut = new UpdateEmployeeCommandHandler(context);
             var updatedEmployee = new UpdateEmployeeCommand { Id = employeeId, FirstName = GConst.ValidName, LocationId = locationId };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedEmployee, CancellationToken.None));
@@ -34,11 +40,6 @@
         [Fact]
         public async void EmployeeShouldThrowReferenceException()
         {
-            var countryId = GetCountryId();
-
-            var employeeId = GetEmployeeId(countryId);
-
-            var sut = new UpdateEmployeeCommandHandler(context);
             var updatedEmployee = new UpdateEmployeeCommand { Id = employeeId, FirstName = GConst.ValidName, LocationId = GConst.InvalidId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedEmployee, CancellationToken.None));
@@ -50,7 +51,6 @@
         [Fact]
         public async void EmployeeShouldThrowNotFoundException()
         {
-            var sut = new UpdateEmployeeCommandHandler(context);
             var updatedEmployee = new UpdateEmployeeCommand { Id = GConst.InvalidId, FirstName = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedEmployee, CancellationToken.None));

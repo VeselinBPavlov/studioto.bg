@@ -12,13 +12,20 @@
 
     public class DeleteServiceCommandHandlerTests : CommandTestBase
     {
+        private int serviceId;
+        private int employeeId;
+        private DeleteServiceCommandHandler sut;
+
+        public DeleteServiceCommandHandlerTests()
+        {
+            serviceId = GetServiceId(null);
+            employeeId = GetEmployeeId(null);
+            sut = new DeleteServiceCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteService()
         {
-            var serviceId = GetServiceId(null);
-
-            var sut = new DeleteServiceCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -28,11 +35,7 @@
         [Fact]
         public async Task ServiceShouldТhrowDeleteFailureException()
         {
-            var serviceId = GetServiceId(null);
-
             GetAppointmentId(serviceId, null, null);
-
-            var sut = new DeleteServiceCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
             
@@ -43,13 +46,7 @@
         [Fact]
         public async Task ServiceShouldТhrowDeleteFailureExceptionEmployee()
         {
-            var serviceId = GetServiceId(null);
-
-            var employeeId = GetEmployeeId(null);
-
             AddEmployeeService(serviceId, employeeId);
-
-            var sut = new DeleteServiceCommandHandler(context);
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = serviceId }, CancellationToken.None));
 
@@ -60,8 +57,6 @@
         [Fact]
         public async Task ServiceShouldТhrowNotFoundException()
         {
-            var sut = new DeleteServiceCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteServiceCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

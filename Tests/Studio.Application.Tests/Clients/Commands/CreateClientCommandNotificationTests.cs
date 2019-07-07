@@ -11,16 +11,22 @@ namespace Studio.Application.Tests.Clients.Commands
 
     public class CreateClientCommandNotificationTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateClientCommandHandler sut;
+
+        public CreateClientCommandNotificationTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateClientCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseClientCreatedNotification()
         {
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateClientCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateClientCommand { CompanyName = GConst.ValidName}, CancellationToken.None);
             var clientId = context.Clients.SingleOrDefault(x => x.CompanyName == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateClientCommandNotification>(c => c.ClientId == clientId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateClientCommandNotification>(c => c.ClientId == clientId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

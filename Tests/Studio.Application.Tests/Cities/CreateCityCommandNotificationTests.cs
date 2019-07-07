@@ -12,19 +12,25 @@ namespace Studio.Application.Tests.Cities.Commands
 
     public class CreateCityCommandNotificationTests : CommandTestBase
     {
+        private int countryId;
+        private Mock<IMediator> mediator;
+        private CreateCityCommandHandler sut;
+
+        public CreateCityCommandNotificationTests()
+        {
+            countryId = GetCountryId();
+            mediator = new Mock<IMediator>();
+            sut = new CreateCityCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseCityCreatedNotification()
         {
-            var countryId = GetCountryId();
-
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateCityCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateCityCommand { Name = GConst.ValidName, CountryId = countryId }, CancellationToken.None);
 
             var cityId = context.Cities.SingleOrDefault(x => x.Name == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateCityCommandNotification>(c => c.CityId == cityId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateCityCommandNotification>(c => c.CityId == cityId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

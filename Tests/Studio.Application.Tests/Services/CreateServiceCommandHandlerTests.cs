@@ -14,14 +14,20 @@
 
     public class CreateServiceCommandHandlerTests : CommandTestBase
     {
+        private int industryId;
+        private Mock<IMediator> mediator;
+        private CreateServiceCommandHandler sut;
+
+        public CreateServiceCommandHandlerTests()
+        {
+            industryId = GetIndustryId();
+            mediator = new Mock<IMediator>();
+            sut = new CreateServiceCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateService()
         {
-            var industryId = GetIndustryId();
-            
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateServiceCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateServiceCommand { Name = GConst.ValidName, IndustryId = industryId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -33,9 +39,6 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForDeletedCountry()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateServiceCommandHandler(context, mediator.Object);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateServiceCommand { Name = GConst.ValidName, IndustryId = Common.GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);

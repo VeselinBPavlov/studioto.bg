@@ -11,13 +11,19 @@
     using Xunit;
 
     public class UpdateCountryCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int countryId;
+        private UpdateCountryCommandHandler sut;
+
+        public UpdateCountryCommandHandlerTests()
+        {
+            countryId = GetCountryId();
+            sut = new UpdateCountryCommandHandler(context);
+        }
+
         [Fact]
         public async void CountryShouldUpdateCorrect()
         {
-            var countryId = GetCountryId();
-
-            var sut = new UpdateCountryCommandHandler(context);
             var updatedCountry = new UpdateCountryCommand { Id = countryId, Name = GConst.UpdatedName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedCountry, CancellationToken.None));
@@ -32,7 +38,6 @@
         [Fact]
         public async void CountryShouldThrowNotFoundException()
         {
-            var sut = new UpdateCountryCommandHandler(context);
             var updatedCountry = new UpdateCountryCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedCountry, CancellationToken.None));

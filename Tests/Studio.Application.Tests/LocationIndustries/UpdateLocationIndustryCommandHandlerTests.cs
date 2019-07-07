@@ -11,16 +11,23 @@
     using Xunit;
 
     public class UpdateLocationIndustrieCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int locationId;
+        private int industryId;
+        private UpdateLocationIndustryCommandHandler sut;
+
+        public UpdateLocationIndustrieCommandHandlerTests()
+        {
+            locationId = GetLocationId(null, null);
+            industryId = GetIndustryId();
+            sut = new UpdateLocationIndustryCommandHandler(context);
+        }
+
         [Fact]
         public async void LocationIndustryShouldUpdateCorrect()
         {
-            var locationId = GetLocationId(null, null);
-            var industryId = GetIndustryId();
-
             AddLocationIndustry(industryId, locationId);
 
-            var sut = new UpdateLocationIndustryCommandHandler(context);
             var updatedLocationIndustrie = new UpdateLocationIndustryCommand { LocationId = locationId, IndustryId = industryId, Description = GConst.ValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedLocationIndustrie, CancellationToken.None));
@@ -37,7 +44,6 @@
         [Fact]
         public async void LocationIndustryShouldThrowNotFoundException()
         {
-            var sut = new UpdateLocationIndustryCommandHandler(context);
             var updatedLocationIndustry = new UpdateLocationIndustryCommand { LocationId = GConst.InvalidId, IndustryId = GConst.InvalidId, Description = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedLocationIndustry, CancellationToken.None));

@@ -11,16 +11,23 @@
     using Xunit;
 
     public class UpdateEmployeeServiceCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int employeeId;
+        private int serviceId;
+        private UpdateEmployeeServiceCommandHandler sut;
+
+        public UpdateEmployeeServiceCommandHandlerTests()
+        {
+            employeeId = GetEmployeeId(null);
+            serviceId = GetServiceId(null);
+            sut = new UpdateEmployeeServiceCommandHandler(context);
+        }
+
         [Fact]
         public async void EmployeeServiceShouldUpdateCorrect()
         {
-            var employeeId = GetEmployeeId(null);
-            var serviceId = GetServiceId(null);
-
             AddEmployeeService(serviceId, employeeId);
 
-            var sut = new UpdateEmployeeServiceCommandHandler(context);
             var updatedEmployeeService = new UpdateEmployeeServiceCommand { EmployeeId = employeeId, ServiceId = serviceId, Price = GConst.ValidPrice };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedEmployeeService, CancellationToken.None));
@@ -37,7 +44,6 @@
         [Fact]
         public async void EmployeeServiceShouldThrowNotFoundException()
         {
-            var sut = new UpdateEmployeeServiceCommandHandler(context);
             var updatedEmployeeService = new UpdateEmployeeServiceCommand { EmployeeId = GConst.InvalidId, ServiceId = GConst.InvalidId, Price = GConst.ValidPrice };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedEmployeeService, CancellationToken.None));

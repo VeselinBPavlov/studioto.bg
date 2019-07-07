@@ -13,12 +13,18 @@
 
     public class CreateIndustryCommandHandlerTests : CommandTestBase
     {
+        private Mock<IMediator> mediator;
+        private CreateIndustryCommandHandler sut;
+
+        public CreateIndustryCommandHandlerTests()
+        {
+            mediator = new Mock<IMediator>();
+            sut = new CreateIndustryCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public async Task ShouldCreateIndustry()
         {
-            var mediator = new Mock<IMediator>();
-            var sut = new CreateIndustryCommandHandler(context, mediator.Object);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateIndustryCommand { Name = GConst.ValidName }, CancellationToken.None));
            
             Assert.Null(status.Exception);

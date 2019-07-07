@@ -13,20 +13,25 @@ namespace Studio.Application.Tests.Appointments.Commands
 
     public class CreateAppointmentCommandNotificationTests : CommandTestBase
     {
+        private string userId;
+        private int serviceId;
+        private int employeeId;
+        private Mock<IMediator> mediator;
+        private CreateAppointmentCommandHandler sut;
+
+        public CreateAppointmentCommandNotificationTests()
+        {
+            AddAdministration();
+            userId = GetUserId();
+            serviceId = GetServiceId(null);
+            employeeId = GetEmployeeId(null);
+            mediator = new Mock<IMediator>();
+            sut = new CreateAppointmentCommandHandler(context, mediator.Object);
+        }
+
         [Fact]
         public void ShouldRaiseAppointmentCreatedNotification()
         {
-            AddAdministration();
-
-            var userId = GetUserId();
-
-            var serviceId = GetServiceId(null);
-
-            var employeeId = GetEmployeeId(null);
-
-            var mediatorMock = new Mock<IMediator>();
-            var sut = new CreateAppointmentCommandHandler(context, mediatorMock.Object);
-
             var result = sut.Handle(new CreateAppointmentCommand
             {
                 FirstName = GConst.ValidName,
@@ -39,7 +44,7 @@ namespace Studio.Application.Tests.Appointments.Commands
 
             var appointmentId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
 
-            mediatorMock.Verify(m => m.Publish(It.Is<CreateAppointmentCommandNotification>(c => c.AppointmentId == appointmentId), It.IsAny<CancellationToken>()), Times.Once);
+            mediator.Verify(m => m.Publish(It.Is<CreateAppointmentCommandNotification>(c => c.AppointmentId == appointmentId), It.IsAny<CancellationToken>()), Times.Once);
         }
     }    
 }

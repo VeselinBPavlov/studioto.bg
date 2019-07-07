@@ -12,13 +12,18 @@
 
     public class DeleteCountryCommandHandlerTests : CommandTestBase
     {
+        private int countryId;
+        private DeleteCountryCommandHandler sut;
+
+        public DeleteCountryCommandHandlerTests()
+        {
+            countryId = GetCountryId();
+            sut = new DeleteCountryCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldDeleteCountry()
         {
-            var countryId = GetCountryId();
-
-            var sut = new DeleteCountryCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
                         
             Assert.Null(status.Exception);
@@ -28,11 +33,7 @@
         [Fact]
         public async Task CountryShouldТhrowDeleteFailureException()
         {
-            var countryId = GetCountryId();
-
             GetCityId(countryId);
-
-            var sut = new DeleteCountryCommandHandler(context);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
             
@@ -44,8 +45,6 @@
         [Fact]
         public async Task CountryShouldТhrowNotFoundException()
         {
-            var sut = new DeleteCountryCommandHandler(context);           
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = GConst.InvalidId }, CancellationToken.None));
            
             Assert.NotNull(status);

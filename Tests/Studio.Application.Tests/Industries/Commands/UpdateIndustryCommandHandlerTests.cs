@@ -11,13 +11,19 @@
     using Xunit;
 
     public class UpdateIndustryCommandHandlerTests : CommandTestBase
-    {   
+    {
+        private int industryId;
+        private UpdateIndustryCommandHandler sut;
+
+        public UpdateIndustryCommandHandlerTests()
+        {
+            industryId = GetIndustryId();
+            sut = new UpdateIndustryCommandHandler(context);
+        }
+
         [Fact]
         public async void IndustryShouldUpdateCorrect()
         {
-            var industryId = GetIndustryId();
-
-            var sut = new UpdateIndustryCommandHandler(context);
             var updatedIndustry = new UpdateIndustryCommand { Id = industryId, Name = GConst.ValidName };
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedIndustry, CancellationToken.None));
@@ -32,7 +38,6 @@
         [Fact]
         public async void IndustryShouldThrowNotFoundException()
         {
-            var sut = new UpdateIndustryCommandHandler(context);
             var updatedIndustry = new UpdateIndustryCommand { Id = GConst.InvalidId, Name = GConst.ValidName };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedIndustry, CancellationToken.None));

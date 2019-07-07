@@ -11,15 +11,20 @@
 
     public class UpdateAddressCommandHandlerTests : CommandTestBase
     {
+        private int cityId;
+        private int addressId;
+        private UpdateAddressCommandHandler sut;
+
+        public UpdateAddressCommandHandlerTests()
+        {
+            cityId = GetCityId(null);
+            addressId = GetAddressId(cityId);
+            sut = new UpdateAddressCommandHandler(context);
+        }
+
         [Fact]
         public async Task ShouldUpdateAddress()
         {
-            var cityId = GetCityId(null);
-
-            var addressId = GetAddressId(cityId);
-
-            var sut = new UpdateAddressCommandHandler(context);
-
             var status = Task<Unit>.FromResult(await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = GConst.ValidName, Number = GConst.ValidAddressNumber, CityId = cityId }, CancellationToken.None));
            
             Assert.Null(status.Exception);
@@ -30,8 +35,6 @@
         [Fact]
         public async Task ShouldThrowNotFoundExceptionError()
         {           
-            var sut = new UpdateAddressCommandHandler(context);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
@@ -41,12 +44,6 @@
         [Fact]
         public async Task ShouldThrowUpdateFailureException()
         {
-            var cityId = GetCityId(null);
-
-            var addressId = GetAddressId(cityId);
-
-            var sut = new UpdateAddressCommandHandler(context);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, Street = GConst.ValidName, Number = GConst.ValidAddressNumber, CityId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
@@ -56,12 +53,6 @@
         [Fact]
         public async Task ShouldThrowAddressFormatError()
         {
-            var cityId = GetCityId(null);
-
-            var addressId = GetAddressId(cityId);
-
-            var sut = new UpdateAddressCommandHandler(context);
-
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new UpdateAddressCommand { Id = addressId, CityId = cityId }, CancellationToken.None));
 
             Assert.NotNull(status);
