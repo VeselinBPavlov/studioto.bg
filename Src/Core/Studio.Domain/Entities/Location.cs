@@ -1,5 +1,6 @@
 ﻿namespace Studio.Domain.Entities
 {
+    using Studio.Domain.Enumerations;
     using Studio.Domain.Interfaces;
     using System;
     using System.Collections.Generic;
@@ -17,6 +18,14 @@
         public string Name { get; set; }
 
         public bool IsOffice { get; set; }
+
+        public Workday StartDay { get; set; }
+
+        public Workday EndDay { get; set; }
+
+        public DateTime StartHour { get; set; }
+
+        public DateTime EndHour { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿namespace Studio.Application.Industries.Commands.Update
 {
     using MediatR;
+    using Studio.Application.Interfaces.Core;
 
-    public class UpdateIndustryCommand : IRequest
+    public class UpdateIndustryCommand : IRequest, IModifiedCommand
     {
         public int Id { get; set; }
 
