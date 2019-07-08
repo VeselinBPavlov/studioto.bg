@@ -16,16 +16,18 @@
     {
         private string userId;
         private int serviceId;
+        private int locationId;
         private int employeeId;
         private Mock<IMediator> mediator;
         private CreateAppointmentCommandHandler sut;
 
         public CreateAppointmentCommandHandlerTests()
         {
-            AddAdministration();
+            this.locationId = GetLocationId(null, null);
             this.userId = GetUserId();
             this.serviceId = GetServiceId(null);
-            this.employeeId = GetEmployeeId(null);
+            this.employeeId = GetEmployeeId(locationId);
+            AddEmployeeService(serviceId, employeeId);
             this.mediator = new Mock<IMediator>();
             this.sut = new CreateAppointmentCommandHandler(context, this.mediator.Object);
         }
@@ -134,7 +136,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value))), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]
@@ -152,7 +154,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value))), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException,  GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]

@@ -22,6 +22,7 @@
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.Price, GConst.ValidPrice);
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.EmployeeId, GConst.ValidId);
             createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.ServiceId, GConst.ValidId);
+            createValidator.ShouldNotHaveValidationErrorFor(createCommand => createCommand.DurationInMinutes, GConst.ValidServiceDuration);
         }
 
         [Fact]
@@ -31,6 +32,15 @@
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.Price, GConst.InvalidPrice);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.EmployeeId, GConst.ZeroId);
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.ServiceId, GConst.ZeroId);
+        }
+
+        [Fact]
+        public void EmployeeServiceShouldReturnErrorForInvalidDuration()
+        {
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.DurationInMinutes, null as string);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.DurationInMinutes, string.Empty);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.DurationInMinutes, GConst.ValidStartHour);
+            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.DurationInMinutes, GConst.ValidStartHour + GConst.ValidStartHour + GConst.ValidStartHour);
         }
     }
 }

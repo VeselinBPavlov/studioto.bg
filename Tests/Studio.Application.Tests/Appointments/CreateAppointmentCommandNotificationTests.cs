@@ -15,18 +15,20 @@ namespace Studio.Application.Tests.Appointments.Commands
     {
         private string userId;
         private int serviceId;
+        private int locationId;
         private int employeeId;
         private Mock<IMediator> mediator;
         private CreateAppointmentCommandHandler sut;
 
         public CreateAppointmentCommandNotificationTests()
         {
-            AddAdministration();
-            userId = GetUserId();
-            serviceId = GetServiceId(null);
-            employeeId = GetEmployeeId(null);
-            mediator = new Mock<IMediator>();
-            sut = new CreateAppointmentCommandHandler(context, mediator.Object);
+            this.locationId = GetLocationId(null, null);
+            this.userId = GetUserId();
+            this.serviceId = GetServiceId(null);
+            this.employeeId = GetEmployeeId(locationId);
+            AddEmployeeService(serviceId, employeeId);
+            this.mediator = new Mock<IMediator>();
+            this.sut = new CreateAppointmentCommandHandler(context, this.mediator.Object);
         }
 
         [Fact]

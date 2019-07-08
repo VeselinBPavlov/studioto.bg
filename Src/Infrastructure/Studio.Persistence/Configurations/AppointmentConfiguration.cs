@@ -32,6 +32,11 @@
                    .HasMaxLength(450)
                    .IsUnicode();
 
+            builder.Property(a => a.TimeBlockHelper)
+                   .HasMaxLength(20)
+                   .IsRequired()
+                   .IsUnicode();
+
             builder.HasOne(a => a.Employee)
                    .WithMany(e => e.Appointments)
                    .HasForeignKey(a => a.EmployeeId);

@@ -80,6 +80,9 @@ namespace Studio.Common
         public const string ValidPhone = "+359887889884";
         public const string ValidAddressNumber = "1";
         public const string ValidHour = "08:00";
+        public const string ValidStartHour = "8";
+        public const string ValidEndHour = "18";
+        public const string ValidServiceDuration = "30";
         public const string AllHoursBusy = "busy";
         public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
         public const string ReferenceExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are no existing {3} with id {4}.";

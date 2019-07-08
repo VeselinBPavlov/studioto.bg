@@ -50,10 +50,10 @@
 
             //CheckWorkingHours
             DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
-            DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.Administrations.Find(1).Value));
-            if (!(AppointmentHelper.IsInWorkingHours(context, start, end)))
+            DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
+            if (!(AppointmentHelper.IsInWorkingHours(context, employee, start, end)))
             {
-                throw new UpdateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value)));
+                throw new UpdateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
             }
 
             appointment.FirstName = request.FirstName;

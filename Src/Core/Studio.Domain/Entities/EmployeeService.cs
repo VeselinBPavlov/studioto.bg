@@ -7,7 +7,7 @@
     {
         public decimal Price { get; set; }
 
-        public TimeSpan Duration { get; set; }
+        public string DurationInMinutes { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

@@ -31,6 +31,7 @@
             }
 
             employeeService.Price = request.Price;
+            employeeService.DurationInMinutes = request.DurationInMinutes;            
             employeeService.ModifiedOn = DateTime.UtcNow;
 
             this.context.EmployeeServices.Update(employeeService);

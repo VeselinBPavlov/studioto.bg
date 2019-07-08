@@ -9,5 +9,7 @@
         public int ServiceId { get; set; }
 
         public decimal Price { get; set; }
+
+        public string DurationInMinutes { get; set; }
     }
 }

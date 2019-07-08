@@ -22,6 +22,7 @@
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Price, GConst.ValidPrice);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.EmployeeId, GConst.ValidId);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ServiceId, GConst.ValidId);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.DurationInMinutes, GConst.ValidServiceDuration);
         }
 
         [Fact]
@@ -31,6 +32,15 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Price, GConst.InvalidPrice);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EmployeeId, GConst.ZeroId);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ServiceId, GConst.ZeroId);
+        }
+
+        [Fact]
+        public void EmployeeServiceShouldReturnErrorForInvalidDuration()
+        {
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.DurationInMinutes, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.DurationInMinutes, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.DurationInMinutes, GConst.ValidStartHour);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.DurationInMinutes, GConst.ValidStartHour + GConst.ValidStartHour + GConst.ValidStartHour);
         }
     }
 }

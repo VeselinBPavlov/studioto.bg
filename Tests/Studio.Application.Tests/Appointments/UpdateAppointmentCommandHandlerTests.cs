@@ -13,6 +13,7 @@
 
     public class UpdateAppointmentCommandHandlerTests : CommandTestBase
     {
+        private int locationId;
         private int serviceId;
         private int employeeId;
         private int appointmentId;
@@ -20,11 +21,12 @@
 
         public UpdateAppointmentCommandHandlerTests()
         {
-            AddAdministration();
-            serviceId = GetServiceId(null);
-            employeeId = GetEmployeeId(null);
-            appointmentId = GetAppointmentId(serviceId, employeeId, null);
-            sut = new UpdateAppointmentCommandHandler(context);
+            this.locationId = GetLocationId(null, null);
+            this.serviceId = GetServiceId(null);
+            this.employeeId = GetEmployeeId(locationId);
+            AddEmployeeService(serviceId, employeeId);
+            this.appointmentId = GetAppointmentId(serviceId, employeeId, null);
+            this.sut = new UpdateAppointmentCommandHandler(context);
         }
 
         [Fact]
@@ -99,7 +101,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value))), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]
@@ -119,9 +121,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value))), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
-
-
     }
 }

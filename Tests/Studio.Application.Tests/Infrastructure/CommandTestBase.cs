@@ -75,7 +75,12 @@ namespace Studio.Application.Tests.Infrastructure
 
         public int GetLocationId(int? clientId, int? addressId)
         {
-            Location location = new Location { Name = GConst.ValidName };
+            Location location = new Location 
+            { 
+                Name = GConst.ValidName,  
+                StartHour = GConst.ValidStartHour,
+                EndHour = GConst.ValidEndHour
+            };
 
             if (clientId != null)
             {
@@ -200,7 +205,12 @@ namespace Studio.Application.Tests.Infrastructure
 
         public void AddEmployeeService(int serviceId, int employeeId)
         {
-            var employeeService = new EmployeeService { ServiceId = serviceId, EmployeeId = employeeId};
+            var employeeService = new EmployeeService 
+            { 
+                ServiceId = serviceId, 
+                EmployeeId = employeeId, 
+                DurationInMinutes = GConst.ValidServiceDuration
+            };
             context.EmployeeServices.Add(employeeService);
             context.SaveChanges();
         }

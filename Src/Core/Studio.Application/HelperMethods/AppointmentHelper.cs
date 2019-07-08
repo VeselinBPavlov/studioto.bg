@@ -14,7 +14,7 @@ namespace Studio.Application.HelperMethods
     {        
         //Appointment Creation Helper Methods
         //Checking if InsideWorkingHours + Not Weekend
-        public static bool IsInWorkingHours(IStudioDbContext context, DateTime start, DateTime end)
+        public static bool IsInWorkingHours(IStudioDbContext context, Employee employee, DateTime start, DateTime end)
         {
             // check Not Saturday or Sunday
             if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
@@ -22,7 +22,7 @@ namespace Studio.Application.HelperMethods
                 return false;
             }
             
-            TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(start, int.Parse(context.Administrations.Find(3).Value)));
+            TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(employee.Location.StartHour)), TimeTrim.Hour(start, int.Parse(employee.Location.EndHour)));
             return workingHours.HasInside(new TimeRange(start, end));
         }
 

@@ -44,6 +44,7 @@
                 ServiceId = service.Id,
                 Service = service,
                 Price = request.Price,
+                DurationInMinutes = request.DurationInMinutes,
                 CreatedOn = DateTime.UtcNow,
                 IsDeleted = false
             };

@@ -14,6 +14,14 @@
                    .HasMaxLength(100)
                    .IsUnicode()
                    .IsRequired();
+
+            builder.Property(c => c.StartHour)
+                   .HasMaxLength(20)
+                   .IsRequired();
+
+            builder.Property(c => c.EndHour)
+                   .HasMaxLength(20)
+                   .IsRequired();
             
             builder.HasOne(l => l.Address)
                    .WithOne(a => a.Location)

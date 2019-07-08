@@ -9,6 +9,8 @@
         public void Configure(EntityTypeBuilder<EmployeeService> builder)
         {
             builder.HasKey(es => new { es.EmployeeId, es.ServiceId });
+
+            builder.Property(es => es.DurationInMinutes).IsRequired();
         }
     }
 }
