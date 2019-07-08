@@ -18,7 +18,7 @@ namespace Studio.Application.Tests.Services.Commands
 
         public CreateServiceCommandNotificationTests()
         {
-            industryId = GetIndustryId();
+            industryId = ArrangeHelper.GetIndustryId(context);
             mediator = new Mock<IMediator>();
             sut = new CreateServiceCommandHandler(context, mediator.Object);
         }

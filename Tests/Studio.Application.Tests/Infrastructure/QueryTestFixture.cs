@@ -21,36 +21,6 @@ namespace Studio.Application.Tests.Infrastructure
         {
             StudioDBContextFactory.Destroy(this.context);
         }
-
-        public void AddCountries() 
-        {
-            var countries = new List<Country> 
-            { 
-                new Country { Name = "Bulgaria" },
-                new Country { Name = "France" },
-                new Country { Name = "England" },
-            };            
-            this.context.Countries.AddRange(countries);
-            this.context.SaveChanges();
-        }
-
-        public void AddCities() 
-        {
-            var country = new Country { Name = "Bulgaria" };
-            context.Countries.Add(country);
-            context.SaveChanges();
-
-            var cities = new List<City> 
-            { 
-                new City { Name = "Sofia", CountryId = country.Id },
-                new City { Name = "Varna", CountryId = country.Id},
-                new City { Name = "Burgas", CountryId = country.Id },
-            };            
-            this.context.Cities.AddRange(cities);
-            this.context.SaveChanges();
-        }
-
-
     }
 
     [CollectionDefinition("QueryCollection")]

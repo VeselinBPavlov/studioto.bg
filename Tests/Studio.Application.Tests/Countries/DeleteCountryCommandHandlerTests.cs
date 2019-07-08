@@ -17,7 +17,7 @@
 
         public DeleteCountryCommandHandlerTests()
         {
-            countryId = GetCountryId();
+            countryId = ArrangeHelper.GetCountryId(context);
             sut = new DeleteCountryCommandHandler(context);
         }
 
@@ -33,7 +33,7 @@
         [Fact]
         public async Task CountryShouldТhrowDeleteFailureException()
         {
-            GetCityId(countryId);
+            ArrangeHelper.GetCityId(context, countryId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCountryCommand { Id = countryId }, CancellationToken.None));
             

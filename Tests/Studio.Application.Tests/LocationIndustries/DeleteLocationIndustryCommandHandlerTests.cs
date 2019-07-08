@@ -18,15 +18,15 @@
 
         public DeleteLocationIndustryCommandHandlerTests()
         {
-            locationId = GetLocationId(null, null);
-            industryId = GetIndustryId();
+            locationId = ArrangeHelper.GetLocationId(context, null, null);
+            industryId = ArrangeHelper.GetIndustryId(context);
             sut = new DeleteLocationIndustryCommandHandler(context);
         }
 
         [Fact]
         public async Task ShouldDeleteLocationIndustry()
         {
-            AddLocationIndustry(industryId, locationId);
+            ArrangeHelper.AddLocationIndustry(context, industryId, locationId);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteLocationIndustryCommand { LocationId = locationId, IndustryId = industryId }, CancellationToken.None));
                         

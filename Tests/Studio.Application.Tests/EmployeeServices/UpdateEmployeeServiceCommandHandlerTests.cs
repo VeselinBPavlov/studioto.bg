@@ -18,15 +18,15 @@
 
         public UpdateEmployeeServiceCommandHandlerTests()
         {
-            employeeId = GetEmployeeId(null);
-            serviceId = GetServiceId(null);
+            employeeId = ArrangeHelper.GetEmployeeId(context, null);
+            serviceId = ArrangeHelper.GetServiceId(context, null);
             sut = new UpdateEmployeeServiceCommandHandler(context);
         }
 
         [Fact]
         public async void EmployeeServiceShouldUpdateCorrect()
         {
-            AddEmployeeService(serviceId, employeeId);
+            ArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
 
             var updatedEmployeeService = new UpdateEmployeeServiceCommand { EmployeeId = employeeId, ServiceId = serviceId, Price = GConst.ValidPrice };
 

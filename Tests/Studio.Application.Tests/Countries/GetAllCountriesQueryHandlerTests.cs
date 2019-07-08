@@ -17,7 +17,7 @@ namespace Studio.Application.Tests.Countries
         private GetAllCountriesListQueryHandler sut;
         public GetAllCountriesQueryHandlerTests()
         {
-            AddCountries();
+            ArrangeHelper.AddCountries(context);
             sut = new GetAllCountriesListQueryHandler(context, mapper);
         }
 

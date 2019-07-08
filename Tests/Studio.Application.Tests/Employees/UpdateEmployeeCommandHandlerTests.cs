@@ -18,8 +18,8 @@
 
         public UpdateEmployeeCommandHandlerTests()
         {
-            locationId = GetLocationId(null, null);
-            employeeId = GetEmployeeId(locationId);
+            locationId = ArrangeHelper.GetLocationId(context, null, null);
+            employeeId = ArrangeHelper.GetEmployeeId(context, locationId);
             sut = new UpdateEmployeeCommandHandler(context);
         }
 

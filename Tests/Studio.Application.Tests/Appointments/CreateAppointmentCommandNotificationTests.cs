@@ -22,11 +22,11 @@ namespace Studio.Application.Tests.Appointments.Commands
 
         public CreateAppointmentCommandNotificationTests()
         {
-            this.locationId = GetLocationId(null, null);
-            this.userId = GetUserId();
-            this.serviceId = GetServiceId(null);
-            this.employeeId = GetEmployeeId(locationId);
-            AddEmployeeService(serviceId, employeeId);
+            this.locationId = ArrangeHelper.GetLocationId(context, null, null);
+            this.userId = ArrangeHelper.GetUserId(context);
+            this.serviceId = ArrangeHelper.GetServiceId(context, null);
+            this.employeeId = ArrangeHelper.GetEmployeeId(context, locationId);
+            ArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
             this.mediator = new Mock<IMediator>();
             this.sut = new CreateAppointmentCommandHandler(context, this.mediator.Object);
         }

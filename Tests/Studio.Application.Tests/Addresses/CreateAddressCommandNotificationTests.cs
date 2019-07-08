@@ -18,7 +18,7 @@ namespace Studio.Application.Tests.Addresses.Commands
 
         public CreateAddressCommandNotificationTests()
         {
-            cityId = GetCityId(null);
+            cityId = ArrangeHelper.GetCityId(context, null);
             this.mediator = new Mock<IMediator>();
             this.sut = new CreateAddressCommandHandler(context, mediator.Object);
         }

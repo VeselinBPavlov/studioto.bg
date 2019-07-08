@@ -18,8 +18,8 @@
 
         public UpdateCityCommandHandlerTests()
         {
-            countryId = GetCountryId();
-            cityId = GetCityId(countryId);
+            countryId = ArrangeHelper.GetCountryId(context);
+            cityId = ArrangeHelper.GetCityId(context, countryId);
             sut = new UpdateCityCommandHandler(context);
         }
 

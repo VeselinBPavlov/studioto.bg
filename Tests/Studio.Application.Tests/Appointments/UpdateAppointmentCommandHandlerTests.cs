@@ -21,11 +21,11 @@
 
         public UpdateAppointmentCommandHandlerTests()
         {
-            this.locationId = GetLocationId(null, null);
-            this.serviceId = GetServiceId(null);
-            this.employeeId = GetEmployeeId(locationId);
-            AddEmployeeService(serviceId, employeeId);
-            this.appointmentId = GetAppointmentId(serviceId, employeeId, null);
+            this.locationId = ArrangeHelper.GetLocationId(context, null, null);
+            this.serviceId = ArrangeHelper.GetServiceId(context, null);
+            this.employeeId = ArrangeHelper.GetEmployeeId(context, locationId);
+            ArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
+            this.appointmentId = ArrangeHelper.GetAppointmentId(context, serviceId, employeeId, null);
             this.sut = new UpdateAppointmentCommandHandler(context);
         }
 

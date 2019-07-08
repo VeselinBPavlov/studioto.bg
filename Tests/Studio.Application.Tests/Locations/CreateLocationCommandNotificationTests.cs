@@ -19,8 +19,8 @@ namespace Studio.Application.Tests.Locations.Commands
 
         public CreateLocationCommandNotificationTests()
         {
-            clientId = GetClientId();
-            addressId = GetAddressId(null);
+            clientId = ArrangeHelper.GetClientId(context);
+            addressId = ArrangeHelper.GetAddressId(context, null);
             mediator = new Mock<IMediator>();
             sut = new CreateLocationCommandHandler(context, mediator.Object);
         }

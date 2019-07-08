@@ -21,8 +21,8 @@
 
         public CreateLocationIndustryCommandHandlerTests()
         {
-           locationId = GetLocationId(null, null);
-           industryId = GetIndustryId();
+           locationId = ArrangeHelper.GetLocationId(context, null, null);
+           industryId = ArrangeHelper.GetIndustryId(context);
            mediator = new Mock<IMediator>();
            sut = new CreateLocationIndustryCommandHandler(context, mediator.Object);
         }

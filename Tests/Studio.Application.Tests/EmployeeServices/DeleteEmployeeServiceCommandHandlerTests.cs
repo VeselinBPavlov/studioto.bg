@@ -18,15 +18,15 @@
 
         public DeleteEmployeeServiceCommandHandlerTests()
         {
-            employeeId = GetEmployeeId(null);
-            serviceId = GetServiceId(null);
+            employeeId = ArrangeHelper.GetEmployeeId(context, null);
+            serviceId = ArrangeHelper.GetServiceId(context, null);
             sut = new DeleteEmployeeServiceCommandHandler(context);
         }
 
         [Fact]
         public async Task ShouldDeleteEmployeeService()
         {
-            AddEmployeeService(serviceId, employeeId);
+            ArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
 
             var status = Task<Unit>.FromResult(await sut.Handle(new DeleteEmployeeServiceCommand { EmployeeId = employeeId, ServiceId = serviceId }, CancellationToken.None));
                         

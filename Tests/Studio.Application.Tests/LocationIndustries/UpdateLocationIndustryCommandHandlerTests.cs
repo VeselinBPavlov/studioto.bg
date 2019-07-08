@@ -18,15 +18,15 @@
 
         public UpdateLocationIndustrieCommandHandlerTests()
         {
-            locationId = GetLocationId(null, null);
-            industryId = GetIndustryId();
+            locationId = ArrangeHelper.GetLocationId(context, null, null);
+            industryId = ArrangeHelper.GetIndustryId(context);
             sut = new UpdateLocationIndustryCommandHandler(context);
         }
 
         [Fact]
         public async void LocationIndustryShouldUpdateCorrect()
         {
-            AddLocationIndustry(industryId, locationId);
+            ArrangeHelper.AddLocationIndustry(context, industryId, locationId);
 
             var updatedLocationIndustrie = new UpdateLocationIndustryCommand { LocationId = locationId, IndustryId = industryId, Description = GConst.ValidName };
 

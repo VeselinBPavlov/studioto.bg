@@ -20,7 +20,7 @@
 
         public CreateAddressCommandHandlerTests()
         {
-            cityId = GetCityId(null);
+            cityId = ArrangeHelper.GetCityId(context, null);
             this.mediator = new Mock<IMediator>();
             this.sut = new CreateAddressCommandHandler(context, mediator.Object);
         }

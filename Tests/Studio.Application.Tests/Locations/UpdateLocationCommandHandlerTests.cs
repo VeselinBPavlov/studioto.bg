@@ -19,9 +19,9 @@
 
         public UpdateLocationCommandHandlerTests()
         {
-            clientId = GetClientId();
-            addressId = GetAddressId(null);
-            locationId = GetLocationId(clientId, addressId);
+            clientId = ArrangeHelper.GetClientId(context);
+            addressId = ArrangeHelper.GetAddressId(context, null);
+            locationId = ArrangeHelper.GetLocationId(context, clientId, addressId);
             sut = new UpdateLocationCommandHandler(context);
         }
 

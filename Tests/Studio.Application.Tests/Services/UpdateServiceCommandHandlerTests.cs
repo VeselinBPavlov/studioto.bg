@@ -18,8 +18,8 @@
 
         public UpdateServiceCommandHandlerTests()
         {
-            industryId = GetIndustryId();
-            serviceId = GetServiceId(industryId);
+            industryId = ArrangeHelper.GetIndustryId(context);
+            serviceId = ArrangeHelper.GetServiceId(context, industryId);
             sut = new UpdateServiceCommandHandler(context);
         }
 

@@ -18,8 +18,8 @@
 
         public DeleteEmployeeCommandHandlerTests()
         {
-            employeeId = GetEmployeeId(null);
-            serviceId = GetServiceId(null);
+            employeeId = ArrangeHelper.GetEmployeeId(context, null);
+            serviceId = ArrangeHelper.GetServiceId(context, null);
             sut = new DeleteEmployeeCommandHandler(context);
         }
 
@@ -35,7 +35,7 @@
         [Fact]
         public async Task EmployeeShouldТhrowDeleteFailureExceptionReferenceAppointments()
         {
-            GetAppointmentId(null, employeeId, null);
+            ArrangeHelper.GetAppointmentId(context, null, employeeId, null);
                         
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeCommand { Id = employeeId }, CancellationToken.None));
             
@@ -46,7 +46,7 @@
         [Fact]
         public async Task EmployeeShouldТhrowDeleteFailureExceptionReferenceServices()
         {
-            AddEmployeeService(serviceId, employeeId);
+            ArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteEmployeeCommand { Id = employeeId }, CancellationToken.None));
             

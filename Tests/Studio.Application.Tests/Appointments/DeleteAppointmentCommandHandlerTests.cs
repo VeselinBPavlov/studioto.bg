@@ -15,7 +15,7 @@
 
         public DeleteAppointmentCommandHandlerTests()
         {
-            appointmentId = GetAppointmentId(null, null, null);
+            appointmentId = ArrangeHelper.GetAppointmentId(context, null, null, null);
             sut = new DeleteAppointmentCommandHandler(context);
         }
 

@@ -17,8 +17,8 @@
 
         public UpdateAddressCommandHandlerTests()
         {
-            cityId = GetCityId(null);
-            addressId = GetAddressId(cityId);
+            cityId = ArrangeHelper.GetCityId(context, null);
+            addressId = ArrangeHelper.GetAddressId(context, cityId);
             sut = new UpdateAddressCommandHandler(context);
         }
 

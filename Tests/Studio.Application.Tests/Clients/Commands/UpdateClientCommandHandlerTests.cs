@@ -17,7 +17,7 @@
 
         public UpdateClientCommandHandlerTests()
         {
-            clientId = GetClientId();
+            clientId = ArrangeHelper.GetClientId(context);
             sut = new UpdateClientCommandHandler(context);
         }
 

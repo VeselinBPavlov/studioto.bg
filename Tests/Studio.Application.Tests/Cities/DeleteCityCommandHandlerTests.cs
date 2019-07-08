@@ -17,7 +17,7 @@
 
         public DeleteCityCommandHandlerTests()
         {
-            cityId = GetCityId(null);
+            cityId = ArrangeHelper.GetCityId(context, null);
             sut = new DeleteCityCommandHandler(context);
         }
 
@@ -33,7 +33,7 @@
         [Fact]
         public async Task CityShouldТhrowDeleteFailureException()
         {
-            GetAddressId(cityId);
+            ArrangeHelper.GetAddressId(context, cityId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteCityCommand { Id = cityId }, CancellationToken.None));
             

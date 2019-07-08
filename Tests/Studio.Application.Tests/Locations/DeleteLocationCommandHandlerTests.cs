@@ -17,7 +17,7 @@
 
         public DeleteLocationCommandHandlerTests()
         {
-            locationId = GetLocationId(null, null);
+            locationId = ArrangeHelper.GetLocationId(context, null, null);
             sut = new DeleteLocationCommandHandler(context);
         }
 
@@ -33,7 +33,7 @@
         [Fact]
         public async Task LocationShouldТhrowDeleteFailureExceptionForInvalidClient()
         {
-            GetEmployeeId(locationId);
+            ArrangeHelper.GetEmployeeId(context, locationId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteLocationCommand { Id = locationId }, CancellationToken.None));
             
@@ -44,8 +44,8 @@
         [Fact]
         public async Task LocationShouldТhrowDeleteFailureExceptionForInvalidAddress()
         {
-            var industryId = GetIndustryId();
-            AddLocationIndustry(industryId, locationId);
+            var industryId = ArrangeHelper.GetIndustryId(context);
+            ArrangeHelper.AddLocationIndustry(context, industryId, locationId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteLocationCommand { Id = locationId }, CancellationToken.None));
             

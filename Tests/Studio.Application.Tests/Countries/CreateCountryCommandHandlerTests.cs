@@ -36,7 +36,7 @@
         [Fact]
         public async Task ShouldThrowCreateFailureException()
         {
-            var countryId = GetCountryId();
+            var countryId = ArrangeHelper.GetCountryId(context);
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateCountryCommand { Name = GConst.ValidName }, CancellationToken.None));
            

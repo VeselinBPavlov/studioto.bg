@@ -15,7 +15,7 @@
 
         public DeleteAddressCommandHandlerTests()
         {
-            addressId = GetAddressId(null);
+            addressId = ArrangeHelper.GetAddressId(context, null);
             sut = new DeleteAddressCommandHandler(context);            
         }
 
@@ -31,7 +31,7 @@
         [Fact]
         public async Task AddressShouldТhrowDeleteFailureException()
         {
-            GetLocationId(null, addressId);
+            ArrangeHelper.GetLocationId(context, null, addressId);
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteAddressCommand { Id = addressId }, CancellationToken.None));
             
             Assert.NotNull(status);

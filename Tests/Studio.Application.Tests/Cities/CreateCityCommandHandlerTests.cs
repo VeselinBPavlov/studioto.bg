@@ -20,7 +20,7 @@
 
         public CreateCityCommandHandlerTests()
         {
-            countryId = GetCountryId();
+            countryId = ArrangeHelper.GetCountryId(context);
             mediator = new Mock<IMediator>();
             sut = new CreateCityCommandHandler(context, mediator.Object);
         }

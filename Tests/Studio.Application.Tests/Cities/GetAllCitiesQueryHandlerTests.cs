@@ -17,7 +17,7 @@ namespace Studio.Application.Tests.Cities
         private GetAllCitiesListQueryHandler sut;
         public GetAllCitiesQueryHandlerTests()
         {
-            AddCities();
+            ArrangeHelper.AddCities(context);
             sut = new GetAllCitiesListQueryHandler(context, mapper);
         }
 

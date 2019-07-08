@@ -19,8 +19,8 @@ namespace Studio.Application.Tests.EmployeeServices.Commands
 
         public CreateEmployeeServiceCommandNotificationTests()
         {
-            employeeId = GetEmployeeId(null);
-            serviceId = GetServiceId(null);
+            employeeId = ArrangeHelper.GetEmployeeId(context, null);
+            serviceId = ArrangeHelper.GetServiceId(context, null);
             mediator = new Mock<IMediator>();
             sut = new CreateEmployeeServiceCommandHandler(context, mediator.Object);
         }

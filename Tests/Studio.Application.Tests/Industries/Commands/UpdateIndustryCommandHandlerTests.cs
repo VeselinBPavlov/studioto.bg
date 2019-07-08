@@ -17,7 +17,7 @@
 
         public UpdateIndustryCommandHandlerTests()
         {
-            industryId = GetIndustryId();
+            industryId = ArrangeHelper.GetIndustryId(context);
             sut = new UpdateIndustryCommandHandler(context);
         }
 

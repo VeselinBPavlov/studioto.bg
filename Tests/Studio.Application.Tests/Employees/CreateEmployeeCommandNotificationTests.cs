@@ -18,7 +18,7 @@ namespace Studio.Application.Tests.Employees.Commands
 
         public CreateEmployeeCommandNotificationTests()
         {
-            locationId = GetLocationId(null, null);
+            locationId = ArrangeHelper.GetLocationId(context, null, null);
             mediator = new Mock<IMediator>();
             sut = new CreateEmployeeCommandHandler(context, mediator.Object);
         }

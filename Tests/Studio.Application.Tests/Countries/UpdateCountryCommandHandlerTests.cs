@@ -17,7 +17,7 @@
 
         public UpdateCountryCommandHandlerTests()
         {
-            countryId = GetCountryId();
+            countryId = ArrangeHelper.GetCountryId(context);
             sut = new UpdateCountryCommandHandler(context);
         }
 
