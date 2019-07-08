@@ -10,6 +10,7 @@
     using System;
     using System.Linq;
     using Studio.Common;
+    using Studio.Application.HelperMethods;
 
     public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointmentCommand, Unit>
     {
@@ -44,10 +45,25 @@
                 throw new UpdateFailureException(GConst.Appointment, request.Id, string.Format(GConst.RefereceException, GConst.EmployeeLower, request.EmployeeId));
             }
 
+            //Set Time
+            request.ReservationTime = DateTime.Parse(request.TimeBlockHelper);
+
+            //CheckWorkingHours
+            DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
+            DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.Administrations.Find(1).Value));
+            if (!(AppointmentHelper.IsInWorkingHours(context, start, end)))
+            {
+                throw new UpdateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value)));
+            }
+
             appointment.FirstName = request.FirstName;
             appointment.LastName = request.LastName;
             appointment.Email = request.Email;
             appointment.Phone = request.Phone;
+            appointment.ReservationTime = request.ReservationTime;
+            appointment.ReservationDate = request.ReservationDate;
+            appointment.TimeBlockHelper = request.TimeBlockHelper;
+            appointment.Comment = request.Comment;
             appointment.ServiceId = request.ServiceId;
             appointment.EmployeeId = request.EmployeeId;
             appointment.ModifiedOn = DateTime.UtcNow;

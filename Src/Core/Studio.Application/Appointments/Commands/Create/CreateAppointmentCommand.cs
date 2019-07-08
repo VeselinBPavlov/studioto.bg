@@ -1,9 +1,10 @@
 ﻿namespace Studio.Application.Appointments.Commands.Create
 {
     using MediatR;
+    using Studio.Application.Interfaces.Core;
     using System;
 
-    public class CreateAppointmentCommand : IRequest
+    public class CreateAppointmentCommand : IRequest, IAppointmentCommand
     {
         public string FirstName { get; set; }
 

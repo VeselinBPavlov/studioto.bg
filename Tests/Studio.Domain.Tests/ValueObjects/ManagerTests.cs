@@ -51,7 +51,7 @@ namespace Studio.Domain.Tests.ValueObjects
         }
 
         [Fact]
-        public void ShouldThrowManagerInvalidExceptionForInvalidAdAccount()
+        public void ShouldThrowManagerInvalidExceptionForInvalidManager()
         {
             Assert.Throws<ManagerInvalidException>(() => (Manager) InvalidName);
         }

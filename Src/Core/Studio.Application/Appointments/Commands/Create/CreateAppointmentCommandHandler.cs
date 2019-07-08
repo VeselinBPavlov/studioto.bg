@@ -12,6 +12,8 @@
     using System.Globalization;
     using Microsoft.EntityFrameworkCore;
     using Itenso.TimePeriod;
+    using Studio.Application.HelperMethods;
+    using Studio.Application.Interfaces.Core;
 
     public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, Unit>
     {
@@ -79,13 +81,13 @@
             //CheckWorkingHours
             DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
             DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.Administrations.Find(1).Value));
-            if (!(IsInWorkingHours(start, end)))
+            if (!(AppointmentHelper.IsInWorkingHours(context, start, end)))
             {
                 throw new CreateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, int.Parse(context.Administrations.Find(2).Value), int.Parse(context.Administrations.Find(3).Value)));
             }
 
             //Check Appointment Clash
-            string check = ValidateNoAppoinmentClash(request);
+            string check = AppointmentHelper.ValidateNoAppoinmentClash(context, request);
             if (check != "")
             {
                 throw new CreateFailureException(GConst.Appointment, request.Email, check);
@@ -117,36 +119,36 @@
             return Unit.Value;
         }
 
-        private bool IsInWorkingHours(DateTime start, DateTime end)
-        {
-            // check Not Saturday or Sunday
-            if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
-            {
-                return false;
-            }
+        //private bool IsInWorkingHours(DateTime start, DateTime end)
+        //{
+        //    // check Not Saturday or Sunday
+        //    if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
+        //    {
+        //        return false;
+        //    }
 
-            TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(start, int.Parse(context.Administrations.Find(3).Value)));
-            return workingHours.HasInside(new TimeRange(start, end));
-        }
+        //    TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(start, int.Parse(context.Administrations.Find(3).Value)));
+        //    return workingHours.HasInside(new TimeRange(start, end));
+        //}
 
-        private string ValidateNoAppoinmentClash(CreateAppointmentCommand appointment)
-        {
-            var apps = context.Appointments.ToList();
-            var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId).ToList();
+        //private string ValidateNoAppoinmentClash(CreateAppointmentCommand appointment)
+        //{
+        //    var apps = context.Appointments.ToList();
+        //    var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId).ToList();
 
-            foreach (var item in appointments)
-            {
-                if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
-                {
-                    string errorMessage = String.Format(
-                        GConst.ReservedHourException,
-                        item.Employee.FirstName,
-                        item.ReservationDate.ToShortDateString(),
-                        item.ReservationTime.ToShortTimeString());
-                    return errorMessage;
-                }
-            }
-            return String.Empty;
-        }
+        //    foreach (var item in appointments)
+        //    {
+        //        if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
+        //        {
+        //            string errorMessage = String.Format(
+        //                GConst.ReservedHourException,
+        //                item.Employee.FirstName,
+        //                item.ReservationDate.ToShortDateString(),
+        //                item.ReservationTime.ToShortTimeString());
+        //            return errorMessage;
+        //        }
+        //    }
+        //    return String.Empty;
+        //}
     }
 }

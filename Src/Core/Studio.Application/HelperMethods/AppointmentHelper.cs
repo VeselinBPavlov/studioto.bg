@@ -4,6 +4,7 @@ using System.Linq;
 using Itenso.TimePeriod;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Studio.Application.Extensions;
+using Studio.Application.Interfaces.Core;
 using Studio.Application.Interfaces.Persistence;
 using Studio.Domain.Entities;
 
@@ -36,7 +37,7 @@ namespace Studio.Application.HelperMethods
             return workingHours.HasInside(block);
         }
 
-        public static string ValidateNoAppoinmentClash(IStudioDbContext context, Appointment appointment)
+        public static string ValidateNoAppoinmentClash(IStudioDbContext context, IAppointmentCommand appointment)
         {
             var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId);
                                

@@ -24,14 +24,11 @@ namespace Studio.Application.Tests.Infrastructure
 
         public int GetCityId(int? countryId)
         {
-            City city;
-            if (countryId == null)
+            City city = new City { Name = GConst.ValidName };
+
+            if (countryId != null)
             {
-                city = new City { Name = GConst.ValidName };
-            }
-            else
-            {
-                city = new City { Name = GConst.ValidName, CountryId = countryId.Value };
+                city.CountryId = countryId.Value;
             }
 
             context.Cities.Add(city);
@@ -49,13 +46,10 @@ namespace Studio.Application.Tests.Infrastructure
                 Number = GConst.ValidAddressNumber
             };
 
-            Address address;
-            if (cityId == null)
-            {
-                address = new Address { AddressFormat = AddressFormat.For(inputAddressData) };
-            }
-            else
-            {
+            Address address = new Address { AddressFormat = AddressFormat.For(inputAddressData) };
+
+            if (cityId != null)
+            {            
                 address = new Address { AddressFormat = AddressFormat.For(inputAddressData), CityId = cityId.Value };
             }
 
@@ -81,18 +75,16 @@ namespace Studio.Application.Tests.Infrastructure
 
         public int GetLocationId(int? clientId, int? addressId)
         {
-            Location location;
+            Location location = new Location { Name = GConst.ValidName };
+
             if (clientId != null)
             {
-                location = new Location { Name = GConst.ValidName, ClientId = clientId.Value };
+                location.ClientId = clientId.Value;
             }
-            else if (addressId != null)
+
+            if (addressId != null)
             {
-                location = new Location { Name = GConst.ValidName, AddressId = addressId.Value };
-            }
-            else
-            {
-                location = new Location { Name = GConst.ValidName };
+                location.AddressId = addressId.Value;
             }
 
             context.Locations.Add(location);
@@ -128,14 +120,11 @@ namespace Studio.Application.Tests.Infrastructure
 
         public int GetServiceId(int? industryId)
         {
-            Service service;
+            Service service = new Service { Name = GConst.ValidName };
+
             if (industryId != null)
             {
-                service = new Service { Name = GConst.ValidName, IndustryId = industryId.Value };
-            }
-            else
-            {
-                service = new Service { Name = GConst.ValidName };
+                service.IndustryId = industryId.Value;
             }
 
             context.Services.Add(service);
@@ -163,11 +152,16 @@ namespace Studio.Application.Tests.Infrastructure
             return employeeId;
         }
 
-        public void AddLocationIndustry(int industryId, int locationId)
+        public string GetUserId()
         {
-            var locationIndustry = new LocationIndustry { IndustryId = industryId, LocationId = locationId };
-            context.LocationIndustries.Add(locationIndustry);
+            var user = new StudioUser { UserName = GConst.ValidName, Email = GConst.ValidEmail };
+
+            context.StudioUsers.Add(user);
             context.SaveChanges();
+
+            var userId = context.StudioUsers.SingleOrDefault(x => x.UserName == GConst.ValidName).Id;
+
+            return userId;
         }
 
         public int GetAppointmentId(int? serviceId, int? employeeId, string userId)
@@ -211,17 +205,11 @@ namespace Studio.Application.Tests.Infrastructure
             context.SaveChanges();
         }
 
-        public string GetUserId()
+        public void AddLocationIndustry(int industryId, int locationId)
         {
-            var user = new StudioUser { UserName = GConst.ValidName, Email = GConst.ValidEmail };
-
-            context.StudioUsers.Add(user);
+            var locationIndustry = new LocationIndustry { IndustryId = industryId, LocationId = locationId };
+            context.LocationIndustries.Add(locationIndustry);
             context.SaveChanges();
-
-
-            var userId = context.StudioUsers.SingleOrDefault(x => x.UserName == GConst.ValidName).Id;
-
-            return userId;
         }
 
         public void AddAdministration()
