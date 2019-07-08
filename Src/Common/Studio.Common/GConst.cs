@@ -68,6 +68,7 @@ namespace Studio.Common
         public const int InvalidId = 100;
         public const int ValidId = 1;
         public const int ValidCount = 1;
+        public const int ValidQueryCount = 3;
         public const string ValidName = "CETech";
         public const decimal ValidPrice = 2.10M;
         public const decimal ZeroPrice = 0.00M;
