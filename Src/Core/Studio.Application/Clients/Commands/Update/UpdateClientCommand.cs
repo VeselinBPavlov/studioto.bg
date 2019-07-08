@@ -1,8 +1,9 @@
 ﻿namespace Studio.Application.Clients.Commands.Update
 {
     using MediatR;
+    using Studio.Application.Interfaces.Core;
 
-    public class UpdateClientCommand : IRequest
+    public class UpdateClientCommand : IRequest, IModifiedCommand
     {
         public int Id { get; set; }
 

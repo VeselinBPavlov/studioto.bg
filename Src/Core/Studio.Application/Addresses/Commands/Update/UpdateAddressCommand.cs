@@ -1,8 +1,9 @@
 ﻿namespace Studio.Application.Addresses.Commands.Update
 {
     using MediatR;
+    using Studio.Application.Interfaces.Core;
 
-    public class UpdateAddressCommand : IRequest
+    public class UpdateAddressCommand : IRequest, IModifiedCommand
     {
         public int Id { get; set; }
 
