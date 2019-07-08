@@ -52,6 +52,7 @@ namespace Studio.Common
         public const string Employees = "employees";
         public const string Cities = "cities";
         public const string Services = "services";
+        public const string Industries = "industries";
         public const string Appointments = "appointments";
         public const string Users = "users";
         public const string Create = "Creation";
@@ -83,6 +84,8 @@ namespace Studio.Common
         public const string ValidStartHour = "8";
         public const string ValidEndHour = "18";
         public const string ValidServiceDuration = "30";
+        public const string ValidStartDay = "1";
+        public const string ValidEndDay = "5";
         public const string AllHoursBusy = "busy";
         public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
         public const string ReferenceExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are no existing {3} with id {4}.";
