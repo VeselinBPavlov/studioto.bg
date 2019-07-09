@@ -13,10 +13,10 @@ namespace Studio.Application.Tests.Locations.Queries
     using Xunit;
 
     [Collection("QueryCollection")]
-    public class GetLocationsFilteredQueryHandlerTests : QueryTestFixture
+    public class GetFilteredLocationsQueryHandlerTests : QueryTestFixture
     {
         private GetFilteredLocationsListQueryHandler sut;
-        public GetLocationsFilteredQueryHandlerTests()
+        public GetFilteredLocationsQueryHandlerTests()
         {
             QueryArrangeHelper.AddLocations(context);
             sut = new GetFilteredLocationsListQueryHandler(context, mapper);

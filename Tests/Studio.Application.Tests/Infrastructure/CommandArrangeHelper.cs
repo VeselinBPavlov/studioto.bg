@@ -6,6 +6,7 @@ namespace Studio.Application.Tests.Infrastructure
     using Studio.Application.Interfaces.Persistence;
     using Studio.Common;
     using Studio.Domain.Entities;
+    using Studio.Domain.Enumerations;
     using Studio.Domain.ValueObjects;
     using Studio.Persistence.Context;
 
@@ -66,9 +67,13 @@ namespace Studio.Application.Tests.Infrastructure
         {
             Location location = new Location 
             { 
-                Name = GConst.ValidName,  
+                Name = GConst.ValidName,                  
                 StartHour = GConst.ValidStartHour,
-                EndHour = GConst.ValidEndHour
+                EndHour = GConst.ValidEndHour,
+                StartDay = Workday.Понеделник,
+                EndDay = Workday.Петък,
+                Slogan = GConst.ValidName,
+                Description = GConst.ValidName
             };
 
             if (clientId != null)
@@ -102,7 +107,7 @@ namespace Studio.Application.Tests.Infrastructure
 
         public static int GetIndustryId(StudioDbContext context)
         {
-            var industry = new Industry { Name = GConst.ValidName };
+            var industry = new Industry { Name = GConst.ValidName, Possition = GConst.ValidName };
 
             context.Industries.Add(industry);
             context.SaveChanges();

@@ -47,5 +47,19 @@
             context.Locations.AddRange(locations);
             context.SaveChanges();
         }
+
+        public static void AddEmployees(StudioDbContext context) 
+        {
+            var industryId = CommandArrangeHelper.GetIndustryId(context);
+            var serviceId = CommandArrangeHelper.GetServiceId(context, industryId);
+            var addressId = CommandArrangeHelper.GetAddressId(context, null);
+            var locationId = CommandArrangeHelper.GetLocationId(context, null, addressId);
+            
+            var employee = new Employee { Id = 1, FirstName = GConst.ValidName, LastName = GConst.ValidName, LocationId = locationId };
+            var employeeService = new EmployeeService { ServiceId = serviceId, Employee = employee };
+            context.Employees.Add(employee);
+            context.EmployeeServices.Add(employeeService);
+            context.SaveChanges();
+        }
     }
 }
