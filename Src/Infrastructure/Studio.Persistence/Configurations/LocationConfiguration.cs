@@ -15,6 +15,19 @@
                    .IsUnicode()
                    .IsRequired();
 
+            builder.Property(c => c.Phone)
+                   .HasMaxLength(20)
+                   .IsRequired();
+
+            builder.Property(c => c.Slogan)
+                   .HasMaxLength(200)
+                   .IsUnicode()
+                   .IsRequired();
+
+            builder.Property(c => c.Description)
+                   .IsUnicode()
+                   .IsRequired();
+
             builder.Property(c => c.StartHour)
                    .HasMaxLength(20)
                    .IsRequired();

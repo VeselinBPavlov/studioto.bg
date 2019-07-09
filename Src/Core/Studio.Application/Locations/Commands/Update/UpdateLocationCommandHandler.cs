@@ -47,6 +47,9 @@
 
             location.Name = request.Name;
             location.IsOffice = request.IsOffice;
+            location.Phone = request.Phone;
+            location.Slogan = request.Slogan;
+            location.Description = request.Description;
             location.StartDay = Enum.Parse<Workday>(request.StartDay);
             location.EndDay = Enum.Parse<Workday>(request.EndDay);
             location.StartHour = request.StartHour;

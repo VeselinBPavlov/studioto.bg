@@ -42,6 +42,9 @@
             {
                 Name = request.Name,
                 IsOffice = request.IsOffice,
+                Phone = request.Phone,
+                Slogan = request.Slogan,
+                Description = request.Description,
                 StartDay = Enum.Parse<Workday>(request.StartDay),
                 EndDay = Enum.Parse<Workday>(request.EndDay),
                 StartHour = request.StartHour,

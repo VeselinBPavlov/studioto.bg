@@ -19,6 +19,12 @@
 
         public bool IsOffice { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Slogan { get; set; }
+
+        public string Description { get; set; }
+
         public Workday StartDay { get; set; }
 
         public Workday EndDay { get; set; }

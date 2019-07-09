@@ -24,6 +24,9 @@
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.EndDay, GConst.ValidEndDay);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.StartHour, GConst.ValidStartHour);
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.EndHour, GConst.ValidEndHour);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.ValidPhone);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Slogan, GConst.ValidPhone);
+            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Description, GConst.ValidPhone);
         }
 
         [Fact]
@@ -34,16 +37,21 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndDay, null as string);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.StartHour, null as string);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndHour, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Slogan, null as string);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Description, null as string);
         }
 
         [Fact]
-        public void LocationShouldReturnErrorIfNameLongerThan100Characters()
+        public void LocationShouldReturnErrorIfNameLongerThan100CharactersAnd200ForSlogan()
         {
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Name, GConst.InvalidName);            
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.StartDay, GConst.InvalidName);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndDay, GConst.InvalidName);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.StartHour, GConst.InvalidName);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndHour, GConst.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Slogan, GConst.InvalidName + GConst.InvalidName);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.InvalidName);
         }
 
         [Fact]
@@ -54,6 +62,9 @@
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndDay, string.Empty);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.StartHour, string.Empty);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.EndHour, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Slogan, string.Empty);
+            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Description, string.Empty);
         }
     }
 }

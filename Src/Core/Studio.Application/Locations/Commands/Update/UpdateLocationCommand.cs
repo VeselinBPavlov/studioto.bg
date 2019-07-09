@@ -11,6 +11,12 @@
 
         public bool IsOffice { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Slogan { get; set; }
+
+        public string Description { get; set; }
+
         public string StartDay { get; set; }
 
         public string EndDay { get; set; }
