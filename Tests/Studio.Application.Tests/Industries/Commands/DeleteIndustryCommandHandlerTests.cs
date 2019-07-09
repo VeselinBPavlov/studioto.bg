@@ -18,7 +18,7 @@
 
         public DeleteIndustryCommandHandlerTests()
         {
-            industryId = ArrangeHelper.GetIndustryId(context);
+            industryId = CommandArrangeHelper.GetIndustryId(context);
             sut = new DeleteIndustryCommandHandler(context);
         }
 
@@ -34,7 +34,7 @@
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailureExceptionForConnectedService()
         {
-            ArrangeHelper.GetServiceId(context, industryId);
+            CommandArrangeHelper.GetServiceId(context, industryId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             
@@ -45,9 +45,9 @@
         [Fact]
         public async Task IndustryShouldТhrowDeleteFailueExceptionForConnectedLocation()
         {
-            var locationId = ArrangeHelper.GetLocationId(context, null, null);
+            var locationId = CommandArrangeHelper.GetLocationId(context, null, null);
 
-            ArrangeHelper.AddLocationIndustry(context, industryId, locationId);
+            CommandArrangeHelper.AddLocationIndustry(context, industryId, locationId);
             
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteIndustryCommand { Id = industryId }, CancellationToken.None));
             

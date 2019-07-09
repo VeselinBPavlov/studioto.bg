@@ -17,7 +17,7 @@
 
         public DeleteClientCommandHandlerTests()
         {
-            clientId = ArrangeHelper.GetClientId(context);
+            clientId = CommandArrangeHelper.GetClientId(context);
             sut = new DeleteClientCommandHandler(context);
         }
 
@@ -34,7 +34,7 @@
         [Fact]
         public async Task ShouldТhrowDeleteFailureException()
         {
-            ArrangeHelper.GetLocationId(context, clientId, null);           
+            CommandArrangeHelper.GetLocationId(context, clientId, null);           
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new DeleteClientCommand { Id = clientId }, CancellationToken.None));
             var message = status.Message;
