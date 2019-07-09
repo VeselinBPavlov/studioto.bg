@@ -1,6 +1,8 @@
 ﻿namespace Studio.Application.Tests.Infrastructure
 {
+    using Studio.Common;
     using Studio.Domain.Entities;
+    using Studio.Domain.Enumerations;
     using Studio.Persistence.Context;
     using System.Collections.Generic;
 
@@ -29,6 +31,20 @@
                 new City { Name = "Burgas", CountryId = countryId },
             };
             context.Cities.AddRange(cities);
+            context.SaveChanges();
+        }
+
+        public static void AddLocations(StudioDbContext context)
+        {
+            var cityId = CommandArrangeHelper.GetCityId(context, null);
+            
+            var addressIdFirst = CommandArrangeHelper.GetAddressId(context, cityId);
+
+            var locations = new List<Location>
+            {
+                new Location { Id = 1, Name = GConst.ValidName, StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", Phone = "0888777666", AddressId = addressIdFirst }
+            };
+            context.Locations.AddRange(locations);
             context.SaveChanges();
         }
     }
