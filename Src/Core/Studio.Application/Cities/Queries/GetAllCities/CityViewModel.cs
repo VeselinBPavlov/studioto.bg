@@ -13,6 +13,7 @@ namespace Studio.Application.Cities.Queries.GetAllCities
         public int CountryId { get; set; }
 
         public string CountryName { get; set; }
+
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<City, CityViewModel>()

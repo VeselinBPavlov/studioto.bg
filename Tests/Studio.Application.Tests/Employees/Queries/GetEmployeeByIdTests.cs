@@ -4,6 +4,7 @@ namespace Studio.Application.Tests.Employees.Queries
     using System.Threading;
     using System.Threading.Tasks;
     using Shouldly;
+    using Studio.Application.Cities.Queries.GetCityById;
     using Studio.Application.Cities.Queries.GetEmployeeById;
     using Studio.Application.Cities.Queries.GetEmployeesByLocation;
     using Studio.Application.Tests.Infrastructure;

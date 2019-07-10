@@ -9,6 +9,20 @@ namespace Studio.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Administrations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Value = table.Column<string>(maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Administrations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -47,6 +61,7 @@ namespace Studio.Persistence.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: true),
+                    IsTemporary = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -79,7 +94,7 @@ namespace Studio.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContactForm",
+                name: "ContactForms",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -87,7 +102,7 @@ namespace Studio.Persistence.Migrations
                     FirstName = table.Column<string>(maxLength: 100, nullable: false),
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Email = table.Column<string>(maxLength: 100, nullable: false),
-                    Topic = table.Column<string>(maxLength: 50, nullable: false),
+                    Topic = table.Column<string>(maxLength: 100, nullable: false),
                     Message = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
@@ -96,7 +111,7 @@ namespace Studio.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContactForm", x => x.Id);
+                    table.PrimaryKey("PK_ContactForms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,7 +120,7 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -246,7 +261,7 @@ namespace Studio.Persistence.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -328,6 +343,13 @@ namespace Studio.Persistence.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     IsOffice = table.Column<bool>(nullable: false),
+                    Phone = table.Column<string>(maxLength: 20, nullable: false),
+                    Slogan = table.Column<string>(maxLength: 200, nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    StartDay = table.Column<int>(nullable: false),
+                    EndDay = table.Column<int>(nullable: false),
+                    StartHour = table.Column<string>(maxLength: 20, nullable: false),
+                    EndHour = table.Column<string>(maxLength: 20, nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -417,7 +439,9 @@ namespace Studio.Persistence.Migrations
                     LastName = table.Column<string>(maxLength: 100, nullable: false),
                     Email = table.Column<string>(maxLength: 100, nullable: false),
                     Phone = table.Column<string>(maxLength: 100, nullable: false),
+                    ReservationDate = table.Column<DateTime>(nullable: false),
                     ReservationTime = table.Column<DateTime>(nullable: false),
+                    TimeBlockHelper = table.Column<string>(maxLength: 20, nullable: false),
                     Comment = table.Column<string>(maxLength: 450, nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
@@ -457,6 +481,7 @@ namespace Studio.Persistence.Migrations
                     EmployeeId = table.Column<int>(nullable: false),
                     ServiceId = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
+                    DurationInMinutes = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -544,6 +569,12 @@ namespace Studio.Persistence.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Countries_Name",
+                table: "Countries",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_LocationId",
                 table: "Employees",
                 column: "LocationId");
@@ -578,6 +609,9 @@ namespace Studio.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Administrations");
+
+            migrationBuilder.DropTable(
                 name: "Appointments");
 
             migrationBuilder.DropTable(
@@ -596,7 +630,7 @@ namespace Studio.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ContactForm");
+                name: "ContactForms");
 
             migrationBuilder.DropTable(
                 name: "EmployeeServices");

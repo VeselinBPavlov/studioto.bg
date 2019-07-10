@@ -15,7 +15,7 @@ namespace Studio.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -132,6 +132,27 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("Studio.Domain.Entities.Administration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(true);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Administrations");
+                });
+
             modelBuilder.Entity("Studio.Domain.Entities.Appointment", b =>
                 {
                     b.Property<int>("Id")
@@ -170,9 +191,16 @@ namespace Studio.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
+                    b.Property<DateTime>("ReservationDate");
+
                     b.Property<DateTime>("ReservationTime");
 
                     b.Property<int>("ServiceId");
+
+                    b.Property<string>("TimeBlockHelper")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(true);
 
                     b.Property<string>("UserId");
 
@@ -205,7 +233,7 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(100)
                         .IsUnicode(true);
 
                     b.HasKey("Id");
@@ -284,12 +312,12 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<string>("Topic")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .IsUnicode(true);
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactForm");
+                    b.ToTable("ContactForms");
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Country", b =>
@@ -308,10 +336,13 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(100)
                         .IsUnicode(true);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Countries");
                 });
@@ -358,6 +389,9 @@ namespace Studio.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("DurationInMinutes")
+                        .IsRequired();
 
                     b.Property<bool>("IsDeleted");
 
@@ -415,6 +449,16 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .IsUnicode(true);
+
+                    b.Property<int>("EndDay");
+
+                    b.Property<string>("EndHour")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("IsOffice");
@@ -425,6 +469,21 @@ namespace Studio.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .IsUnicode(true);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Slogan")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(true);
+
+                    b.Property<int>("StartDay");
+
+                    b.Property<string>("StartHour")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -547,6 +606,8 @@ namespace Studio.Persistence.Migrations
                         .IsUnicode(true);
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsTemporary");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50)

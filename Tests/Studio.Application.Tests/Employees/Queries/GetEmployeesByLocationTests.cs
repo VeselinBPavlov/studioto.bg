@@ -13,7 +13,7 @@ namespace Studio.Application.Tests.Employees.Queries
     {
         private GetEmployeesByLocationListQueryHandler sut;
         public GetEmployeesByLocationTests()
-        {            
+        {                        
             QueryArrangeHelper.AddEmployees(context);
             sut = new GetEmployeesByLocationListQueryHandler(context, mapper);
         }
