@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-
 namespace Studio.Application.Countries.Queries.GetAllCountries
 {
+    using System.Collections.Generic;
+
     public class CountriesListViewModel
     {
-        public IList<CountryViewModel> Countries { get; set; } 
+        public IList<CountryAllViewModel> Countries { get; set; } 
     }
 }

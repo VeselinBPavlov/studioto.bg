@@ -22,6 +22,34 @@
             context.SaveChanges();
         }
 
+        public static void AddServices(StudioDbContext context)
+        {
+            var industryId = CommandArrangeHelper.GetIndustryId(context);
+
+            var services = new List<Service>
+            {
+                new Service { Id = 1, Name = "Hairstyle", IndustryId = industryId },
+                new Service { Id = 2, Name = "Colormade", IndustryId = industryId },
+                new Service { Id = 3, Name = "Massage", IndustryId = industryId }
+            };
+
+            context.Services.AddRange(services);
+            context.SaveChanges();
+        }
+
+        public static void AddIndustries(StudioDbContext context)
+        {
+            var industries = new List<Industry>
+            {
+                new Industry { Id = 1, Name = "Hairstyle", Possition = "Styler" },
+                new Industry { Id = 2, Name = "Fitness", Possition = "Instructor" },
+                new Industry { Id = 3, Name = "Massage", Possition = "Мasseur" }
+            };
+
+            context.Industries.AddRange(industries);
+            context.SaveChanges();
+        }
+
         public static void AddAppointmentes(StudioDbContext context)
         {
             var userId = CommandArrangeHelper.GetUserId(context);

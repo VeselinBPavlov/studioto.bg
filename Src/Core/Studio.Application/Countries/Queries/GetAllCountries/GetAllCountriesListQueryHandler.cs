@@ -22,7 +22,7 @@ namespace Studio.Application.Countries.Queries.GetAllCountries
         {
             return new CountriesListViewModel
             {
-                Countries = await this.context.Countries.ProjectTo<CountryViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Countries = await this.context.Countries.ProjectTo<CountryAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

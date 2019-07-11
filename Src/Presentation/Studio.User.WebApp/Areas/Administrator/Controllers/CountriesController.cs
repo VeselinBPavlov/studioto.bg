@@ -11,16 +11,14 @@
     public class CountriesController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<CountriesListViewModel>> GetAll()
-        {
-            return View(await Mediator.Send(new GetAllCountriesListQuery()));
-        }
+        public async Task<ActionResult<CountriesListViewModel>> GetAll() 
+            => View(await Mediator.Send(new GetAllCountriesListQuery()));
+        
 
         [HttpGet]
-        public async Task<ActionResult<Studio.Application.Countries.Queries.GetCountryById.CountryViewModel>> Get(int id)
-        {
-            return View(await Mediator.Send(new GetCountryByIdQuery { Id = id }));
-        }
+        public async Task<ActionResult<CountryViewModel>> Get(int id) 
+            => View(await Mediator.Send(new GetCountryByIdQuery { Id = id }));
+        
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateCountryCommand command)
@@ -36,7 +34,7 @@
         {
             await Mediator.Send(command);
 
-            return NoContent();
+            return this.RedirectToAction();
         }        
 
         [HttpDelete]
@@ -44,7 +42,7 @@
         {
             await Mediator.Send(new DeleteCountryCommand { Id = id });
 
-            return NoContent();
+            return this.RedirectToAction();
         }
     }
 }

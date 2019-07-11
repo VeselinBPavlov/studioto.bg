@@ -6,14 +6,14 @@ using Studio.Domain.Entities;
 
 namespace Studio.Application.Countries.Queries.GetAllCountries
 {
-    public class CountryViewModel : IHaveCustomMapping
+    public class CountryAllViewModel : IHaveCustomMapping
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Country, CountryViewModel>();
+            configuration.CreateMap<Country, CountryAllViewModel>();
         }
     }
 }

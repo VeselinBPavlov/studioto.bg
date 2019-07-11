@@ -20,6 +20,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence.Context;
+    using Studio.Application.Interfaces.Persistence;
 
     public class Startup
     {
@@ -54,11 +55,17 @@
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
                     this.Configuration.GetConnectionString("StudioDBConnectionHome")));
+            
+            services.AddScoped<IStudioDbContext, StudioDbContext>();
+
             services.AddDefaultIdentity<StudioUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<StudioDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc() // (options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

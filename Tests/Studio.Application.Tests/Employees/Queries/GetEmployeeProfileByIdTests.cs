@@ -1,31 +1,31 @@
 namespace Studio.Application.Tests.Employees.Queries
 {
-    using Shouldly;
-    using Studio.Application.Appointments.Queries.GetAppointmentById;
-    using Studio.Application.Clients.Queries.GetClientById;
-    using Studio.Application.Employees.Queries.GetEmployeeById;
-    using Studio.Application.Tests.Infrastructure;
-    using Studio.Common;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Shouldly;
+    using Studio.Application.Cities.Queries.GetCityById;
+    using Studio.Application.Cities.Queries.GetEmployeesByLocation;
+    using Studio.Application.Employees.Queries.GetPageEmployeeById;
+    using Studio.Application.Tests.Infrastructure;
+    using Studio.Common;
     using Xunit;
 
-    public class GetEmployeeByIdTests : QueryTestFixture
+    public class GetEmployeeProfileByIdTests : QueryTestFixture
     {
         private GetEmployeeByIdQueryHandler sut;
-
-        public GetEmployeeByIdTests()
-        {
+        public GetEmployeeProfileByIdTests()
+        {            
             QueryArrangeHelper.AddEmployees(context);
             sut = new GetEmployeeByIdQueryHandler(context);
         }
 
         [Fact]
-        public async Task GetEmployeeByIdTest()
+        public async Task GetEmployeesByLocationTest()
         {
             var status = await sut.Handle(new GetEmployeeByIdQuery { Id = GConst.ValidId }, CancellationToken.None);
 
-            status.ShouldBeOfType<EmployeeViewModel>();
+            status.ShouldBeOfType<EmployeeProfileViewModel>();
             status.Id.ShouldBe(GConst.ValidId);
         }
 
