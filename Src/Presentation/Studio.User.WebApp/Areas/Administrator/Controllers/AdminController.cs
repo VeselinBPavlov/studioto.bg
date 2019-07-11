@@ -2,9 +2,15 @@ namespace Studio.User.WebApp.Areas.Administrator.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class AdminController : BaseController
+    [Area("Administrator")]
+    public class AdminController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Countries()
         {
             return View();
         }

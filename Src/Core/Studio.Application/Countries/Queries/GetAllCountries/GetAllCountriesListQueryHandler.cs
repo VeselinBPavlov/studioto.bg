@@ -1,5 +1,6 @@
 namespace Studio.Application.Countries.Queries.GetAllCountries
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -22,7 +23,7 @@ namespace Studio.Application.Countries.Queries.GetAllCountries
         {
             return new CountriesListViewModel
             {
-                Countries = await this.context.Countries.ProjectTo<CountryAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Countries = await this.context.Countries.Where(c => c.IsDeleted != true).ProjectTo<CountryAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

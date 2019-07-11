@@ -23,9 +23,9 @@
 
         public async Task<Unit> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
-            bool isCountryUnique = context.Countries.Any(c => c.Name == request.Name && c.IsDeleted != true);
+            bool isCountryNotUnique = context.Countries.Any(c => c.Name == request.Name);
 
-            if (isCountryUnique)
+            if (isCountryNotUnique)
             {
                 throw new CreateFailureException(GConst.Country, request.Name, string.Format(GConst.UniqueNameException, GConst.CountryLower));
             }

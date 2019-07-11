@@ -20,7 +20,11 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Persistence.Context;
+    using Studio.Application.Countries.Queries.GetAllCountries;
     using Studio.Application.Interfaces.Persistence;
+    using FluentValidation.AspNetCore;
+    using Studio.Application.Clients.Commands.Create;
+    using Studio.User.WebApp.FIlters;
 
     public class Startup
     {
@@ -42,6 +46,7 @@
             services.AddTransient<IDateTime, MachineDateTime>();
 
             // MediatR
+            services.AddMediatR(typeof(GetAllCountriesListQueryHandler).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
@@ -54,7 +59,7 @@
 
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("StudioDBConnectionHome")));
+                    this.Configuration.GetConnectionString("StudioDBConnectionWork")));
             
             services.AddScoped<IStudioDbContext, StudioDbContext>();
 
@@ -62,10 +67,12 @@
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<StudioDbContext>();
 
+            services.AddRouting(options => options.LowercaseUrls = true);
+            
             services
-                .AddMvc() // (options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-                //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>());
+                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
