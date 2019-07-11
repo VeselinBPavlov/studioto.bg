@@ -1,4 +1,4 @@
-namespace Studio.Application.Cities.Queries.GetEmployeeById
+namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 {
     using System.Linq;
     using System.Threading;
@@ -7,6 +7,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeeById
     using AutoMapper.QueryableExtensions;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
+    using Studio.Application.Employees.Queries.GetPageEmployeeById;
     using Studio.Application.Exceptions;
     using Studio.Application.Interfaces.Persistence;
     using Studio.Common;
@@ -14,23 +15,22 @@ namespace Studio.Application.Cities.Queries.GetEmployeeById
     public class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery, EmployeeProfileViewModel>
     {
         private readonly IStudioDbContext context;
-        private readonly IMapper mapper;
 
-        public GetEmployeeByIdQueryHandler(IStudioDbContext context, IMapper mapper)
+        public GetEmployeeByIdQueryHandler(IStudioDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
+
         public async Task<EmployeeProfileViewModel> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
         {
-            var employee = await this.context.Employees.FindAsync(request.Id);
+            var employee = await context.Employees.FindAsync(request.Id);
 
-            if (employee == null) 
+            if (employee == null)
             {
                 throw new NotFoundException(GConst.Employee, request.Id);
-            }            
+            }
 
-            return EmployeeProfileViewModel.Create(employee);            
+            return EmployeeProfileViewModel.Create(employee);
         }
     }
 }

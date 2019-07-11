@@ -15,7 +15,7 @@ namespace Studio.Application.Tests.Clients.Queries
         public GetClientByIdTests()
         {
             QueryArrangeHelper.AddClients(context);
-            sut = new GetClientByIdQueryHandler(context, mapper);
+            sut = new GetClientByIdQueryHandler(context);
         }
 
         [Fact]

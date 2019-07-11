@@ -15,13 +15,12 @@ namespace Studio.Application.Cities.Queries.GetCityById
     public class GetCityByIdQueryHandler : IRequestHandler<GetCityByIdQuery, CityViewModel>
     {
         private readonly IStudioDbContext context;
-        private readonly IMapper mapper;
 
-        public GetCityByIdQueryHandler(IStudioDbContext context, IMapper mapper)
+        public GetCityByIdQueryHandler(IStudioDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
+
         public async Task<CityViewModel> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
             var city = await context.Cities.FindAsync(request.Id);

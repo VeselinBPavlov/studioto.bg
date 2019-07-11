@@ -6,7 +6,7 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
     using Studio.Application.Interfaces.Mapping;
     using Studio.Domain.Entities;
 
-    public class LocationViewModel : IHaveCustomMapping
+    public class LocationAllViewModel : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -26,7 +26,7 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Location, LocationViewModel>()
+            configuration.CreateMap<Location, LocationAllViewModel>()
                 .ForMember(x => x.Address, y => y.MapFrom(src => src.Address.AddressFormat.ToString()))
                 .ForMember(x => x.StartDay, y => y.MapFrom(src => src.StartDay.ToString()))
                 .ForMember(x => x.EndDay, y => y.MapFrom(src => src.EndDay.ToString()));

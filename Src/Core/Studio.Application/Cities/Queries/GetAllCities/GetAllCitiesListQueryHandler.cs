@@ -22,7 +22,7 @@ namespace Studio.Application.Cities.Queries.GetAllCities
         {
             return new CitiesListViewModel
             {
-                Cities = await this.context.Cities.ProjectTo<CityViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Cities = await this.context.Cities.ProjectTo<CityAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

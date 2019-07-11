@@ -15,7 +15,7 @@ namespace Studio.Application.Tests.Countries.Queries
         public GetCountryByIdTests()
         {
             QueryArrangeHelper.AddCountries(context);
-            sut = new GetCountryByIdQueryHandler(context, mapper);
+            sut = new GetCountryByIdQueryHandler(context);
         }
 
         [Fact]

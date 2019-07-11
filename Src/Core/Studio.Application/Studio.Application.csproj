@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Addresses\Queries\" />
+    <Folder Include="Addresses\Queries\GetAllAddresses\" />
     <Folder Include="Countries\Commands\Delete\" />
     <Folder Include="Countries\Commands\Update\" />
     <Folder Include="Countries\Queries\" />

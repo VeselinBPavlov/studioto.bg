@@ -11,13 +11,12 @@ namespace Studio.Application.Countries.Queries.GetCountryById
     public class GetCountryByIdQueryHandler : IRequestHandler<GetCountryByIdQuery, CountryViewModel>
     {
         private readonly IStudioDbContext context;
-        private readonly IMapper mapper;
 
-        public GetCountryByIdQueryHandler(IStudioDbContext context, IMapper mapper)
+        public GetCountryByIdQueryHandler(IStudioDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
+
         public async Task<CountryViewModel> Handle(GetCountryByIdQuery request, CancellationToken cancellationToken)
         {
             var country = await context.Countries.FindAsync(request.Id);

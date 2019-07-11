@@ -4,7 +4,7 @@ namespace Studio.Application.Cities.Queries.GetAllCities
     using Studio.Application.Interfaces.Mapping;
     using Studio.Domain.Entities;
 
-    public class CityViewModel : IHaveCustomMapping
+    public class CityAllViewModel : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace Studio.Application.Cities.Queries.GetAllCities
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<City, CityViewModel>()
+            configuration.CreateMap<City, CityAllViewModel>()
                 .ForMember(x => x.CountryName, y => y.MapFrom(src => src.Country.Name));
         }
     }

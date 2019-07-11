@@ -22,6 +22,45 @@
             context.SaveChanges();
         }
 
+        public static void AddAppointmentes(StudioDbContext context)
+        {
+            var userId = CommandArrangeHelper.GetUserId(context);
+            var employeeId = CommandArrangeHelper.GetEmployeeId(context, null);
+            var serviceId = CommandArrangeHelper.GetServiceId(context, null);
+
+            var appointments = new List<Appointment>
+            {
+                new Appointment { Id = 1, FirstName = "Misho", LastName = "Mishov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
+                new Appointment { Id = 2, FirstName = "Pesho", LastName = "Peshov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
+                new Appointment { Id = 3, FirstName = "Gosho", LastName = "Goshov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  }
+            };
+
+            context.Appointments.AddRange(appointments);
+            context.SaveChanges();
+        }
+
+        public static void AddAddresses(StudioDbContext context)
+        {
+            InputAddressData addressData = new InputAddressData
+            {
+                Street = "Vasil Levski",
+                Number = "10",
+                Building = "3G",
+                Entrance = "B"
+            };
+
+            var cityId = CommandArrangeHelper.GetCityId(context, null);
+
+            var addresses = new List<Address>
+            {
+                new Address { Id = 1, AddressFormat = (AddressFormat)addressData, Longitude = 40.35M, Latitude = 56.23M, CityId = cityId },
+                new Address { Id = 2, AddressFormat = (AddressFormat)addressData, Longitude = 40.35M, Latitude = 56.23M, CityId = cityId },
+                new Address { Id = 3, AddressFormat = (AddressFormat)addressData,  Longitude = 40.35M, Latitude = 56.23M, CityId = cityId }
+            };
+            context.Addresses.AddRange(addresses);
+            context.SaveChanges();
+        }
+
         public static void AddClients(StudioDbContext context)
         {
             var clients = new List<Client>
@@ -51,7 +90,7 @@
         public static void AddLocations(StudioDbContext context)
         {
             var cityId = CommandArrangeHelper.GetCityId(context, null);
-            
+
             var addressIdFirst = CommandArrangeHelper.GetAddressId(context, cityId);
 
             var locations = new List<Location>
@@ -62,13 +101,13 @@
             context.SaveChanges();
         }
 
-        public static void AddEmployees(StudioDbContext context) 
+        public static void AddEmployees(StudioDbContext context)
         {
             var industryId = CommandArrangeHelper.GetIndustryId(context);
             var serviceId = CommandArrangeHelper.GetServiceId(context, industryId);
             var addressId = CommandArrangeHelper.GetAddressId(context, null);
             var locationId = CommandArrangeHelper.GetLocationId(context, null, addressId);
-            
+
             var employee = new Employee { Id = 1, FirstName = GConst.ValidName, LastName = GConst.ValidName, LocationId = locationId };
             context.Employees.Add(employee);
             var employeeService = new EmployeeService { ServiceId = serviceId, EmployeeId = employee.Id };

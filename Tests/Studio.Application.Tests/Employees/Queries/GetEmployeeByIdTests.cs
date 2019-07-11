@@ -5,8 +5,8 @@ namespace Studio.Application.Tests.Employees.Queries
     using System.Threading.Tasks;
     using Shouldly;
     using Studio.Application.Cities.Queries.GetCityById;
-    using Studio.Application.Cities.Queries.GetEmployeeById;
     using Studio.Application.Cities.Queries.GetEmployeesByLocation;
+    using Studio.Application.Employees.Queries.GetPageEmployeeById;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using Xunit;
@@ -17,7 +17,7 @@ namespace Studio.Application.Tests.Employees.Queries
         public GetEmployeeByIdTests()
         {            
             QueryArrangeHelper.AddEmployees(context);
-            sut = new GetEmployeeByIdQueryHandler(context, mapper);
+            sut = new GetEmployeeByIdQueryHandler(context);
         }
 
         [Fact]

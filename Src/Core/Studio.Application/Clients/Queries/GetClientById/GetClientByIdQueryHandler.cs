@@ -11,13 +11,12 @@ namespace Studio.Application.Clients.Queries.GetClientById
     public class GetClientByIdQueryHandler : IRequestHandler<GetClientByIdQuery, ClientViewModel>
     {
         private readonly IStudioDbContext context;
-        private readonly IMapper mapper;
 
-        public GetClientByIdQueryHandler(IStudioDbContext context, IMapper mapper)
+        public GetClientByIdQueryHandler(IStudioDbContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
+
         public async Task<ClientViewModel> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
             var client = await context.Clients.FindAsync(request.Id);

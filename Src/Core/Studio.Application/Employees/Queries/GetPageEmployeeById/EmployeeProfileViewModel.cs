@@ -1,4 +1,4 @@
-namespace Studio.Application.Cities.Queries.GetEmployeeById
+namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 {
     using System;
     using System.Collections.Generic;

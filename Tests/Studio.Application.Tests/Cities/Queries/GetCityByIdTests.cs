@@ -1,6 +1,7 @@
 namespace Studio.Application.Tests.Cities.Queries
 {
     using Shouldly;
+    using Studio.Application.Appointments.Queries.GetAppointmentById;
     using Studio.Application.Cities.Queries.GetCityById;
     using Studio.Application.Clients.Queries.GetClientById;
     using Studio.Application.Tests.Infrastructure;
@@ -16,7 +17,7 @@ namespace Studio.Application.Tests.Cities.Queries
         public GetCityByIdTests()
         {
             QueryArrangeHelper.AddCities(context);
-            sut = new GetCityByIdQueryHandler(context, mapper);
+            sut = new GetCityByIdQueryHandler(context);
         }
 
         [Fact]

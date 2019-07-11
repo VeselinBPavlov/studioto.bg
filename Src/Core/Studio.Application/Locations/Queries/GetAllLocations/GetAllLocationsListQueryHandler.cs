@@ -25,7 +25,7 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
         {
             return new LocationsListViewModel
             {
-                Locations = await this.context.Locations.OrderByDescending(x => x.CreatedOn).ProjectTo<LocationViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Locations = await this.context.Locations.OrderByDescending(x => x.CreatedOn).ProjectTo<LocationAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }
