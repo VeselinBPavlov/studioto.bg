@@ -23,6 +23,14 @@
                     </span>
                 </a>
             </li>
+            <li class="@Html.IsSelected(controller: "Admin")">
+                <a href="@Url.Action("Cities", "Admin")">
+                    <i class="fa fa-th"></i> <span>Cities</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
+                    </span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

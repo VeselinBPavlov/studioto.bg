@@ -14,5 +14,10 @@ namespace Studio.User.WebApp.Areas.Administrator.Controllers
         {
             return View();
         }
+
+        public IActionResult Cities()
+        {
+            return View();
+        }
     }
 }

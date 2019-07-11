@@ -23,7 +23,7 @@ namespace Studio.Application.Cities.Queries.GetCityById
 
         public async Task<CityViewModel> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
-            var city = await context.Cities.FindAsync(request.Id);
+            var city = await context.Cities.Include(c => c.Country).SingleOrDefaultAsync(c => c.Id == request.Id);
 
             if (city == null)
             {

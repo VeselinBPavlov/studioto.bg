@@ -15,39 +15,37 @@
         $.ajax({
 
             type: "GET",
-            url: "/api/todoItem/GettodoItem",
+            url: "/api/Cities/GetAll",
             success: function (result) {
-                if (result.length == 0) {
+                if (result['cities'].length == 0) {
                     $('table').addClass('hidden');
                 } else {
                     $('table').removeClass('hidden');
                     $('#tbody').children().remove();
 
-                    $(result).each(function (i) {
+                    $(result['cities']).each(function (i) {
                         var tbody = $('#tbody');
                         var tr = "<tr>";
-                        tr += "<td>" + result[i].id;
-                        tr += "<td>" + result[i].todo;
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result[i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result[i].id + ")>" + "Delete";
+                        tr += "<td>" + result['cities'][i].id;
+                        tr += "<td>" + result['cities'][i].name;
+                        tr += "<td>" + result['cities'][i].countryName;
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['cities'][i].id + ")>" + "Edit";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['cities'][i].id + ")>" + "Delete";
                         tbody.append(tr);
                     });
                 }
             }
-
         });
-
-
     }
 
     function CreateData() {
 
-        var formTodo = $('#formTodo').serialize();
+        var formCity = $('#formCity').serialize();
 
          $.ajax({
             type: "POST",
-            url: "/api/todoItem/posttodoitem",
-            data: formTodo,
+            url: "/api/Cities/Create",
+            data: formCity,
             success: function () {
 
                      Message("Data successfuly saved.");
@@ -58,16 +56,13 @@
                      Message("Data fail to saved.");
              }
           });
-
-
     }
 
     function DeleteData(id) {
 
         $.ajax({
             type: "DELETE",
-            url: "/api/todoItem/DeletetodoItem",
-            data: { id: id },
+            url: "/api/Cities/Delete/" + id,
             success: function () {
                 GenerateGridList();
                 Message('Delete success!');
@@ -76,7 +71,6 @@
                 Message('Delete failed!');
             }
         });
-
     }
 
     function EditData(id) {
@@ -85,33 +79,29 @@
 
             $.ajax({
                 type: "GET",
-                url: "/api/todoItem/GettodoItemById",
-                data: { id: id },
+                url: "/api/Cities/Get/" + id,
+                //data: { id: id },
                 success: function (result) {
 
                     $('#id').val(result.id);
-                    $('#todo').val(result.todo);
-                    $('#progress').val(result.progress);
+                    $('#name').val(result.name);
+                    $('#countryName').val(result.countryName);
 
                     $('#Create').addClass('hidden');
                     $('#Update').removeClass('hidden');
                 }
             });
-
         }
-
-
-
     }
 
     function UpdateData() {
 
-        var formTodo = $('#formTodo').serialize();
+        var formCity = $('#formCity').serialize();
 
         $.ajax({
             type: "PUT",
-            url: "/api/todoItem/PuttodoItem",
-            data: formTodo,
+            url: "/api/Cities/Update",
+            data: formCity,
             success: function () {
 
                 $('#Create').removeClass('hidden');
@@ -127,12 +117,10 @@
                 Message('Update failed!');
             }
         });
-
-
     }
 
         function ResetForm() {
-            $('#formTodo').each(function () {
+            $('#formCity').each(function () {
                 this.reset();
             });
         }
