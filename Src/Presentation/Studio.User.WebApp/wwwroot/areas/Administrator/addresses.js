@@ -15,9 +15,9 @@
         $.ajax({
 
             type: "GET",
-            url: "/api/Cities/GetAll",
+            url: "/api/Addresses/GetAll",
             success: function (result) {
-                if (result['cities'].length == 0) {
+                if (result['addresses'].length == 0) {
                     $('table').addClass('hidden');
                 } else {
                     $('table').removeClass('hidden');
@@ -25,31 +25,33 @@
 
                     
 
-                    $(result['cities']).each(function (i) {
+                    $(result['addresses']).each(function (i) {
                         var tbody = $('#tbody');
                         var tr = "<tr>";
-                        tr += "<td>" + result['cities'][i].id;
-                        tr += "<td>" + result['cities'][i].name;
-                        tr += "<td>" + result['cities'][i].countryName;
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['cities'][i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['cities'][i].id + ")>" + "Delete";
+                        tr += "<td>" + result['addresses'][i].id;
+                        tr += "<td>" + result['addresses'][i].address;
+                        tr += "<td>" + result['addresses'][i].longitude;
+                        tr += "<td>" + result['addresses'][i].latitude;
+                        tr += "<td>" + result['addresses'][i].cityName;
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['addresses'][i].id + ")>" + "Edit";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['addresses'][i].id + ")>" + "Delete";
                         tbody.append(tr);
                     });
                 }
             }
         });
         
-        FillCountriesDropdown();
+        FillCitiesDropdown();
     }
 
     function CreateData() {
 
-        var formCity = $('#formCity').serialize();
+        var formAddress = $('#formAddress').serialize();
 
          $.ajax({
             type: "POST",
-            url: "/api/Cities/Create",
-            data: formCity,
+            url: "/api/Addresses/Create",
+            data: formAddress,
             success: function () {
 
                      Message("Data successfuly saved.");
@@ -66,7 +68,7 @@
 
         $.ajax({
             type: "DELETE",
-            url: "/api/Cities/Delete/" + id,
+            url: "/api/Addresses/Delete/" + id,
             success: function () {
                 GenerateGridList();
                 Message('Delete success!');
@@ -82,17 +84,26 @@
         
         if (id != null && id > 0) {
             
-            FillCountriesDropdown()
+            FillCitiesDropdown()
 
             $.ajax({
                 type: "GET",
-                url: "/api/Cities/Get/" + id,
+                url: "/api/Addresses/Get/" + id,
                 //data: { id: id },
                 success: function (result) {
 
                     $('#id').val(result.id);
-                    $('#name').val(result.name);
-                    $('#countryId').val(result.countryId).prop('selected', true);
+                    $('#street').val(result.street);
+                    $('#number').val(result.number);
+                    $('#building').val(result.building);
+                    $('#entrance').val(result.entrance);
+                    $('#floor').val(result.floor);
+                    $('#apartment').val(result.apartment);
+                    $('#district').val(result.district);
+                    $('#longitude').val(result.longitude);                  
+                    $('#latitude').val(result.latitude);                 
+
+                    $('#cityId').val(result.cityId).prop('selected', true);
 
                     $('#Create').addClass('hidden');
                     $('#Update').removeClass('hidden');
@@ -103,12 +114,12 @@
 
     function UpdateData() {
 
-        var formCity = $('#formCity').serialize();
+        var formAddress = $('#formAddress').serialize();
 
         $.ajax({
             type: "PUT",
-            url: "/api/Cities/Update",
-            data: formCity,
+            url: "/api/Addresses/Update",
+            data: formAddress,
             success: function () {
 
                 $('#Create').removeClass('hidden');
@@ -127,7 +138,7 @@
     }
 
         function ResetForm() {
-            $('#formCity').each(function () {
+            $('#formAddress').each(function () {
                 this.reset();
             });
         }
@@ -136,17 +147,17 @@
             toastr.success(text)
         }
 
-        function FillCountriesDropdown() {
+        function FillCitiesDropdown() {
             $.ajax({
 
                 type: "GET",
-                url: "/api/Countries/GetAll",
+                url: "/api/Cities/GetAll",
                 success: function (result) {
-                    var options = $('#countryId');
+                    var options = $('#cityId');
                     options.empty();
                     //don't forget error handling!
-                    $(result['countries']).each(function (i) {
-                        options.append($("<option />").val(result['countries'][i].id).text(result['countries'][i].name));
+                    $(result['cities']).each(function (i) {
+                        options.append($("<option />").val(result['cities'][i].id).text(result['cities'][i].name));
                     });
                 }
             });

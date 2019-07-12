@@ -8,7 +8,19 @@ namespace Studio.Application.Addresses.Queries.GetAddressById
     {
         public int Id { get; set; }
 
-        public string AddressFormat { get; set; }
+        public string Street { get; set; }
+
+        public string Number { get; set; }
+
+        public string Building { get; set; }
+
+        public string Entrance { get; set; }
+
+        public string Floor { get; set; }
+
+        public string Apartment { get; set; }
+
+        public string District { get; set; }
 
         public decimal Latitude { get; set; }
 
@@ -27,7 +39,13 @@ namespace Studio.Application.Addresses.Queries.GetAddressById
                 return address => new AddressViewModel
                 {
                     Id = address.Id,
-                    AddressFormat = address.AddressFormat.ToString(),
+                    Street = address.AddressFormat.Street,
+                    Number = address.AddressFormat.Number,
+                    Building = address.AddressFormat.Building,
+                    Entrance = address.AddressFormat.Entrance,
+                    Floor = address.AddressFormat.Floor,
+                    Apartment = address.AddressFormat.Apartment,
+                    District = address.AddressFormat.District,
                     Longitude = address.Longitude,
                     Latitude = address.Latitude,
                     CityId = address.CityId,

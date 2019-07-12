@@ -16,6 +16,14 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="@Html.IsSelected(controller: "Admin")">
+                <a href="@Url.Action("Addresses", "Admin")">
+                    <i class="fa fa-th"></i> <span>Addresses</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
+                    </span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Admin")">
                 <a href="@Url.Action("Countries", "Admin")">
                     <i class="fa fa-th"></i> <span>Countries</span>
                     <span class="pull-right-container">

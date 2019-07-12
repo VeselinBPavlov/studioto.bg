@@ -19,5 +19,15 @@ namespace Studio.User.WebApp.Areas.Administrator.Controllers
         {
             return View();
         }
+
+        public IActionResult Addresses() 
+        {
+            return this.View();
+        }
+
+        public IActionResult Employees() 
+        {
+            return this.View();
+        }
     }
 }
