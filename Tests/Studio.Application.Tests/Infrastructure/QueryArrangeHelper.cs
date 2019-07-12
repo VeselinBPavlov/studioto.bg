@@ -119,11 +119,13 @@
         {
             var cityId = CommandArrangeHelper.GetCityId(context, null);
 
-            var addressIdFirst = CommandArrangeHelper.GetAddressId(context, cityId);
+            var addressId = CommandArrangeHelper.GetAddressId(context, cityId);
+
+            var clientId = CommandArrangeHelper.GetClientId(context);
 
             var locations = new List<Location>
             {
-                new Location { Id = 1, Name = GConst.ValidName, StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", Phone = "0888777666", AddressId = addressIdFirst }
+                new Location { Id = 1, Name = GConst.ValidName, StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", Phone = "0888777666", AddressId = addressId, ClientId = clientId }
             };
             context.Locations.AddRange(locations);
             context.SaveChanges();
