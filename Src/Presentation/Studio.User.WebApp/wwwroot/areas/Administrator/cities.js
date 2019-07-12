@@ -23,6 +23,8 @@
                     $('table').removeClass('hidden');
                     $('#tbody').children().remove();
 
+                    
+
                     $(result['cities']).each(function (i) {
                         var tbody = $('#tbody');
                         var tr = "<tr>";
@@ -36,6 +38,8 @@
                 }
             }
         });
+        
+        FillCountriesDropdown();
     }
 
     function CreateData() {
@@ -75,7 +79,10 @@
 
     function EditData(id) {
 
+        
         if (id != null && id > 0) {
+            
+            FillCountriesDropdown()
 
             $.ajax({
                 type: "GET",
@@ -85,7 +92,7 @@
 
                     $('#id').val(result.id);
                     $('#name').val(result.name);
-                    $('#countryName').val(result.countryName);
+                    $('#countryId').val(result.countryId).prop('selected', true);
 
                     $('#Create').addClass('hidden');
                     $('#Update').removeClass('hidden');
@@ -127,6 +134,21 @@
 
         function Message(text) {
             toastr.success(text)
+        }
+
+        function FillCountriesDropdown() {
+            $.ajax({
+
+                type: "GET",
+                url: "/api/Countries/GetAll",
+                success: function (result) {
+                    var options = $('#countryId');
+                    //don't forget error handling!
+                    $(result['countries']).each(function (i) {
+                        options.append($("<option />").val(result['countries'][i].id).text(result['countries'][i].name));
+                    });
+                }
+            });
         }
 
 });

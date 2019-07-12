@@ -28,7 +28,7 @@
 
         // POST: api/Cities/Create
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]CreateCityCommand command)
+        public async Task<ActionResult> Create([FromForm]CreateCityCommand command)
         {
             await Mediator.Send(command);
 
@@ -38,7 +38,7 @@
 
         // PUT: api/Cities/Update/5
         [HttpPut]
-        public async Task<IActionResult> Update([FromForm]UpdateCityCommand command)
+        public async Task<ActionResult> Update([FromForm]UpdateCityCommand command)
         {
             await Mediator.Send(command);
 
@@ -47,7 +47,7 @@
 
         // DELETE: api/Cities/Delet/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteCityCommand { Id = id });
 
