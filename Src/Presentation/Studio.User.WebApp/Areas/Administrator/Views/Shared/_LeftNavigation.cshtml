@@ -63,6 +63,22 @@
                     </span>
                 </a>
             </li>
+            <li class="@Html.IsSelected(controller: "Admin")">
+                <a href="@Url.Action("Industries", "Admin")">
+                    <i class="fa fa-th"></i> <span>Industries</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
+                    </span>
+                </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Admin")">
+                <a href="@Url.Action("Services", "Admin")">
+                    <i class="fa fa-th"></i> <span>Services</span>
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-green">CRUD</small>
+                    </span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
