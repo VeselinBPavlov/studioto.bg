@@ -22,6 +22,28 @@
             context.SaveChanges();
         }
 
+        public static void AddLocationIndustries(StudioDbContext context)
+        {
+            var locationId = CommandArrangeHelper.GetLocationId(context, null, null);
+            var industryId = CommandArrangeHelper.GetIndustryId(context);
+
+            var locationIndustry = new LocationIndustry { LocationId = locationId, IndustryId = industryId, Description = "Good!" };
+
+            context.LocationIndustries.Add(locationIndustry);
+            context.SaveChanges();
+        }
+
+        public static void AddEmployeeServices(StudioDbContext context)
+        {
+            var employeeId = CommandArrangeHelper.GetEmployeeId(context, null);
+            var serviceId = CommandArrangeHelper.GetServiceId(context, null);
+
+            var employeeService = new EmployeeService { EmployeeId = employeeId, ServiceId = serviceId, Price = 40.00M, DurationInMinutes = "30" };
+
+            context.EmployeeServices.AddRange(employeeService);
+            context.SaveChanges();
+        }
+
         public static void AddServices(StudioDbContext context)
         {
             var industryId = CommandArrangeHelper.GetIndustryId(context);
