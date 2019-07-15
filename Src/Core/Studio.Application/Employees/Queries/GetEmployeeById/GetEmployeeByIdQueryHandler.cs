@@ -23,7 +23,7 @@ namespace Studio.Application.Employees.Queries.GetEmployeeById
 
         public async Task<EmployeeViewModel> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
         {
-            var employee = await context.Employees.FindAsync(request.Id);
+            var employee = await context.Employees.Include(e => e.Location).SingleOrDefaultAsync(e => e.Id == request.Id);
 
             if (employee == null)
             {

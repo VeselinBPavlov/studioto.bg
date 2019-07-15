@@ -7,7 +7,7 @@
     {
         public CreateCountryCommandValidator()
         {
-            RuleFor(c => c.Name).MaximumLength(100).NotEmpty();
+            RuleFor(c => c.Name).MaximumLength(100).NotEmpty().WithMessage("Invalid Name!");
         }
     }
 }

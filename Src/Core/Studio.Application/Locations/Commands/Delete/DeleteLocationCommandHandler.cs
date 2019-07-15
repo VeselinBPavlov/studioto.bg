@@ -42,13 +42,15 @@
                 throw new DeleteFailureException(Common.GConst.Location, request.Id, string.Format(GConst.DeleteException, GConst.Industries, GConst.LocationLower));
             }
 
-            location.Address.DeletedOn = DateTime.UtcNow;
-            location.Address.IsDeleted = true;
-
             location.DeletedOn = DateTime.UtcNow;
             location.IsDeleted = true;
+
+            var address = this.context.Addresses.Find(location.AddressId);
+            address.DeletedOn = DateTime.UtcNow;
+            address.IsDeleted = true;
             
             this.context.Locations.Update(location);
+            this.context.Addresses.Update(address);
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

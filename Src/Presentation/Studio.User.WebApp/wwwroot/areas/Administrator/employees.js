@@ -82,7 +82,7 @@
         
         if (id != null && id > 0) {
             
-            FillCountriesDropdown()
+            FillLocationsDropdown()
 
             $.ajax({
                 type: "GET",
