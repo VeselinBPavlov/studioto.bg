@@ -13,11 +13,13 @@
     public class DeleteLocationCommandHandlerTests : CommandTestBase
     {
         private int locationId;
+        private int addressId;
         private DeleteLocationCommandHandler sut;
 
         public DeleteLocationCommandHandlerTests()
         {
-            locationId = CommandArrangeHelper.GetLocationId(context, null, null);
+            addressId = CommandArrangeHelper.GetAddressId(context, null);
+            locationId = CommandArrangeHelper.GetLocationId(context, null, addressId);
             sut = new DeleteLocationCommandHandler(context);
         }
 

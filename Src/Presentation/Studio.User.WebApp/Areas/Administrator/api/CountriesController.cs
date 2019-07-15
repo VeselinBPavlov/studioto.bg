@@ -45,7 +45,7 @@
             return NoContent();
         }        
 
-        // DELETE: api/Countries/Delet/5
+        // DELETE: api/Countries/Delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

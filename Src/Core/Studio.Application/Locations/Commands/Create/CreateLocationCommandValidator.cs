@@ -8,14 +8,14 @@
     {
         public CreateLocationCommandValidator()
         {
-            RuleFor(l => l.Name).MaximumLength(100).NotEmpty();
-            RuleFor(l => l.StartDay).NotEmpty().Must(BeValidDayOfWeek);
-            RuleFor(l => l.EndDay).NotEmpty().Must(BeValidDayOfWeek);
-            RuleFor(l => l.StartHour).NotEmpty().Must(BeValidHour);
-            RuleFor(l => l.EndHour).NotEmpty().Must(BeValidHour);
-            RuleFor(c => c.Phone).Matches(@"^(\+359|0)(\d{9})$").NotEmpty();
-            RuleFor(c => c.Slogan).MaximumLength(200).NotEmpty();
-            RuleFor(c => c.Description).NotEmpty();
+            RuleFor(l => l.Name).MaximumLength(100).NotEmpty().WithMessage("Invalid Name");
+            RuleFor(l => l.StartDay).NotEmpty().Must(BeValidDayOfWeek).WithMessage("Invalid StartDay"); ;
+            RuleFor(l => l.EndDay).NotEmpty().Must(BeValidDayOfWeek).WithMessage("Invalid EndDay"); ;
+            RuleFor(l => l.StartHour).NotEmpty().Must(BeValidHour).WithMessage("Invalid StartHour"); ;
+            RuleFor(l => l.EndHour).NotEmpty().Must(BeValidHour).WithMessage("Invalid EndHour"); ;
+            RuleFor(c => c.Phone).Matches(@"^(\+359|0)(\d{9})$").NotEmpty().WithMessage("Invalid Phone"); ;
+            RuleFor(c => c.Slogan).MaximumLength(200).NotEmpty().WithMessage("Invalid Slogan"); ;
+            RuleFor(c => c.Description).NotEmpty().WithMessage("Invalid Description"); ;
         }
 
         private bool BeValidHour(string hour)

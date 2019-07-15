@@ -12,7 +12,9 @@ namespace Studio.Application.Clients.Queries.GetClientById
 
         public string VatNumber { get; set; }
 
-        public string Manager { get; set; }
+        public string ManagerFirstName { get; set; }
+
+        public string ManagerLastName { get; set; }
 
         public string Phone { get; set; }
 
@@ -25,7 +27,8 @@ namespace Studio.Application.Clients.Queries.GetClientById
                     Id = client.Id,
                     CompanyName = client.CompanyName,
                     VatNumber = client.VatNumber,
-                    Manager = client.Manager.ToString(),
+                    ManagerFirstName = client.Manager.FirstName,
+                    ManagerLastName = client.Manager.LastName,
                     Phone = client.Phone
                 };
             }

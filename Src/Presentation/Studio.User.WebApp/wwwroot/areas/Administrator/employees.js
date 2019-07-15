@@ -15,43 +15,41 @@
         $.ajax({
 
             type: "GET",
-            url: "/api/Addresses/GetAll",
+            url: "/api/Employees/GetAll",
             success: function (result) {
-                if (result['addresses'].length == 0) {
+                if (result['employees'].length == 0) {
                     $('table').addClass('hidden');
                 } else {
                     $('table').removeClass('hidden');
-                    $('#tbody').children().remove();
+                    $('#tbody').children().remove();                    
 
-                    
-
-                    $(result['addresses']).each(function (i) {
+                    $(result['employees']).each(function (i) {
                         var tbody = $('#tbody');
                         var tr = "<tr>";
-                        tr += "<td>" + result['addresses'][i].id;
-                        tr += "<td>" + result['addresses'][i].address;
-                        tr += "<td>" + result['addresses'][i].longitude;
-                        tr += "<td>" + result['addresses'][i].latitude;
-                        tr += "<td>" + result['addresses'][i].cityName;
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['addresses'][i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['addresses'][i].id + ")>" + "Delete";
+                        tr += "<td>" + result['employees'][i].id;
+                        tr += "<td>" + result['employees'][i].firstName;
+                        tr += "<td>" + result['employees'][i].lastName;
+                        tr += "<td>" + result['employees'][i].locationName;
+                        tr += "<td>" + result['employees'][i].possitions;
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['employees'][i].id + ")>" + "Edit";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['employees'][i].id + ")>" + "Delete";
                         tbody.append(tr);
                     });
                 }
             }
         });
         
-        FillCitiesDropdown();
+        FillLocationsDropdown();
     }
 
     function CreateData() {
 
-        var formAddress = $('#formAddress').serialize();
+        var formEmployee = $('#formEmployee').serialize();
 
          $.ajax({
             type: "POST",
-            url: "/api/Addresses/Create",
-            data: formAddress,
+            url: "/api/Employees/Create",
+            data: formEmployee,
             success: function () {
 
                      Message("Data successfuly saved.");
@@ -68,7 +66,7 @@
 
         $.ajax({
             type: "DELETE",
-            url: "/api/Addresses/Delete/" + id,
+            url: "/api/Employees/Delete/" + id,
             success: function () {
                 GenerateGridList();
                 Message('Delete success!');
@@ -84,26 +82,19 @@
         
         if (id != null && id > 0) {
             
-            FillCitiesDropdown()
+            FillCountriesDropdown()
 
             $.ajax({
                 type: "GET",
-                url: "/api/Addresses/Get/" + id,
+                url: "/api/Employees/Get/" + id,
                 //data: { id: id },
                 success: function (result) {
 
                     $('#id').val(result.id);
-                    $('#street').val(result.street);
-                    $('#number').val(result.number);
-                    $('#building').val(result.building);
-                    $('#entrance').val(result.entrance);
-                    $('#floor').val(result.floor);
-                    $('#apartment').val(result.apartment);
-                    $('#district').val(result.district);
-                    $('#longitude').val(result.longitude);                  
-                    $('#latitude').val(result.latitude);                 
+                    $('#firstName').val(result.firstName);
+                    $('#lastName').val(result.lastName);
 
-                    $('#cityId').val(result.cityId).prop('selected', true);
+                    $('#locationId').val(result.locationId).prop('selected', true);
 
                     $('#Create').addClass('hidden');
                     $('#Update').removeClass('hidden');
@@ -114,12 +105,12 @@
 
     function UpdateData() {
 
-        var formAddress = $('#formAddress').serialize();
+        var formEmployee = $('#formEmployee').serialize();
 
         $.ajax({
             type: "PUT",
-            url: "/api/Addresses/Update",
-            data: formAddress,
+            url: "/api/Employees/Update",
+            data: formEmployee,
             success: function () {
 
                 $('#Create').removeClass('hidden');
@@ -138,7 +129,7 @@
     }
 
         function ResetForm() {
-            $('#formAddress').each(function () {
+            $('#formEmployee').each(function () {
                 this.reset();
             });
         }
@@ -147,17 +138,17 @@
             toastr.success(text)
         }
 
-        function FillCitiesDropdown() {
+        function FillLocationsDropdown() {
             $.ajax({
 
                 type: "GET",
-                url: "/api/Cities/GetAllNames",
+                url: "/api/Locations/GetAllNames",
                 success: function (result) {
-                    var options = $('#cityId');
+                    var options = $('#locationId');
                     options.empty();
                     //don't forget error handling!
-                    $(result['cities']).each(function (i) {
-                        options.append($("<option />").val(result['cities'][i].id).text(result['cities'][i].name));
+                    $(result['locations']).each(function (i) {
+                        options.append($("<option />").val(result['locations'][i].id).text(result['locations'][i].name));
                     });
                 }
             });

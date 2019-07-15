@@ -7,6 +7,13 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Administration\**" />
+    <Content Remove="Areas\Administration\**" />
+    <EmbeddedResource Remove="Areas\Administration\**" />
+    <None Remove="Areas\Administration\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
@@ -27,10 +34,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Controllers\" />
-    <Folder Include="Areas\Administration\Data\" />
-    <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Areas\Administration\Views\" />
     <Folder Include="wwwroot\img\Clients\" />
     <Folder Include="wwwroot\img\Users\" />
   </ItemGroup>

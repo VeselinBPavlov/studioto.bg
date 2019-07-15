@@ -7,6 +7,7 @@
     using Studio.Application.Addresses.Commands.Update;
     using Studio.Application.Addresses.Queries.GetAddressById;
     using Studio.Application.Addresses.Queries.GetAllAddresses;
+    using Studio.Application.Addresses.Queries.GetAllNames;
 
     public class AddressesController : BaseApiController
     {
@@ -15,6 +16,14 @@
         public async Task<ActionResult<AddressesListViewModel>> GetAll()
         {
             var result = await Mediator.Send(new GetAllAddressesListQuery());
+            return Ok(result);
+        }
+
+        // GET: api/Addresses/GetAllNames
+        [HttpGet]
+        public async Task<ActionResult<AddressesNamesListViewModel>> GetAllNames()
+        {
+            var result = await Mediator.Send(new GetAddressesNamesListQuery());
             return Ok(result);
         }
 
@@ -45,7 +54,7 @@
             return NoContent();
         }        
 
-        // DELETE: api/Addresses/Delet/5
+        // DELETE: api/Addresses/Delete/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

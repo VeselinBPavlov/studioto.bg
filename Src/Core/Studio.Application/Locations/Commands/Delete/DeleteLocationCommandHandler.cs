@@ -40,7 +40,10 @@
             if (hasIndustries)
             {
                 throw new DeleteFailureException(Common.GConst.Location, request.Id, string.Format(GConst.DeleteException, GConst.Industries, GConst.LocationLower));
-            }          
+            }
+
+            location.Address.DeletedOn = DateTime.UtcNow;
+            location.Address.IsDeleted = true;
 
             location.DeletedOn = DateTime.UtcNow;
             location.IsDeleted = true;

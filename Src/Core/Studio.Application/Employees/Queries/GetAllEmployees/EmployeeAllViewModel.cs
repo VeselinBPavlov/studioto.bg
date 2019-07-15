@@ -7,7 +7,7 @@ namespace Studio.Application.Employees.Queries.GetAllEmployees
 
     public class EmployeeAllViewModel : IHaveCustomMapping
     {
-         public int Id { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 

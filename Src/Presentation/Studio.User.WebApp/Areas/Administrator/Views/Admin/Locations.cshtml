@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewData["Title"] = "Cities";
+    ViewData["Title"] = "Locations";
 }
-<span id="Addressspan"></span>
+<span id="locationspan"></span>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Addresses
+            Locations
         </h1>
         <ol class="breadcrumb"></ol>
     </section>
@@ -18,54 +18,57 @@
             <div >
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Create / Edit Addresses</h3>
+                        <h3 class="box-title">Create / Edit Locations</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form id="formAddress">
+                    <form id="formLocation">
                         <div class="box-body">
                             <input type="hidden" id="id" name="id" />
                             <div class="form-group">
-                                <label>Street</label>
-                                <input class="form-control" id="street" name="street" placeholder="Write your street ...">
+                                <label>Location</label>
+                                <input class="form-control" id="name" name="name" placeholder="Write your location name ...">
                             </div>
                             <div class="form-group">
-                                <label>Number</label>
-                                <input class="form-control" id="number" name="number" placeholder="Write your number ...">
+                                <label>Is Office</label>
+                                <input type="checkbox" id="isOffice" name="isOffice" value="false" />
                             </div>
                             <div class="form-group">
-                                <label>Building</label>
-                                <input class="form-control" id="building" name="building" placeholder="Write your building ...">
+                                <label>Phone</label>
+                                <input class="form-control" id="phone" name="phone" placeholder="Write your location phone ...">
                             </div>
                             <div class="form-group">
-                                <label>Entrance</label>
-                                <input class="form-control" id="entrance" name="entrance" placeholder="Write your entrance ...">
+                                <label>Slogan</label>
+                                <input class="form-control" id="slogan" name="slogan" placeholder="Write your slogan ...">
                             </div>
                             <div class="form-group">
-                                <label>Floor</label>
-                                <input class="form-control" id="floor" name="floor" placeholder="Write your floor ...">
+                                <label>Description</label>
+                                <input class="form-control" id="description" name="description" placeholder="Write your description ...">
                             </div>
                             <div class="form-group">
-                                <label>Apartment</label>
-                                <input class="form-control" id="apartment" name="apartment" placeholder="Write your apartment ...">
+                                <label>Start Day</label>
+                                <input class="form-control" id="startDay" name="startDay" placeholder="Write your description ...">
                             </div>
                             <div class="form-group">
-                                <label>District</label>
-                                <input class="form-control" id="district" name="district" placeholder="Write your district ...">
+                                <label>End Day</label>
+                                <input class="form-control" id="endDay" name="endDay" placeholder="Write your description ...">
                             </div>
                             <div class="form-group">
-                                <label>Longitude</label>
-                                <input class="form-control" id="longitude" name="longitude" type="number" placeholder="Write your longitude ...">
+                                <label>Start Hour</label>
+                                <input class="form-control" id="startHour" name="startHour" placeholder="Write your description ...">
                             </div>
                             <div class="form-group">
-                                <label>Latitude</label>
-                                <input class="form-control" id="latitude" name="latitude" type="number" placeholder="Write your latitude ...">
+                                <label>End Hour</label>
+                                <input class="form-control" id="endHour" name="endHour" placeholder="Write your description ...">
                             </div>
                             <div class="form-group">
-                                <label>City</label>
-                                <select class="form-control" id="cityId" name="cityId"></select>
-                            </div>                                
-
+                                <label>Client</label>
+                                <select class="form-control" id="clientId" name="clientId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <select class="form-control" id="addressId" name="addressId"></select>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 
@@ -82,7 +85,7 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Addresses</h3>
+                        <h3 class="box-title">Locations</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
@@ -90,10 +93,14 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
+                                    <th>Location</th>
                                     <th>Address</th>
-                                    <th>Longitude</th>
-                                    <th>Latitude</th>
-                                    <th>City</th>
+                                    <th>Start Day</th>
+                                    <th>End Day</th>
+                                    <th>Start Hour</th>
+                                    <th>End Hour</th>
+                                    <th>Phone</th>
+                                    <th>Company</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -112,10 +119,9 @@
     <!-- /.content -->
 </div>
 @section Scripts{
-    <environment include="Development,Staging,Production">
-        <script src="~/areas/Administrator/helper.js"></script>
-        <script src="~/areas/Administrator/addresses.js"></script>
-    </environment>
+<environment include="Development,Staging,Production">
+    <script src="~/areas/Administrator/locations.js"></script>
+</environment>
 }
 
 

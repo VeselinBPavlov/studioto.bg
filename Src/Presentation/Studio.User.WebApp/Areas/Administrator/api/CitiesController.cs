@@ -6,6 +6,7 @@
     using Studio.Application.Cities.Commands.Delete;
     using Studio.Application.Cities.Commands.Update;
     using Studio.Application.Cities.Queries.GetAllCities;
+    using Studio.Application.Cities.Queries.GetAllNames;
     using Studio.Application.Cities.Queries.GetCityById;
 
     public class CitiesController : BaseApiController
@@ -15,6 +16,14 @@
         public async Task<ActionResult<CitiesListViewModel>> GetAll()
         {
             var result = await Mediator.Send(new GetAllCitiesListQuery());
+            return Ok(result);
+        }
+
+        // GET: api/Cities/GetAllNames
+        [HttpGet]
+        public async Task<ActionResult<CitiesNamesListViewModel>> GetAllNames()
+        {
+            var result = await Mediator.Send(new GetCitiesNamesListQuery());
             return Ok(result);
         }
 
@@ -45,7 +54,7 @@
             return NoContent();
         }        
 
-        // DELETE: api/Cities/Delet/5
+        // DELETE: api/Cities/Delete/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

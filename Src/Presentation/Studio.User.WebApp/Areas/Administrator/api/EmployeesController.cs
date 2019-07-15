@@ -6,6 +6,7 @@
     using Studio.Application.Employees.Commands.Delete;
     using Studio.Application.Employees.Commands.Update;
     using Studio.Application.Employees.Queries.GetAllEmployees;
+    using Studio.Application.Employees.Queries.GetAllNames;
     using Studio.Application.Employees.Queries.GetEmployeeById;
 
     public class EmployeesController : BaseApiController
@@ -15,6 +16,14 @@
         public async Task<ActionResult<EmployeesListViewModel>> GetAll()
         {
             var result = await Mediator.Send(new GetAllEmployeesListQuery());
+            return Ok(result);
+        }
+
+        // GET: api/Employees/GetAllNames
+        [HttpGet]
+        public async Task<ActionResult<EmployeesNamesListViewModel>> GetAllNames()
+        {
+            var result = await Mediator.Send(new GetEmployeesNamesListQuery());
             return Ok(result);
         }
 
@@ -45,7 +54,7 @@
             return NoContent();
         }        
 
-        // DELETE: api/Employees/Delet/5
+        // DELETE: api/Employees/Delete/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

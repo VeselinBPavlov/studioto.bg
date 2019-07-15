@@ -14,6 +14,5 @@
         public string ManagerLastName { get; set; }
 
         public string Phone { get; set; }
-
     }
 }

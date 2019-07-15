@@ -24,12 +24,15 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
 
         public string Phone { get; set; }
 
+        public string Company { get; set; }
+
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Location, LocationAllViewModel>()
                 .ForMember(x => x.Address, y => y.MapFrom(src => src.Address.AddressFormat.ToString()))
                 .ForMember(x => x.StartDay, y => y.MapFrom(src => src.StartDay.ToString()))
-                .ForMember(x => x.EndDay, y => y.MapFrom(src => src.EndDay.ToString()));
+                .ForMember(x => x.EndDay, y => y.MapFrom(src => src.EndDay.ToString()))
+                .ForMember(x => x.Company, y => y.MapFrom(src => src.Client.CompanyName));
         }
     }
 }
