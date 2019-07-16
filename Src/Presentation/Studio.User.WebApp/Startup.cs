@@ -65,6 +65,7 @@
 
             services.AddDefaultIdentity<StudioUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddRoles<StudioRole>()
                 .AddEntityFrameworkStores<StudioDbContext>();
 
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -78,6 +79,14 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using(var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                using(var context = serviceScope.ServiceProvider.GetRequiredService<StudioDbContext>())
+                {
+                    StudioInitializer.Initialize(context);
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

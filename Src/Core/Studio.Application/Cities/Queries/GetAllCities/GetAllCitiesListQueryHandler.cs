@@ -1,5 +1,6 @@
 namespace Studio.Application.Cities.Queries.GetAllCities
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Cities.Queries.GetAllCities
         {
             return new CitiesListViewModel
             {
-                Cities = await this.context.Cities.ProjectTo<CityAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Cities = await this.context.Cities.Where(c => c.IsDeleted != true).ProjectTo<CityAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

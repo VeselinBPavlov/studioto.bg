@@ -9,6 +9,7 @@
     using Studio.Domain.Entities;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -25,7 +26,8 @@
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Location, LocationNameViewModel>();
+            configuration.CreateMap<Location, LocationNameViewModel>()
+                .ForMember(x => x.Name, y => y.MapFrom(src => src.Client.CompanyName + " / " + src.Name));
         }
     }
 
@@ -48,7 +50,7 @@
         {
             return new LocationsNamesListViewModel
             {
-                Locations = await this.context.Locations.ProjectTo<LocationNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Locations = await this.context.Locations.Where(c => c.IsDeleted != true && c.IsOffice == false).OrderBy(l => l.Client.CompanyName).ProjectTo<LocationNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

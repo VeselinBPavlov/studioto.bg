@@ -29,11 +29,10 @@
                         tr += "<td>" + result['locations'][i].id;
                         tr += "<td>" + result['locations'][i].name;
                         tr += "<td>" + result['locations'][i].address;
-                        tr += "<td>" + result['locations'][i].startDay;
-                        tr += "<td>" + result['locations'][i].endDay;
-                        tr += "<td>" + result['locations'][i].startHour;
-                        tr += "<td>" + result['locations'][i].endHour;
+                        tr += "<td>" + result['locations'][i].workDays;
+                        tr += "<td>" + result['locations'][i].workHours;
                         tr += "<td>" + result['locations'][i].phone;
+                        tr += "<td>" + result['locations'][i].company;
 
                         tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['locations'][i].id + ")>" + "Edit";
                         tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['locations'][i].id + ")>" + "Delete";

@@ -59,7 +59,7 @@
                 throw new CreateFailureException(GConst.Appointment, request.ServiceId, string.Format(GConst.RefereceException, GConst.ServiceLower, request.ServiceId));
             }
 
-            var employee = await this.context.Employees.FindAsync(request.EmployeeId);
+            var employee = await this.context.Employees.Include(e => e.Location).SingleOrDefaultAsync(e => e.Id == request.EmployeeId);
 
             if (employee == null || employee.IsDeleted == true)
             {

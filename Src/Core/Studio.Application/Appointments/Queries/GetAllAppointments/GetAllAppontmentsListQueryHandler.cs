@@ -1,5 +1,6 @@
 namespace Studio.Application.Appointments.Queries.GetAllAppointments
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Appointments.Queries.GetAllAppointments
         {
             return new AppointmentsListViewModel
             {
-                Appointments = await this.context.Appointments.ProjectTo<AppointmentAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Appointments = await this.context.Appointments.Where(a => a.IsDeleted != true).ProjectTo<AppointmentAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

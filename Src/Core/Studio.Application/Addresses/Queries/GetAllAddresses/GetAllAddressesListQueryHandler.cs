@@ -1,5 +1,6 @@
 namespace Studio.Application.Addresses.Queries.GetAllAddresses
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Addresses.Queries.GetAllAddresses
         {
             return new AddressesListViewModel
             {
-                Addresses = await this.context.Addresses.ProjectTo<AddressAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Addresses = await this.context.Addresses.Where(a => a.IsDeleted != true).ProjectTo<AddressAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

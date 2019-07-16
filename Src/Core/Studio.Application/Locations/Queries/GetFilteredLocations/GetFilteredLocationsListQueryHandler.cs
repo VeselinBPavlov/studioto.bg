@@ -58,7 +58,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
 
             return new LocationsFilteredListViewModel
             {
-                Locations = await locations.ProjectTo<LocationFilteredViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Locations = await locations.Where(c => c.IsDeleted != true).ProjectTo<LocationFilteredViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

@@ -1,5 +1,6 @@
 namespace Studio.Application.Employees.Queries.GetAllEmployees
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Employees.Queries.GetAllEmployees
         {
             return new EmployeesListViewModel
             {
-                Employees = await this.context.Employees.ProjectTo<EmployeeAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await this.context.Employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

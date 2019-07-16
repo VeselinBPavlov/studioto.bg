@@ -1,5 +1,6 @@
 namespace Studio.Application.Services.Queries.GetAllServices
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Services.Queries.GetAllServices
         {
             return new ServicesListViewModel
             {
-                Services = await this.context.Services.ProjectTo<ServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Services = await this.context.Services.Where(c => c.IsDeleted != true).ProjectTo<ServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

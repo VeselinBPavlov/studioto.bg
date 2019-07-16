@@ -9,7 +9,7 @@
     public abstract class DesignTimeDbContextFactoryBase<TContext> :
          IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
-        private const string ConnectionStringName = "StudioDBConnectionHome";
+        private const string ConnectionStringName = "StudioDBConnectionWork";
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
 
         public TContext CreateDbContext(string[] args)

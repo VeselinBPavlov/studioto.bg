@@ -33,7 +33,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
 
             return new EmployeesListViewModel
             {
-                Employees = await employees.ProjectTo<EmployeeViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

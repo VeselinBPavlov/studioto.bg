@@ -1,5 +1,6 @@
 namespace Studio.Application.Clients.Queries.GetAllClients
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.Clients.Queries.GetAllClients
         {
             return new ClientsListViewModel
             {
-                Clients = await this.context.Clients.ProjectTo<ClientAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Clients = await this.context.Clients.Where(c => c.IsDeleted != true).ProjectTo<ClientAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

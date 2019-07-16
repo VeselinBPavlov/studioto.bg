@@ -14,13 +14,9 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
 
         public string Address { get; set; }
 
-        public string StartDay { get; set; }
+        public string WorkDays { get; set; }
 
-        public string EndDay { get; set; }
-
-        public string StartHour { get; set; }  
-
-        public string EndHour { get; set; }   
+        public string WorkHours { get; set; }  
 
         public string Phone { get; set; }
 
@@ -30,8 +26,8 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
         {
             configuration.CreateMap<Location, LocationAllViewModel>()
                 .ForMember(x => x.Address, y => y.MapFrom(src => src.Address.AddressFormat.ToString()))
-                .ForMember(x => x.StartDay, y => y.MapFrom(src => src.StartDay.ToString()))
-                .ForMember(x => x.EndDay, y => y.MapFrom(src => src.EndDay.ToString()))
+                .ForMember(x => x.WorkDays, y => y.MapFrom(src => src.StartDay.ToString() + " - " + src.EndDay.ToString()))
+                .ForMember(x => x.WorkHours, y => y.MapFrom(src => src.StartHour.ToString() + " - " + src.EndHour.ToString()))
                 .ForMember(x => x.Company, y => y.MapFrom(src => src.Client.CompanyName));
         }
     }

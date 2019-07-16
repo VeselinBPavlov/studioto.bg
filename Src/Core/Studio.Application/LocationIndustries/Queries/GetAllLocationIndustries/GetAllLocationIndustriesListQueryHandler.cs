@@ -1,5 +1,6 @@
 namespace Studio.Application.LocationIndustries.Queries.GetAllLocationIndustries
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -23,7 +24,7 @@ namespace Studio.Application.LocationIndustries.Queries.GetAllLocationIndustries
         {
             return new LocationIndustriesListViewModel
             {
-                LocationIndustries = await this.context.LocationIndustries.ProjectTo<LocationIndustryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                LocationIndustries = await this.context.LocationIndustries.Where(c => c.IsDeleted != true).ProjectTo<LocationIndustryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }
