@@ -32,7 +32,7 @@ namespace Studio.Persistence.Context
             SeedCities(context);
 
             SeedAddresses(context);
-
+ 
             SeedClients(context);
 
             SeedLocations(context);
@@ -329,13 +329,13 @@ namespace Studio.Persistence.Context
         {
             var cities = new []
             {
-                new City {  Name = "София", CountryId = 1 },
-                new City {  Name = "Варна", CountryId = 1 },
-                new City {  Name = "Бургас", CountryId = 1 },
-                new City {  Name = "Пловдив", CountryId = 1 },
-                new City {  Name = "Стара Загора", CountryId = 1 },
-                new City {  Name = "Русе", CountryId = 1 },
-                new City {  Name = "Велико Търново", CountryId = 1 }
+                new City { Name = "София", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Варна", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Бургас", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Пловдив", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Стара Загора", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Русе", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new City { Name = "Велико Търново", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false }
             };
 
             context.Cities.AddRange(cities);
