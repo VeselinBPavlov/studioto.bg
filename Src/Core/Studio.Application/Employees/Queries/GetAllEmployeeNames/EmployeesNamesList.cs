@@ -9,6 +9,7 @@
     using Studio.Domain.Entities;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -49,7 +50,7 @@
         {
             return new EmployeesNamesListViewModel
             {
-                Employees = await this.context.Employees.ProjectTo<EmployeeNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await this.context.Employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

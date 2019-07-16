@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -16,19 +17,19 @@ namespace Studio.User.WebApp.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<StudioUser> _signInManager;
         private readonly UserManager<StudioUser> _userManager;
+        private readonly RoleManager<StudioRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<StudioUser> userManager,
             SignInManager<StudioUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            RoleManager<StudioRole> roleManager,
+            ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
-            _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -38,6 +39,23 @@ namespace Studio.User.WebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [MinLength(2), MaxLength(50)]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; } 
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [MinLength(2), MaxLength(50)]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }    
+
+            [Required]
+            [RegularExpression(@"^(\+359|0)(\d{9})$", ErrorMessage = "Invalid phone format!")]
+            [Display(Name = "Phone")]
+            public string PhoneNumber { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -65,21 +83,21 @@ namespace Studio.User.WebApp.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new StudioUser { UserName = Input.Email, Email = Input.Email };
+                var user = new StudioUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName, PhoneNumber = Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                if (_userManager.Users.Count() == 1) 
+                {
+                   await _userManager.AddToRoleAsync(user, "Administrator");
+                }   
+                else 
+                {
+                   await _userManager.AddToRoleAsync(user, "User");
+                }                   
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _logger.LogInformation("User created a new account with password.");                    
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

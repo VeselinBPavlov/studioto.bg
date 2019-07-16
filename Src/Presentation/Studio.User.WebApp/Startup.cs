@@ -25,6 +25,8 @@
     using FluentValidation.AspNetCore;
     using Studio.Application.Clients.Commands.Create;
     using Studio.User.WebApp.FIlters;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Studio.Application.Infrastructure.SendGrid;
 
     public class Startup
     {
@@ -63,7 +65,14 @@
             
             services.AddScoped<IStudioDbContext, StudioDbContext>();
 
-            services.AddDefaultIdentity<StudioUser>()
+            services.AddDefaultIdentity<StudioUser>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 6;
+                })
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddRoles<StudioRole>()
                 .AddEntityFrameworkStores<StudioDbContext>();
@@ -73,7 +82,32 @@
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>())
+                .AddRazorPagesOptions(options =>
+                {
+                    options.AllowAreas = true;
+                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                });
+
+             services
+                .ConfigureApplicationCookie(options =>
+                {
+                    options.LoginPath = "/Identity/Account/Login";
+                    options.LogoutPath = "/Identity/Account/Logout";
+                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                });
+
+            services
+                .Configure<CookiePolicyOptions>(options =>
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
+                });
+            
+            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<ISmsSender, NullMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

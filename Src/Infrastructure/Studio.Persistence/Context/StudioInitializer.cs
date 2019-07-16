@@ -20,14 +20,12 @@ namespace Studio.Persistence.Context
         {
             context.Database.EnsureCreated();
 
-            if (context.Users.Any())
+            if (context.StudioRoles.Any())
             {
                 return; // Db has been seeded
             }
 
             SeedRoles(context);
-
-            //SeedUsers(context);
 
             SeedCountries(context);
 
@@ -351,18 +349,6 @@ namespace Studio.Persistence.Context
             context.Countries.Add(country);
             context.SaveChanges();
         }
-
-        // private void SeedUsers(StudioDbContext context)
-        // {
-        //     var users = new [] 
-        //     {
-        //         new StudioUser { Id = Guid.NewGuid().ToString(), UserName = "Admin", NormalizedUserName = "ADMIN", Email = "vp_fin@abv.bg", NormalizedEmail = "VP_FIN@ABV.BG", PasswordHash = HashPassword("123"), PhoneNumber = "0883456789", FirstName = "Pesho", LastName = "Petrov", IsTemporary = false, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-        //         new StudioUser { Id = Guid.NewGuid().ToString(), UserName = "Pesho", NormalizedUserName = "PESHO", Email = "vp_fin@abv.bg", NormalizedEmail = "VP_FIN@ABV.BG", PasswordHash = HashPassword("123"), PhoneNumber = "0883456789", FirstName = "Pesho", LastName = "Petrov", IsTemporary = false, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-        //     };
-
-        //     context.StudioUsers.AddRange(users);
-        //     context.SaveChanges();
-        // }     
 
         private void SeedRoles(StudioDbContext context)
         {
