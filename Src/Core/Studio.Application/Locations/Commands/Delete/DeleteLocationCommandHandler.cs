@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = await context.Locations.FindAsync(request.Id);
+            var location = await this.context.Locations.FindAsync(request.Id);
 
             if (location == null || location.IsDeleted == true)
             {

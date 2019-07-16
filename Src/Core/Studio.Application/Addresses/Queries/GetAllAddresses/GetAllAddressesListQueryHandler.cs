@@ -18,11 +18,12 @@ namespace Studio.Application.Addresses.Queries.GetAllAddresses
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<AddressesListViewModel> Handle(GetAllAddressesListQuery request, CancellationToken cancellationToken)
         {
             return new AddressesListViewModel
             {
-                Addresses = await this.context.Addresses.ProjectTo<AddressAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Addresses = await this.context.Addresses.ProjectTo<AddressAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

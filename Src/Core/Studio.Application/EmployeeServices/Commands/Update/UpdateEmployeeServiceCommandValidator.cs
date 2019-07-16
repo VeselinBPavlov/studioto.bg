@@ -9,7 +9,7 @@
             RuleFor(es => es.Price).GreaterThan(0.00M);
             RuleFor(es => es.EmployeeId).NotEqual(0);
             RuleFor(es => es.ServiceId).NotEqual(0);
-            RuleFor(es => es.DurationInMinutes).NotEmpty().Must(BeValidDuration);
+            RuleFor(es => es.DurationInMinutes).NotEmpty().Must(this.BeValidDuration);
         }
 
         private bool BeValidDuration(string duration)

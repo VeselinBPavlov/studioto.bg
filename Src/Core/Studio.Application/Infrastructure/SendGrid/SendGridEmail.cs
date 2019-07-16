@@ -10,8 +10,8 @@
 
         public SendGridEmail(string email, string name = null)
         {
-            Email = email;
-            Name = name;
+            this.Email = email;
+            this.Name = name;
         }
 
         [JsonProperty("email")]

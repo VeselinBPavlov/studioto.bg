@@ -39,11 +39,11 @@
                 IsDeleted = false
             };
 
-            context.Employees.Add(employee);
+            this.context.Employees.Add(employee);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateEmployeeCommandNotification { EmployeeId = employee.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateEmployeeCommandNotification { EmployeeId = employee.Id }, cancellationToken);
 
             return Unit.Value;
         }

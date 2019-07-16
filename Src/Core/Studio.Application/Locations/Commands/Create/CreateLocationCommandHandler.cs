@@ -55,11 +55,11 @@
                 IsDeleted = false
             };
 
-            context.Locations.Add(Location);
+            this.context.Locations.Add(Location);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateLocationCommandNotification { LocationId = Location.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateLocationCommandNotification { LocationId = Location.Id }, cancellationToken);
 
             return Unit.Value;
         }

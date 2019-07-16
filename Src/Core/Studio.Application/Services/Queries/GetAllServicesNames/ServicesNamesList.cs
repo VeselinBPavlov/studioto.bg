@@ -20,6 +20,7 @@
     public class ServiceNameViewModel : IHaveCustomMapping
     {
         public string Id { get; set; }
+
         public string Name { get; set; }
 
         public void CreateMappings(Profile configuration)

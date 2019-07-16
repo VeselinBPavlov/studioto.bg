@@ -22,6 +22,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<LocationsFilteredListViewModel> Handle(GetFilteredLocationsListQuery request, CancellationToken cancellationToken)
         {
             var locations = this.context.Locations.OrderByDescending(l => l.CreatedOn).AsQueryable();
@@ -57,7 +58,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
 
             return new LocationsFilteredListViewModel
             {
-                Locations = await locations.ProjectTo<LocationFilteredViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Locations = await locations.ProjectTo<LocationFilteredViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

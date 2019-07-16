@@ -45,13 +45,13 @@
                 throw new UpdateFailureException(GConst.Appointment, request.Id, string.Format(GConst.RefereceException, GConst.EmployeeLower, request.EmployeeId));
             }
 
-            //Set Time
+            // Set Time
             request.ReservationTime = DateTime.Parse(request.TimeBlockHelper);
 
-            //CheckWorkingHours
+            // CheckWorkingHours
             DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
-            DateTime end = (request.ReservationDate.Add(request.ReservationTime.TimeOfDay)).AddMinutes(double.Parse(context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
-            if (!(AppointmentHelper.IsInWorkingHours(context, employee, start, end)))
+            DateTime end = request.ReservationDate.Add(request.ReservationTime.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
+            if (!AppointmentHelper.IsInWorkingHours(this.context, employee, start, end))
             {
                 throw new UpdateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
             }

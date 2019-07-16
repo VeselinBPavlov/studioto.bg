@@ -1,15 +1,14 @@
 ﻿namespace Studio.Application.Addresses.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System.Linq;
-    using Studio.Application.Exceptions;
-    using System;
-    using Studio.Domain.ValueObjects;
-    using Studio.Common;
+    using Common;
+    using Domain.Entities;
+    using Domain.ValueObjects;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class CreateAddressCommandHandler : IRequestHandler<CreateAddressCommand, Unit>
     {
@@ -52,11 +51,11 @@
                 IsDeleted = false
             };
 
-            context.Addresses.Add(address);
+            this.context.Addresses.Add(address);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateAddressCommandNotification { AddressId = address.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateAddressCommandNotification { AddressId = address.Id }, cancellationToken);
 
             return Unit.Value;
         }

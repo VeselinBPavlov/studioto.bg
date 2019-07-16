@@ -33,11 +33,11 @@
                 IsDeleted = false
             };
 
-            context.Clients.Add(client);
+            this.context.Clients.Add(client);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateClientCommandNotification { ClientId = client.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateClientCommandNotification { ClientId = client.Id }, cancellationToken);
 
             return Unit.Value;
         }

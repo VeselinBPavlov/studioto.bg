@@ -1,9 +1,9 @@
-using System;
-using System.Text;
-using Itenso.TimePeriod;
-
 namespace Studio.Application.Extensions
 {
+    using System;
+    using System.Text;
+    using Itenso.TimePeriod;
+
     public class TimeBlockExtension : TimeBlock
     {
         public TimeBlockExtension(DateTime x, TimeSpan y)
@@ -11,7 +11,7 @@ namespace Studio.Application.Extensions
         {
         }
 
-        //Overriding toString Method
+        // Overriding toString Method
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

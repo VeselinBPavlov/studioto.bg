@@ -20,15 +20,15 @@ namespace Studio.Application.Tests.EmployeeServices.Queries
             sut = new GetEmployeeServiceByIdQueryHandler(context);
         }
 
-        // [Fact]
-        // public async Task GetEmployeeServiceByIdTest()
-        // {
-        //     var status = await sut.Handle(new GetEmployeeServiceByIdQuery { EmployeeId = GConst.ValidId, ServiceId = GConst.ValidId }, CancellationToken.None);
+        //[Fact]
+        //public async Task GetEmployeeServiceByIdTest()
+        //{
+        //    var status = await sut.Handle(new GetEmployeeServiceByIdQuery { EmployeeId = GConst.ValidId, ServiceId = GConst.ValidId }, CancellationToken.None);
 
-        //     status.ShouldBeOfType<EmployeeServiceViewModel>();
-        //     status.EmployeeId.ShouldBe(GConst.ValidId);
-        //     status.ServiceId.ShouldBe(GConst.ValidId);
-        // }
+        //    status.ShouldBeOfType<EmployeeServiceViewModel>();
+        //    status.EmployeeId.ShouldBe(GConst.ValidId);
+        //    status.ServiceId.ShouldBe(GConst.ValidId);
+        //}
 
         [Fact]
         public async Task ShouldThowNotFoundException()

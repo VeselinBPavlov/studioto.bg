@@ -45,20 +45,19 @@
                 throw new ArgumentOutOfRangeException(nameof(fromName));
             }
 
-            logger = loggerFactory.CreateLogger<SendGridEmailSender>();
-            httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue(AuthenticationScheme, apiKey);
-            httpClient.BaseAddress = new Uri(BaseUrl);
+            this.logger = loggerFactory.CreateLogger<SendGridEmailSender>();
+            this.httpClient = new HttpClient();
+            this.httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(AuthenticationScheme, apiKey);
+            this.httpClient.BaseAddress = new Uri(BaseUrl);
             this.fromAddress = fromAddress;
             this.fromName = fromName;
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            if (string.IsNullOrWhiteSpace(fromAddress))
+            if (string.IsNullOrWhiteSpace(this.fromAddress))
             {
-                throw new ArgumentOutOfRangeException(nameof(fromAddress));
+                throw new ArgumentOutOfRangeException(nameof(this.fromAddress));
             }
 
             if (string.IsNullOrWhiteSpace(email))
@@ -74,12 +73,12 @@
             var msg = new SendGridMessage(
                 new SendGridEmail(email),
                 subject,
-                new SendGridEmail(fromAddress, fromName),
+                new SendGridEmail(this.fromAddress, this.fromName),
                 message);
             try
             {
                 var json = JsonConvert.SerializeObject(msg);
-                var response = await httpClient.PostAsync(
+                var response = await this.httpClient.PostAsync(
                     SendEmailUrlPath,
                     new StringContent(json, Encoding.UTF8, "application/json"));
 
@@ -93,7 +92,7 @@
             }
             catch (Exception ex)
             {
-                logger.LogError($"Exception during sending email: {ex}");
+                this.logger.LogError($"Exception during sending email: {ex}");
             }
         }
     }

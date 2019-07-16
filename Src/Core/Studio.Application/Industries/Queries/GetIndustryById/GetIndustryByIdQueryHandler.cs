@@ -23,7 +23,7 @@ namespace Studio.Application.Industries.Queries.GetIndustryById
 
         public async Task<IndustryViewModel> Handle(GetIndustryByIdQuery request, CancellationToken cancellationToken)
         {
-            var industry = await context.Industries.FindAsync(request.Id);
+            var industry = await this.context.Industries.FindAsync(request.Id);
 
             if (industry == null)
             {

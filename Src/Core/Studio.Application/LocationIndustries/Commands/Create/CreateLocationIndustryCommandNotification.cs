@@ -9,6 +9,7 @@
     public class CreateLocationIndustryCommandNotification : INotification
     {
         public int LocationId { get; set; }
+
         public int IndustryId { get; set; }
 
         public class LocationIndustryCreatedHandler : INotificationHandler<CreateLocationIndustryCommandNotification>

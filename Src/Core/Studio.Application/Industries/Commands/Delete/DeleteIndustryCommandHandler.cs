@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteIndustryCommand request, CancellationToken cancellationToken)
         {
-            var industry = await context.Industries
+            var industry = await this.context.Industries
                 .FindAsync(request.Id);
 
             if (industry == null || industry.IsDeleted == true)

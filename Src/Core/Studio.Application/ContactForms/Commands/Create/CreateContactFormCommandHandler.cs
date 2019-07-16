@@ -31,13 +31,13 @@
                 IsDeleted = false
             };
 
-            context.ContactForms.Add(contactForm);
+            this.context.ContactForms.Add(contactForm);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             // TODO: Send email to admin.
 
-            await mediator.Publish(new CreateContactFormCommandNotification { ContactFormId = contactForm.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateContactFormCommandNotification { ContactFormId = contactForm.Id }, cancellationToken);
 
             return Unit.Value;
         }

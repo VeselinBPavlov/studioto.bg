@@ -9,6 +9,7 @@
     public class CreateEmployeeServiceCommandNotification : INotification
     {
         public int EmployeeId { get; set; }
+
         public int ServiceId { get; set; }
 
         public class EmployeeServiceCreatedHandler : INotificationHandler<CreateEmployeeServiceCommandNotification>

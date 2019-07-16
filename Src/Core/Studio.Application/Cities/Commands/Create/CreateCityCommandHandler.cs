@@ -38,11 +38,11 @@
                 IsDeleted = false
             };
 
-            context.Cities.Add(city);
+            this.context.Cities.Add(city);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateCityCommandNotification { CityId = city.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateCityCommandNotification { CityId = city.Id }, cancellationToken);
 
             return Unit.Value;
         }

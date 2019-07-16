@@ -18,11 +18,12 @@ namespace Studio.Application.Cities.Queries.GetAllCities
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<CitiesListViewModel> Handle(GetAllCitiesListQuery request, CancellationToken cancellationToken)
         {
             return new CitiesListViewModel
             {
-                Cities = await this.context.Cities.ProjectTo<CityAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Cities = await this.context.Cities.ProjectTo<CityAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

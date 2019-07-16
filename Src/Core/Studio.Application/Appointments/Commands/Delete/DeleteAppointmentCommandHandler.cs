@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteAppointmentCommand request, CancellationToken cancellationToken)
         {
-            var appointment = await context.Appointments.FindAsync(request.Id);
+            var appointment = await this.context.Appointments.FindAsync(request.Id);
 
             if (appointment == null || appointment.IsDeleted == true)
             {

@@ -18,11 +18,12 @@ namespace Studio.Application.Clients.Queries.GetAllClients
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<ClientsListViewModel> Handle(GetAllClientsListQuery request, CancellationToken cancellationToken)
         {
             return new ClientsListViewModel
             {
-                Clients = await this.context.Clients.ProjectTo<ClientAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Clients = await this.context.Clients.ProjectTo<ClientAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

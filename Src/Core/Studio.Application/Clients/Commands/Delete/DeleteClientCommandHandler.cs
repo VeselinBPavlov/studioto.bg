@@ -22,7 +22,7 @@
 
         public async Task<Unit> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
-            var client = await context.Clients
+            var client = await this.context.Clients
                 .FindAsync(request.Id);
 
             if (client == null || client.IsDeleted == true)
@@ -30,7 +30,7 @@
                 throw new NotFoundException(GConst.Client, request.Id);
             }
 
-            var hasLocations = context.Locations.Any(l => l.ClientId == client.Id && l.Client.IsDeleted == false);
+            var hasLocations = this.context.Locations.Any(l => l.ClientId == client.Id && l.Client.IsDeleted == false);
 
             if (hasLocations)
             {
@@ -40,8 +40,8 @@
             client.DeletedOn = DateTime.UtcNow;
             client.IsDeleted = true;
 
-            context.Clients.Update(client);
-            await context.SaveChangesAsync(cancellationToken);
+            this.context.Clients.Update(client);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

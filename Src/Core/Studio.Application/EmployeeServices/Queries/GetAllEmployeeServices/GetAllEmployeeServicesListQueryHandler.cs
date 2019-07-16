@@ -18,11 +18,12 @@ namespace Studio.Application.EmployeeServices.Queries.GetAllEmployeeServices
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<EmployeeServicesListViewModel> Handle(GetAllEmployeeServicesListQuery request, CancellationToken cancellationToken)
         {
             return new EmployeeServicesListViewModel
             {
-                EmployeeServices = await this.context.EmployeeServices.ProjectTo<EmployeeServiceAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                EmployeeServices = await this.context.EmployeeServices.ProjectTo<EmployeeServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

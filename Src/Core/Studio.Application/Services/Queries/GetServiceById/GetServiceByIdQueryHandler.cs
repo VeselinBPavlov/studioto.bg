@@ -23,7 +23,7 @@ namespace Studio.Application.Services.Queries.GetServiceById
 
         public async Task<ServiceViewModel> Handle(GetServiceByIdQuery request, CancellationToken cancellationToken)
         {
-            var service = await context.Services.Include(s => s.Industry).SingleOrDefaultAsync(s => s.Id == request.Id);
+            var service = await this.context.Services.Include(s => s.Industry).SingleOrDefaultAsync(s => s.Id == request.Id);
 
             if (service == null)
             {

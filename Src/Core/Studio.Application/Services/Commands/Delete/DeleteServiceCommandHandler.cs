@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
         {
-            var service = await context.Services.FindAsync(request.Id);
+            var service = await this.context.Services.FindAsync(request.Id);
 
             if (service == null || service.IsDeleted == true)
             {

@@ -18,11 +18,12 @@ namespace Studio.Application.Industries.Queries.GetAllIndustries
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<IndustriesListViewModel> Handle(GetAllIndustriesListQuery request, CancellationToken cancellationToken)
         {
             return new IndustriesListViewModel
             {
-                Industries = await this.context.Industries.ProjectTo<IndustryAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Industries = await this.context.Industries.ProjectTo<IndustryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

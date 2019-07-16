@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employee = await context.Employees.FindAsync(request.Id);
+            var employee = await this.context.Employees.FindAsync(request.Id);
 
             if (employee == null || employee.IsDeleted == true)
             {

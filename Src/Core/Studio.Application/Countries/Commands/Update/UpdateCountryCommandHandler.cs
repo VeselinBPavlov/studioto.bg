@@ -30,7 +30,7 @@
                 throw new NotFoundException(GConst.Country, request.Id);
             }
 
-            bool isCountryUnique = context.Countries.Any(c => c.Name == request.Name && c.IsDeleted == false);
+            bool isCountryUnique = this.context.Countries.Any(c => c.Name == request.Name && c.IsDeleted == false);
 
             if (isCountryUnique)
             {

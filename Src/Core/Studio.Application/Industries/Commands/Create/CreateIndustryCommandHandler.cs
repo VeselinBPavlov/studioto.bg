@@ -1,11 +1,11 @@
 ﻿namespace Studio.Application.Industries.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System;
+    using Domain.Entities;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class CreateIndustryCommandHandler : IRequestHandler<CreateIndustryCommand, Unit>
     {
@@ -28,11 +28,11 @@
                 IsDeleted = false
             };
 
-            context.Industries.Add(industry);
+            this.context.Industries.Add(industry);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateIndustryCommandNotification { IndustryId = industry.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateIndustryCommandNotification { IndustryId = industry.Id }, cancellationToken);
 
             return Unit.Value;
         }

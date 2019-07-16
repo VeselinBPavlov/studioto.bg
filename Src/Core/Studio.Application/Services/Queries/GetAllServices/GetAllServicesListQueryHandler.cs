@@ -18,11 +18,12 @@ namespace Studio.Application.Services.Queries.GetAllServices
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<ServicesListViewModel> Handle(GetAllServicesListQuery request, CancellationToken cancellationToken)
         {
             return new ServicesListViewModel
             {
-                Services = await this.context.Services.ProjectTo<ServiceAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Services = await this.context.Services.ProjectTo<ServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

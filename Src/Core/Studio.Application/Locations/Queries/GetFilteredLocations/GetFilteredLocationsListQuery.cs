@@ -2,7 +2,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
 {
     using MediatR;
 
-    public class GetFilteredLocationsListQuery: IRequest<LocationsFilteredListViewModel>
+    public class GetFilteredLocationsListQuery : IRequest<LocationsFilteredListViewModel>
     {
         public int? CityId { get; set; }
 

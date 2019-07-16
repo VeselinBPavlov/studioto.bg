@@ -18,11 +18,12 @@ namespace Studio.Application.Appointments.Queries.GetAllAppointments
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<AppointmentsListViewModel> Handle(GetAllAppointmentsListQuery request, CancellationToken cancellationToken)
         {
             return new AppointmentsListViewModel
             {
-                Appointments = await this.context.Appointments.ProjectTo<AppointmentAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Appointments = await this.context.Appointments.ProjectTo<AppointmentAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

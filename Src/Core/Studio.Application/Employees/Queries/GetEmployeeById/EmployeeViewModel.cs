@@ -14,7 +14,7 @@ namespace Studio.Application.Employees.Queries.GetEmployeeById
 
         public int LocationId { get; set; }
 
-        public string LocationName{ get; set; }
+        public string LocationName { get; set; }
 
         public static Expression<Func<Employee, EmployeeViewModel>> Projection
         {

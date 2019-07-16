@@ -38,11 +38,11 @@
                 IsDeleted = false
             };
 
-            context.Services.Add(service);
+            this.context.Services.Add(service);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateServiceCommandNotification { ServiceId = service.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateServiceCommandNotification { ServiceId = service.Id }, cancellationToken);
 
             return Unit.Value;
         }

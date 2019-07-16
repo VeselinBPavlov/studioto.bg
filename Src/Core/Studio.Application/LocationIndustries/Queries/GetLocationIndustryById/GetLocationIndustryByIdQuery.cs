@@ -7,6 +7,5 @@ namespace Studio.Application.Cities.Queries.GetLocationIndustryById
         public int LocationId { get; set; }
 
         public int IndustryId { get; set; }
-
     }
 }

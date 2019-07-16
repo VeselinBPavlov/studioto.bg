@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
-
-namespace Studio.Common
+﻿namespace Studio.Common
 {
+    using System;
+    using System.Globalization;
+
     public static class GConst
     {
         #region Studio.Application.Core
@@ -95,8 +95,6 @@ namespace Studio.Common
         public const string ValueObjectExceptionMessage = "{0} is invalid.";
         public const string NotAvalableHours = "No Appointments Available for {0}";
 
-
         #endregion
-
     }
 }

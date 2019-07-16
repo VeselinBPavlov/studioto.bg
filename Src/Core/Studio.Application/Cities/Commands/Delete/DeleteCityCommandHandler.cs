@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
         {
-            var city = await context.Cities.FindAsync(request.Id);
+            var city = await this.context.Cities.FindAsync(request.Id);
 
             if (city == null || city.IsDeleted == true)
             {

@@ -23,7 +23,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeeServiceById
 
         public async Task<EmployeeServiceViewModel> Handle(GetEmployeeServiceByIdQuery request, CancellationToken cancellationToken)
         {
-            var employeeService = await context.EmployeeServices
+            var employeeService = await this.context.EmployeeServices
                 .Include(c => c.Employee)
                 .Include(c => c.Service)
                 .SingleOrDefaultAsync(c => c.EmployeeId == request.EmployeeId && c.ServiceId == request.ServiceId);

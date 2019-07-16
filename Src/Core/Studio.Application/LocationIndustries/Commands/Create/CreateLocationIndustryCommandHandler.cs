@@ -51,11 +51,11 @@
                 IsDeleted = false
             };
 
-            context.LocationIndustries.Add(locationIndustry);
+            this.context.LocationIndustries.Add(locationIndustry);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateLocationIndustryCommandNotification { LocationId = locationIndustry.LocationId, IndustryId = locationIndustry.IndustryId }, cancellationToken);
+            await this.mediator.Publish(new CreateLocationIndustryCommandNotification { LocationId = locationIndustry.LocationId, IndustryId = locationIndustry.IndustryId }, cancellationToken);
 
             return Unit.Value;
         }

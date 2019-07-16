@@ -23,7 +23,7 @@
 
         public async Task<Unit> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
-            var client = await context.Clients
+            var client = await this.context.Clients
                 .SingleOrDefaultAsync(c => c.Id == request.Id && c.IsDeleted != true, cancellationToken);
 
             if (client == null)
@@ -39,9 +39,9 @@
             client.Manager = manager;
             client.ModifiedOn = DateTime.UtcNow;
 
-            context.Clients.Update(client);
+            this.context.Clients.Update(client);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

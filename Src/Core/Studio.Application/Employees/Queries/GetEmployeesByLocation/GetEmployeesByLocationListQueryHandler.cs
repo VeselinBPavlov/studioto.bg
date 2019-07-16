@@ -21,6 +21,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<EmployeesListViewModel> Handle(GetEmployeesByLocationListQuery request, CancellationToken cancellationToken)
         {
             var employees = this.context.Employees.Where(e => e.LocationId == request.LocationId);
@@ -32,7 +33,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
 
             return new EmployeesListViewModel
             {
-                Employees = await employees.ProjectTo<EmployeeViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await employees.ProjectTo<EmployeeViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

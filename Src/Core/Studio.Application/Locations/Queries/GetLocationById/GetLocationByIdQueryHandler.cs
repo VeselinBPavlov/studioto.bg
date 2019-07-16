@@ -23,7 +23,7 @@ namespace Studio.Application.Locations.Queries.GetLocationById
 
         public async Task<LocationViewModel> Handle(GetLocationByIdQuery request, CancellationToken cancellationToken)
         {
-            var location = await context.Locations
+            var location = await this.context.Locations
                 .Include(c => c.Address)
                     .ThenInclude(a => a.City)
                 .Include(l => l.Client)

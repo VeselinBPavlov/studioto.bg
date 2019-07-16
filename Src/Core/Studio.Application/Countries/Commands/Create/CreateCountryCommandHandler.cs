@@ -23,7 +23,7 @@
 
         public async Task<Unit> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
-            bool isCountryNotUnique = context.Countries.Any(c => c.Name == request.Name);
+            bool isCountryNotUnique = this.context.Countries.Any(c => c.Name == request.Name);
 
             if (isCountryNotUnique)
             {
@@ -37,11 +37,11 @@
                 IsDeleted = false
             };
 
-            context.Countries.Add(country);
+            this.context.Countries.Add(country);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new CreateCountryCommandNotification { CountryId = country.Id }, cancellationToken);
+            await this.mediator.Publish(new CreateCountryCommandNotification { CountryId = country.Id }, cancellationToken);
 
             return Unit.Value;
         }

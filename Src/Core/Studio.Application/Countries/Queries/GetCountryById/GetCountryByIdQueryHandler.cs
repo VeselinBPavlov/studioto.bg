@@ -19,7 +19,7 @@ namespace Studio.Application.Countries.Queries.GetCountryById
 
         public async Task<CountryViewModel> Handle(GetCountryByIdQuery request, CancellationToken cancellationToken)
         {
-            var country = await context.Countries.FindAsync(request.Id);
+            var country = await this.context.Countries.FindAsync(request.Id);
 
             if (country == null)
             {

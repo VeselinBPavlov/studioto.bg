@@ -7,6 +7,5 @@ namespace Studio.Application.Cities.Queries.GetEmployeeServiceById
         public int EmployeeId { get; set; }
 
         public int ServiceId { get; set; }
-
     }
 }

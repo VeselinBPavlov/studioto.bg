@@ -21,7 +21,7 @@ namespace Studio.Application.Clients.Queries.GetClientById
 
         public async Task<ClientViewModel> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
-            var client = await context.Clients.Include(c => c.Manager).SingleOrDefaultAsync(c => c.Id == request.Id);
+            var client = await this.context.Clients.Include(c => c.Manager).SingleOrDefaultAsync(c => c.Id == request.Id);
 
             if (client == null)
             {

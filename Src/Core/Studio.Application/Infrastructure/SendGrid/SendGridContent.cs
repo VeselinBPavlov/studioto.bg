@@ -10,8 +10,8 @@
 
         public SendGridContent(string type, string content)
         {
-            Type = type;
-            Value = content;
+            this.Type = type;
+            this.Value = content;
         }
 
         [JsonProperty("type")]

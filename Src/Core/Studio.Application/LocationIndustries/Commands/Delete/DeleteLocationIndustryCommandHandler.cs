@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteLocationIndustryCommand request, CancellationToken cancellationToken)
         {
-            var locationIndustry = await context.LocationIndustries.FindAsync(request.LocationId, request.IndustryId);
+            var locationIndustry = await this.context.LocationIndustries.FindAsync(request.LocationId, request.IndustryId);
 
             if (locationIndustry == null || locationIndustry.IsDeleted == true)
             {

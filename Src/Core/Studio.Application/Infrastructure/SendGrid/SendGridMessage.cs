@@ -21,7 +21,7 @@
             IEnumerable<SendGridEmail> bcc = null,
             string type = TypeHtml)
         {
-            Personalizations = new List<SendGridPersonalization>
+            this.Personalizations = new List<SendGridPersonalization>
             {
                 new SendGridPersonalization
                 {
@@ -30,8 +30,8 @@
                     Subject = subject,
                 },
             };
-            From = from;
-            Content = new List<SendGridContent> { new SendGridContent(type, message) };
+            this.From = from;
+            this.Content = new List<SendGridContent> { new SendGridContent(type, message) };
         }
 
         [JsonProperty("personalizations")]

@@ -19,11 +19,12 @@ namespace Studio.Application.Countries.Queries.GetAllCountries
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<CountriesListViewModel> Handle(GetAllCountriesListQuery request, CancellationToken cancellationToken)
         {
             return new CountriesListViewModel
             {
-                Countries = await this.context.Countries.Where(c => c.IsDeleted != true).ProjectTo<CountryAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Countries = await this.context.Countries.Where(c => c.IsDeleted != true).ProjectTo<CountryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

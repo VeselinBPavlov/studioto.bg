@@ -23,7 +23,7 @@ namespace Studio.Application.Cities.Queries.GetLocationIndustryById
 
         public async Task<LocationIndustryViewModel> Handle(GetLocationIndustryByIdQuery request, CancellationToken cancellationToken)
         {
-            var LocationIndustry = await context.LocationIndustries
+            var LocationIndustry = await this.context.LocationIndustries
                 .Include(c => c.Location)
                 .Include(c => c.Industry)
                 .SingleOrDefaultAsync(c => c.LocationId == request.LocationId && c.IndustryId == request.IndustryId);

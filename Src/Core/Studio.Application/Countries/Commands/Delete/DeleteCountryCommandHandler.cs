@@ -21,7 +21,7 @@
 
         public async Task<Unit> Handle(DeleteCountryCommand request, CancellationToken cancellationToken)
         {
-            var country = await context.Countries
+            var country = await this.context.Countries
                 .FindAsync(request.Id);
 
             if (country == null || country.IsDeleted == true)

@@ -21,11 +21,12 @@ namespace Studio.Application.Locations.Queries.GetAllLocations
             this.context = context;
             this.mapper = mapper;
         }
+
         public async Task<LocationsListViewModel> Handle(GetAllLocationsListQuery request, CancellationToken cancellationToken)
         {
             return new LocationsListViewModel
             {
-                Locations = await this.context.Locations.OrderByDescending(x => x.CreatedOn).ProjectTo<LocationAllViewModel>(mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Locations = await this.context.Locations.OrderByDescending(x => x.CreatedOn).ProjectTo<LocationAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }
