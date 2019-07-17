@@ -13,11 +13,11 @@
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();            
+            CreateWebHostBuilder(args).Build().Run();     
         }
 
-        public static IWebHostBuilder BuildWebHost(string[] args) =>
-                WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+                new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -34,7 +34,6 @@
                     logging.AddConsole();
                     logging.AddDebug();
                 })
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
     }
 }

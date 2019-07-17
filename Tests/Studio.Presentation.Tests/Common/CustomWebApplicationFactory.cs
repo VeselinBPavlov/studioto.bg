@@ -25,7 +25,7 @@
                 services.AddDbContext<IStudioDbContext, StudioDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
-                    options.UseInternalServiceProvider(serviceProvider);
+                    //options.UseInternalServiceProvider(serviceProvider);
                 });
 
                 // Build the service provider.
