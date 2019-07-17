@@ -44,7 +44,7 @@ namespace Studio.Application.HelperMethods
                                
             foreach (var item in appointments)
             {
-                if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
+                if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.Value.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
                 {
                     string errorMessage = string.Format(
                         "{0} already has an appointment on {1} on {2}.",

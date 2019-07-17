@@ -49,18 +49,14 @@
             request.ReservationTime = DateTime.Parse(request.TimeBlockHelper);
 
             // CheckWorkingHours
-            DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
-            DateTime end = request.ReservationDate.Add(request.ReservationTime.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
+            DateTime start = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay);
+            DateTime end = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
             if (!AppointmentHelper.IsInWorkingHours(this.context, employee, start, end))
             {
-                throw new UpdateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
-            }
+                throw new UpdateFailureException(GConst.Appointment, request.TimeBlockHelper, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
+            };
 
-            appointment.FirstName = request.FirstName;
-            appointment.LastName = request.LastName;
-            appointment.Email = request.Email;
-            appointment.Phone = request.Phone;
-            appointment.ReservationTime = request.ReservationTime;
+            appointment.ReservationTime = request.ReservationTime.Value;
             appointment.ReservationDate = request.ReservationDate;
             appointment.TimeBlockHelper = request.TimeBlockHelper;
             appointment.Comment = request.Comment;

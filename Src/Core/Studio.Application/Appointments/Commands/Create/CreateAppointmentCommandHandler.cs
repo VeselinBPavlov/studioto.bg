@@ -24,32 +24,11 @@
 
         public async Task<Unit> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
         {
-            StudioUser user = new StudioUser();
+            var user = await this.context.StudioUsers.FindAsync(request.UserId);
 
-            if (request.UserId == null)
+            if (user == null || user.IsDeleted == true)
             {
-                user = await this.context.StudioUsers.SingleOrDefaultAsync(u => u.Email == request.Email);
-
-                if (user == null)
-                {
-                    user = new StudioUser
-                    {
-                        FirstName = request.FirstName,
-                        LastName = request.LastName,
-                        Email = request.Email,
-                        PhoneNumber = request.Phone,
-                        CreatedOn = DateTime.UtcNow,
-                        IsDeleted = false,
-                        IsTemporary = true
-                    };
-
-                    this.context.StudioUsers.Add(user);
-                    await this.context.SaveChangesAsync(cancellationToken);
-                }
-            }
-            else
-            {
-                user = await this.context.StudioUsers.FindAsync(request.UserId);
+                throw new CreateFailureException(GConst.Appointment, request.UserId, string.Format(GConst.RefereceException, GConst.UserLower, request.UserId));
             }
 
             var service = await this.context.Services.FindAsync(request.ServiceId);
@@ -68,34 +47,30 @@
 
             if (request.TimeBlockHelper == GConst.AllHoursBusy)
             {
-                throw new CreateFailureException(GConst.Appointment, request.Email, string.Format(GConst.NotAvalableHours, request.ReservationDate.ToShortDateString()));
+                throw new CreateFailureException(GConst.Appointment, request.UserId, string.Format(GConst.NotAvalableHours, request.ReservationDate.ToShortDateString()));
             }
 
             // Set Time
             request.ReservationTime = DateTime.Parse(request.TimeBlockHelper);
 
             // CheckWorkingHours
-            DateTime start = request.ReservationDate.Add(request.ReservationTime.TimeOfDay);
-            DateTime end = request.ReservationDate.Add(request.ReservationTime.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
+            DateTime start = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay);
+            DateTime end = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
             if (!AppointmentHelper.IsInWorkingHours(this.context, employee, start, end))
             {
-                throw new CreateFailureException(GConst.Appointment, request.Email, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
+                throw new CreateFailureException(GConst.Appointment, request.UserId, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));
             }
 
             // Check Appointment Clash
             string check = AppointmentHelper.ValidateNoAppoinmentClash(this.context, request);
             if (check != string.Empty)
             {
-                throw new CreateFailureException(GConst.Appointment, request.Email, check);
+                throw new CreateFailureException(GConst.Appointment, request.UserId, check);
             }
 
             var appointment = new Appointment
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Email = request.Email,
-                Phone = request.Phone,
-                ReservationTime = request.ReservationTime,
+                ReservationTime = request.ReservationTime.Value,
                 ReservationDate = request.ReservationDate,
                 TimeBlockHelper = request.TimeBlockHelper,
                 Comment = request.Comment,

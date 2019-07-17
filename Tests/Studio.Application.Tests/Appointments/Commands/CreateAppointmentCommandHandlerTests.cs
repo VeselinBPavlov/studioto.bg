@@ -37,7 +37,6 @@
         {
             var status = Task<Unit>.FromResult(await sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
                 EmployeeId = employeeId,
@@ -51,44 +50,9 @@
         }
 
         [Fact]
-        public async Task ShouldNotThrowCreateFailureExceptionForEmptyUser()
-        {
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateAppointmentCommand
-            {
-                FirstName = GConst.ValidName,
-                ReservationDate = new DateTime(2019, 09, 09),
-                TimeBlockHelper = GConst.ValidHour,
-                EmployeeId = employeeId,
-                ServiceId = serviceId
-            }, CancellationToken.None));
-
-            Assert.Null(status.Exception);
-            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(GConst.ValidCount, context.Appointments.Count());
-        }
-
-        [Fact]
-        public async Task ShouldNotThrowCreateFailureExceptionAndFindUserByEmail()
-        {
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateAppointmentCommand
-            {
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
-                EmployeeId = employeeId,
-                ServiceId = serviceId,
-                ReservationDate = new DateTime(2019, 09, 09),
-                TimeBlockHelper = GConst.ValidHour,
-            }, CancellationToken.None));
-
-            Assert.Null(status.Exception);
-            Assert.Equal(GConst.SuccessStatus, status.Status.ToString());
-            Assert.Equal(GConst.ValidCount, context.Appointments.Count());
-        }
-
-        [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidServiceId()
         {
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand { FirstName = GConst.ValidName, EmployeeId = employeeId, UserId = userId ,ServiceId = GConst.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand { EmployeeId = employeeId, UserId = userId ,ServiceId = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GConst.ReferenceExceptionMessage, GConst.Create, GConst.Appointment, GConst.InvalidId, GConst.ServiceLower, GConst.InvalidId), status.Message);
@@ -97,7 +61,7 @@
         [Fact]
         public async Task ShouldThrowCreateFailureExceptionForInvalidEmployeeId()
         {
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand { FirstName = GConst.ValidName, EmployeeId = GConst.InvalidId, ServiceId = serviceId, UserId = userId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand { EmployeeId = GConst.InvalidId, ServiceId = serviceId, UserId = userId }, CancellationToken.None));
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GConst.ReferenceExceptionMessage, GConst.Create, GConst.Appointment, GConst.InvalidId, GConst.EmployeeLower, GConst.InvalidId), status.Message);
@@ -108,8 +72,6 @@
         {
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.AllHoursBusy,
                 EmployeeId = employeeId,
@@ -118,7 +80,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.NotAvalableHours, new DateTime(2019, 09, 09).ToShortDateString())), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, userId, string.Format(GConst.NotAvalableHours, new DateTime(2019, 09, 09).ToShortDateString())), status.Message);
         }
 
         [Fact]
@@ -126,8 +88,6 @@
         {
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.InvalidHourBefore,
                 EmployeeId = employeeId,
@@ -136,7 +96,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, userId, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]
@@ -144,8 +104,6 @@
         {
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.InvalidHourAfter,
                 EmployeeId = employeeId,
@@ -154,7 +112,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException,  GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, userId, string.Format(GConst.InvalidAppointmentHourException,  GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]
@@ -164,8 +122,6 @@
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
                 EmployeeId = employeeId,
@@ -174,7 +130,7 @@
             }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.ReservedHourException, GConst.ValidName, new DateTime(2019, 09, 09).ToShortDateString(), DateTime.Parse(GConst.ValidHour).ToShortTimeString())), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Create, GConst.Appointment, userId, string.Format(GConst.ReservedHourException, GConst.ValidName, new DateTime(2019, 09, 09).ToShortDateString(), DateTime.Parse(GConst.ValidHour).ToShortTimeString())), status.Message);
         }
     }
 }

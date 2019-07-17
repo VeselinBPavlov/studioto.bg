@@ -36,7 +36,6 @@ namespace Studio.Application.Tests.Appointments.Commands
         {
             var result = sut.Handle(new CreateAppointmentCommand
             {
-                FirstName = GConst.ValidName,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
                 EmployeeId = employeeId,
@@ -44,7 +43,7 @@ namespace Studio.Application.Tests.Appointments.Commands
                 UserId = userId
             }, CancellationToken.None);
 
-            var appointmentId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
+            var appointmentId = context.Appointments.SingleOrDefault(x => x.TimeBlockHelper == GConst.ValidHour).Id;
 
             mediator.Verify(m => m.Publish(It.Is<CreateAppointmentCommandNotification>(c => c.AppointmentId == appointmentId), It.IsAny<CancellationToken>()), Times.Once);
         }

@@ -35,7 +35,6 @@
             var updatedAppointment = new UpdateAppointmentCommand
             {
                 Id = appointmentId,
-                FirstName = GConst.ValidName,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
                 EmployeeId = employeeId,
@@ -54,7 +53,7 @@
         [Fact]
         public async void AppointmentShouldThrowReferenceExceptionForInvalidServiceId()
         {
-            var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, FirstName = GConst.ValidName, ServiceId = GConst.InvalidId, EmployeeId = employeeId };
+            var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, ServiceId = GConst.InvalidId, EmployeeId = employeeId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
@@ -65,7 +64,7 @@
         [Fact]
         public async void AppointmentShouldThrowReferenceExceptionForInvalidEmployeeId()
         {
-            var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, FirstName = GConst.ValidName, ServiceId = serviceId, EmployeeId = GConst.InvalidId };
+            var updatedAppointment = new UpdateAppointmentCommand { Id = appointmentId, ServiceId = serviceId, EmployeeId = GConst.InvalidId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
@@ -76,7 +75,7 @@
         [Fact]
         public async void AppointmentShouldThrowNotFoundException()
         {
-            var updatedAppointment = new UpdateAppointmentCommand { Id = GConst.InvalidId, FirstName = GConst.ValidName };
+            var updatedAppointment = new UpdateAppointmentCommand { Id = GConst.InvalidId };
 
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
                         
@@ -90,8 +89,6 @@
             var updatedAppointment = new UpdateAppointmentCommand
             {
                 Id = appointmentId,
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.InvalidHourBefore,
                 EmployeeId = employeeId,
@@ -101,7 +98,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.InvalidHourBefore, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
 
         [Fact]
@@ -110,8 +107,6 @@
             var updatedAppointment = new UpdateAppointmentCommand
             {
                 Id = appointmentId,
-                FirstName = GConst.ValidName,
-                Email = GConst.ValidEmail,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.InvalidHourAfter,
                 EmployeeId = employeeId,
@@ -121,7 +116,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(updatedAppointment, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.ValidEmail, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
+            Assert.Equal(string.Format(GConst.FailureException, GConst.Update, GConst.Appointment, GConst.InvalidHourAfter, string.Format(GConst.InvalidAppointmentHourException, GConst.ValidStartHour, GConst.ValidEndHour)), status.Message);
         }
     }
 }

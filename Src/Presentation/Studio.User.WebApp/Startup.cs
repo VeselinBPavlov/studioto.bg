@@ -80,7 +80,11 @@
             services.AddRouting(options => options.LowercaseUrls = true);
             
             services
-                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .AddMvc(options => 
+                {
+                    options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>())
                 .AddRazorPagesOptions(options =>

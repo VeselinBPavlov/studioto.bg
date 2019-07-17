@@ -23,7 +23,7 @@ namespace Studio.Application.Employees.Queries.GetAllEmployees
         {
             configuration.CreateMap<Employee, EmployeeAllViewModel>()
                 .ForMember(x => x.LocationName, y => y.MapFrom(src => src.Location.Name))
-                .ForMember(x => x.Possitions, y => y.MapFrom(src => string.Join(", ", src.EmployeeServices.Select(z => z.Service.Industry.Possition))));
+                .ForMember(x => x.Possitions, y => y.MapFrom(src => string.Join(", ", src.EmployeeServices.Select(z => z.Service.Industry.Possition).Distinct())));
         }
     }
 }

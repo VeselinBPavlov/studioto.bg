@@ -20,11 +20,6 @@
         [Fact]
         public void AppointmentShouldNotReturnError()
         {
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.FirstName, GConst.ValidName);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.LastName, GConst.ValidName);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Email, GConst.ValidEmail);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.ValidPhone);
-            updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservationTime, DateTime.UtcNow.AddDays(1));
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.ReservationDate, DateTime.UtcNow.AddDays(1));
             updateValidator.ShouldNotHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, GConst.ValidName);
         }
@@ -32,36 +27,18 @@
         [Fact]
         public void AppointmentShouldReturnErrorIfNameIsNull()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.FirstName, null as string);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, null as string);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, null as string);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, null as string);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, null as string);
-        }
-
-        [Fact]
-        public void AppointmentShouldReturnErrorIfNameLongerThan100Characters()
-        {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.FirstName, GConst.InvalidName);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, GConst.InvalidName);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, GConst.InvalidName);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, GConst.InvalidName);            
         }
 
         [Fact]
         public void AppointmentShouldReturnErrorIfNameIsEmptyString()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.FirstName, string.Empty);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.LastName, string.Empty);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Email, string.Empty);
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.Phone, string.Empty);
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.TimeBlockHelper, string.Empty);
         }
 
                 [Fact]
         public void AppointmentShouldReturnErrorIfReservationDateIsPassed()
         {
-            updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservationTime, DateTime.UtcNow.AddDays(-1));
             updateValidator.ShouldHaveValidationErrorFor(updateCommand => updateCommand.ReservationDate, DateTime.UtcNow.AddDays(-1));
         }
     }

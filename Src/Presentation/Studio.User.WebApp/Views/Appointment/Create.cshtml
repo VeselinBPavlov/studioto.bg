@@ -1,0 +1,32 @@
+﻿@model Studio.Application.Appointments.Commands.Create.CreateAppointmentCommand
+@{
+    ViewData["Title"] = "Appointment";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Appointment" asp-action="Create" method="post">
+            <h4>Create a new Appointment.</h4>
+            <hr />
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control" />
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control" />
+            <label asp-for="Phone">Phone</label>
+            <input asp-for="Phone" class="form-control" />
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <label asp-for="ReservationDate">Reservation Date</label>
+            <input asp-for="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
+            <label asp-for="ReservationTime">Reservation Time</label>
+            <input asp-for="ReservationTime" type="date" asp-format="dd-MM-yyyy" class="form-control" />
+            <label asp-for="TimeBlockHelper">TimeBlockHelper</label>
+            <input asp-for="TimeBlockHelper" class="form-control" />
+            <label asp-for="Comment">Comment</label>
+            <input asp-for="Comment" class="form-control" />
+        </form>
+    </div>
+</div> 
+
