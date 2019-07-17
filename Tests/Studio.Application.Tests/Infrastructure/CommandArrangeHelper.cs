@@ -167,7 +167,6 @@ namespace Studio.Application.Tests.Infrastructure
         {
             Appointment appointment = new Appointment
             {
-                FirstName = GConst.ValidName,
                 ReservationDate = new DateTime(2019, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
             };
@@ -192,7 +191,7 @@ namespace Studio.Application.Tests.Infrastructure
             context.Appointments.Add(appointment);
             context.SaveChanges();
 
-            var appointmentId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
+            var appointmentId = context.Appointments.SingleOrDefault(x => x.TimeBlockHelper == GConst.ValidHour).Id;
 
             return appointmentId;
         }

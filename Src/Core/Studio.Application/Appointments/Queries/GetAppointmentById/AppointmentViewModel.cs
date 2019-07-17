@@ -43,10 +43,10 @@ namespace Studio.Application.Appointments.Queries.GetAppointmentById
                 return appointment => new AppointmentViewModel
                 {
                     Id = appointment.Id,
-                    FirstName = appointment.FirstName,
-                    LastName = appointment.LastName,
-                    Email = appointment.Email,
-                    Phone = appointment.Phone,
+                    FirstName = appointment.User.FirstName,
+                    LastName = appointment.User.LastName,
+                    Email = appointment.User.Email,
+                    Phone = appointment.User.PhoneNumber,
                     ReservationDate = appointment.ReservationDate.ToShortDateString(),
                     ReservationTime = appointment.ReservationTime.ToShortTimeString(),
                     TimeBlockHelper = appointment.TimeBlockHelper,

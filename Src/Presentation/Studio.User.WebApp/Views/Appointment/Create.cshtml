@@ -1,4 +1,11 @@
 ﻿@model Studio.Application.Appointments.Commands.Create.CreateAppointmentCommand
+@using Microsoft.AspNetCore.Identity
+@using Studio.Domain.Entities
+@inject UserManager<StudioUser> UserManager
+<!-- 
+var user = await UserManager.GetUserAsync(User);
+var userId = user?.Id; -->
+
 @{
     ViewData["Title"] = "Appointment";
 }
@@ -8,24 +15,18 @@
         <form asp-controller="Appointment" asp-action="Create" method="post">
             <h4>Create a new Appointment.</h4>
             <hr />
-            <label asp-for="FirstName">First Name</label>
-            <input asp-for="FirstName" class="form-control" />
-            <label asp-for="LastName">Last Name</label>
-            <input asp-for="LastName" class="form-control" />
-            <label asp-for="Phone">Phone</label>
-            <input asp-for="Phone" class="form-control" />
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" />
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" />
             <label asp-for="ReservationDate">Reservation Date</label>
             <input asp-for="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
-            <label asp-for="ReservationTime">Reservation Time</label>
-            <input asp-for="ReservationTime" type="date" asp-format="dd-MM-yyyy" class="form-control" />
             <label asp-for="TimeBlockHelper">TimeBlockHelper</label>
             <input asp-for="TimeBlockHelper" class="form-control" />
             <label asp-for="Comment">Comment</label>
             <input asp-for="Comment" class="form-control" />
+            <label asp-for="EmployeeId">Employee</label>
+            <input asp-for="EmployeeId" class="form-control" />
+            <label asp-for="ServiceId">ServiceId</label>
+            <input asp-for="ServiceId" class="form-control" />
+            <input asp-for="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 </div> 

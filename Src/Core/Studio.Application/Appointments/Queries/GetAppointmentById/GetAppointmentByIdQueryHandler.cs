@@ -23,7 +23,11 @@ namespace Studio.Application.Appointments.Queries.GetAppointmentById
 
         public async Task<AppointmentViewModel> Handle(GetAppointmentByIdQuery request, CancellationToken cancellationToken)
         {
-            var appointment = await this.context.Appointments.FindAsync(request.Id);
+            var appointment = await this.context.Appointments
+                .Include(a => a.User)
+                .Include(a => a.Employee)
+                .Include(a => a.Service)
+                .SingleOrDefaultAsync(a => a.Id == request.Id);
 
             if (appointment == null)
             {

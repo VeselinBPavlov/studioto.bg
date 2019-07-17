@@ -80,9 +80,9 @@
 
             var appointments = new List<Appointment>
             {
-                new Appointment { Id = 1, FirstName = "Misho", LastName = "Mishov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
-                new Appointment { Id = 2, FirstName = "Pesho", LastName = "Peshov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
-                new Appointment { Id = 3, FirstName = "Gosho", LastName = "Goshov", Email = "abv@abv.bg", Phone = "0883654321", Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  }
+                new Appointment { Id = 1, Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
+                new Appointment { Id = 2, Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  },
+                new Appointment { Id = 3, Comment = "Be Happy!", ReservationDate = new DateTime(2019, 09, 15), TimeBlockHelper = "9", ReservationTime = new DateTime(2019, 09, 15, 9, 0, 0), EmployeeId = employeeId, ServiceId = serviceId, UserId = userId  }
             };
 
             context.Appointments.AddRange(appointments);

@@ -43,7 +43,7 @@
 
             var status = Task<Unit>.FromResult(await sut.Handle(updatedAppointment, CancellationToken.None));
 
-            var resultId = context.Appointments.SingleOrDefault(x => x.FirstName == GConst.ValidName).Id;
+            var resultId = context.Appointments.SingleOrDefault(x => x.TimeBlockHelper == GConst.ValidHour).Id;
 
             Assert.Equal(appointmentId, resultId);
             Assert.Equal(GConst.SuccessStatus, status.Status.ToString());

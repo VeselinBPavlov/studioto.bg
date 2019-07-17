@@ -10,24 +10,6 @@
         {
             builder.HasKey(a => a.Id);
 
-            builder.Property(a => a.FirstName)
-                   .HasMaxLength(100)
-                   .IsUnicode()
-                   .IsRequired();
-
-            builder.Property(a => a.LastName)
-                   .HasMaxLength(100)
-                   .IsUnicode()
-                   .IsRequired();
-
-            builder.Property(a => a.Email)
-                   .HasMaxLength(100)
-                   .IsRequired();
-
-            builder.Property(a => a.Phone)
-                   .HasMaxLength(100)
-                   .IsRequired();
-
             builder.Property(a => a.Comment)
                    .HasMaxLength(450)
                    .IsUnicode();
