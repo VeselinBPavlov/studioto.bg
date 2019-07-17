@@ -5,18 +5,20 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.EntityFrameworkCore;
+    using System;
 
     public class Program
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-            
+            BuildWebHost(args).Run();            
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder BuildWebHost(string[] args) =>
                 WebHost.CreateDefaultBuilder(args)
-                ////.UseKestrel()
+                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
