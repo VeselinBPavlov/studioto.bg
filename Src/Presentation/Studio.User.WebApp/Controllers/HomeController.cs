@@ -11,7 +11,17 @@
             return this.View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return this.View();
+        }
+
+        public IActionResult Steps()
+        {
+            return this.View();
+        }
+
+        public IActionResult Contacts()
         {
             return this.View();
         }
