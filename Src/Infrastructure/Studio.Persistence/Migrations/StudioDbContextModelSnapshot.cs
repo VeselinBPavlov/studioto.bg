@@ -132,27 +132,6 @@ namespace Studio.Persistence.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Studio.Domain.Entities.Administration", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .IsUnicode(true);
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .IsUnicode(true);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Administrations");
-                });
-
             modelBuilder.Entity("Studio.Domain.Entities.Appointment", b =>
                 {
                     b.Property<int>("Id")
@@ -167,29 +146,11 @@ namespace Studio.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.Property<int>("EmployeeId");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(true);
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(true);
-
                     b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(100);
 
                     b.Property<DateTime>("ReservationDate");
 
@@ -656,7 +617,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.StudioRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -680,7 +641,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.StudioRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.StudioUser")
                         .WithMany("Roles")
@@ -693,7 +654,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.StudioUser")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Address", b =>
@@ -701,7 +662,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.City", "City")
                         .WithMany("Addresses")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.OwnsOne("Studio.Domain.ValueObjects.AddressFormat", "AddressFormat", b1 =>
                         {
@@ -746,7 +707,7 @@ namespace Studio.Persistence.Migrations
                             b1.HasOne("Studio.Domain.Entities.Address")
                                 .WithOne("AddressFormat")
                                 .HasForeignKey("Studio.Domain.ValueObjects.AddressFormat", "AddressId")
-                                .OnDelete(DeleteBehavior.Restrict);
+                                .OnDelete(DeleteBehavior.Cascade);
                         });
                 });
 
@@ -755,12 +716,12 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Employee", "Employee")
                         .WithMany("Appointments")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.StudioUser", "User")
                         .WithMany("Appointments")
@@ -772,7 +733,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Client", b =>
@@ -800,7 +761,7 @@ namespace Studio.Persistence.Migrations
                             b1.HasOne("Studio.Domain.Entities.Client")
                                 .WithOne("Manager")
                                 .HasForeignKey("Studio.Domain.ValueObjects.Manager", "ClientId")
-                                .OnDelete(DeleteBehavior.Restrict);
+                                .OnDelete(DeleteBehavior.Cascade);
                         });
                 });
 
@@ -809,7 +770,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Location", "Location")
                         .WithMany("Employees")
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.EmployeeService", b =>
@@ -817,12 +778,12 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Employee", "Employee")
                         .WithMany("EmployeeServices")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.Service", "Service")
                         .WithMany("LocationServices")
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Location", b =>
@@ -830,12 +791,12 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Address", "Address")
                         .WithOne("Location")
                         .HasForeignKey("Studio.Domain.Entities.Location", "AddressId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.Client", "Client")
                         .WithMany("Locations")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.LocationIndustry", b =>
@@ -843,12 +804,12 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Industry", "Industry")
                         .WithMany("LocationIndustries")
                         .HasForeignKey("IndustryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Studio.Domain.Entities.Location", "Location")
                         .WithMany("LocationIndustries")
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Studio.Domain.Entities.Service", b =>
@@ -856,7 +817,7 @@ namespace Studio.Persistence.Migrations
                     b.HasOne("Studio.Domain.Entities.Industry", "Industry")
                         .WithMany("Services")
                         .HasForeignKey("IndustryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
