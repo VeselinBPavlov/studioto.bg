@@ -11,7 +11,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
     using Studio.Application.Interfaces.Persistence;
     using Studio.Common;
 
-    public class GetEmployeesByLocationListQueryHandler : IRequestHandler<GetEmployeesByLocationListQuery, EmployeesListViewModel>
+    public class GetEmployeesByLocationListQueryHandler : IRequestHandler<GetEmployeesByLocationListQuery, EmployeesByLocationListViewModel>
     {
         private readonly IStudioDbContext context;
         private readonly IMapper mapper;
@@ -22,7 +22,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
             this.mapper = mapper;
         }
 
-        public async Task<EmployeesListViewModel> Handle(GetEmployeesByLocationListQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeesByLocationListViewModel> Handle(GetEmployeesByLocationListQuery request, CancellationToken cancellationToken)
         {
             var employees = this.context.Employees.Where(e => e.LocationId == request.LocationId);
 
@@ -31,9 +31,9 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
                 throw new NotFoundException(GConst.Employee, request.LocationId);
             }
 
-            return new EmployeesListViewModel
+            return new EmployeesByLocationListViewModel
             {
-                Employees = await employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeByLocationViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

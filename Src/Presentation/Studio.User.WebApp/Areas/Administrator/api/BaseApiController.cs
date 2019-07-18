@@ -1,9 +1,11 @@
 namespace Studio.User.WebApp.Areas.Administrator.api
 {
     using MediatR;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
 
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]

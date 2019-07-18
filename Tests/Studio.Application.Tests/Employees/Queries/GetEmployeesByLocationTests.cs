@@ -23,8 +23,8 @@ namespace Studio.Application.Tests.Employees.Queries
         {
             var result = await sut.Handle(new GetEmployeesByLocationListQuery { LocationId = GConst.ValidId }, CancellationToken.None);
 
-            result.ShouldBeOfType<EmployeesListViewModel>();
-            // TODO: Test for empty collection.
+            result.ShouldBeOfType<EmployeesByLocationListViewModel>();
+            result.Employees.Count.ShouldBe(GConst.ValidCount);
         }
     }
 }

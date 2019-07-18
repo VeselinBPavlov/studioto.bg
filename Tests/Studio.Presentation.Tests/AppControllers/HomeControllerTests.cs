@@ -1,6 +1,9 @@
 ﻿namespace Studio.Presentation.Tests.AppControllers
 {
     using MyTested.AspNetCore.Mvc;
+    using Studio.Application.ContactForms.Commands.Create;
+    using Studio.Common;
+    using Studio.Domain.Entities;
     using Studio.User.WebApp.Controllers;
     using Xunit;
 
@@ -37,6 +40,25 @@
                 .Calling(c => c.Contacts())
                 .ShouldReturn()
                 .View();
+
+        [Fact]
+        public void CreatePostShouldSaveArticleSetModelStateMessageAndRedirectWhenValidModelState()
+            => MyController<HomeController>
+                .Instance()
+                .Calling(c => c.Contacts(new CreateContactFormCommand
+                {
+                    FirstName = GConst.ValidName,
+                    LastName = GConst.ValidName,
+                    Email = "vp_fin@abv.bg",
+                    Topic = GConst.ValidName,
+                    Message = GConst.ValidName
+                }))
+                .ShouldHave()
+                .ValidModelState()
+                .AndAlso()
+                .ShouldReturn()
+                .Redirect(redirect => redirect
+                    .To<HomeController>(c => c.Index()));
     }
 }
 

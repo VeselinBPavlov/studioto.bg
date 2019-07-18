@@ -6,7 +6,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
     using Studio.Application.Interfaces.Mapping;
     using Studio.Domain.Entities;
 
-    public class EmployeeViewModel : IHaveCustomMapping
+    public class EmployeeByLocationViewModel : IHaveCustomMapping
     {
         public int Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace Studio.Application.Cities.Queries.GetEmployeesByLocation
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Employee, EmployeeViewModel>()
+            configuration.CreateMap<Employee, EmployeeByLocationViewModel>()
                 .ForMember(x => x.Possitions, y => y.MapFrom(src => string.Join(", ", src.EmployeeServices.Select(z => z.Service.Industry.Possition))));
         }
     }

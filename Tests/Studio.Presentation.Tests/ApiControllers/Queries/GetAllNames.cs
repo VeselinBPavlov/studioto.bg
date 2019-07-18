@@ -3,6 +3,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
     using Common;
+    using Microsoft.AspNetCore.Mvc;
+    using MyTested.AspNetCore.Mvc;
     using Studio.Application.Addresses.Queries.GetAllNames;
     using Studio.Application.Cities.Queries.GetAllNames;
     using Studio.Application.Clients.Queries.GetAllNames;
@@ -11,106 +13,93 @@
     using Studio.Application.Locations.Queries.GetAllNames;
     using Studio.Application.Services.Queries.GetAllNames;
     using Studio.User.WebApp;
+    using Studio.User.WebApp.Areas.Administrator.api;
     using Xunit;
 
     public class GetAllNames : IClassFixture<CustomWebApplicationFactory<Startup>>
-    {
-        private readonly HttpClient client;
-
-        public GetAllNames(CustomWebApplicationFactory<Startup> factory)
-        {
-            this.client = factory.CreateClient();
-        }        
+    {      
+        [Fact]
+        public void GetAllNamesCitiesShouldReturnCitiesNamesListViewModel()
+            => MyController<CitiesController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<CitiesNamesListViewModel>>();
 
         [Fact]
-        public async Task ReturnAllCitiesNames()
-        {
-            var response = await client.GetAsync("/api/Cities/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<CitiesNamesListViewModel>(response);
-
-            Assert.IsType<CitiesNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Cities);
-        }
-
-        [Fact]
-        public async Task ReturnAllAddressesNames()
-        {
-            var response = await client.GetAsync("/api/Addresses/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<AddressesNamesListViewModel>(response);
-
-            Assert.IsType<AddressesNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Addresses);
-        }
+        public void GetAllNamesAddressesShouldReturnAddressesNamesListViewModel()
+            => MyController<AddressesController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<AddressesNamesListViewModel>>();
 
         [Fact]
-        public async Task ReturnAllClientsNames()
-        {
-            var response = await client.GetAsync("/api/Clients/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<ClientsNamesListViewModel>(response);
-
-            Assert.IsType<ClientsNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Clients);
-        }
-
-        [Fact]
-        public async Task ReturnAllEmployeesNames()
-        {
-            var response = await client.GetAsync("/api/Employees/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<EmployeesNamesListViewModel>(response);
-
-            Assert.IsType<EmployeesNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Employees);
-        }
+        public void GetAllNamesClientsShouldReturnClientsNamesListViewModel()
+            => MyController<ClientsController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<ClientsNamesListViewModel>>();
 
         [Fact]
-        public async Task ReturnAllIndustriesNames()
-        {
-            var response = await client.GetAsync("/api/Industries/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<IndustriesNamesListViewModel>(response);
-
-            Assert.IsType<IndustriesNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Industries);
-        }
+        public void GetAllNamesLocationsShouldReturnLocationsNamesListViewModel()
+            => MyController<LocationsController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<LocationsNamesListViewModel>>();
+        
+        [Fact]
+        public void GetAllNamesIndustriesShouldReturnIndustriesNamesListViewModel()
+            => MyController<IndustriesController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<IndustriesNamesListViewModel>>();
 
         [Fact]
-        public async Task ReturnAllLocationsNames()
-        {
-            var response = await client.GetAsync("/api/Locations/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<LocationsNamesListViewModel>(response);
-
-            Assert.IsType<LocationsNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Locations);
-        }
+        public void GetAllNamesEmployeesShouldReturnEmployeesNamesListViewModel()
+            => MyController<EmployeesController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<EmployeesNamesListViewModel>>();
 
         [Fact]
-        public async Task ReturnAllServicesNames()
-        {
-            var response = await client.GetAsync("/api/Services/GetAllNames");
-
-           response.EnsureSuccessStatusCode();
-
-            var vm = await Utilities.GetResponseContent<ServicesNamesListViewModel>(response);
-
-            Assert.IsType<ServicesNamesListViewModel>(vm);
-            Assert.NotEmpty(vm.Services);
-        }        
+        public void GetAllNamesServicesShouldReturnServicesNamesListViewModel()
+            => MyController<ServicesController>
+                .Instance()
+                .Calling(c => c.GetAllNames())
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForHttpMethod(MyTested.AspNetCore.Mvc.HttpMethod.Get))
+                .AndAlso()
+                .ShouldReturn()
+                .ResultOfType<ActionResult<ServicesNamesListViewModel>>();
     }
 }
