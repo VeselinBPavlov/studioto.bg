@@ -10,22 +10,25 @@
     using Studio.Common;
     using Xunit;
     using Moq;
+    using Microsoft.Extensions.Logging;
 
     public class CreateContactFormCommandHandlerTests : CommandTestBase
     {
         private Mock<IMediator> mediator;
         private CreateContactFormCommandHandler sut;
+        private ILoggerFactory loggerFactory;
 
         public CreateContactFormCommandHandlerTests()
         {
             mediator = new Mock<IMediator>();
-            sut = new CreateContactFormCommandHandler(context, mediator.Object);
+            loggerFactory = new LoggerFactory();
+            sut = new CreateContactFormCommandHandler(context, mediator.Object, loggerFactory);            
         }
 
         [Fact]
         public async Task ShouldCreateContactForm()
         {
-            var status = Task<Unit>.FromResult(await sut.Handle(new CreateContactFormCommand { FirstName = GConst.ValidName }, CancellationToken.None));
+            var status = Task<Unit>.FromResult(await sut.Handle(new CreateContactFormCommand { FirstName = GConst.ValidName, LastName = GConst.ValidName, Topic = GConst.ValidName, Message = GConst.ValidName, Email = "vp_fin@abv.bg" }, CancellationToken.None));
            
             Assert.Null(status.Exception);
             Assert.Equal(GConst.SuccessStatus, status.Status.ToString());

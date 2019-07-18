@@ -15,6 +15,10 @@
         public const string UniqueNameException = "There are existing {0} with the same name.";
         public const string InvalidAppointmentHourException = "Location Working Hours are from {0} to {1}.";
         public const string ReservedHourException = "{0} already has an appointment on {1} on {2}.";
+        public const string SenderEmail = "studio@gmail.bg";
+        public const string SenderName = "studioto.bg";
+        public const string SenderSubject = "Потвърдена заявка.";
+        public const string SenderMessage = "Важата резервация в Studio.bg e потвърдена. Можете да видите резевацията в личния си профил.";
 
         #endregion
 

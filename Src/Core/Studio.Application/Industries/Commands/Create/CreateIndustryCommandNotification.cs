@@ -1,4 +1,4 @@
-﻿namespace Studio.Application.ContactForms.Commands.Create
+﻿namespace Studio.Application.Industries.Commands.Create
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -6,20 +6,20 @@
     using Interfaces.Infrastructure;
     using Notifications;
 
-    public class CreateContactFormCommandNotification : INotification
+    public class CreateIndustryCommandNotification : INotification
     {
-        public int ContactFormId { get; set; }
+        public int IndustryId { get; set; }
 
-        public class ContactFormCreatedHandler : INotificationHandler<CreateContactFormCommandNotification>
+        public class IndustryCreatedHandler : INotificationHandler<CreateIndustryCommandNotification>
         {
             private readonly INotificationService notification;
 
-            public ContactFormCreatedHandler(INotificationService notification)
+            public IndustryCreatedHandler(INotificationService notification)
             {
                 this.notification = notification;
             }
 
-            public async Task Handle(CreateContactFormCommandNotification notification, CancellationToken cancellationToken)
+            public async Task Handle(CreateIndustryCommandNotification notification, CancellationToken cancellationToken)
             {
                 await this.notification.SendAsync(new Message());
             }
