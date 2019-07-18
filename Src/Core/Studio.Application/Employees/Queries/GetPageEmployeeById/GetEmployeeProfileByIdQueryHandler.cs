@@ -12,16 +12,16 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
     using Studio.Application.Interfaces.Persistence;
     using Studio.Common;
 
-    public class GetEmployeeByIdQueryHandler : IRequestHandler<GetEmployeeByIdQuery, EmployeeProfileViewModel>
+    public class GetEmployeeProfileByIdQueryHandler : IRequestHandler<GetEmployeeProfileByIdQuery, EmployeeProfileViewModel>
     {
         private readonly IStudioDbContext context;
 
-        public GetEmployeeByIdQueryHandler(IStudioDbContext context)
+        public GetEmployeeProfileByIdQueryHandler(IStudioDbContext context)
         {
             this.context = context;
         }
 
-        public async Task<EmployeeProfileViewModel> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeeProfileViewModel> Handle(GetEmployeeProfileByIdQuery request, CancellationToken cancellationToken)
         {
             var employee = await this.context.Employees.FindAsync(request.Id);
 

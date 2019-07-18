@@ -6,6 +6,7 @@ namespace Studio.Application.Tests.Employees.Queries
     using Shouldly;
     using Studio.Application.Cities.Queries.GetCityById;
     using Studio.Application.Cities.Queries.GetEmployeesByLocation;
+    using Studio.Application.Employees.Queries.GetEmployeeById;
     using Studio.Application.Employees.Queries.GetPageEmployeeById;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
@@ -13,17 +14,17 @@ namespace Studio.Application.Tests.Employees.Queries
 
     public class GetEmployeeProfileByIdTests : QueryTestFixture
     {
-        private GetEmployeeByIdQueryHandler sut;
+        private GetEmployeeProfileByIdQueryHandler sut;
         public GetEmployeeProfileByIdTests()
         {            
             QueryArrangeHelper.AddEmployees(context);
-            sut = new GetEmployeeByIdQueryHandler(context);
+            sut = new GetEmployeeProfileByIdQueryHandler(context);
         }
 
         [Fact]
         public async Task GetEmployeesByLocationTest()
         {
-            var status = await sut.Handle(new GetEmployeeByIdQuery { Id = GConst.ValidId }, CancellationToken.None);
+            var status = await sut.Handle(new GetEmployeeProfileByIdQuery { Id = GConst.ValidId }, CancellationToken.None);
 
             status.ShouldBeOfType<EmployeeProfileViewModel>();
             status.Id.ShouldBe(GConst.ValidId);
@@ -32,7 +33,7 @@ namespace Studio.Application.Tests.Employees.Queries
         [Fact]
         public async Task ShouldThowNotFoundException()
         {
-            var status = await Record.ExceptionAsync(async () => await sut.Handle(new GetEmployeeByIdQuery { Id = GConst.InvalidId }, CancellationToken.None));
+            var status = await Record.ExceptionAsync(async () => await sut.Handle(new GetEmployeeProfileByIdQuery { Id = GConst.InvalidId }, CancellationToken.None));
 
             Assert.NotNull(status);
             Assert.Equal(string.Format(GConst.NotFoundExceptionMessage, GConst.Employee, GConst.InvalidId), status.Message);
