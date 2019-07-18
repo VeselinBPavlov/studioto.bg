@@ -8,7 +8,6 @@
     using AutoMapper;
     using Common;
     using Domain.Entities;
-    using Infrastructure;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -43,10 +42,6 @@
             // AutoMapper
             services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
-            // Framework Serices.
-            services.AddTransient<INotificationService, NotificationService>();
-            services.AddTransient<IDateTime, MachineDateTime>();
-
             // MediatR
             services.AddMediatR(typeof(GetAllCountriesListQueryHandler).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
@@ -61,7 +56,7 @@
 
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("StudioDBConnectionHome")));
+                    this.Configuration.GetConnectionString("StudioDBConnectionWork")));
             
             services.AddScoped<IStudioDbContext, StudioDbContext>();
 
@@ -110,7 +105,7 @@
                     options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
             
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
         }
 

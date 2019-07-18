@@ -53,9 +53,7 @@
 
             this.context.LocationIndustries.Add(locationIndustry);
 
-            await this.context.SaveChangesAsync(cancellationToken);
-
-            await this.mediator.Publish(new CreateLocationIndustryCommandNotification { LocationId = locationIndustry.LocationId, IndustryId = locationIndustry.IndustryId }, cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);            
 
             return Unit.Value;
         }

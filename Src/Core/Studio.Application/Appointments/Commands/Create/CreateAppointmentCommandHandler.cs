@@ -85,8 +85,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateAppointmentCommandNotification { AppointmentId = appointment.Id }, cancellationToken);
-
             return Unit.Value;
         }
 

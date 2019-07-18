@@ -37,8 +37,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateClientCommandNotification { ClientId = client.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

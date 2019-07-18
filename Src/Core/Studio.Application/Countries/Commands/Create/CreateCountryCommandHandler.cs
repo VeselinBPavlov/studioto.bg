@@ -41,8 +41,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateCountryCommandNotification { CountryId = country.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

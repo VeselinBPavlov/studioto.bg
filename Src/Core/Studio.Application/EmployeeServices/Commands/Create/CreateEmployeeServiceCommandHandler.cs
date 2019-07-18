@@ -51,9 +51,7 @@
 
             this.context.EmployeeServices.Add(employeeService);
 
-            await this.context.SaveChangesAsync(cancellationToken);
-
-            await this.mediator.Publish(new CreateEmployeeServiceCommandNotification { EmployeeId = employeeService.EmployeeId, ServiceId = employeeService.ServiceId }, cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);            
 
             return Unit.Value;
         }

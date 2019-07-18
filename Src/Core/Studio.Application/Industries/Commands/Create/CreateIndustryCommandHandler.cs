@@ -32,8 +32,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateIndustryCommandNotification { IndustryId = industry.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

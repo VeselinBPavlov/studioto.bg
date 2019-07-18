@@ -59,8 +59,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateLocationCommandNotification { LocationId = Location.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

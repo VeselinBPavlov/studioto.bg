@@ -13,7 +13,7 @@
 
     public class CreateContactFormCommandHandler : IRequestHandler<CreateContactFormCommand, Unit>
     {
-        private readonly string apiKey = "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";   
+        private readonly string apiKey = "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";
         private readonly IStudioDbContext context;
         private readonly IMediator mediator;
         private readonly ILoggerFactory loggerFactory;
@@ -40,9 +40,7 @@
 
             this.context.ContactForms.Add(contactForm);
 
-            await this.context.SaveChangesAsync(cancellationToken);
-
-            await this.mediator.Publish(new CreateContactFormCommandNotification { ContactFormId = contactForm.Id }, cancellationToken);
+            await this.context.SaveChangesAsync(cancellationToken);           
 
             var emailSender = new SendGridEmailSender(loggerFactory, apiKey, GConst.SenderEmail, GConst.SenderName);
             await emailSender.SendEmailAsync(request.Email, GConst.SenderSubject, GConst.SenderMessage);

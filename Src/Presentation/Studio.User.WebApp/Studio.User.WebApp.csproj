@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Studio.Common\Studio.Common.csproj" />
     <ProjectReference Include="..\..\Core\Studio.Domain\Studio.Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\Studio.Infrastructure\Studio.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Studio.Persistence\Studio.Persistence.csproj" />
   </ItemGroup>
 

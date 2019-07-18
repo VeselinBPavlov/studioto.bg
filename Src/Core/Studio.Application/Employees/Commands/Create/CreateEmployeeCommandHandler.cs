@@ -43,8 +43,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateEmployeeCommandNotification { EmployeeId = employee.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

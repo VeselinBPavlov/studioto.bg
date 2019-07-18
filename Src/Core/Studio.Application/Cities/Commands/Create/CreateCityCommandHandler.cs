@@ -42,8 +42,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateCityCommandNotification { CityId = city.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }

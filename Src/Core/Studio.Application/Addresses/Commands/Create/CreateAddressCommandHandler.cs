@@ -55,8 +55,6 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            await this.mediator.Publish(new CreateAddressCommandNotification { AddressId = address.Id }, cancellationToken);
-
             return Unit.Value;
         }
     }
