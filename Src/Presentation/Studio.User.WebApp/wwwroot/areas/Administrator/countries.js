@@ -38,7 +38,7 @@
     }
 
     function CreateData() {
-
+        console.log("Haha");
         var formCountry = $('#formCountry').serialize();
 
          $.ajax({

@@ -28,6 +28,7 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
                     .ThenInclude(es => es.Service)
                         .ThenInclude(s => s.Industry)
                 .Include(e => e.Location)
+                    .ThenInclude(l => l.Address)
                 .SingleOrDefaultAsync(e => e.Id == request.Id);
 
             if (employee == null)

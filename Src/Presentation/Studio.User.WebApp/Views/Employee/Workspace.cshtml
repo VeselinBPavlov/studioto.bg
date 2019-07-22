@@ -1,10 +1,38 @@
-﻿@using Studio.Application.Employees.Queries.GetPageEmployeeById;
-@model EmployeeProfileViewModel;
+﻿
+@using Studio.Application.Employees.Queries.GetPageEmployeeById;
+@using Studio.Application.Appointments.Commands.Create;
+@using Microsoft.AspNetCore.Identity;
+@using Studio.Domain.Entities;
+@model EmployeeAppointmentDto;
+@inject UserManager<StudioUser> UserManager
 
 @{
-    ViewData["Title"] = "Steps";
+    ViewData["Title"] = "Workspace";
+    EmployeeProfileViewModel employee = Model.EmployeeProfileViewModel;
+    CreateAppointmentCommand appointment = Model.CreateAppointmentCommand;
 }
 
+
 <div class="text-center">
-    <h1 class="display-4">@Model.FirstName</h1>
+    <h1 class="display-4">@employee.FirstName</h1>
 </div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Appointment" asp-action="Create" method="post">
+            <h4>Create a new Appointment.</h4>
+            <hr />
+            <label asp-for="@appointment.ReservationDate">Reservation Date</label>
+            <input asp-for="@appointment.ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
+            <label asp-for="@appointment.TimeBlockHelper">TimeBlockHelper</label>
+            <input asp-for="@appointment.TimeBlockHelper" class="form-control" />
+            <label asp-for="@appointment.Comment">Comment</label>
+            <input asp-for="@appointment.Comment" class="form-control" />
+            <label asp-for="@appointment.ServiceId">ServiceId</label>
+            <input asp-for="@appointment.ServiceId" class="form-control" />
+            <input asp-for="@appointment.EmployeeId" class="form-control" value="@employee.Id" hidden />
+            <input asp-for="@appointment.UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div> 

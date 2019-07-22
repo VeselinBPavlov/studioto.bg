@@ -5,7 +5,7 @@ namespace Studio.User.WebApp.Areas.Administrator.api
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
 
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]

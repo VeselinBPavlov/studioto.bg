@@ -81,7 +81,7 @@
                 .AddMvc(options => 
                 {
                     options.Filters.Add(typeof(CustomExceptionFilterAttribute));
-                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                    //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>())
