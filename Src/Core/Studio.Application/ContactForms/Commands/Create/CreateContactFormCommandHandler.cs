@@ -10,6 +10,8 @@
     using Microsoft.Extensions.Configuration;
     using Studio.Application.Infrastructure.SendGrid;
     using Studio.Common;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Studio.Application.Interfaces.Infrastructure;
 
     public class CreateContactFormCommandHandler : IRequestHandler<CreateContactFormCommand, Unit>
     {
@@ -17,10 +19,12 @@
         private readonly IStudioDbContext context;
         private readonly IMediator mediator;
         private readonly ILoggerFactory loggerFactory;
+        private readonly ISender emailSender;
 
-        public CreateContactFormCommandHandler(IStudioDbContext context, IMediator mediator, ILoggerFactory loggerFactory)
+        public CreateContactFormCommandHandler(IStudioDbContext context, IMediator mediator, ILoggerFactory loggerFactory, ISender emailSender)
         {
             this.loggerFactory = loggerFactory;
+            this.emailSender = emailSender;
             this.context = context;
             this.mediator = mediator;
         }
@@ -42,7 +46,7 @@
 
             await this.context.SaveChangesAsync(cancellationToken);           
 
-            var emailSender = new SendGridEmailSender(loggerFactory, apiKey, GConst.SenderEmail, GConst.SenderName);
+            emailSender.ConfigureSendGridEmailSender(loggerFactory, apiKey, GConst.SenderEmail, GConst.SenderName);
             await emailSender.SendEmailAsync(request.Email, GConst.SenderSubject, GConst.SenderMessage);
 
             return Unit.Value;

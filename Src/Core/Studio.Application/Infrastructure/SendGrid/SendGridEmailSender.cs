@@ -10,20 +10,21 @@
     using Microsoft.Extensions.Logging;
 
     using Newtonsoft.Json;
+    using Studio.Application.Interfaces.Infrastructure;
 
     // Documentation: https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html
-    public class SendGridEmailSender : IEmailSender
+    public class SendGridEmailSender : ISender
     {
         private const string AuthenticationScheme = "Bearer";
         private const string BaseUrl = "https://api.sendgrid.com/v3/";
         private const string SendEmailUrlPath = "mail/send";
 
-        private readonly string fromAddress;
-        private readonly string fromName;
-        private readonly HttpClient httpClient;
-        private readonly ILogger logger;
+        private string fromAddress;
+        private string fromName;
+        private HttpClient httpClient;
+        private ILogger logger;
 
-        public SendGridEmailSender(ILoggerFactory loggerFactory, string apiKey, string fromAddress, string fromName)
+        public void ConfigureSendGridEmailSender(ILoggerFactory loggerFactory, string apiKey, string fromAddress, string fromName)
         {
             if (loggerFactory == null)
             {

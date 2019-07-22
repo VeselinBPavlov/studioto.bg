@@ -11,6 +11,8 @@
     using Xunit;
     using Moq;
     using Microsoft.Extensions.Logging;
+    using Studio.Application.Interfaces.Infrastructure;
+    using Studio.Application.Infrastructure.SendGrid;
 
     public class CreateContactFormCommandHandlerTests : CommandTestBase
     {
@@ -18,11 +20,14 @@
         private CreateContactFormCommandHandler sut;
         private ILoggerFactory loggerFactory;
 
+        private ISender sender;
+
         public CreateContactFormCommandHandlerTests()
         {
             mediator = new Mock<IMediator>();
             loggerFactory = new LoggerFactory();
-            sut = new CreateContactFormCommandHandler(context, mediator.Object, loggerFactory);            
+            sender = new SendGridEmailSender();            
+            sut = new CreateContactFormCommandHandler(context, mediator.Object, loggerFactory, sender);            
         }
 
         [Fact]
