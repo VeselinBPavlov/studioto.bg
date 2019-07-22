@@ -4,13 +4,15 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Studio.Application.ContactForms.Commands.Create;
+    using Studio.Application.Locations.Queries.GetFilteredLocations;
     using WebApp.Models;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return this.View();
+            var result = await Mediator.Send(new GetFilteredLocationsListQuery());
+            return this.View(result);
         }
 
         public IActionResult About()

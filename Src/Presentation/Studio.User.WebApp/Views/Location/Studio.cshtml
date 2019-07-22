@@ -1,0 +1,16 @@
+﻿@using Studio.Application.Locations.Queries.GetLocationByIdPage;
+@model LocationPageViewModel;
+
+@{
+    ViewData["Title"] = "Steps";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Name</h1>
+    <ul>
+        @foreach (var employee in @Model.Employees)
+        {
+            <li><a asp-controller="Employee" asp-action="Workspace" asp-route-id="@employee.EmployeeId">@employee.EmployeeName  - @employee.Possitions</a></li>
+        }
+    </ul>
+</div>
