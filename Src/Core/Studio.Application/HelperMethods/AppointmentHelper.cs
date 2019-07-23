@@ -26,17 +26,17 @@ namespace Studio.Application.HelperMethods
             return workingHours.HasInside(new TimeRange(start, end));
         }
 
-        // public static bool IsInWorkingHours(IStudioDbContext context, TimeBlock block)
-        // {
-        //     // check Not Saturday or Sunday
-        //     if (block.Start.DayOfWeek == DayOfWeek.Saturday || block.Start.DayOfWeek == DayOfWeek.Sunday)
-        //     {
-        //         return false;
-        //     }
+        public static bool IsInWorkingHours(string startHour, string endHour, TimeBlock block)
+        {
+            // check Not Saturday or Sunday
+            if (block.Start.DayOfWeek == DayOfWeek.Saturday || block.Start.DayOfWeek == DayOfWeek.Sunday)
+            {
+                return false;
+            }
 
-        //     TimeRange workingHours = new TimeRange(TimeTrim.Hour(block.Start.Date, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(block.Start.Date, int.Parse(context.Administrations.Find(3).Value)));
-        //     return workingHours.HasInside(block);
-        // }
+            TimeRange workingHours = new TimeRange(TimeTrim.Hour(block.Start.Date, int.Parse(startHour)), TimeTrim.Hour(block.Start.Date, int.Parse(endHour)));
+            return workingHours.HasInside(block);
+        }
 
         public static string ValidateNoAppoinmentClash(IStudioDbContext context, IAppointmentCommand appointment)
         {
@@ -57,7 +57,7 @@ namespace Studio.Application.HelperMethods
             return string.Empty;
         }
 
-        // public static List<SelectListItem> AvailableAppointments(IStudioDbContext context, int employeeId, DateTime date)
+        // public static List<SelectListItem> AvailableAppointments(int employeeId, DateTime date)
         // {
         //     int a, s, e;
         //     a = int.Parse(context.Administrations.Find(1).Value);

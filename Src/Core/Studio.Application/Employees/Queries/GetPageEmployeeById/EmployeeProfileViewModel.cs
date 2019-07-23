@@ -34,6 +34,8 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 
         public string LocationEndHour { get; set; }
 
+        public ICollection<ServiceProfileViewModel> Services { get; set; }
+
         public static Expression<Func<Employee, EmployeeProfileViewModel>> Projection
         {
             get
@@ -51,7 +53,10 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
                     LocationStartDay = employee.Location.StartDay.ToString(),
                     LocationEndDay = employee.Location.EndDay.ToString(),
                     LocationStartHour = employee.Location.StartHour,
-                    LocationEndHour = employee.Location.EndHour
+                    LocationEndHour = employee.Location.EndHour,
+                    Services = employee.EmployeeServices.AsQueryable()
+                        .Select(ServiceProfileViewModel.Projection)
+                        .ToList()
                 };
             }
         }

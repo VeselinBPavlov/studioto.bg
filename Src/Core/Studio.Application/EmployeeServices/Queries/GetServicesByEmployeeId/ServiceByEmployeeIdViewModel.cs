@@ -13,7 +13,7 @@ namespace Studio.Application.EmployeeServices.Queries.GetServicesByEmployeeId
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<EmployeeService, ServiceByEmployeeIdViewModel>()
-                .ForMember(x => x.ServiceName, y => y.MapFrom(src => src.Service.Name));
+                .ForMember(x => x.ServiceName, y => y.MapFrom(src => src.Service.Name + " - " + src.Price + " лв."));
         }
     }
 }

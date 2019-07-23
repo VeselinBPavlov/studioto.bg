@@ -19,20 +19,65 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Appointment" asp-action="Create" method="post">
+        <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
             <h4>Create a new Appointment.</h4>
             <hr />
-            <label asp-for="@appointment.ReservationDate">Reservation Date</label>
-            <input asp-for="@appointment.ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
-            <label asp-for="@appointment.TimeBlockHelper">TimeBlockHelper</label>
-            <input asp-for="@appointment.TimeBlockHelper" class="form-control" />
-            <label asp-for="@appointment.Comment">Comment</label>
-            <input asp-for="@appointment.Comment" class="form-control" />
-            <label asp-for="@appointment.ServiceId">ServiceId</label>
-            <input asp-for="@appointment.ServiceId" class="form-control" />
-            <input asp-for="@appointment.EmployeeId" class="form-control" value="@employee.Id" hidden />
-            <input asp-for="@appointment.UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
-            <button type="submit" class="btn btn-primary">Create</button>
+            <label>Reservation Date</label>
+            <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
+            <label>TimeBlockHelper</label>
+            <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select"></select>    
+            <label>Comment</label>
+            <input id="Comment" name="Comment" class="form-control" />
+            <label>Service</label>
+            <select id="ServiceId" name="ServiceId" class="browser-default custom-select">
+                <option value="0">Select Service</option>
+                @foreach (var service in @employee.Services)
+                {
+                    <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName</option>
+                }
+            </select>
+            <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  hidden />
+            <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
+            <input type="submit" class="btn btn-primary">
         </form>
     </div>
 </div> 
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Select Doctor and Date"));
+            $('#TimeBlockHelper').val("placeholder");
+            $("#TimeBlockHelper").prop("disabled", true);
+            $("#ReservationDate, #ServiceId").change(function () {
+                var now = new Date();
+                var date = new Date($("#ReservationDate").val());
+
+                if (date > now && $("#ServiceId").val() != 0) {
+                    var formAppointment = $('#FormAppointment').serialize();
+
+                $.ajax({
+                   type: "POST",
+                   url: "/Appointment/GetAvailableAppointments",
+                   data: formAppointment,
+                   success: function (data) {
+                       for (i = 0; i < data.length; i++) {
+                           var option = $("<option value=" + data[i]["value"] + ">" + data[i]["text"] + "</option>");
+                           option.appendTo($("#TimeBlockHelper"));
+                       }
+                        $("#TimeBlockHelper").find('[value="0"]').remove();
+                        $("#TimeBlockHelper").prop("disabled", false);
+                    },
+                    error: function () { alert("Error retrieving available appointments!"); }
+                });
+                }
+                else {
+                    $("#TimeBlockHelper").empty();
+                    $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Select Reservation Hour"));
+                    $('#TimeBlockHelper').val("placeholder");
+                    $("#TimeBlockHelper").prop("disabled", true);
+                }
+            });
+        });
+    </script>
+}

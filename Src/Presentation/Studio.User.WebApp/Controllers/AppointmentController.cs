@@ -1,8 +1,12 @@
 namespace Studio.User.WebApp.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Studio.Application.Appointments.Commands.Create;
+    using Studio.Application.Appointments.Queries.GetAvailableAppointments;
     using WebApp.Models;
 
     public class AppointmentController : BaseController
@@ -18,6 +22,15 @@ namespace Studio.User.WebApp.Controllers
         {               
             await Mediator.Send(command);
             return this.Redirect("/");
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetAvailableAppointments([FromForm]CreateAppointmentCommand command)
+        {
+            var result = await Mediator.Send(new GetAvailableAppointmentsQuery { Command = command });
+
+            List<SelectListItem> resultlist = result.AvailableAppointments;
+            return Json(resultlist);
         }
     }
 }
