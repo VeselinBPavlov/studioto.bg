@@ -16,6 +16,8 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 
         public string Duration { get; set; }
 
+        public decimal Price { get; set; }
+
         public static Expression<Func<EmployeeService, ServiceProfileViewModel>> Projection
         {
             get
@@ -24,7 +26,8 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
                 {
                     ServiceId = employeeService.ServiceId,
                     ServiceName = employeeService.Service.Name,
-                    Duration = employeeService.DurationInMinutes                    
+                    Duration = employeeService.DurationInMinutes,
+                    Price = employeeService.Price                    
                 };
             }
         }

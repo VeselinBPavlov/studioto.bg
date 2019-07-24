@@ -10,16 +10,22 @@
     using Interfaces.Persistence;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
+    using Studio.Application.Interfaces.Infrastructure;
 
     public class CreateAppointmentCommandHandler : IRequestHandler<CreateAppointmentCommand, Unit>
     {
         private readonly IStudioDbContext context;
         private readonly IMediator mediator;
+        private readonly ILoggerFactory loggerFactory;
+        private readonly ISender emailSender;
 
-        public CreateAppointmentCommandHandler(IStudioDbContext context, IMediator mediator)
+        public CreateAppointmentCommandHandler(IStudioDbContext context, IMediator mediator, ILoggerFactory loggerFactory,  ISender emailSender)
         {
             this.context = context;
             this.mediator = mediator;
+            this.loggerFactory = loggerFactory;
+            this.emailSender = emailSender;
         }
 
         public async Task<Unit> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
@@ -85,39 +91,10 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
+            emailSender.ConfigureSendGridEmailSender(loggerFactory, GConst.ApiKey, GConst.SenderEmail, GConst.SenderName);
+            await emailSender.SendEmailAsync(user.Email, GConst.AppointmentSubject, string.Format(GConst.AppointmentMessage, service.Name, employee.Location.Name, request.TimeBlockHelper));
+
             return Unit.Value;
         }
-
-        ////private bool IsInWorkingHours(DateTime start, DateTime end)
-        ////{
-        ////    // check Not Saturday or Sunday
-        ////    if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
-        ////    {
-        ////        return false;
-        ////    }
-        ////
-        ////    TimeRange workingHours = new TimeRange(TimeTrim.Hour(start, int.Parse(context.Administrations.Find(2).Value)), TimeTrim.Hour(start, int.Parse(context.Administrations.Find(3).Value)));
-        ////    return workingHours.HasInside(new TimeRange(start, end));
-        ////}
-        ////
-        ////private string ValidateNoAppoinmentClash(CreateAppointmentCommand appointment)
-        ////{
-        ////    var apps = context.Appointments.ToList();
-        ////    var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId).ToList();
-        ////
-        ////    foreach (var item in appointments)
-        ////    {
-        ////        if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
-        ////        {
-        ////            string errorMessage = String.Format(
-        ////                GConst.ReservedHourException,
-        ////                item.Employee.FirstName,
-        ////                item.ReservationDate.ToShortDateString(),
-        ////                item.ReservationTime.ToShortTimeString());
-        ////            return errorMessage;
-        ////        }
-        ////    }
-        ////    return String.Empty;
-        ////}
     }
 }

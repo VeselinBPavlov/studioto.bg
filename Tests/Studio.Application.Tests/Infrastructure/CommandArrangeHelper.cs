@@ -214,5 +214,21 @@ namespace Studio.Application.Tests.Infrastructure
             context.LocationIndustries.Add(locationIndustry);
             context.SaveChanges();
         }
+
+        public static int[] GetEmployeeServiceIds(StudioDbContext context) 
+        {
+            var ids = new int[2];
+
+            var locationId = GetLocationId(context, null, null);
+            var employeeId = GetEmployeeId(context, locationId);
+            var serviceId = GetServiceId(context, null);
+
+            ids[0] = employeeId;
+            ids[1] = serviceId;
+
+            AddEmployeeService(context, employeeId, serviceId);
+
+            return ids;
+        }
     }
 }

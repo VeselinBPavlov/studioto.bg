@@ -10,6 +10,17 @@
 
     public static class QueryArrangeHelper
     {
+        public static void AddUsers(StudioDbContext context)
+        {
+            var users = new List<StudioUser>
+            {
+                new StudioUser { Id = Guid.NewGuid().ToString(), Email = "vp_fin@abv.bg" },
+                new StudioUser { Id = Guid.NewGuid().ToString(), Email = "gosho@goshev.bg" },
+                new StudioUser { Id = Guid.NewGuid().ToString(), Email = "pesho@peshev.bg" },
+            };
+            context.StudioUsers.AddRange(users);
+            context.SaveChanges();
+        }
         public static void AddCountries(StudioDbContext context)
         {
             var countries = new List<Country>

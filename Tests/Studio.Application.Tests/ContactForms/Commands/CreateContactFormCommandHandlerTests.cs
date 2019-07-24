@@ -19,7 +19,6 @@
         private Mock<IMediator> mediator;
         private CreateContactFormCommandHandler sut;
         private ILoggerFactory loggerFactory;
-
         private ISender sender;
 
         public CreateContactFormCommandHandlerTests()

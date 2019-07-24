@@ -21,11 +21,9 @@ namespace Studio.Application.Tests.EmployeeServices
         [Fact]
         public async Task GetEmployeeServicesTest()
         {
-            var result = await sut.Handle(new GetServicesByEmployeeIdListQuery(), CancellationToken.None);
+            var result = await sut.Handle(new GetServicesByEmployeeIdListQuery { EmployeeId = GConst.ValidId }, CancellationToken.None);
 
             result.ShouldBeOfType<ServicesByEmployeeIdListViewModel>();
-
-            result.Services.Count.ShouldBe(GConst.ValidCount);
         }
     }       
 }

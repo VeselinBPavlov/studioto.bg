@@ -9,11 +9,11 @@ namespace Studio.Application.Tests.Appointments.Queries
     using System.Threading.Tasks;
     using Xunit;
 
-    public class GetAppointmentByIdTests : QueryTestFixture
+    public class GetAppointmentByIdQueryHandlerTests : QueryTestFixture
     {
         private GetAppointmentByIdQueryHandler sut;
 
-        public GetAppointmentByIdTests()
+        public GetAppointmentByIdQueryHandlerTests()
         {
             QueryArrangeHelper.AddAppointmentes(context);
             sut = new GetAppointmentByIdQueryHandler(context);

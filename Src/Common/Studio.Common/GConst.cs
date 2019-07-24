@@ -16,6 +16,9 @@
         public const string SenderName = "studioto.bg";
         public const string SenderSubject = "Получено запитване.";
         public const string SenderMessage = "Вашето запитване е получено успешно. Очаквайте свързване с администратор.";
+        public const string ApiKey = "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";
+        public const string AppointmentSubject = "Успешна резервация в Studioto.bg!";
+        public const string AppointmentMessage = "Вие успешно резервирахте час за {0} в {1} от {2} часа.";
 
         #endregion
 
@@ -95,6 +98,7 @@
         public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
         public const string ValueObjectExceptionMessage = "{0} is invalid.";
         public const string NotAvalableHours = "No Appointments Available for {0}";
+        public const int AvailableAppointmentsCount = 20;
 
         #endregion
     }

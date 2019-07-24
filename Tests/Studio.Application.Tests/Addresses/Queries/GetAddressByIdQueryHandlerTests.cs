@@ -9,18 +9,18 @@ namespace Studio.Application.Tests.Addresses.Queries
     using System.Threading.Tasks;
     using Xunit;
 
-    public class GetAddressByIdTests : QueryTestFixture
+    public class GetAddressByIdQueryHandlerTests : QueryTestFixture
     {
         private GetAddressByIdQueryHandler sut;
 
-        public GetAddressByIdTests()
+        public GetAddressByIdQueryHandlerTests()
         {
             QueryArrangeHelper.AddAddresses(context);
             sut = new GetAddressByIdQueryHandler(context);
         }
 
         [Fact]
-        public async Task GetAddressByIdTest()
+        public async Task GetAddressByIdQueryHandlerTest()
         {
             var status = await sut.Handle(new GetAddressByIdQuery { Id = GConst.ValidId }, CancellationToken.None);
 

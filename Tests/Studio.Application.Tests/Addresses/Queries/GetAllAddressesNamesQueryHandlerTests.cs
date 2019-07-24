@@ -9,11 +9,11 @@
     using Xunit;
 
     [Collection("QueryCollection")]
-    public class GetAllAddressesNames : QueryTestFixture
+    public class GetAllAddressesNamesQueryHandlerTests : QueryTestFixture
     {
         private GetAddressesNamesListQueryHandler sut;
 
-        public GetAllAddressesNames()
+        public GetAllAddressesNamesQueryHandlerTests()
         {
             QueryArrangeHelper.AddAddresses(context);
             sut = new GetAddressesNamesListQueryHandler(context, mapper);

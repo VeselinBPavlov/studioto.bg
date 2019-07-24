@@ -12,11 +12,9 @@
     CreateAppointmentCommand appointment = Model.CreateAppointmentCommand;
 }
 
-
 <div class="text-center">
     <h1 class="display-4">@employee.FirstName</h1>
 </div>
-
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
@@ -24,18 +22,19 @@
             <hr />
             <label>Reservation Date</label>
             <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
+            <label>Service</label>
+            <select id="ServiceId" name="ServiceId" class="browser-default custom-select">
+                <option value="0">Избери услуга</option>
+                @foreach (var service in @employee.Services)
+                {
+                    <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName - @service.Price лв.</option>
+                }
+            </select>
             <label>TimeBlockHelper</label>
             <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select"></select>    
             <label>Comment</label>
             <input id="Comment" name="Comment" class="form-control" />
-            <label>Service</label>
-            <select id="ServiceId" name="ServiceId" class="browser-default custom-select">
-                <option value="0">Select Service</option>
-                @foreach (var service in @employee.Services)
-                {
-                    <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName</option>
-                }
-            </select>
+            
             <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  hidden />
             <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
             <input type="submit" class="btn btn-primary">
@@ -43,41 +42,8 @@
     </div>
 </div> 
 
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Select Doctor and Date"));
-            $('#TimeBlockHelper').val("placeholder");
-            $("#TimeBlockHelper").prop("disabled", true);
-            $("#ReservationDate, #ServiceId").change(function () {
-                var now = new Date();
-                var date = new Date($("#ReservationDate").val());
-
-                if (date > now && $("#ServiceId").val() != 0) {
-                    var formAppointment = $('#FormAppointment').serialize();
-
-                $.ajax({
-                   type: "POST",
-                   url: "/Appointment/GetAvailableAppointments",
-                   data: formAppointment,
-                   success: function (data) {
-                       for (i = 0; i < data.length; i++) {
-                           var option = $("<option value=" + data[i]["value"] + ">" + data[i]["text"] + "</option>");
-                           option.appendTo($("#TimeBlockHelper"));
-                       }
-                        $("#TimeBlockHelper").find('[value="0"]').remove();
-                        $("#TimeBlockHelper").prop("disabled", false);
-                    },
-                    error: function () { alert("Error retrieving available appointments!"); }
-                });
-                }
-                else {
-                    $("#TimeBlockHelper").empty();
-                    $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Select Reservation Hour"));
-                    $('#TimeBlockHelper').val("placeholder");
-                    $("#TimeBlockHelper").prop("disabled", true);
-                }
-            });
-        });
-    </script>
+@section Scripts{
+<environment include="Development,Staging,Production">
+    <script src="~/js/appointment.js"></script>
+</environment>
 }

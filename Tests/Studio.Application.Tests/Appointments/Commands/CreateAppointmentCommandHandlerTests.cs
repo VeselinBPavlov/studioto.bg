@@ -11,6 +11,10 @@
     using Xunit;
     using Moq;
     using Studio.Domain.Entities;
+    using Castle.Core.Logging;
+    using Studio.Application.Interfaces.Infrastructure;
+    using Microsoft.Extensions.Logging;
+    using Studio.Application.Infrastructure.SendGrid;
 
     public class CreateAppointmentCommandHandlerTests : CommandTestBase
     {
@@ -19,6 +23,9 @@
         private int locationId;
         private int employeeId;
         private Mock<IMediator> mediator;
+        private Microsoft.Extensions.Logging.ILoggerFactory loggerFactory;
+        
+        private ISender sender;
         private CreateAppointmentCommandHandler sut;
 
         public CreateAppointmentCommandHandlerTests()
@@ -29,7 +36,9 @@
             this.employeeId = CommandArrangeHelper.GetEmployeeId(context, locationId);
             CommandArrangeHelper.AddEmployeeService(context, serviceId, employeeId);
             this.mediator = new Mock<IMediator>();
-            this.sut = new CreateAppointmentCommandHandler(context, this.mediator.Object);
+            loggerFactory = new LoggerFactory();
+            sender = new SendGridEmailSender();   
+            this.sut = new CreateAppointmentCommandHandler(context, this.mediator.Object, loggerFactory, sender);
         }
 
         [Fact]
