@@ -1,13 +1,7 @@
 ﻿namespace Studio.Persistence.Context
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Application.Interfaces.Persistence;
     using Domain.Entities;
-    using Domain.Interfaces;
     using Infrastructure;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

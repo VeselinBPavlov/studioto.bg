@@ -16,7 +16,7 @@
 
     public class AddressesNamesListViewModel
     {
-        public IList<AddressNameViewModel> Addresses { get; set; }          
+        public IList<AddressNameViewModel> Addresses { get; set; }
     }
 
     public class AddressNameViewModel : IHaveCustomMapping

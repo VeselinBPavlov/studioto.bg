@@ -6,7 +6,7 @@ namespace Studio.Application.Appointments.Queries.GetAllAppointments
     using Studio.Domain.Entities;
 
     public class AppointmentAllViewModel : IHaveCustomMapping
-    {        
+    {
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -44,7 +44,7 @@ namespace Studio.Application.Appointments.Queries.GetAllAppointments
                 .ForMember(x => x.ReservationTime, y => y.MapFrom(src => src.ReservationTime.ToShortTimeString()))
                 .ForMember(x => x.ServiceName, y => y.MapFrom(src => src.Service.Name))
                 .ForMember(x => x.EmployeeNames, y => y.MapFrom(src => src.Employee.FirstName + " " + src.Employee.FirstName))
-                .ForMember(x => x.UserEmail, y => y.MapFrom(src => src.User.Email));            
+                .ForMember(x => x.UserEmail, y => y.MapFrom(src => src.User.Email));
         }
     }
 }

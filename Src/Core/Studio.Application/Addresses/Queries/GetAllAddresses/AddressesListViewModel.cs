@@ -4,6 +4,6 @@ namespace Studio.Application.Addresses.Queries.GetAllAddresses
 
     public class AddressesListViewModel
     {
-        public IList<AddressAllViewModel> Addresses { get; set; } 
+        public IList<AddressAllViewModel> Addresses { get; set; }
     }
 }
