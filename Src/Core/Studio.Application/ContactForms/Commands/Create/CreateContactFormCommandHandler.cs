@@ -1,17 +1,14 @@
 ﻿namespace Studio.Application.ContactForms.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System;
+    using Interfaces.Persistence;
+    using MediatR;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Configuration;
-    using Studio.Application.Infrastructure.SendGrid;
-    using Studio.Common;
-    using Microsoft.AspNetCore.Identity.UI.Services;
-    using Studio.Application.Interfaces.Infrastructure;
+    using Interfaces.Infrastructure;
+    using Common;
+    using Domain.Entities;
 
     public class CreateContactFormCommandHandler : IRequestHandler<CreateContactFormCommand, Unit>
     {
@@ -43,10 +40,10 @@
 
             this.context.ContactForms.Add(contactForm);
 
-            await this.context.SaveChangesAsync(cancellationToken);           
+            await this.context.SaveChangesAsync(cancellationToken);
 
-            emailSender.ConfigureSendGridEmailSender(loggerFactory, GConst.ApiKey, GConst.SenderEmail, GConst.SenderName);
-            await emailSender.SendEmailAsync(request.Email, GConst.SenderSubject, GConst.SenderMessage);
+            this.emailSender.ConfigureSendGridEmailSender(this.loggerFactory, GConst.ApiKey, GConst.SenderEmail, GConst.SenderName);
+            await this.emailSender.SendEmailAsync(request.Email, GConst.SenderSubject, GConst.SenderMessage);
 
             return Unit.Value;
         }       

@@ -30,8 +30,8 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             var command = request.Command;
             var availableAppointments = new AvailableAppointmentsViewModel();
 
-            var employeeService = await context.EmployeeServices.FindAsync(command.EmployeeId, command.ServiceId);
-            var employee = await context.Employees.Include(emp => emp.Location).SingleOrDefaultAsync(emp => emp.Id == command.EmployeeId);
+            var employeeService = await this.context.EmployeeServices.FindAsync(command.EmployeeId, command.ServiceId);
+            var employee = await this.context.Employees.Include(emp => emp.Location).SingleOrDefaultAsync(emp => emp.Id == command.EmployeeId);
             var startHour = employee.Location.StartHour;
             var endHour = employee.Location.EndHour;
             var duration = employeeService.DurationInMinutes;
@@ -42,7 +42,8 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             e = int.Parse(endHour);
 
             TimeBlock timeBlock = new TimeBlockExtension(new DateTime(command.ReservationDate.Year, command.ReservationDate.Month, command.ReservationDate.Day, s, 0, 0), new TimeSpan(0, a, 0));
-            List<SelectListItem> ItemsList = new List<SelectListItem>();
+
+            List<SelectListItem> itemsList = new List<SelectListItem>();
 
             // No Appointments for past!!
             while (timeBlock.Start.CompareTo(DateTime.Now) <= 0)
@@ -53,7 +54,8 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
                     break;
                 }
             }
-            var appointments = context.Appointments.Where(x => x.EmployeeId == command.EmployeeId);
+
+            var appointments = this.context.Appointments.Where(x => x.EmployeeId == command.EmployeeId);
                                
             bool overlaps = false;
             while (AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock))
@@ -69,22 +71,22 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
 
                 if (!overlaps)
                 {
-                    ItemsList.Add(new SelectListItem() { Text = timeBlock.ToString(), Value = timeBlock.Start.ToString("HH:mm") });
+                    itemsList.Add(new SelectListItem() { Text = timeBlock.ToString(), Value = timeBlock.Start.ToString("HH:mm") });
                 }
 
                 overlaps = false;
                 timeBlock.Move(new TimeSpan(0, a, 0));
             }
 
-            if (ItemsList.Count != 0)
+            if (itemsList.Count != 0)
             {
-                availableAppointments.AvailableAppointments = ItemsList;
+                availableAppointments.AvailableAppointments = itemsList;
                 return availableAppointments;
             }
 
-            ItemsList.Add(new SelectListItem() { Text = "No Appointments Available", Value = GConst.AllHoursBusy });
+            itemsList.Add(new SelectListItem() { Text = "No Appointments Available", Value = GConst.AllHoursBusy });
 
-            availableAppointments.AvailableAppointments = ItemsList;
+            availableAppointments.AvailableAppointments = itemsList;
             return availableAppointments;
         }
     }

@@ -50,7 +50,7 @@ namespace Studio.Persistence.Context
 
         private void SeedEmployeeServices(StudioDbContext context)
         {
-            var employeeServices = new []
+            var employeeServices = new[]
             {
                 new EmployeeService { EmployeeId = 1, ServiceId = 1, Price = 8.00M, DurationInMinutes = "30" },
                 new EmployeeService { EmployeeId = 1, ServiceId = 2, Price = 10.00M, DurationInMinutes = "30" },
@@ -120,7 +120,7 @@ namespace Studio.Persistence.Context
 
         private void SeedLocationIndustries(StudioDbContext context)
         {
-            var locationIndustries = new []
+            var locationIndustries = new[]
             {
                 new LocationIndustry { LocationId = 1, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new LocationIndustry { LocationId = 1, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -150,7 +150,7 @@ namespace Studio.Persistence.Context
 
         private void SeedServices(StudioDbContext context)
         {
-            var services = new []
+            var services = new[]
             {
                 new Service { Name = "Мъжко подстригване", IndustryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Service { Name = "Дамско подстригване", IndustryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -175,7 +175,7 @@ namespace Studio.Persistence.Context
 
         private void SeedEmployees(StudioDbContext context)
         {
-            var employees = new []
+            var employees = new[]
             {
                 new Employee { FirstName = "Иван", LastName = "Петров", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false },
                 new Employee { FirstName = "Ивелина", LastName = "Сиракова", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false },
@@ -219,7 +219,7 @@ namespace Studio.Persistence.Context
 
         private void SeedIndustries(StudioDbContext context)
         {
-            var industries = new []
+            var industries = new[]
             {
                 new Industry { Name = "Коса", Possition = "Фризьор", CreatedOn = DateTime.Now, IsDeleted = false },
                 new Industry { Name = "Нокти", Possition = "Маникюрист", CreatedOn = DateTime.Now, IsDeleted = false },
@@ -234,7 +234,7 @@ namespace Studio.Persistence.Context
 
         private void SeedLocations(StudioDbContext context)
         {
-            var locations = new []
+            var locations = new[]
             {
                 new Location { Name = "Студио \"Стайл\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 1, AddressId = 1 },
                 new Location { Name = "Салон \"Бюти\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 1, AddressId = 2 },
@@ -259,7 +259,7 @@ namespace Studio.Persistence.Context
 
         private void SeedClients(StudioDbContext context)
         {
-            var clients = new []
+            var clients = new[]
             {
                 new Client { CompanyName = "Стартъп ООД", VatNumber = "123456789", Manager = (Manager)"Иван Иванов", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Client { CompanyName = "Интернешенъл ЕООД", VatNumber = "123456789", Manager = (Manager)"Петър Петров", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -274,7 +274,7 @@ namespace Studio.Persistence.Context
 
         private void SeedAddresses(StudioDbContext context)
         {
-            var inputAddressesData = new [] 
+            var inputAddressesData = new[] 
             {
                 new InputAddressData { Street = "Васил Левски", Number = "1" },
                 new InputAddressData { Street = "Христо Ботев", Number = "2" },
@@ -298,28 +298,28 @@ namespace Studio.Persistence.Context
                 new InputAddressData { Street = "Ропотамо", Number = "20" }
             };
 
-            var addresses = new []
+            var addresses = new[]
             {
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[0], Longitude = 10.00M, Latitude = 10.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[1], Longitude = 20.00M, Latitude = 20.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[2], Longitude = 30.00M, Latitude = 30.00M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[3], Longitude = 40.00M, Latitude = 40.00M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[4], Longitude = 50.00M, Latitude = 50.00M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[5], Longitude = 60.00M, Latitude = 60.00M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[6], Longitude = 70.00M, Latitude = 70.00M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[7], Longitude = 80.00M, Latitude = 80.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[8], Longitude = 90.00M, Latitude = 90.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[9], Longitude = 10.10M, Latitude = 10.10M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[10], Longitude = 10.20M, Latitude = 10.20M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[11], Longitude = 10.30M, Latitude = 10.30M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[12], Longitude = 10.40M, Latitude = 10.40M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[13], Longitude = 10.50M, Latitude = 10.50M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[14], Longitude = 10.60M, Latitude = 10.60M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[15], Longitude = 10.70M, Latitude = 10.70M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[16], Longitude = 10.80M, Latitude = 10.80M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[17], Longitude = 10.90M, Latitude = 10.90M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[18], Longitude = 10.11M, Latitude = 10.11M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat) inputAddressesData[19], Longitude = 10.12M, Latitude = 10.12M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[0], Longitude = 10.00M, Latitude = 10.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[1], Longitude = 20.00M, Latitude = 20.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[2], Longitude = 30.00M, Latitude = 30.00M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[3], Longitude = 40.00M, Latitude = 40.00M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[4], Longitude = 50.00M, Latitude = 50.00M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[5], Longitude = 60.00M, Latitude = 60.00M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[6], Longitude = 70.00M, Latitude = 70.00M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[7], Longitude = 80.00M, Latitude = 80.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[8], Longitude = 90.00M, Latitude = 90.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[9], Longitude = 10.10M, Latitude = 10.10M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[10], Longitude = 10.20M, Latitude = 10.20M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[11], Longitude = 10.30M, Latitude = 10.30M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[12], Longitude = 10.40M, Latitude = 10.40M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[13], Longitude = 10.50M, Latitude = 10.50M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[14], Longitude = 10.60M, Latitude = 10.60M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[15], Longitude = 10.70M, Latitude = 10.70M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[16], Longitude = 10.80M, Latitude = 10.80M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[17], Longitude = 10.90M, Latitude = 10.90M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[18], Longitude = 10.11M, Latitude = 10.11M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[19], Longitude = 10.12M, Latitude = 10.12M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }
             };
 
             context.Addresses.AddRange(addresses);
@@ -328,7 +328,7 @@ namespace Studio.Persistence.Context
 
         private void SeedCities(StudioDbContext context)
         {
-            var cities = new []
+            var cities = new[]
             {
                 new City { Name = "София", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new City { Name = "Варна", CountryId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -353,7 +353,7 @@ namespace Studio.Persistence.Context
 
         private void SeedRoles(StudioDbContext context)
         {
-            var roles = new [] 
+            var roles = new[]
             {
                 new StudioRole { Id = Guid.NewGuid().ToString(), Name = "Administrator", NormalizedName = "ADMINISTRATOR", CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new StudioRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER", CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -361,14 +361,6 @@ namespace Studio.Persistence.Context
 
             context.StudioRoles.AddRange(roles);
             context.SaveChanges();
-        }
-
-        private string HashPassword(string password)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                return Encoding.UTF8.GetString(sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password)));
-            }
         }
     }
 }

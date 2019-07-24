@@ -1,16 +1,14 @@
 ﻿namespace Studio.Application.Locations.Commands.Update
 {
-    using Studio.Domain.Entities;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
+    using Common;
+    using Domain.Enumerations;
     using Exceptions;
     using Interfaces.Persistence;
-    using System;
-    using System.Linq;
-    using Studio.Common;
-    using Studio.Domain.Enumerations;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationCommand, Unit>
     {

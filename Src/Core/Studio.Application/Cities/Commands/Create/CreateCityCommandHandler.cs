@@ -1,14 +1,13 @@
 ﻿namespace Studio.Application.Cities.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System.Linq;
-    using Studio.Application.Exceptions;
-    using System;
-    using Studio.Common;
+    using Common;
+    using Domain.Entities;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Unit>
     {

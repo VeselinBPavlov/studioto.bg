@@ -1,16 +1,14 @@
 ﻿namespace Studio.Application.Appointments.Commands.Update
 {
-    using Studio.Domain.Entities;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
+    using Exceptions;
+    using HelperMethods;
+    using Interfaces.Persistence;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
-    using Exceptions;
-    using Interfaces.Persistence;
-    using System;
-    using System.Linq;
-    using Studio.Common;
-    using Studio.Application.HelperMethods;
 
     public class UpdateAppointmentCommandHandler : IRequestHandler<UpdateAppointmentCommand, Unit>
     {
@@ -51,6 +49,7 @@
             // CheckWorkingHours
             DateTime start = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay);
             DateTime end = request.ReservationDate.Add(request.ReservationTime.Value.TimeOfDay).AddMinutes(double.Parse(this.context.EmployeeServices.Find(employee.Id, service.Id).DurationInMinutes));
+
             if (!AppointmentHelper.IsInWorkingHours(this.context, employee, start, end))
             {
                 throw new UpdateFailureException(GConst.Appointment, request.TimeBlockHelper, string.Format(GConst.InvalidAppointmentHourException, employee.Location.StartHour, employee.Location.EndHour));

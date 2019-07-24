@@ -1,12 +1,12 @@
 ﻿namespace Studio.Application.Clients.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System;
-    using Studio.Domain.ValueObjects;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Domain.Entities;
+    using Domain.ValueObjects;
 
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Unit>
     {

@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Studio.Domain.Entities;
-
 namespace Studio.Application.Locations.Queries.GetLocationByIdPage
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Domain.Entities;
+
     public class EmployeeLocationPageViewModel
     {
         public int EmployeeId { get; set; }

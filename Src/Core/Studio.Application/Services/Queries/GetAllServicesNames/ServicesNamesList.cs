@@ -1,17 +1,16 @@
 ﻿namespace Studio.Application.Services.Queries.GetAllNames
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Studio.Application.Interfaces.Mapping;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Domain.Entities;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Domain.Entities;
+    using Interfaces.Mapping;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class ServicesNamesListViewModel
     {

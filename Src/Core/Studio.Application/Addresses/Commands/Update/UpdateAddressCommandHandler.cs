@@ -1,16 +1,14 @@
 ﻿namespace Studio.Application.Addresses.Commands.Update
 {
-    using Studio.Domain.Entities;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
     using Exceptions;
     using Interfaces.Persistence;
-    using System;
-    using System.Linq;
-    using Studio.Domain.ValueObjects;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
     using Studio.Common;
+    using Studio.Domain.ValueObjects;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     public class UpdateAddressCommandHandler : IRequestHandler<UpdateAddressCommand, Unit>
     {

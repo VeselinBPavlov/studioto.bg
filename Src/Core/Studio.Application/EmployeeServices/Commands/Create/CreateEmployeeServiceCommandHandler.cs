@@ -1,14 +1,13 @@
 ﻿namespace Studio.Application.EmployeeServices.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System.Linq;
+    using Interfaces.Persistence;
+    using MediatR;
     using Studio.Application.Exceptions;
-    using System;
     using Studio.Common;
+    using Studio.Domain.Entities;
 
     public class CreateEmployeeServiceCommandHandler : IRequestHandler<CreateEmployeeServiceCommand, Unit>
     {

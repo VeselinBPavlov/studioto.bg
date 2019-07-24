@@ -1,13 +1,9 @@
-using System;
-using System.Linq.Expressions;
-using System.Linq;
-
-using AutoMapper;
-using Studio.Application.Interfaces.Mapping;
-using Studio.Domain.Entities;
-
 namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 {
+    using System;
+    using System.Linq.Expressions;
+    using Domain.Entities;
+
     public class ServiceProfileViewModel
     {
         public int ServiceId { get; set; }

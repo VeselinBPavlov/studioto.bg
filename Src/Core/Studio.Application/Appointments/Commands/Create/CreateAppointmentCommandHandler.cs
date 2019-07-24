@@ -91,8 +91,8 @@
 
             await this.context.SaveChangesAsync(cancellationToken);
 
-            emailSender.ConfigureSendGridEmailSender(loggerFactory, GConst.ApiKey, GConst.SenderEmail, GConst.SenderName);
-            await emailSender.SendEmailAsync(user.Email, GConst.AppointmentSubject, string.Format(GConst.AppointmentMessage, service.Name, employee.Location.Name, request.TimeBlockHelper));
+            this.emailSender.ConfigureSendGridEmailSender(this.loggerFactory, GConst.ApiKey, GConst.SenderEmail, GConst.SenderName);
+            await this.emailSender.SendEmailAsync(user.Email, GConst.AppointmentSubject, string.Format(GConst.AppointmentMessage, service.Name, employee.Location.Name, request.TimeBlockHelper));
 
             return Unit.Value;
         }

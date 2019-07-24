@@ -1,15 +1,14 @@
 ﻿namespace Studio.Application.Countries.Commands.Update
 {
-    using Studio.Domain.Entities;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Exceptions;
-    using Interfaces.Persistence;
     using System;
     using System.Linq;
-    using Studio.Common;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Common;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, Unit>
     {

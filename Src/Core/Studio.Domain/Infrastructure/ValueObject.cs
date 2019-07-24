@@ -8,12 +8,12 @@ namespace Studio.Domain.Infrastructure
     {
         public static bool operator ==(ValueObject<T> a, ValueObject<T> b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            if (a is null && b is null)
             {
                 return true;
             }
 
-            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            if (a is null || b is null)
             {
                 return false;
             }
@@ -30,7 +30,7 @@ namespace Studio.Domain.Infrastructure
         {
             var valueObject = obj as T;
 
-            if (ReferenceEquals(valueObject, null))
+            if (valueObject == null)
             {
                 return false;
             }                

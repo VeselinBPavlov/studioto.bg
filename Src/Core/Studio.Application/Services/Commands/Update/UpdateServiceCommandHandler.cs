@@ -1,15 +1,13 @@
 ﻿namespace Studio.Application.Services.Commands.Update
 {
-    using Studio.Domain.Entities;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
+    using Common;
     using Exceptions;
     using Interfaces.Persistence;
-    using System;
-    using System.Linq;
-    using Studio.Common;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class UpdateServiceCommandHandler : IRequestHandler<UpdateServiceCommand, Unit>
     {

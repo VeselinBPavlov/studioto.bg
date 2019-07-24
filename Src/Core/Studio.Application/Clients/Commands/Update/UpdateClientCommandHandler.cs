@@ -1,16 +1,14 @@
 ﻿namespace Studio.Application.Clients.Commands.Update
 {
-    using Studio.Domain.Entities;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
+    using Common;
+    using Domain.ValueObjects;
     using Exceptions;
     using Interfaces.Persistence;
-    using System;
-    using Studio.Domain.ValueObjects;
-    using Studio.Application.Clients.Commands.Update;
-    using Studio.Common;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, Unit>
     {

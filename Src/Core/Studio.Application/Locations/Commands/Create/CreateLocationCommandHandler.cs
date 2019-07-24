@@ -1,15 +1,14 @@
 ﻿namespace Studio.Application.Locations.Commands.Create
 {
-    using MediatR;
-    using Interfaces.Persistence;
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Studio.Domain.Entities;
-    using System.Linq;
-    using Studio.Application.Exceptions;
-    using System;
-    using Studio.Common;
-    using Studio.Domain.Enumerations;
+    using Common;
+    using Domain.Entities;
+    using Domain.Enumerations;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, Unit>
     {
@@ -38,7 +37,7 @@
                 throw new CreateFailureException(GConst.Location, request.Name, string.Format(GConst.RefereceException, GConst.AddressLower, request.AddressId));
             }
 
-            var Location = new Location
+            var location = new Location
             {
                 Name = request.Name,
                 IsOffice = request.IsOffice,
@@ -55,7 +54,7 @@
                 IsDeleted = false
             };
 
-            this.context.Locations.Add(Location);
+            this.context.Locations.Add(location);
 
             await this.context.SaveChangesAsync(cancellationToken);
 

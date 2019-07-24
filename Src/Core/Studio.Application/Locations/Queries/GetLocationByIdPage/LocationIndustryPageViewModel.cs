@@ -1,9 +1,9 @@
-using System;
-using System.Linq.Expressions;
-using Studio.Domain.Entities;
-
 namespace Studio.Application.Locations.Queries.GetLocationByIdPage
 {
+    using System;
+    using System.Linq.Expressions;
+    using Domain.Entities;
+
     public class LocationIndustryPageViewModel
     {
         public int IndustryId { get; set; }
