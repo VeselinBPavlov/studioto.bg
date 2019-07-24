@@ -12,7 +12,7 @@ namespace Studio.User.WebApp.Controllers
     public class AppointmentController : BaseController
     {
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Success()
         {
             return this.View();
         }
@@ -21,7 +21,7 @@ namespace Studio.User.WebApp.Controllers
         public async Task<IActionResult> Create([FromForm]CreateAppointmentCommand command)
         {               
             await Mediator.Send(command);
-            return this.Redirect("/");
+            return this.Redirect("/Appointment/Success");
         }
 
         [HttpPost]

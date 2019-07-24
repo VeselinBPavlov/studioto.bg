@@ -7,8 +7,8 @@
     {
         public CreateAppointmentCommandValidator()
         {            
-            RuleFor(c => c.ReservationDate).NotEmpty().Must(this.BeValidDate);
-            RuleFor(c => c.TimeBlockHelper).NotEmpty();
+            RuleFor(c => c.ReservationDate).NotEmpty().WithMessage("Reservation date is required").Must(this.BeValidDate).WithMessage("Invalid date");
+            RuleFor(c => c.TimeBlockHelper).NotEmpty().WithMessage("Reservation hour is required");
         }
 
         private bool BeValidDate(DateTime reservationTime)

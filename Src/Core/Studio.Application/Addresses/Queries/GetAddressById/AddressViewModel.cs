@@ -49,7 +49,7 @@ namespace Studio.Application.Addresses.Queries.GetAddressById
                     Longitude = address.Longitude,
                     Latitude = address.Latitude,
                     CityId = address.CityId,
-                    CityName = address.City.Name                   
+                    CityName = address.City.Name
                 };
             }
         }

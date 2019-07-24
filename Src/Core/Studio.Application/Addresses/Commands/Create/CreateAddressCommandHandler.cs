@@ -25,7 +25,7 @@
         {
             var city = await this.context.Cities.FindAsync(request.CityId);
 
-            if (city == null || city.IsDeleted == true) 
+            if (city == null || city.IsDeleted == true)
             {
                 throw new CreateFailureException(GConst.Address, request.Street, string.Format(GConst.RefereceException, GConst.CityLower, request.CityId));
             }
