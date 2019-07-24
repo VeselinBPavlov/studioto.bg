@@ -1,8 +1,5 @@
 ﻿namespace Studio.Common
 {
-    using System;
-    using System.Globalization;
-
     public static class GConst
     {
         #region Studio.Application.Core

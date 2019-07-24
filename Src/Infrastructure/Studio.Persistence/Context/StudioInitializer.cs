@@ -25,27 +25,27 @@ namespace Studio.Persistence.Context
                 return; // Db has been seeded
             }
 
-            SeedRoles(context);
+            this.SeedRoles(context);
 
-            SeedCountries(context);
+            this.SeedCountries(context);
 
-            SeedCities(context);
+            this.SeedCities(context);
 
-            SeedAddresses(context);
- 
-            SeedClients(context);
+            this.SeedAddresses(context);
 
-            SeedLocations(context);
+            this.SeedClients(context);
 
-            SeedEmployees(context);
+            this.SeedLocations(context);
 
-            SeedIndustries(context);
+            this.SeedEmployees(context);
 
-            SeedServices(context);           
+            this.SeedIndustries(context);
 
-            SeedLocationIndustries(context);
+            this.SeedServices(context);
 
-            SeedEmployeeServices(context);
+            this.SeedLocationIndustries(context);
+
+            this.SeedEmployeeServices(context);
         }
 
         private void SeedEmployeeServices(StudioDbContext context)
@@ -120,7 +120,7 @@ namespace Studio.Persistence.Context
 
         private void SeedLocationIndustries(StudioDbContext context)
         {
-            var locationIndustries = new [] 
+            var locationIndustries = new []
             {
                 new LocationIndustry { LocationId = 1, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new LocationIndustry { LocationId = 1, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
@@ -161,12 +161,12 @@ namespace Studio.Persistence.Context
                 new Service { Name = "Лакиране", IndustryId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Service { Name = "Пилинг", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Service { Name = "Кола маска", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Лазерна епилация", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Лечебна процедура за кожа", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Спортен масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Целулитен масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Класически масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Service {  Name = "Стандартна процедура", IndustryId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false }
+                new Service { Name = "Лазерна епилация", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Service { Name = "Лечебна процедура за кожа", IndustryId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Service { Name = "Спортен масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Service { Name = "Целулитен масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Service { Name = "Класически масаж", IndustryId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Service { Name = "Стандартна процедура", IndustryId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false }
             };
 
             context.Services.AddRange(services);
@@ -186,31 +186,31 @@ namespace Studio.Persistence.Context
                 new Employee { FirstName = "Калин", LastName = "Димитров", LocationId = 4, CreatedOn = DateTime.Now, IsDeleted = false }, 
                 new Employee { FirstName = "Женя", LastName = "Симеонова", LocationId = 4, CreatedOn = DateTime.Now, IsDeleted = false }, 
                 new Employee { FirstName = "Росен", LastName = "Желязков", LocationId = 5, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Татяна", LastName = "Николова", LocationId = 5, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Борис", LastName = "Трифонов", LocationId = 6, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Елисавета", LastName = "Бакалска", LocationId = 6, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Борислав", LastName = "Михайлов", LocationId = 7, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Стефка", LastName = "Костадинова", LocationId = 7, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Йордан", LastName = "Лечков", LocationId = 8, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Валя", LastName = "Балканска", LocationId = 8, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Григор", LastName = "Димитров", LocationId = 9, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Кремена", LastName = "Иванова", LocationId = 9, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Стефан", LastName = "Николов", LocationId = 10, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Никола", LastName = "Йорданов", LocationId = 10, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Петър", LastName = "Митев", LocationId = 11, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Асенка", LastName = "Митева", LocationId = 11, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Евлоги", LastName = "Караасенов", LocationId = 12, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Петилетка", LastName = "Петрова", LocationId = 12, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Пантелей", LastName = "Иванов", LocationId = 13, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Гица", LastName = "Красенова", LocationId = 13, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Колейман", LastName = "Шишманов", LocationId = 14, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Пена", LastName = "Дамнянова", LocationId = 14, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Коста", LastName = "Киряков", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Христина", LastName = "Асенова", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Ламби", LastName = "Костов", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Тихомир", LastName = "Трайков", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Николета", LastName = "Попова", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false }, 
-                new Employee {  FirstName = "Анастасия", LastName = "Иванова", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false }
+                new Employee { FirstName = "Татяна", LastName = "Николова", LocationId = 5, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Борис", LastName = "Трифонов", LocationId = 6, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Елисавета", LastName = "Бакалска", LocationId = 6, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Борислав", LastName = "Михайлов", LocationId = 7, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Стефка", LastName = "Костадинова", LocationId = 7, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Йордан", LastName = "Лечков", LocationId = 8, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Валя", LastName = "Балканска", LocationId = 8, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Григор", LastName = "Димитров", LocationId = 9, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Кремена", LastName = "Иванова", LocationId = 9, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Стефан", LastName = "Николов", LocationId = 10, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Никола", LastName = "Йорданов", LocationId = 10, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Петър", LastName = "Митев", LocationId = 11, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Асенка", LastName = "Митева", LocationId = 11, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Евлоги", LastName = "Караасенов", LocationId = 12, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Петилетка", LastName = "Петрова", LocationId = 12, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Пантелей", LastName = "Иванов", LocationId = 13, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Гица", LastName = "Красенова", LocationId = 13, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Колейман", LastName = "Шишманов", LocationId = 14, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Пена", LastName = "Дамнянова", LocationId = 14, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Коста", LastName = "Киряков", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Христина", LastName = "Асенова", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Ламби", LastName = "Костов", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Тихомир", LastName = "Трайков", LocationId = 15, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Николета", LastName = "Попова", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false }, 
+                new Employee { FirstName = "Анастасия", LastName = "Иванова", LocationId = 1, CreatedOn = DateTime.Now, IsDeleted = false }
             };
 
             context.Employees.AddRange(employees);
@@ -221,11 +221,11 @@ namespace Studio.Persistence.Context
         {
             var industries = new []
             {
-                new Industry {  Name = "Коса", Possition = "Фризьор", CreatedOn = DateTime.Now, IsDeleted = false },
-                new Industry {  Name = "Нокти", Possition = "Маникюрист", CreatedOn = DateTime.Now, IsDeleted = false },
-                new Industry {  Name = "Тяло", Possition = "Козметик", CreatedOn = DateTime.Now, IsDeleted = false },
-                new Industry {  Name = "Масаж", Possition = "Масажист", CreatedOn = DateTime.Now, IsDeleted = false },
-                new Industry {  Name = "Тен", Possition = "Соларен специалист", CreatedOn = DateTime.Now, IsDeleted = false }
+                new Industry { Name = "Коса", Possition = "Фризьор", CreatedOn = DateTime.Now, IsDeleted = false },
+                new Industry { Name = "Нокти", Possition = "Маникюрист", CreatedOn = DateTime.Now, IsDeleted = false },
+                new Industry { Name = "Тяло", Possition = "Козметик", CreatedOn = DateTime.Now, IsDeleted = false },
+                new Industry { Name = "Масаж", Possition = "Масажист", CreatedOn = DateTime.Now, IsDeleted = false },
+                new Industry { Name = "Тен", Possition = "Соларен специалист", CreatedOn = DateTime.Now, IsDeleted = false }
             };
 
             context.Industries.AddRange(industries);
@@ -245,12 +245,12 @@ namespace Studio.Persistence.Context
                 new Location { Name = "Студио за маникюр \"Халена\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 3, AddressId = 7 },
                 new Location { Name = "Солариум \"Тен\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 3, AddressId = 8 },
                 new Location { Name = "Козметична клиника \"За теб\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 3, AddressId = 9 },
-                new Location {  Name = "Студио \"Енигма\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 10 },
-                new Location {  Name = "Студио \"Сонора\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 11 },                
-                new Location {  Name = "Салон за красота \"Гили\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 12 },
-                new Location {  Name = "Фризьорски салон \"Ирен\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 13 },
-                new Location {  Name = "Масажно студио \"Релакс\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 14 },
-                new Location {  Name = "Козметичен салон \"Дийп\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 15 }
+                new Location { Name = "Студио \"Енигма\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 10 },
+                new Location { Name = "Студио \"Сонора\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 11 },                
+                new Location { Name = "Салон за красота \"Гили\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 4, AddressId = 12 },
+                new Location { Name = "Фризьорски салон \"Ирен\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 13 },
+                new Location { Name = "Масажно студио \"Релакс\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 14 },
+                new Location { Name = "Козметичен салон \"Дийп\"",  IsOffice = false, Phone = "0885789456", Slogan = "Красотата е здраве.", Description = "Нашата визия за бизнеса е се крие в иновациите и доброто обслужване.", StartDay = Workday.Понеделник, EndDay = Workday.Петък, StartHour = "9", EndHour = "18", CreatedOn = DateTime.UtcNow, IsDeleted = false, ClientId = 5, AddressId = 15 }
             };
 
             context.Locations.AddRange(locations);
@@ -261,11 +261,11 @@ namespace Studio.Persistence.Context
         {
             var clients = new []
             {
-                new Client {  CompanyName = "Стартъп ООД", VatNumber = "123456789", Manager = (Manager)"Иван Иванов", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Client {  CompanyName = "Интернешенъл ЕООД", VatNumber = "123456789", Manager = (Manager)"Петър Петров", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Client {  CompanyName = "Стайл Комерс ООД", VatNumber = "123456789", Manager = (Manager)"Герорги Георгиев", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Client {  CompanyName = "Гуд Вижън ЕООД", VatNumber = "123456789", Manager = (Manager)"Михаил Михайлов", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Client {  CompanyName = "Комерс ООД", VatNumber = "123456789", Manager = (Manager)"Захари Захариев", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false }
+                new Client { CompanyName = "Стартъп ООД", VatNumber = "123456789", Manager = (Manager)"Иван Иванов", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Client { CompanyName = "Интернешенъл ЕООД", VatNumber = "123456789", Manager = (Manager)"Петър Петров", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Client { CompanyName = "Стайл Комерс ООД", VatNumber = "123456789", Manager = (Manager)"Герорги Георгиев", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Client { CompanyName = "Гуд Вижън ЕООД", VatNumber = "123456789", Manager = (Manager)"Михаил Михайлов", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Client { CompanyName = "Комерс ООД", VatNumber = "123456789", Manager = (Manager)"Захари Захариев", Phone = "0884123456", CreatedOn = DateTime.UtcNow, IsDeleted = false }
             };
 
             context.Clients.AddRange(clients);
@@ -309,17 +309,18 @@ namespace Studio.Persistence.Context
                 new Address { AddressFormat = (AddressFormat) inputAddressesData[6], Longitude = 70.00M, Latitude = 70.00M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Address { AddressFormat = (AddressFormat) inputAddressesData[7], Longitude = 80.00M, Latitude = 80.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
                 new Address { AddressFormat = (AddressFormat) inputAddressesData[8], Longitude = 90.00M, Latitude = 90.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[9], Longitude = 10.10M, Latitude = 10.10M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[10], Longitude = 10.20M, Latitude = 10.20M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[11], Longitude = 10.30M, Latitude = 10.30M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[12], Longitude = 10.40M, Latitude = 10.40M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[13], Longitude = 10.50M, Latitude = 10.50M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[14], Longitude = 10.60M, Latitude = 10.60M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[15], Longitude = 10.70M, Latitude = 10.70M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[16], Longitude = 10.80M, Latitude = 10.80M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[17], Longitude = 10.90M, Latitude = 10.90M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[18], Longitude = 10.11M, Latitude = 10.11M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address {  AddressFormat = (AddressFormat) inputAddressesData[19], Longitude = 10.12M, Latitude = 10.12M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }            };
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[9], Longitude = 10.10M, Latitude = 10.10M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[10], Longitude = 10.20M, Latitude = 10.20M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[11], Longitude = 10.30M, Latitude = 10.30M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[12], Longitude = 10.40M, Latitude = 10.40M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[13], Longitude = 10.50M, Latitude = 10.50M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[14], Longitude = 10.60M, Latitude = 10.60M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[15], Longitude = 10.70M, Latitude = 10.70M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[16], Longitude = 10.80M, Latitude = 10.80M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[17], Longitude = 10.90M, Latitude = 10.90M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[18], Longitude = 10.11M, Latitude = 10.11M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat) inputAddressesData[19], Longitude = 10.12M, Latitude = 10.12M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }
+            };
 
             context.Addresses.AddRange(addresses);
             context.SaveChanges();
@@ -354,8 +355,8 @@ namespace Studio.Persistence.Context
         {
             var roles = new [] 
             {
-                new StudioRole { Id = Guid.NewGuid().ToString(), Name = "Administrator", NormalizedName = "ADMINISTRATOR", CreatedOn = DateTime.UtcNow, IsDeleted = false  },
-                new StudioRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER", CreatedOn = DateTime.UtcNow, IsDeleted = false  },
+                new StudioRole { Id = Guid.NewGuid().ToString(), Name = "Administrator", NormalizedName = "ADMINISTRATOR", CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new StudioRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER", CreatedOn = DateTime.UtcNow, IsDeleted = false },
             };
 
             context.StudioRoles.AddRange(roles);

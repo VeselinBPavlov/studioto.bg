@@ -1,9 +1,9 @@
 ﻿namespace Studio.Domain.Entities
 {
-    using Studio.Domain.Enumerations;
-    using Studio.Domain.Interfaces;
     using System;
     using System.Collections.Generic;
+    using Enumerations;
+    using Interfaces;
 
     public class Location : IAuditInfo, IDeletableEntity
     {
@@ -52,6 +52,5 @@
         public virtual ICollection<Employee> Employees { get; private set; }
 
         public virtual ICollection<LocationIndustry> LocationIndustries { get; private set; }
-
     }
 }

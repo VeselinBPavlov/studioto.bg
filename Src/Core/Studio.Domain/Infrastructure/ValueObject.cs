@@ -41,7 +41,7 @@ namespace Studio.Domain.Infrastructure
         public override int GetHashCode()
         {
             return this.GetEqualityComponents()
-                .Aggregate(1, (current, obj) => current * 23 + (obj?.GetHashCode() ?? 0));
+                .Aggregate(1, (current, obj) => (current * 23) + (obj?.GetHashCode() ?? 0));
         }        
 
         protected abstract IEnumerable<object> GetEqualityComponents();

@@ -1,16 +1,19 @@
 ﻿namespace Studio.Domain.ValueObjects
 {
-    using Studio.Common;
-    using Studio.Domain.Exceptions;
-    using Studio.Domain.Infrastructure;
     using System;
     using System.Collections.Generic;
+    using Exceptions;
+    using Infrastructure;
 
     public class Manager : ValueObject<Manager>
     {
         private Manager()
         {
         }
+
+        public string FirstName { get; private set; }
+
+        public string LastName { get; private set; }
 
         public static Manager For(string accountString)
         {
@@ -28,11 +31,7 @@
             }
 
             return manager;
-        }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
+        }        
 
         public static implicit operator string(Manager manager)
         {

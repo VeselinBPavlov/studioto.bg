@@ -1,6 +1,5 @@
 ﻿namespace Studio.Domain.Exceptions
 {
-    using Studio.Common;
     using System;
 
     public class ManagerInvalidException : Exception

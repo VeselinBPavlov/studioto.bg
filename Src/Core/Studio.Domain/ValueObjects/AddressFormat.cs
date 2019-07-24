@@ -37,12 +37,12 @@ namespace Studio.Domain.ValueObjects
             var address = new AddressFormat()
             {
                 Street = addressData.Street,
-                Number =  addressData.Number,
-                Building =  addressData.Building,
-                Entrance =  addressData.Entrance,
-                Floor =  addressData.Floor,
-                Apartment =  addressData.Apartment,
-                District =  addressData.District
+                Number = addressData.Number,
+                Building = addressData.Building,
+                Entrance = addressData.Entrance,
+                Floor = addressData.Floor,
+                Apartment = addressData.Apartment,
+                District = addressData.District
             };          
             
             return address;

@@ -1,9 +1,9 @@
 ﻿namespace Studio.Domain.Entities
 {
-    using Studio.Domain.Interfaces;
-    using Studio.Domain.ValueObjects;
     using System;
     using System.Collections.Generic;
+    using Interfaces;
+    using ValueObjects;
 
     public class Client : IAuditInfo, IDeletableEntity
     {
