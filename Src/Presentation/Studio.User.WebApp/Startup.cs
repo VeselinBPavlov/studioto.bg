@@ -71,7 +71,7 @@
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 6;
                 })
-                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddDefaultUI(UIFramework.Bootstrap3)
                 .AddRoles<StudioRole>()
                 .AddEntityFrameworkStores<StudioDbContext>();
 

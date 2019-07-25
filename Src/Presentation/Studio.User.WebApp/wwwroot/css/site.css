@@ -1,4 +1,8 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+/* ASP STYLE START */
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -33,3 +37,71 @@
         display: none;
     }
 }
+
+/* ASP STYLE END */
+
+/* LOGIN AND REGISTER PAGE START */
+
+.loginWrapper {
+    text-align: center;
+    padding-top: 80px;
+    background-color: white;
+    min-height: 630px;
+}
+
+.loginWrapper img {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    max-width: 100%;
+}
+
+.loginWrapper form {
+    width: 380px;
+    margin: auto;
+    padding-top: 14px;
+}
+
+.loginWrapper form input {
+    margin-bottom: 20px;
+    padding: 25px 20px;
+    border-radius: 5px;
+    font: 1em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.loginWrapper form button {
+    background-color: #DF9974;
+    border: none;
+    color: #FFFFFF;
+    width: 380px;
+    padding: 20px;
+    border-radius: 5px;
+    font: 1em/1em 'Roboto', Arial, Sans-serif;
+    margin-bottom: 10px;
+}
+
+.loginWrapper form button:hover {
+    background-color: #DF9974;
+}
+
+.loginWrapper .slogan {
+    color: #DF9974;
+    font: 700 12px/1em 'Roboto', Arial, Sans-serif;
+}
+
+.loginWrapper .logo {
+    display: inline;
+}
+
+.loginWrapper h3 {
+    color: #999999;
+    font: 1.2em/1.2em 'Roboto', Arial, Sans-serif;
+}
+
+.loginWrapper .info {
+    color: #000000;
+    text-decoration: none;
+    font: 0.9em/0.9em 'Roboto', Arial, Sans-serif;
+}
+
+/* LOGIN AND REGISTER PAGE END */
