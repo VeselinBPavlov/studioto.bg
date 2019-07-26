@@ -3,6 +3,7 @@ namespace Studio.Presentation.Tests.ApiControllers.Commands
     using System.Net.Http;
     using MyTested.AspNetCore.Mvc;
     using Studio.Application.Countries.Commands.Create;
+    using Studio.Common;
     using Studio.Presentation.Tests.Common;
     using Studio.User.WebApp;
     using Studio.User.WebApp.Areas.Administrator.api;

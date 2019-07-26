@@ -1,11 +1,21 @@
 namespace Studio.Presentation.Tests.AppControllers
 {
     using MyTested.AspNetCore.Mvc;
+    using Studio.Common;
     using Studio.User.WebApp.Areas.Administrator.Controllers;
     using Xunit;
 
     public class AdminControllerTests
     {
+        [Fact]
+        public void ControllerShouldBeInAdminArea()
+            => MyController<AdminController>
+                .Instance()
+                .ShouldHave()
+                .Attributes(attrs => attrs
+                    .SpecifyingArea(GConst.AdministratorArea)
+                    .RestrictingForAuthorizedRequests(GConst.AdministratorRole));
+
         [Fact]
         public void ReturnViewWhenCallingIndexAction()
             => MyMvc

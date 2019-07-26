@@ -4,8 +4,9 @@ namespace Studio.User.WebApp.Areas.Administrator.api
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
+    using Studio.Common;
 
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = GConst.AdministratorRole)]
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]

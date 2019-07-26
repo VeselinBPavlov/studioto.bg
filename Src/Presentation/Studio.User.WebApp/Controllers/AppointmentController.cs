@@ -3,10 +3,12 @@ namespace Studio.User.WebApp.Controllers
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Studio.Application.Appointments.Commands.Create;
     using Studio.Application.Appointments.Queries.GetAvailableAppointments;
+    using Studio.Common;
     using WebApp.Models;
 
     public class AppointmentController : BaseController
@@ -17,6 +19,7 @@ namespace Studio.User.WebApp.Controllers
             return this.View();
         }
 
+        [Authorize(Roles = GConst.UserRole)]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]CreateAppointmentCommand command)
         {               

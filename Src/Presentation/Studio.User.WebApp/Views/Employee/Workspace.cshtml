@@ -35,8 +35,8 @@
             <label>Comment</label>
             <input id="Comment" name="Comment" class="form-control" />
             
-            <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  hidden />
-            <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" hidden/>           
+            <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  type="hidden" />
+            <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" type="hidden" />           
             <input type="submit" class="btn btn-primary">
         </form>
     </div>

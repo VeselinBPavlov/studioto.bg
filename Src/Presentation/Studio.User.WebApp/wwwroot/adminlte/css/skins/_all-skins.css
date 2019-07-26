@@ -3,7 +3,9 @@
  * ----------
  */
 .skin-blue .main-header .navbar {
-  background-color: #3c8dbc;
+  background: url("../../../img/background/glass-3081015.jpg") no-repeat fixed center; 
+  background-size: cover;
+  background-position: 0% 183%;
 }
 .skin-blue .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -43,7 +45,7 @@
   }
 }
 .skin-blue .main-header .logo {
-  background-color: #367fa9;
+  background-color: #1E282C;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }

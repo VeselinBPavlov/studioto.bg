@@ -101,5 +101,14 @@
         public const int AvailableAppointmentsCount = 20;
 
         #endregion
+
+        #region Studio.User.WebApp
+
+        public const string AdministratorRole = "Administrator";
+        public const string AdministratorArea = "Administrator";
+        public const string UserRole = "User";
+
+
+        #endregion
     }
 }

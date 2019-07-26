@@ -1,12 +1,11 @@
-﻿@using Studio.Domain.Entities;
-@using Microsoft.AspNetCore.Identity;
-@inject UserManager<StudioUser> UserManager;
-
+﻿
 @{
     ViewData["Title"] = "Successful Appointment";
 }
 
 <h1>Успешна резервация</h1>
-<button type="button" asp-controller="Home" asp-action="Index">Начало</button>
-<button type="button" asp-controller="Profile" asp-action="Details" asp-route-id="@UserManager.GetUserId(this.User)">Профил</button>
+
+<form asp-action="Index" asp-controller="Home" method="get" >
+    <input type="submit" class="btn btn-primary" placeholder="Начало" />
+</form>
 

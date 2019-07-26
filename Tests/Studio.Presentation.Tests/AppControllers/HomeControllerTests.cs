@@ -3,7 +3,6 @@
     using MyTested.AspNetCore.Mvc;
     using Studio.Application.ContactForms.Commands.Create;
     using Studio.Common;
-    using Studio.Domain.Entities;
     using Studio.User.WebApp.Controllers;
     using Xunit;
 
