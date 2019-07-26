@@ -40,7 +40,7 @@ body {
 
 /* ASP STYLE END */
 
-/* LOGIN AND REGISTER PAGE START */
+/* LOGIN, REGISTER, CONTACTS PAGE END */
 
 .loginWrapper {
     text-align: center;
@@ -104,4 +104,12 @@ body {
     font: 0.9em/0.9em 'Roboto', Arial, Sans-serif;
 }
 
-/* LOGIN AND REGISTER PAGE END */
+.loginWrapper textarea {
+    margin-bottom: 20px;
+}
+
+.loginWrapper .contactsInfo {
+    text-align: left;
+}
+
+/* LOGIN, REGISTER, CONTACTS PAGE END */

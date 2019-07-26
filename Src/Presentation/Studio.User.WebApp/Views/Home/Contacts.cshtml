@@ -3,25 +3,32 @@
     ViewData["Title"] = "Contacts";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Contacts</h1>
-    <div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Home" asp-action="Contacts" method="post">
-            <h4>Send email.</h4>
-            <hr />
-            <label asp-for="FirstName">First Name</label>
-            <input asp-for="FirstName" class="form-control" />
-            <label asp-for="LastName">Last Name</label>
-            <input asp-for="LastName" class="form-control" />  
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" />  
-            <label asp-for="Topic">Subject</label>
-            <input asp-for="Topic" class="form-control" />    
-            <label asp-for="Message">Message</label>
-            <textarea asp-for="Message" class="form-control"></textarea>
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
+<div class="loginWrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 contactsInfo" >
+                <p>Здравейте!</p>
+                <p>Ако желаете да се свържете с нас, моля, използвайте формата за контакт, 
+                    като изпратите имейл на contacts@studio.bg </p>
+                <p>Всички предложения, идеи и мнения, с които можем да подобрим studioto.bg 
+                    и да го направим по-удобно за вас, са добре дошли! </p>
+                <p>Благодарим ви!</p>
+                <hr/>
+                <p>Фирма: Cyber Earth Technologies Ltd.</p>
+                <p>Адрес: гр. Велико Търново, ул. "Дунав" 12</p>
+                <p>Телефон: 0888 123 456</p>
+                <p>МОЛ: Веселин Павлов</p>
+            </div>
+            <div class="col-xs-6">
+                <form asp-controller="Home" asp-action="Contacts" method="post">
+                <input asp-for="FirstName" class="form-control" placeholder="Име" />
+                <input asp-for="LastName" class="form-control" placeholder="Фамилия" />  
+                <input asp-for="Email" class="form-control" placeholder="Email" />  
+                <input asp-for="Topic" class="form-control" placeholder="Tема"  />    
+                <textarea asp-for="Message"  rows="4" cols="50" class="form-control" placeholder="Съобщение"></textarea>
+                <button type="submit" class="btn btn-primary">Изпрати</button>
+                </form>
+            </div>
+        </div>
     </div>
-</div> 
 </div>
