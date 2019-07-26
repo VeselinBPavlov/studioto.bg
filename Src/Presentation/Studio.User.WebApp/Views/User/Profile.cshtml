@@ -1,5 +1,69 @@
-﻿@{
+﻿@using Studio.Application.Appointments.Queries.GetAppointmentsByUserId;
+@model AppointmentsProfileListViewModel;
+
+@{
     ViewData["Title"] = "Profile Details";
 }
+
+@if (Model.NewAppointments.Count > 0) 
+{
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Студио</th>
+      <th scope="col">Служител</th>
+      <th scope="col">Услуга</th>
+      <th scope="col">Ден и час</th>    
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var appointment in Model.NewAppointments)
+      {
+        <tr>
+            <td>@appointment.Id</td>
+            <td>@appointment.LocationName</td>
+            <td>@appointment.EmployeeNames</td>
+            <td>@appointment.ServiceName</td>
+            <td>@appointment.ReservationDate @appointment.ReservationTime</td>
+        </tr>
+      }  
+</table>
+}
+else 
+{
+    <h4>Нямате резервации</h4>
+}
+
+@if (Model.OldAppointments.Count > 0) 
+{
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Студио</th>
+      <th scope="col">Служител</th>
+      <th scope="col">Услуга</th>
+      <th scope="col">Ден и час</th>    
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var appointment in Model.OldAppointments)
+      {
+        <tr>
+            <td>@appointment.Id</td>
+            <td>@appointment.LocationName</td>
+            <td>@appointment.EmployeeNames</td>
+            <td>@appointment.ServiceName</td>
+            <td>@appointment.ReservationDate @appointment.ReservationTime</td>
+        </tr>
+      }  
+</table>
+}
+else 
+{
+    <h4>Нямате отминали резервации</h4>
+}
+
 
 

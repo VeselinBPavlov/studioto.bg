@@ -83,7 +83,7 @@
             context.SaveChanges();
         }
 
-        public static void AddAppointmentes(StudioDbContext context)
+        public static string AddAppointmentes(StudioDbContext context)
         {
             var userId = CommandArrangeHelper.GetUserId(context);
             var employeeId = CommandArrangeHelper.GetEmployeeId(context, null);
@@ -98,6 +98,8 @@
 
             context.Appointments.AddRange(appointments);
             context.SaveChanges();
+
+            return userId;
         }
 
         public static void AddAddresses(StudioDbContext context)
