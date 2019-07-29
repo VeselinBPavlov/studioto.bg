@@ -2,13 +2,23 @@
 {
     using System;
     using FluentValidation;
+    using Studio.Common;
 
     public class CreateAppointmentCommandValidator : AbstractValidator<CreateAppointmentCommand>
     {
+        private const string ReservationDate = "Дата за резервация";
+        private const string TimeBlockHelper = "Час за резервация";
+
         public CreateAppointmentCommandValidator()
         {            
-            RuleFor(c => c.ReservationDate).NotEmpty().WithMessage("Reservation date is required").Must(this.BeValidDate).WithMessage("Invalid date");
-            RuleFor(c => c.TimeBlockHelper).NotEmpty().WithMessage("Reservation hour is required");
+            RuleFor(c => c.ReservationDate)
+                .NotEmpty()
+                .WithMessage(string.Format(GConst.ErrorRequiredMessage, ReservationDate))
+                .Must(this.BeValidDate)
+                .WithMessage(string.Format(GConst.ErrorInvalidMessage, ReservationDate));
+            RuleFor(c => c.TimeBlockHelper)
+                .NotEmpty()
+                .WithMessage(string.Format(GConst.ErrorRequiredMessage, TimeBlockHelper));
         }
 
         private bool BeValidDate(DateTime reservationTime)

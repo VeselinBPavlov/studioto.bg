@@ -17,9 +17,7 @@
                 <form id="account" method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input asp-for="Input.Email" type="email" class="form-control" placeholder="Email">
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    <input asp-for="Input.Password" type="password" class="form-control" aria-describedby="emailHelp" placeholder="Парола">
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <input asp-for="Input.Password" type="password" class="form-control" placeholder="Парола">
                     <button type="submit" class="btn btn-primary">ВЛЕЗ</button>
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">

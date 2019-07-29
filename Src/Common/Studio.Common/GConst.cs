@@ -18,7 +18,15 @@
         public const string SenderMessage = "Вашето запитване е получено успешно. Очаквайте свързване с администратор.";
         public const string ApiKey = "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";
         public const string AppointmentSubject = "Успешна резервация в Studioto.bg!";
-        public const string AppointmentMessage = "Вие успешно резервирахте час за {0} в {1} от {2} часа.";
+        public const string AppointmentMessage = "Вие успешно резервирахте час за {0} в {1} от {2} часа.";  
+        public const string ErrorRequiredMessage = "Полето \"{0}\" e задължително";
+        public const string ErrorLengthMessage = "Полето \"{0}\" трябва да е дължина {1} до {2} символа";
+        public const string ErrorInvalidMessage = "Невалидна стойност на полето \"{0}\"";
+        public const string ErrorPhoneMessage = "Невалиден телефонен формат. Примери: +359884456456, 0884456456";
+        public const string ErrorVatNumberMessage = "Невалиден формат на данъчния номер. Примери: 123456789, BG123456789";
+        public const string ErrorEmailMessage = "Невалиден email формат. Пример: user@provider.com";
+        public const string ErrorPriceMessage = "Цената трябва да е по-голяма от 0.00";
+
 
         #endregion
 

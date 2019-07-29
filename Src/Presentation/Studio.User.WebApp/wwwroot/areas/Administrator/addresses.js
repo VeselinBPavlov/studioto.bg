@@ -54,13 +54,23 @@
             data: formAddress,
             success: function () {
 
-                     Message("Data successfuly saved.");
+                     Message("Data successfuly saved.", 'success');
 
                      GenerateGridList();
              },
-             error: function () {
-                     Message("Data fail to saved.");
-             }
+             error: function (response) {                     
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if(error !== undefined) {
+                    message += error;
+                    } else {
+                    Object.keys(errors).forEach(function(key) {
+                        message += `${key} - ${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
+            }
           });
     }
 
@@ -71,10 +81,20 @@
             url: "/api/Addresses/Delete/" + id,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!');
+                Message('Delete success!', 'success');
             },
-            error: function () {
-                Message('Delete failed!');
+            error: function (response) {                     
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if(error !== undefined) {
+                    message += error;
+                    } else {
+                    Object.keys(errors).forEach(function(key) {
+                        message += `${key} - ${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
             }
         });
     }
@@ -127,12 +147,22 @@
 
                 $('#id').val(0);
 
-                Message('Update success!');
+                Message('Update success!', 'success');
 
                 GenerateGridList();
             },
-            error: function () {
-                Message('Update failed!');
+            error: function (response) {                     
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if(error !== undefined) {
+                    message += error;
+                    } else {
+                    Object.keys(errors).forEach(function(key) {
+                        message += `${key} - ${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
             }
         });
     }
@@ -143,8 +173,12 @@
             });
         }
 
-        function Message(text) {
-            toastr.success(text)
+        function Message(text, status) {
+            if (status == "success") {
+                toastr.success(text)
+            } else {
+                toastr.error(text)
+            }
         }
 
         function FillCitiesDropdown() {
