@@ -25,8 +25,8 @@ namespace Studio.Application.Appointments.Queries.GetAppointmentsByUserId
         {
             return new AppointmentsProfileListViewModel 
             {
-                NewAppointments = await this.context.Appointments.Where(a => a.UserId == request.UserId && a.IsDeleted != true && a.ReservationDate >= DateTime.UtcNow.Date && a.ReservationTime >= DateTime.UtcNow).ProjectTo<AppointmentProfileViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken),
-                OldAppointments = await this.context.Appointments.Where(a => a.UserId == request.UserId && a.IsDeleted != true && a.ReservationDate < DateTime.UtcNow.Date && a.ReservationTime < DateTime.UtcNow).ProjectTo<AppointmentProfileViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                NewAppointments = await this.context.Appointments.Where(a => a.UserId == request.UserId && a.IsDeleted != true && a.ReservationDate >= DateTime.UtcNow).ProjectTo<AppointmentProfileViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken),
+                OldAppointments = await this.context.Appointments.Where(a => a.UserId == request.UserId && a.IsDeleted != true && a.ReservationDate < DateTime.UtcNow).ProjectTo<AppointmentProfileViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

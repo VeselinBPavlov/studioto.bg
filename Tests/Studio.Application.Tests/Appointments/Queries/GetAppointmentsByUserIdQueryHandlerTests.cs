@@ -24,15 +24,15 @@ namespace Studio.Application.Tests.Appointments.Queries
             sut = new GetAppointmentsByUserIdListQueryHandler(context, mapper);
         }
 
-        // [Fact]
-        // public async Task GetAppointmentsTest()
-        // {
-        //     var result = await sut.Handle(new GetAppointmentsByUserIdListQuery { UserId = userId }, CancellationToken.None);
+        //[Fact]
+        //public async Task GetAppointmentsTest()
+        //{
+        //    var result = await sut.Handle(new GetAppointmentsByUserIdListQuery { UserId = userId }, CancellationToken.None);
 
-        //     result.ShouldBeOfType<AppointmentsProfileListViewModel>();
+        //    result.ShouldBeOfType<AppointmentsProfileListViewModel>();
 
-        //     result.NewAppointments.Count.ShouldBe(GConst.ValidQueryCount);
-        //     result.OldAppointments.Count.ShouldBe(GConst.ZeroId);
-        // }
+        //    result.NewAppointments.Count.ShouldBe(GConst.ValidQueryCount);
+        //    result.OldAppointments.Count.ShouldBe(GConst.ZeroId);
+        //}
     }       
 }

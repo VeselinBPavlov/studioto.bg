@@ -1,9 +1,8 @@
 namespace Studio.Application.Appointments.Queries.GetAppointmentsByUserId
 {
-    using System;
     using AutoMapper;
-    using Studio.Application.Interfaces.Mapping;
-    using Studio.Domain.Entities;
+    using Domain.Entities;
+    using Interfaces.Mapping;
 
     public class AppointmentProfileViewModel : IHaveCustomMapping
     {

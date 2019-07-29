@@ -59,7 +59,7 @@
 
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("StudioDBConnectionWork")));
+                    this.Configuration.GetConnectionString("StudioDBConnectionHome")));
             
             services.AddScoped<IStudioDbContext, StudioDbContext>();
 
