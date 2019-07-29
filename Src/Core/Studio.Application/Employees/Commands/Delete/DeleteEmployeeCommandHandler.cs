@@ -31,14 +31,14 @@
 
             if (hasAppointments)
             {
-                throw new DeleteFailureException(Common.GConst.Employee, request.Id, string.Format(GConst.DeleteException, GConst.Appointments, GConst.EmployeeLower));
+                throw new DeleteFailureException(GConst.Employee, request.Id, string.Format(GConst.DeleteException, GConst.Appointments, GConst.EmployeeLower));
             }   
 
             var hasServices = this.context.EmployeeServices.Any(a => a.EmployeeId == employee.Id && a.Employee.IsDeleted == false);
 
             if (hasServices)
             {
-                throw new DeleteFailureException(Common.GConst.Employee, request.Id, string.Format(GConst.DeleteException, GConst.Services, GConst.EmployeeLower));
+                throw new DeleteFailureException(GConst.Employee, request.Id, string.Format(GConst.DeleteException, GConst.Services, GConst.EmployeeLower));
             }          
 
             employee.DeletedOn = DateTime.UtcNow;

@@ -5,10 +5,10 @@
 
     public class DeleteFailureException : Exception
     {
-        private const string Delete = "Deletion";
+        private const string Delete = "изтриването";
 
         public DeleteFailureException(string name, object key, string message)
-            : base(string.Format(Common.GConst.FailureException, Delete, name, key, message))
+            : base(string.Format(GConst.FailureException, Delete, name, key, message))
         {
         }
     }

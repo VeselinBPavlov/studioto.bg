@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewData["Title"] = "Cities";
+    ViewData["Title"] = "Адреси";
 }
 <span id="Addressspan"></span>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Addresses
+            Адреси
         </h1>
         <ol class="breadcrumb"></ol>
     </section>
@@ -18,7 +18,7 @@
             <div >
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Create / Edit Addresses</h3>
+                        <h3 class="box-title">Създаване / Промяна на адреси</h3>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -26,43 +26,43 @@
                         <div class="box-body">
                             <input type="hidden" id="id" name="id" />
                             <div class="form-group">
-                                <label>Street</label>
-                                <input class="form-control" id="street" name="street" placeholder="Write street ...">
+                                <label>Улица</label>
+                                <input class="form-control" id="street" name="street" placeholder="Напиши улица ...">
                             </div>
                             <div class="form-group">
-                                <label>Number</label>
-                                <input class="form-control" id="number" name="number" placeholder="Write number ...">
+                                <label>Номер</label>
+                                <input class="form-control" id="number" name="number" placeholder="Напиши номер ...">
                             </div>
                             <div class="form-group">
-                                <label>Building</label>
-                                <input class="form-control" id="building" name="building" placeholder="Write building ...">
+                                <label>Блок</label>
+                                <input class="form-control" id="building" name="building" placeholder="Напиши блок ...">
                             </div>
                             <div class="form-group">
-                                <label>Entrance</label>
-                                <input class="form-control" id="entrance" name="entrance" placeholder="Write entrance ...">
+                                <label>Вход</label>
+                                <input class="form-control" id="entrance" name="entrance" placeholder="Напиши вход ...">
                             </div>
                             <div class="form-group">
-                                <label>Floor</label>
-                                <input class="form-control" id="floor" name="floor" placeholder="Write floor ...">
+                                <label>Етаж</label>
+                                <input class="form-control" id="floor" name="floor" placeholder="Напиши етаж ...">
                             </div>
                             <div class="form-group">
-                                <label>Apartment</label>
-                                <input class="form-control" id="apartment" name="apartment" placeholder="Write apartment ...">
+                                <label>Апартамент</label>
+                                <input class="form-control" id="apartment" name="apartment" placeholder="Напиши апартамент ...">
                             </div>
                             <div class="form-group">
-                                <label>District</label>
-                                <input class="form-control" id="district" name="district" placeholder="Write district ...">
+                                <label>Квартал</label>
+                                <input class="form-control" id="district" name="district" placeholder="Напиши квартал ...">
                             </div>
                             <div class="form-group">
-                                <label>Longitude</label>
-                                <input class="form-control" id="longitude" name="longitude" type="number" placeholder="Write longitude ...">
+                                <label>Дължина</label>
+                                <input class="form-control" id="longitude" name="longitude" type="number" placeholder="Напиши дължина ...">
                             </div>
                             <div class="form-group">
-                                <label>Latitude</label>
-                                <input class="form-control" id="latitude" name="latitude" type="number" placeholder="Write latitude ...">
+                                <label>Ширина</label>
+                                <input class="form-control" id="latitude" name="latitude" type="number" placeholder="Напиши ширина ...">
                             </div>
                             <div class="form-group">
-                                <label>City</label>
+                                <label>Град</label>
                                 <select class="form-control" id="cityId" name="cityId"></select>
                             </div>                                
 
@@ -70,8 +70,8 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="button" id="Create" value="Create" class="btn btn-success" onclick="CreateData()" />
-                            <input type="button" id="Update" value="Update" class="btn btn-info hidden" onclick="UpdateData()" />
+                            <input type="button" id="Create" value="Създаване" class="btn btn-success" onclick="CreateData()" />
+                            <input type="button" id="Update" value="Промяна" class="btn btn-info hidden" onclick="UpdateData()" />
                         </div>
                     </form>
                 </div>
@@ -82,7 +82,7 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Addresses</h3>
+                        <h3 class="box-title">Адреси</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
@@ -90,10 +90,10 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th>Address</th>
-                                    <th>Longitude</th>
-                                    <th>Latitude</th>
-                                    <th>City</th>
+                                    <th>Адрес</th>
+                                    <th>Дължина</th>
+                                    <th>Ширина</th>
+                                    <th>Град</th>
                                     <th></th>
                                     <th></th>
                                 </tr>

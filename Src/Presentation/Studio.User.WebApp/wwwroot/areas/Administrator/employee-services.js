@@ -35,8 +35,8 @@
                         tr += "<td>" + result['employeeServices'][i].price;
                         tr += "<td>" + result['employeeServices'][i].durationInMinutes;
 
-                        tr += "<td>" + `<button class='btn btn-info btn-xs' onclick=EditData(${result['employeeServices'][i].employeeId},${result['employeeServices'][i].serviceId})>` + "Edit";
-                        tr += "<td>" + `<button class='btn btn-danger btn-xs' onclick=DeleteData(${result['employeeServices'][i].employeeId},${result['employeeServices'][i].serviceId})>` + "Delete";
+                        tr += "<td>" + `<button class='btn btn-info btn-xs' onclick=EditData(${result['employeeServices'][i].employeeId},${result['employeeServices'][i].serviceId})>` + "Промяна";
+                        tr += "<td>" + `<button class='btn btn-danger btn-xs' onclick=DeleteData(${result['employeeServices'][i].employeeId},${result['employeeServices'][i].serviceId})>` + "Изтриване";
                         tbody.append(tr);
                     });
                 }
@@ -57,7 +57,7 @@
             data: formEmployeeService,
             success: function () {
 
-                     Message("Data successfuly saved.", 'success');
+                     Message("Служителят с услугата е запазен успешно!", 'success');
 
                      GenerateGridList();
              },
@@ -69,7 +69,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -84,7 +84,7 @@
             url: "/api/EmployeeServices/Delete/" + employeeId + "/" + serviceId,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!', 'success');
+                Message('Служителят с услугата е изтрит успешно!', 'success');
             },
             error: function (response) {                     
                 var message = "";
@@ -94,7 +94,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -144,7 +144,7 @@
                 $('#employeeId').val(0);
                 $('#serviceId').val(0);
 
-                Message('Update success!', 'success');
+                Message('Служителят с услугата е променен успешно!', 'success');
 
                 GenerateGridList();
             },
@@ -156,7 +156,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);

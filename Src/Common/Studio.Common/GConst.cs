@@ -5,12 +5,12 @@
         #region Studio.Application.Core
 
         public const string BaseException = "One or more validation failures have occurred.";
-        public const string FailureException = "{0} of entity \"{1}\" ({2}) failed. {3}";
-        public const string NotFoundException = "Entity \"{0}\" ({1}) was not found.";
-        public const string DeleteException = "There are existing {0} associated with this {1}.";
-        public const string RefereceException = "There are no existing {0} with id {1}.";
-        public const string UniqueNameException = "There are existing {0} with the same name.";
-        public const string InvalidAppointmentHourException = "Location Working Hours are from {0} to {1}.";
+        public const string FailureException = "Възникна грешка при {0} на \"{1}\" ({2}). {3}";
+        public const string NotFoundException = "Обектът от тип \"{0}\" ({1}) не е намерен.";
+        public const string DeleteException = "Съществуват {0} свързани с {1}.";
+        public const string RefereceException = "Не съществува {0} с id {1}.";
+        public const string UniqueNameException = "Съшествува {0} със същото име.";
+        public const string InvalidAppointmentHourException = "Работното време на обекта е от  {0} до {1} часа.";
         public const string ReservedHourException = "{0} already has an appointment on {1} on {2}.";
         public const string SenderEmail = "studio@gmail.bg";
         public const string SenderName = "studioto.bg";
@@ -33,43 +33,43 @@
         #region Studio.Application.Domain
 
         public const string ValueObjectException = "{0} is invalid.";
-        public const string AddressFormatException = "Street and number are required!";
-        public const string ManagerException = "First and last name are with incorrect format!";
-        public const string Industry = "Industry";
-        public const string Country = "Country";
-        public const string City = "City";
-        public const string Address = "Address";
-        public const string Location = "Location";
-        public const string Manager = "Manager";
-        public const string Client = "Client";
-        public const string Service = "Service";
-        public const string Employee = "Employee";
-        public const string Appointment = "Appointment";
-        public const string EmployeeService = "Employee-Service relation";
-        public const string LocationIndustry = "Location-Industry relation";
-        public const string User = "User";
-        public const string IndustryLower = "industry";
-        public const string CountryLower = "country";
-        public const string CityLower = "city";
-        public const string AddressLower = "address";
-        public const string LocationLower = "location";
-        public const string ManagerLower = "manager";
-        public const string ClientLower = "client";
-        public const string ServiceLower = "service";
-        public const string EmployeeLower = "employee";
-        public const string AppointmentLower = "appointment";
-        public const string UserLower = "user";
-        public const string Addresses = "addresses";
-        public const string Locations = "locations";
-        public const string Employees = "employees";
-        public const string Cities = "cities";
-        public const string Services = "services";
-        public const string Industries = "industries";
-        public const string Appointments = "appointments";
-        public const string Users = "users";
-        public const string Create = "Creation";
-        public const string Delete = "Deletion";
-        public const string Update = "Update";
+        public const string AddressFormatException = "Улицата и номера са задължителни!";
+        public const string ManagerException = "Невалиден формат за име и фамилия!";
+        public const string Industry = "Бизнес";
+        public const string Country = "Държава";
+        public const string City = "Град";
+        public const string Address = "Адрес";
+        public const string Location = "Обект";
+        public const string Manager = "Управител";
+        public const string Client = "Фирма";
+        public const string Service = "Услуга";
+        public const string Employee = "Служител";
+        public const string Appointment = "Резервация";
+        public const string EmployeeService = "Връзка Служител-Услуга";
+        public const string LocationIndustry = "Връзка Обект-Бизнес";
+        public const string User = "Потребител";
+        public const string IndustryLower = "бизнес";
+        public const string CountryLower = "държава";
+        public const string CityLower = "град";
+        public const string AddressLower = "адрес";
+        public const string LocationLower = "обект";
+        public const string ManagerLower = "управител";
+        public const string ClientLower = "фирма";
+        public const string ServiceLower = "услуга";
+        public const string EmployeeLower = "служител";
+        public const string AppointmentLower = "регистрация";
+        public const string UserLower = "потребител";
+        public const string Addresses = "адреси";
+        public const string Locations = "обекти";
+        public const string Employees = "служители";
+        public const string Cities = "градове";
+        public const string Services = "услуги";
+        public const string Industries = "бизнеси";
+        public const string Appointments = "резервации";
+        public const string Users = "потребители";
+        public const string Create = "създаването";
+        public const string Delete = "изтриването";
+        public const string Update = "промяната";
 
         #endregion
 
@@ -100,12 +100,12 @@
         public const string ValidStartDay = "1";
         public const string ValidEndDay = "5";
         public const string AllHoursBusy = "busy";
-        public const string NotFoundExceptionMessage = "Entity \"{0}\" ({1}) was not found.";
-        public const string ReferenceExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are no existing {3} with id {4}.";
-        public const string DeleteFailureExceptionMessage = "Deletion of entity \"{0}\" ({1}) failed. There are existing {2} associated with this {3}.";       
-        public const string UniqueNameExceptionMessage = "{0} of entity \"{1}\" ({2}) failed. There are existing {3} with the same name.";
-        public const string ValueObjectExceptionMessage = "{0} is invalid.";
-        public const string NotAvalableHours = "No Appointments Available for {0}";
+        public const string NotFoundExceptionMessage = "Обектът от тип \"{0}\" ({1}) не е намерен.";
+        public const string ReferenceExceptionMessage = "Възникна грешка при {0} на \"{1}\" ({2}). Не съществува {3} с id {4}.";
+        public const string DeleteFailureExceptionMessage = "Възникна грешка при изтриването на \"{0}\" ({1}). Съществуват {2} свързани с {3}.";       
+        public const string UniqueNameExceptionMessage = "Възникна грешка при {0} на \"{1}\" ({2}). Съшествува {3} със същото име.";
+        public const string ValueObjectExceptionMessage = "Невалиден {0}.";
+        public const string NotAvalableHours = "Няма свободни часове за {0}";
         public const int AvailableAppointmentsCount = 20;
 
         #endregion

@@ -32,8 +32,8 @@
                         tr += "<td>" + result['locationIndustries'][i].industryName;
                         tr += "<td>" + result['locationIndustries'][i].description;
 
-                        tr += "<td>" + `<button class='btn btn-info btn-xs' onclick=EditData(${result['locationIndustries'][i].locationId},${result['locationIndustries'][i].industryId})>` + "Edit";
-                        tr += "<td>" + `<button class='btn btn-danger btn-xs' onclick=DeleteData(${result['locationIndustries'][i].locationId},${result['locationIndustries'][i].industryId})>` + "Delete";
+                        tr += "<td>" + `<button class='btn btn-info btn-xs' onclick=EditData(${result['locationIndustries'][i].locationId},${result['locationIndustries'][i].industryId})>` + "Промени";
+                        tr += "<td>" + `<button class='btn btn-danger btn-xs' onclick=DeleteData(${result['locationIndustries'][i].locationId},${result['locationIndustries'][i].industryId})>` + "Изтрий";
                         tbody.append(tr);
                     });
                 }
@@ -54,7 +54,7 @@
             data: formLocationIndustry,
             success: function () {
 
-                     Message("Data successfuly saved.", 'success');
+                     Message("Обектът с бизнес е записан успешно!", 'success');
 
                      GenerateGridList();
              },
@@ -66,7 +66,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -81,7 +81,7 @@
             url: "/api/LocationIndustries/Delete/" + locationId + "/" + industryId,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!', 'success');
+                Message('Обектът с бизнес е изтрит успешно!', 'success');
             },
             error: function (response) {                     
                 var message = "";
@@ -91,7 +91,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -141,7 +141,7 @@
                 $('#employeeId').val(0);
                 $('#serviceId').val(0);
 
-                Message('Update success!', 'success');
+                Message('Обектът с бизнес е променен успешно!', 'success');
 
                 GenerateGridList();
             },
@@ -153,7 +153,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);

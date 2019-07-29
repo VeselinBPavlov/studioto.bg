@@ -31,8 +31,8 @@
                         tr += "<td>" + result['cities'][i].id;
                         tr += "<td>" + result['cities'][i].name;
                         tr += "<td>" + result['cities'][i].countryName;
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['cities'][i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['cities'][i].id + ")>" + "Delete";
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['cities'][i].id + ")>" + "Промяна";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['cities'][i].id + ")>" + "Изтриване";
                         tbody.append(tr);
                     });
                 }
@@ -52,7 +52,7 @@
             data: formCity,
             success: function () {
 
-                     Message("Data successfuly saved.", 'success');
+                     Message("Градът е записан успешно!", 'success');
 
                      GenerateGridList();
              },
@@ -64,7 +64,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -79,7 +79,7 @@
             url: "/api/Cities/Delete/" + id,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!', 'success');
+                Message('Градът е изтрит успешно!', 'success');
             },
             error: function (response) {                     
                 var message = "";
@@ -89,7 +89,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -136,7 +136,7 @@
 
                 $('#id').val(0);
 
-                Message('Update success!', 'success');
+                Message('Градът е променен успешно!', 'success');
 
                 GenerateGridList();
             },
@@ -148,7 +148,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);

@@ -28,8 +28,8 @@
                         var tr = "<tr>";
                         tr += "<td>" + result['countries'][i].id;
                         tr += "<td>" + result['countries'][i].name;
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['countries'][i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['countries'][i].id + ")>" + "Delete";
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['countries'][i].id + ")>" + "Промяна";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['countries'][i].id + ")>" + "Изтриване";
                         tbody.append(tr);
                     });
                 }
@@ -46,7 +46,7 @@
             data: formCountry,
             success: function () {
 
-                     Message("Data successfuly saved.", 'success');
+                     Message("Държавата е записана успешно!", 'success');
 
                      GenerateGridList();
              },
@@ -58,7 +58,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -73,10 +73,20 @@
             url: "/api/Countries/Delete/" + id,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!', 'success');
+                Message('Държавата е изтрита успешно!', 'success');
             },
-            error: function () {
-                Message('Delete failed!');
+            error: function (response) {                     
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if(error !== undefined) {
+                    message += error;
+                    } else {
+                    Object.keys(errors).forEach(function(key) {
+                        message += `${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
             }
         });
     }
@@ -116,12 +126,22 @@
 
                 $('#id').val(0);
 
-                Message('Update success!', 'success');
+                Message('Държавата е променена успешно!', 'success');
 
                 GenerateGridList();
             },
-            error: function () {
-                Message('Update failed!');
+            error: function (response) {                     
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if(error !== undefined) {
+                    message += error;
+                    } else {
+                    Object.keys(errors).forEach(function(key) {
+                        message += `${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
             }
         });
     }

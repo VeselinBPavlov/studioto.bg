@@ -34,8 +34,8 @@
                         tr += "<td>" + result['locations'][i].phone;
                         tr += "<td>" + result['locations'][i].company;
 
-                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['locations'][i].id + ")>" + "Edit";
-                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['locations'][i].id + ")>" + "Delete";
+                        tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['locations'][i].id + ")>" + "Промени";
+                        tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['locations'][i].id + ")>" + "Изтрий";
                         tbody.append(tr);
                     });
                 }
@@ -56,7 +56,7 @@
             data: formLocation,
             success: function () {
 
-                Message("Data successfuly saved.", 'success');
+                Message("Бизнесът е запазен успешно!", 'success');
 
                 GenerateGridList();
             },
@@ -68,7 +68,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -83,7 +83,7 @@
             url: "/api/Locations/Delete/" + id,
             success: function () {
                 GenerateGridList();
-                Message('Delete success!', 'success');
+                Message('Бизнесът е изтрит успешно!', 'success');
             },
             error: function (response) {                     
                 var message = "";
@@ -93,7 +93,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);
@@ -151,7 +151,7 @@
 
                 $('#id').val(0);
 
-                Message('Update success!', 'success');
+                Message('Бизнесът е променен успешно!', 'success');
 
                 GenerateGridList();
             },
@@ -163,7 +163,7 @@
                     message += error;
                     } else {
                     Object.keys(errors).forEach(function(key) {
-                        message += `${key} - ${errors[key]}!<br/>`;                        
+                        message += `${errors[key]}!<br/>`;                        
                     });
                 }
                 Message(message);

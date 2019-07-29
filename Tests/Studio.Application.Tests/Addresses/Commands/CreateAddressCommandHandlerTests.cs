@@ -41,7 +41,7 @@
             var status = await Record.ExceptionAsync(async () => await sut.Handle(new CreateAddressCommand { CityId = cityId }, CancellationToken.None));
 
             Assert.NotNull(status);
-            Assert.Equal(string.Format(GConst.ValueObjectExceptionMessage, GConst.Address), status.Message);
+            Assert.Equal(string.Format(GConst.ValueObjectExceptionMessage, GConst.AddressLower), status.Message);
         }
 
         [Fact]
