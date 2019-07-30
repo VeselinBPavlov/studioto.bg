@@ -5,6 +5,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+<partial name="_HeaderIndex" />
+
+<main>
 <div class="search">
     <div class="container">
         <div class="row">
@@ -46,104 +49,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-lg-3">
+            @foreach (var location in Model.Locations)
+            {
+             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <div class="studio-info-box">
-                    <img class="studio-photo" src="images/venera-studio-photo.jpg" alt="Venera Studio Photo" />
-                    <h2 class="studio-name">Козметични студия "Венера"</h2>
+                    <img class="studio-photo" src="~/img/index/mix-studio-photo.jpg" alt="location-photo" />
+                    <h2 class="studio-name">@location.Name</h2>
                     <div class="studio-info-wrapper">
-                        <p class="studio-address">София, кв. Редута ул. Братован 1</p>
-                        <p class="studio-hw">Пн-Нд 9:00-20:00</p>
-                        <p class="studio-phone">0886  620 336</p>
+                        <p class="studio-address">@location.Address</p>
+                        <p class="studio-hw">@location.StartDay.Substring(0, 3) - @location.EndDay.Substring(0, 3) @location.StartHour - @location.EndHour</p>
+                        <p class="studio-phone">@location.Phone</p>
                     </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                    <a asp-controller="Location" asp-action="Studio" asp-route-id="@location.Id" class="make-app" title="Резервирай">Резервирай</a>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/new-image-photo.jpg" alt="Venera Studio Photo" />
-                    <h2 class="studio-name">Козметичнo студиo "Нов Имидж"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">Враца, ул. Лукашов 10 офис 206</p>
-                        <p class="studio-hw">Пн-Нд 10:00-18:00</p>
-                        <p class="studio-phone">0888  828 962</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/studio-sofia-photo.jpg" alt="Sofia Studio Photo" />
-                    <h2 class="studio-name">Козметичнo студиo "София"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">София, Ст.Град ул. И. Странски 1</p>
-                        <p class="studio-hw">Пн-Нд 9:00-18:00</p>
-                        <p class="studio-phone">0888  277 757</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/jeni-studio-photo.jpg" alt="Jeni Studio Photo" />
-                    <h2 class="studio-name">Козметично студио "Жени"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">София, Красно село ул. Хубча 7</p>
-                        <p class="studio-hw">Пн-Нд 9:00-18:00</p>
-                        <p class="studio-phone">0888  549 720</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/mix-studio-photo.jpg" alt="Mix Studio Photo" />
-                    <h2 class="studio-name">Козметично студио "Микс"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">София, кв. Обеля ул. Оборище 79</p>
-                        <p class="studio-hw">Пн-Сб 9:00-20:00</p>
-                        <p class="studio-phone">02  846 5121</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/beauty-studio-photo.jpg" alt="Beauty Studio Photo" />
-                    <h2 class="studio-name">Козметично студио "Beauty"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">София, кв. Лозенец ул. Криволак 49</p>
-                        <p class="studio-hw">Пн-Пт 9:00-18:00</p>
-                        <p class="studio-phone">0892  948 719</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/family-studio-photo.jpg" alt="Family Studio Photo" />
-                    <h2 class="studio-name">Козметично студио "Family"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">София, бул. Ал. Малинов бл.491</p>
-                        <p class="studio-hw">Пн-Пт 9:00-180:00</p>
-                        <p class="studio-phone">0884  665 217</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-3">
-                <div class="studio-info-box">
-                    <img class="studio-photo" src="images/agusta-studio-photo.jpeg" alt="Agusta Studio Photo" />
-                    <h2 class="studio-name">Козметично студио "Агуста"</h2>
-                    <div class="studio-info-wrapper">
-                        <p class="studio-address">Велико Търново, ул. Цветарска 2</p>
-                        <p class="studio-hw">Пн-Пт 9:00-19:00</p>
-                        <p class="studio-phone">0884  592 667</p>
-                    </div>
-                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
-                </div>
-            </div>
+            }         
         </div>
     </div>
 </div>
@@ -155,7 +75,7 @@
                 <span class="studio">Какво е Studioto.bg?</span>
             </div>
             <div class="col-xs-12 col col-sm-6 learn-more-box">
-                <a class="read-more" href="javascript:void(0)" title="Научете още">Научете още</a>
+                <a class="read-more" asp-controller="Home" asp-action="About" title="Научете още">Научете още</a>
             </div>
         </div>
         <div class="row">
@@ -166,7 +86,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-xs-12 col-md-6 col-md-offset-1">
-                <img src="images/header-background.jpg" alt="За нас" />
+                <img src="~/img/index/header-background.jpg" alt="За нас" />
             </div>
         </div>
     </div>
@@ -184,7 +104,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-xs-12 col-md-6 reservation-box">
-                <img src="images/reservation.jpg" alt="Резервация" />
+                <img src="~/img/index/reservation.jpg" alt="Резервация" />
             </div>
             <div class="col-xs-12 col-md-5 col-md-offset-1">
                 <div class="makeapp-box">
@@ -229,10 +149,40 @@
 
 
 <div class="appointment-wrapper">
-    <img class="makeapp-img" src="images/apple.png" alt="Резервация" />
+    <img class="makeapp-img" src="~/img/index/apple.png" alt="Резервация" />
     <div class="book-online-box">
-        <img src="images/Asset6.png" alt="Logo Image" />
+        <img src="~/img/logo/logo-black.png" alt="Logo Image" />
         <p>Book online, enjoy at the place!</p>
         <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
     </div>
 </div>
+</main>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+    </script>

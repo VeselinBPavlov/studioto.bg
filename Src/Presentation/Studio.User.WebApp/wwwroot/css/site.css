@@ -1,53 +1,12 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-/* ASP STYLE START */
-
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
-}
-
-/* ASP STYLE END */
-
 /* LOGIN, REGISTER, CONTACTS PAGE END */
 
 .loginWrapper {
     text-align: center;
-    padding-top: 20px;
     background-color: white;
-    min-height: 630px;
-    padding-bottom: 40px;
+    min-height: 500px;
+    padding-bottom: 130px;
 }
 
 .loginWrapper img {
@@ -133,36 +92,48 @@ header {
     background-size: cover;
 }
 
+.head {
+    min-height: 100px;
+}
+
 .header-logo-container a {
     display: inline-block;
 }
 
-    .header-logo-container a img {
-        display: block;
-        width: 250px;
-        height: 65px;
-        max-width: 100%;
-    }
+.header-logo-container a img {
+    display: block;
+    width: 250px;
+    height: 65px;
+    max-width: 100%;
+}
 
 .info-box {
     margin-top: 18px;
     text-align: right;
 }
 
-    .info-box a {
-        font: 400 1em/1em 'Roboto', Arial, Sans-serif;
-        text-transform: uppercase;
-        color: #fff;
-        text-decoration: none;
-        text-shadow: 0 0 10px #FFFFFF;
-        transition: all ease-in-out .3s;
-    }
+.info-box a, .info-box button {
+    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 10px #FFFFFF;
+    transition: all ease-in-out .3s;
+}
 
-        .info-box a:hover,
-        .info-box a:active,
-        .info-box a:focus {
-            color: #c78f72;
-        }
+.info-box a:hover,
+.info-box a:active,
+.info-box a:focus,
+.info-box button:hover,
+.info-box button:active,
+.info-box button:focus {
+    color: #c78f72;
+}
+
+.info-box button {
+    background: none;
+    border: none;
+}
 
 .contacts {
     text-align: center;
@@ -181,23 +152,23 @@ header {
     text-align: left;
 }
 
-    .input-box input {
-        color: #fff;
-        border: none;
-        font: 400 1em/1em 'Roboto', Arial, Sans-serif;
-        background: transparent;
-    }
+.input-box input {
+    color: #fff;
+    border: none;
+    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+    background: transparent;
+}
 
 
-    .input-box:before {
-        position: absolute;
-        content: "";
-        width: 20px;
-        height: 20px;
-        top: 0;
-        left: 0;
-        background: url(images/sign-in-alt-solid.svg);
-    }
+.input-box:before {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background: url(../img/index/sign-in-alt-solid.svg);
+}
 
 .caption {
     position: absolute;
@@ -205,16 +176,16 @@ header {
     background-color: rgba(223, 153, 116, 0.5);
 }
 
-    .caption h2 {
-        padding: 0 90px 0;
-        color: #fff;
-        font: 400 2.3em/1.5em 'Roboto', Arial, Sans-serif;
-    }
+.caption h2 {
+    padding: 0 90px 0;
+    color: #fff;
+    font: 400 2.3em/1.5em 'Roboto', Arial, Sans-serif;
+}
 
-        .caption h2 span {
-            display: block;
-            font: inherit;
-        }
+.caption h2 span {
+    display: block;
+    font: inherit;
+}
 
 /*#endregion Header*/
 
@@ -272,7 +243,7 @@ main {
         left: 10px;
         width: 50px;
         height: 50px;
-        background: url(images/home.png) no-repeat left center;
+        background: url(../img/index/home.png) no-repeat left center;
         background-size: 40px;
     }
 
@@ -288,7 +259,7 @@ main {
         left: 19px;
         width: 50px;
         height: 50px;
-        background: url(images/beauty-saloon.png) no-repeat left center;
+        background: url(../img/index/beauty-saloon.png) no-repeat left center;
         background-size: 35px;
     }
 
@@ -304,7 +275,7 @@ main {
         left: 19px;
         width: 50px;
         height: 50px;
-        background: url(images/scissors.png) no-repeat left center;
+        background: url(../img/index/scissors.png) no-repeat left center;
         background-size: 35px;
     }
 
@@ -320,7 +291,7 @@ main {
         right: 45px;
         width: 50px;
         height: 50px;
-        background: url(images/search-solid.svg) no-repeat left center;
+        background: url(../img/index/search-solid.svg) no-repeat left center;
         background-size: 35px;
     }
 
@@ -367,7 +338,7 @@ main {
         right: 0;
         width: 30px;
         height: 30px;
-        background: url(images/chevron-right-solid.svg) no-repeat left center;
+        background: url(../img/index/chevron-right-solid.svg) no-repeat left center;
         background-size: 18px;
     }
 
@@ -433,7 +404,7 @@ main {
         left: 0;
         width: 20px;
         height: 20px;
-        background: url(images/placeholder.png) no-repeat left center;
+        background: url(../img/index/placeholder.png) no-repeat left center;
         background-size: 18px;
     }
 
@@ -445,7 +416,7 @@ main {
         left: 0;
         width: 20px;
         height: 20px;
-        background: url(images/time.png) no-repeat left center;
+        background: url(../img/index/time.png) no-repeat left center;
         background-size: 18px;
     }
 
@@ -457,7 +428,7 @@ main {
         left: 0;
         width: 20px;
         height: 20px;
-        background: url(images/smartphone-call.png) no-repeat left center;
+        background: url(../img/index/smartphone-call.png) no-repeat left center;
         background-size: 18px;
     }
 
@@ -509,7 +480,7 @@ main {
         right: 0;
         width: 30px;
         height: 30px;
-        background: url(images/chevron-right-solid.svg) no-repeat left center;
+        background: url(../img/index/chevron-right-solid.svg) no-repeat left center;
         background-size: 18px;
     }
 
@@ -654,7 +625,7 @@ main {
     position: relative;
     min-height: 850px;
     padding-top: 170px;
-    background: url(images/reviewslider-background.jpg) no-repeat center center;
+    background: url(../img/index/reviewslider-background.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -813,7 +784,7 @@ footer p {
     width: 20px;
     height: 20px;
     left: 0;
-    background: url(images/copyright-regular.svg);
+    background: url(../img/index/copyright-regular.svg);
 }
 
 /* FOOTER END*/

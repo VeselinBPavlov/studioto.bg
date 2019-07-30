@@ -4,7 +4,9 @@
 @{
     ViewData["Title"] = "Profile Details";
 }
+<partial name="_Header" />
 
+<main>
 @if (Model.NewAppointments.Count > 0) 
 {
 <table class="table">
@@ -64,6 +66,7 @@ else
 {
     <h4>Нямате отминали резервации</h4>
 }
+</main>
 
 
 

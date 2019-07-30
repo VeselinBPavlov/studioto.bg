@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Studio.User.WebApp</title>
+    <title>@ViewData["Title"] - Studioto.bg</title>
     <link rel="stylesheet" href="~/lib/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="~/bootstrap/bootstrap-extensions.css" />
@@ -11,14 +11,8 @@
 
 </head>
 <body>
-    <partial name="_HeaderIndex" />
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    
+    @RenderBody()
 
     <partial name="_Footer" />
 

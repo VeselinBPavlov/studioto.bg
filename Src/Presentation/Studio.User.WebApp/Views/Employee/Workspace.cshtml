@@ -11,7 +11,8 @@
     EmployeeProfileViewModel employee = Model.EmployeeProfileViewModel;
     CreateAppointmentCommand appointment = Model.CreateAppointmentCommand;
 }
-
+<partial name="_Header" />
+<main>
 <div class="text-center">
     <h1 class="display-4">@employee.FirstName</h1>
 </div>
@@ -41,6 +42,7 @@
         </form>
     </div>
 </div> 
+</main>
 
 @section Scripts{
 <environment include="Development,Staging,Production">
