@@ -5,16 +5,234 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="search">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="input-town">
+                    <select class="custom-select">
+                        <option selected>Град</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="beauty-saloon">
+                    <input type="text" placeholder="Име на студиото" name="uname" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="procedure">
+                    <input type="text" placeholder="Процедура" name="uname" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 search-saloon">
+                <input type="submit" value="ТЪРСИ">
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <ul>
-        @foreach (var location in Model.Locations)
-        {
-            <li><a asp-controller="Location" asp-action="Studio" asp-route-id="@location.Id">@location.Name</a></li>
-        }
-    </ul>
+<div class="all-studios">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col col-sm-6">
+                <span class="studio">СТУДИЯ</span>
+            </div>
+            <div class="col-xs-12 col col-sm-6 view-studios">
+                <a class="view-all-studios" href="javascript:void(0)" title="Виж всички студия">Виж всички 140 студия</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/venera-studio-photo.jpg" alt="Venera Studio Photo" />
+                    <h2 class="studio-name">Козметични студия "Венера"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, кв. Редута ул. Братован 1</p>
+                        <p class="studio-hw">Пн-Нд 9:00-20:00</p>
+                        <p class="studio-phone">0886  620 336</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/new-image-photo.jpg" alt="Venera Studio Photo" />
+                    <h2 class="studio-name">Козметичнo студиo "Нов Имидж"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">Враца, ул. Лукашов 10 офис 206</p>
+                        <p class="studio-hw">Пн-Нд 10:00-18:00</p>
+                        <p class="studio-phone">0888  828 962</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/studio-sofia-photo.jpg" alt="Sofia Studio Photo" />
+                    <h2 class="studio-name">Козметичнo студиo "София"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, Ст.Град ул. И. Странски 1</p>
+                        <p class="studio-hw">Пн-Нд 9:00-18:00</p>
+                        <p class="studio-phone">0888  277 757</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/jeni-studio-photo.jpg" alt="Jeni Studio Photo" />
+                    <h2 class="studio-name">Козметично студио "Жени"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, Красно село ул. Хубча 7</p>
+                        <p class="studio-hw">Пн-Нд 9:00-18:00</p>
+                        <p class="studio-phone">0888  549 720</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/mix-studio-photo.jpg" alt="Mix Studio Photo" />
+                    <h2 class="studio-name">Козметично студио "Микс"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, кв. Обеля ул. Оборище 79</p>
+                        <p class="studio-hw">Пн-Сб 9:00-20:00</p>
+                        <p class="studio-phone">02  846 5121</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/beauty-studio-photo.jpg" alt="Beauty Studio Photo" />
+                    <h2 class="studio-name">Козметично студио "Beauty"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, кв. Лозенец ул. Криволак 49</p>
+                        <p class="studio-hw">Пн-Пт 9:00-18:00</p>
+                        <p class="studio-phone">0892  948 719</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/family-studio-photo.jpg" alt="Family Studio Photo" />
+                    <h2 class="studio-name">Козметично студио "Family"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">София, бул. Ал. Малинов бл.491</p>
+                        <p class="studio-hw">Пн-Пт 9:00-180:00</p>
+                        <p class="studio-phone">0884  665 217</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="images/agusta-studio-photo.jpeg" alt="Agusta Studio Photo" />
+                    <h2 class="studio-name">Козметично студио "Агуста"</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">Велико Търново, ул. Цветарска 2</p>
+                        <p class="studio-hw">Пн-Пт 9:00-19:00</p>
+                        <p class="studio-phone">0884  592 667</p>
+                    </div>
+                    <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="about-us-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col col-sm-6">
+                <span class="studio">Какво е Studioto.bg?</span>
+            </div>
+            <div class="col-xs-12 col col-sm-6 learn-more-box">
+                <a class="read-more" href="javascript:void(0)" title="Научете още">Научете още</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-5">
+                <div class="about-us-box">
+                    <h3>Studioto.bg е първия в България <span>портал за резервация на  козметични услуги!</span></h3>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-xs-12 col-md-6 col-md-offset-1">
+                <img src="images/header-background.jpg" alt="За нас" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="makeapp-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col col-sm-6">
+                <span class="studio">Как да резервирам?</span>
+            </div>
+            <div class="col-xs-12 col col-sm-6 learn-more-box">
+                <a class="read-more" href="javascript:void(0)" title="Научете още">Научете още</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-xs-12 col-md-6 reservation-box">
+                <img src="images/reservation.jpg" alt="Резервация" />
+            </div>
+            <div class="col-xs-12 col-md-5 col-md-offset-1">
+                <div class="makeapp-box">
+                    <h3>Studioto.bg е изключително лесен и удобен портал, <span>чрез който правите резервация!</span></h3>
+                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="slideshow-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="slideshow-span">
+                    <span>Клиентите за нас</span>
+                </div>
+                <div class="mySlides">
+                    <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut "</q>
+                    <p class="author">- John Keats</p>
+                </div>
+
+                <div class="mySlides">
+                    <q>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested</q>
+                    <p class="author">- Ernest Hemingway</p>
+                </div>
+
+                <div class="mySlides">
+                    <q>ontrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney.</q>
+                    <p class="author">- Thomas A. Edison</p>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="appointment-wrapper">
+    <img class="makeapp-img" src="images/apple.png" alt="Резервация" />
+    <div class="book-online-box">
+        <img src="images/Asset6.png" alt="Logo Image" />
+        <p>Book online, enjoy at the place!</p>
+        <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+    </div>
 </div>

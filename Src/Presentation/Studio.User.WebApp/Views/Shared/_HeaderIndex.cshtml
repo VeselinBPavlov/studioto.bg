@@ -1,0 +1,46 @@
+﻿<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="header-logo-container">
+                    <a class="about-us" asp-area="" asp-controller="Home" asp-action="Index" title="STUDIOTO.BG">
+                        <img src="~/img/logo/logo-white.png" alt="StudiotoBg-Logo" />
+                    </a>
+                </div>
+            </div>
+            <partial name="_LoginPartial" />
+            <div class="col-xs-12 col-md-9 info-box">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-4">
+                        <a class="about-us" asp-area="" asp-controller="Home" asp-action="About" title="Какво е STUDIOTO.BG">какво е studito.bg?</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-3 col-lg-offset-4">
+                        <a class="about-us" asp-area="" asp-controller="Home" asp-action="Steps" title="Как да резервирам">как да резервирам</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 contacts">
+                        <a asp-area="" asp-controller="Home" asp-action="Contacts" title="Контакти">контакти</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 login">
+                        <input type="text" placeholder="Потребител" name="uname" required>
+                    </div>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <div class="col-xs-12 col-sm-2 contacts">
+                            <a class="nav-link text-dark" asp-area="Administrator" asp-controller="Admin" asp-action="Index">Admin</a>
+                        </div>
+                    }
+                    <div class="col-xs-12 col-sm-2 col-lg-1">
+                        <div class="input-box">
+                            <input class="enter" type="submit" value="Вход">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="caption">
+        <h2>Първата платформа в България за изцяло онлайн <span>резервация в любимото студио</span></h2>
+    </div>
+</header>
+
+
