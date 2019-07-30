@@ -1,16 +1,76 @@
 ﻿@using Studio.Domain.Entities;
 @using Microsoft.AspNetCore.Identity;
 @inject UserManager<StudioUser> UserManager;
+@inject SignInManager<StudioUser> SignInManager
+
 
 @{
     ViewData["Title"] = "Successful Appointment";
 }
-<partial name="_Header" />
-<main>
-<h1>Успешна резервация</h1>
 
-<form asp-action="Index" asp-controller="Home" method="get" >
-    <input type="submit" class="btn btn-primary" placeholder="Начало" />
-</form>
-</main>
+
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="header-logo-container">
+                    <a class="about-us" asp-area="" asp-controller="Home" asp-action="Index" title="STUDIOTO.BG">
+                        <img src="~/img/logo/logo-white.png" alt="StudiotoBg-Logo" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9 info-box">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-2">
+                        <a class="about-us" asp-area="" asp-controller="Home" asp-action="About" title="Какво е STUDIOTO.BG">какво е studito.bg?</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                        <a asp-area="" asp-controller="Home" asp-action="Steps" title="Как да резервирам">как да резервирам</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 contacts">
+                        <a asp-area="" asp-controller="Home" asp-action="Contacts" title="Контакти">контакти</a>
+                    </div>
+                    
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <div class="col-xs-12 col-sm-2 contacts">
+                                <a asp-area="Administrator" asp-controller="Admin" asp-action="Index">Администратор</a>
+                            </div>
+                        }
+                        else 
+                        {
+                            <div class="col-xs-12 col-sm-2 contacts">
+                                <!-- <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a> -->
+                                <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@UserManager.GetUserId(this.User)" title="Manage">Профил</a>
+                            </div>
+                        }                        
+                        <div class="col-xs-12 col-sm-2">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" >Изход</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-12 col-sm-2">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
+                        </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Вход</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="success">
+        <h2>Първата платформа в България за изцяло онлайн <span>резервация в любимото студио</span></h2>
+        <form asp-action="Index" asp-controller="Home" method="get" >
+        <input type="submit" class="btn btn-primary" placeholder="Начало" />
+        </form>
+    </div>
+</header>
+
 
