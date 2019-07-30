@@ -352,6 +352,7 @@ main {
 .studio-info-box {
     border: 1px solid #df9974;
     border-radius: 20px;
+    margin-bottom: 40px;
 }
 
 .studio-photo {

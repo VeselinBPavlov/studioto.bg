@@ -11,29 +11,30 @@
 <div class="search">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
+        <form asp-controller="Location" asp-action="All" method="get">
+            <div class="col-xs-12 col-sm-6 col-md-3">            
                 <div class="input-town">
-                    <select class="custom-select">
-                        <option selected>Град</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="custom-select" name="cityId" >
+                        <option value="0" selected>Град</option>
+                        <vc:cities-names></vc:cities-names>
                     </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3">
                 <div class="beauty-saloon">
-                    <input type="text" placeholder="Име на студиото" name="uname" required>
+                    <input type="text" placeholder="Име на студиото" name="studioName">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3">
                 <div class="procedure">
-                    <input type="text" placeholder="Процедура" name="uname" required>
+                    <input type="text" placeholder="Процедура" name="serviceName">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 search-saloon">
                 <input type="submit" value="ТЪРСИ">
             </div>
+            </form>
+                
         </div>
     </div>
 </div>
@@ -45,7 +46,7 @@
                 <span class="studio">СТУДИЯ</span>
             </div>
             <div class="col-xs-12 col col-sm-6 view-studios">
-                <a class="view-all-studios" href="javascript:void(0)" title="Виж всички студия">Виж всички 140 студия</a>
+                <a class="view-all-studios" asp-controller="Location" asp-action="All" title="Виж всички студия">Виж всички студия</a>
             </div>
         </div>
         <div class="row">
@@ -99,7 +100,7 @@
                 <span class="studio">Как да резервирам?</span>
             </div>
             <div class="col-xs-12 col col-sm-6 learn-more-box">
-                <a class="read-more" href="javascript:void(0)" title="Научете още">Научете още</a>
+                <a class="read-more" asp-controller="Home" asp-action="Steps" title="Научете още">Научете още</a>
             </div>
         </div>
         <div class="row">
@@ -153,7 +154,7 @@
     <div class="book-online-box">
         <img src="~/img/logo/logo-black.png" alt="Logo Image" />
         <p>Book online, enjoy at the place!</p>
-        <a href="javascript:void(0)" class="make-app" title="Резервирай">Резервирай</a>
+        <a asp-controller="Location" asp-action="All" class="make-app" title="Резервирай">Резервирай</a>
     </div>
 </div>
 </main>

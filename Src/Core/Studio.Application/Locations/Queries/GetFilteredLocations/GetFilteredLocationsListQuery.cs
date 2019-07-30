@@ -10,6 +10,6 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
 
         public string ServiceName { get; set; }
 
-        public string SearchFieldText { get; set; }
+        public bool? IsHomePage { get; set; }
     }
 }

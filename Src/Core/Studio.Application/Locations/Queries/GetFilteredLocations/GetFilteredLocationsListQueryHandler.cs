@@ -27,34 +27,29 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
         {
             var locations = this.context.Locations.OrderByDescending(l => l.CreatedOn).AsQueryable();
 
-            if (request.CityId != null) 
+            if (request.CityId != 0 && request.CityId != null) 
             {
                 locations = locations.Where(l => l.Address.CityId == request.CityId.Value);
             }
 
             if (string.IsNullOrEmpty(request.StudioName) == false) 
             {
-                locations = locations.Where(l => l.Name == request.StudioName);
+                locations = locations.Where(l => l.Name.ToLower().Contains(request.StudioName.ToLower()));
             }
             
             if (request.ServiceName != null) 
             {
-                locations = locations.Where(l => l.LocationIndustries.Any(y => y.Industry.Name == request.ServiceName));
+                locations = locations.Where(l => l.LocationIndustries.Any(y => y.Industry.Name.ToLower().Contains(request.ServiceName.ToLower())));
             }
 
-            if (string.IsNullOrEmpty(request.SearchFieldText) == false) 
+            if (request.IsHomePage != false) 
             {
-                locations = locations.Where(l => l.Name.Contains(request.SearchFieldText) 
-                    || l.LocationIndustries.Any(x => x.Industry.Name.Contains(request.SearchFieldText)) 
-                    || l.Employees.Any(x => x.FirstName.Contains(request.SearchFieldText))
-                    || l.Employees.Any(x => x.LastName.Contains(request.SearchFieldText))
-                    || l.Description.Contains(request.SearchFieldText));
+                if (locations.Count() > MaxLocationsCount) 
+                {
+                    locations = locations.Take(MaxLocationsCount);
+                }  
             }
-
-            if (locations.Count() > MaxLocationsCount) 
-            {
-                locations = locations.Take(MaxLocationsCount);
-            }          
+                    
 
             return new LocationsFilteredListViewModel
             {

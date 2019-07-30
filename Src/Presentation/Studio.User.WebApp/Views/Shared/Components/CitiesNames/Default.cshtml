@@ -1,0 +1,7 @@
+@using Studio.Application.Cities.Queries.GetAllNames;
+@model CitiesNamesListViewModel;
+
+@foreach (var city in Model.Cities)
+{
+    <option value="@city.Id">@city.Name</option>
+}

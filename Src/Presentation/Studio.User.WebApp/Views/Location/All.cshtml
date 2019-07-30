@@ -1,0 +1,32 @@
+@using Studio.Application.Locations.Queries.GetFilteredLocations;
+@model LocationsFilteredListViewModel;
+
+@{
+    ViewData["Title"] = "All Locations";
+}
+
+<partial name="_Header" />
+
+<main>
+<div class="all-studios">
+    <div class="container">
+        <div class="row">
+            @foreach (var location in Model.Locations)
+            {
+             <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="studio-info-box">
+                    <img class="studio-photo" src="~/img/index/mix-studio-photo.jpg" alt="location-photo" />
+                    <h2 class="studio-name">@location.Name</h2>
+                    <div class="studio-info-wrapper">
+                        <p class="studio-address">@location.Address</p>
+                        <p class="studio-hw">@location.StartDay.Substring(0, 3) - @location.EndDay.Substring(0, 3) @location.StartHour - @location.EndHour</p>
+                        <p class="studio-phone">@location.Phone</p>
+                    </div>
+                    <a asp-controller="Location" asp-action="Studio" asp-route-id="@location.Id" class="make-app" title="Резервирай">Резервирай</a>
+                </div>
+            </div>
+            }         
+        </div>
+    </div>
+</div>
+</main>
