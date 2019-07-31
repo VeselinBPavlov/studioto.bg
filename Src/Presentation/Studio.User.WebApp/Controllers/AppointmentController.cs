@@ -7,6 +7,7 @@ namespace Studio.User.WebApp.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Studio.Application.Appointments.Commands.Create;
+    using Studio.Application.Appointments.Commands.Delete;
     using Studio.Application.Appointments.Queries.GetAvailableAppointments;
     using Studio.Common;
     using WebApp.Models;
@@ -35,6 +36,13 @@ namespace Studio.User.WebApp.Controllers
 
             List<SelectListItem> resultlist = result.AvailableAppointments;
             return Json(resultlist);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromForm]DeleteAppointmentCommand command)
+        {
+            await Mediator.Send(command);
+            return this.Redirect($"/User/Profile/{command.UserId}");
         }
     }
 }

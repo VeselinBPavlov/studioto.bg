@@ -1,5 +1,8 @@
 ﻿@using Studio.Application.Appointments.Queries.GetAppointmentsByUserId;
 @model AppointmentsProfileListViewModel;
+@using Microsoft.AspNetCore.Identity;
+@using Studio.Domain.Entities;
+@inject UserManager<StudioUser> UserManager;
 
 @{
     ViewData["Title"] = "Profile Details";
@@ -7,6 +10,11 @@
 <partial name="_Header" />
 
 <main>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 profile">
+        <div class="col-xs-12 table">
+            <h3>Настоящи резервации</h3>
 @if (Model.NewAppointments.Count > 0) 
 {
 <table class="table">
@@ -16,7 +24,8 @@
       <th scope="col">Студио</th>
       <th scope="col">Служител</th>
       <th scope="col">Услуга</th>
-      <th scope="col">Ден и час</th>    
+      <th scope="col">Ден и час</th>         
+      <th scope="col">Отмени резервация</th>  
     </tr>
   </thead>
   <tbody>
@@ -28,15 +37,24 @@
             <td>@appointment.EmployeeNames</td>
             <td>@appointment.ServiceName</td>
             <td>@appointment.ReservationDate @appointment.ReservationTime</td>
+            <td>
+              <form asp-action="Delete" asp-controller="Appointment" method="post">
+                <input type="hidden" name="id" value="@appointment.Id">
+                <input type="hidden" name="userId" value="@UserManager.GetUserId(this.User)">
+                <button type="submit" class="btn btn-primary">Отмени</button>
+              </form>
+            </td>
         </tr>
       }  
 </table>
 }
 else 
 {
-    <h4>Нямате резервации</h4>
+    <h4>Нямате настоящи резервации</h4>
 }
-
+        </div>
+        <div class="col-xs-12 table">
+          <h3>Отминали резервации</h3>
 @if (Model.OldAppointments.Count > 0) 
 {
 <table class="table">
@@ -46,7 +64,7 @@ else
       <th scope="col">Студио</th>
       <th scope="col">Служител</th>
       <th scope="col">Услуга</th>
-      <th scope="col">Ден и час</th>    
+      <th scope="col">Ден и час</th>     
     </tr>
   </thead>
   <tbody>
@@ -57,7 +75,7 @@ else
             <td>@appointment.LocationName</td>
             <td>@appointment.EmployeeNames</td>
             <td>@appointment.ServiceName</td>
-            <td>@appointment.ReservationDate @appointment.ReservationTime</td>
+            <td>@appointment.ReservationDate @appointment.ReservationTime</td>  
         </tr>
       }  
 </table>
@@ -66,6 +84,11 @@ else
 {
     <h4>Нямате отминали резервации</h4>
 }
+        </div>
+              </div>
+    </div>
+  </div>
+  
 </main>
 
 

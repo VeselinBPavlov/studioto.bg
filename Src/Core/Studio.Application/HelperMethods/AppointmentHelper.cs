@@ -40,7 +40,7 @@ namespace Studio.Application.HelperMethods
 
         public static string ValidateNoAppoinmentClash(IStudioDbContext context, IAppointmentCommand appointment)
         {
-            var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId);
+            var appointments = context.Appointments.Where(x => x.EmployeeId == appointment.EmployeeId && x.IsDeleted != true);
                                
             foreach (var item in appointments)
             {

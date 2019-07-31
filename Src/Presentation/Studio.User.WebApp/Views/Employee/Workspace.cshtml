@@ -16,32 +16,40 @@
 <div class="text-center">
     <h1 class="display-4">@employee.FirstName</h1>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
-            <h4>Create a new Appointment.</h4>
-            <hr />
-            <label>Reservation Date</label>
-            <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" />
-            <label>Service</label>
-            <select id="ServiceId" name="ServiceId" class="browser-default custom-select">
-                <option value="0">Избери услуга</option>
-                @foreach (var service in @employee.Services)
-                {
-                    <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName - @service.Price лв.</option>
-                }
-            </select>
-            <label>TimeBlockHelper</label>
-            <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select"></select>    
-            <label>Comment</label>
-            <input id="Comment" name="Comment" class="form-control" />
-            
-            <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  type="hidden" />
-            <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" type="hidden" />           
-            <input type="submit" class="btn btn-primary">
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-7">
+
+        </div>
+        <div class="col-xs-5 appointment">
+            <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
+                <h4>Форма за резервация</h4>
+                <hr />
+                <div class="form-group">
+                    <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" placeholder="Избери дата" />
+                </div>
+                <div class="form-group">
+                    <select id="ServiceId" name="ServiceId" class="browser-default custom-select form-control form-control-lg">
+                        <option value="0">Избери услуга</option>
+                        @foreach (var service in @employee.Services)
+                        {
+                            <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName - @service.Price лв.</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select form-control form-control-lg"></select>    
+                </div>
+                <div class="form-group">
+                    <textarea id="Comment" name="Comment" rows="4" cols="50" class="form-control" placeholder="Коментар"> </textarea>
+                </div>
+                <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  type="hidden" />
+                <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" type="hidden" />           
+                <button type="submit" class="btn btn-primary">Резервирай</button>
+            </form>
+        </div>
     </div>
-</div> 
+</div>
 </main>
 
 @section Scripts{

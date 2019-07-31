@@ -13,17 +13,10 @@
         {            
             RuleFor(c => c.ReservationDate)
                 .NotEmpty()
-                .WithMessage(string.Format(GConst.ErrorRequiredMessage, ReservationDate))
-                .Must(this.BeValidDate)
-                .WithMessage(string.Format(GConst.ErrorInvalidMessage, ReservationDate));
+                .WithMessage(string.Format(GConst.ErrorRequiredMessage, ReservationDate));
             RuleFor(c => c.TimeBlockHelper)
                 .NotEmpty()
                 .WithMessage(string.Format(GConst.ErrorRequiredMessage, TimeBlockHelper));
-        }
-
-        private bool BeValidDate(DateTime reservationTime)
-        {
-            return reservationTime.Day >= DateTime.UtcNow.Day;
         }
     }
 }

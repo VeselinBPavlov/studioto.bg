@@ -743,6 +743,70 @@ q {
 
 /* SUCSSESSFUL RESERVATION END */
 
+/* EMPLOYEE PAGE START */
+.appointment {
+    text-align: center;
+}
+
+
+.appointment button {
+    background-color: #DF9974;
+    border: none;
+    color: #FFFFFF;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    font: 1em/1em 'Roboto', Arial, Sans-serif;
+    margin-top: 20px;
+}
+
+.appointment form input {
+    margin-bottom: 20px;
+    padding: 25px 20px;
+    border-radius: 5px;
+    font: 1em/1em 'Roboto', Arial, Sans-serif;
+}
+
+
+/* EMPLOYEE PAGE END */
+
+/* PROFILE PAGE START */
+.profile {
+    font: 1.2em/1.2em 'Roboto', Arial, Sans-serif;
+    margin-bottom: 130px;
+}
+
+.profile h3 {
+    text-align: center;
+    color: #999999;
+    padding-bottom: 20px;
+}
+
+.profile .table {
+    padding-bottom: 30px;
+}
+
+.profile .table th {
+    color: #DF9974;
+}
+
+.profile .table h4 {
+    color: #DF9974;
+    text-align: center;
+}
+
+.profile button {
+    background-color: #DF9974;
+    color: #FFFFFF;
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font: 0.8em/0.8em 'Roboto', Arial, Sans-serif;
+}
+
+/* PROFILE PAGE END */
+
 /* FOOTER START */
 
 footer {

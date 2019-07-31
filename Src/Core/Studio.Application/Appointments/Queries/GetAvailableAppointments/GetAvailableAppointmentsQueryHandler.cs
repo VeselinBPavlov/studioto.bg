@@ -55,7 +55,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
                 }
             }
 
-            var appointments = this.context.Appointments.Where(x => x.EmployeeId == command.EmployeeId);
+            var appointments = this.context.Appointments.Where(x => x.EmployeeId == command.EmployeeId && x.IsDeleted != true);
                                
             bool overlaps = false;
             while (AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock))
