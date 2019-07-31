@@ -11,6 +11,7 @@ namespace Studio.User.WebApp.Controllers
     using Studio.Common;
     using WebApp.Models;
 
+    [Authorize(Roles=GConst.UserRole)]
     public class AppointmentController : BaseController
     {
         [HttpGet]

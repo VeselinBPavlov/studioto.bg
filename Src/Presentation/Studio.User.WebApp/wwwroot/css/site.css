@@ -135,8 +135,10 @@ header {
     border: none;
 }
 
-.contacts {
+.nav-element {
     text-align: center;
+    display: inline-block;
+    padding-right: 30px;
 }
 
 .login input {
@@ -208,7 +210,7 @@ main {
         width: 100%;
         border: none;
         border-radius: 7px;
-        padding: 15px 0 15px 55px;
+        padding: 15px 0 15px 60px;
         color: #b9b9b9;
         font: 400 1.2em/1.5em 'Roboto', Arial, Sans-serif;
     }
@@ -454,6 +456,10 @@ main {
         text-decoration: none;
     }
 
+.all-studios-page {
+    padding-top: 0px;
+}
+
 /*#endregion All Studios*/
 
 /*#region About-Us*/
@@ -493,9 +499,11 @@ main {
     }
 
 .about-us-wrapper img {
+    position: relative;
+    left: 156px;
     display: block;
-    max-width: 100%;
-    height: 325px;
+    max-width: 80%;
+    height: 286px;
     width: 800px;
     border-radius: 20px;
 }
@@ -536,8 +544,8 @@ main {
     .makeapp-wrapper img {
         display: block;
         max-width: 100%;
-        height: 325px;
-        width: 800px;
+        height: 310px;
+        width: 740px;
         border-radius: 20px;
     }
 
@@ -581,7 +589,7 @@ main {
 .book-online-box {
     position: absolute;
     top: 30%;
-    left: 0;
+    left: -40px;
     right: 0;
     margin: 0 auto;
 }
@@ -668,12 +676,12 @@ main {
 }
 
 q {
-    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
-    ;
+    font: 400 1.5em/1.5em 'Roboto', Arial, Sans-serif;    
 }
 
 .author {
     color: #df9974;
+    font-size: 18px;
 }
 
 .slideshow-span {
@@ -693,10 +701,44 @@ q {
 /* SUCSSESSFUL RESERVATION START */
 .success {
     background: #FFFFFF;
-    margin: 200px auto;
+    margin: 100px auto;
     text-align: center;
-    width: 60%;
+    width: 40%;
+    height: 430px;
     border-radius: 20px;
+}
+
+.success .row {
+    width: 45%;
+    margin: auto;
+}
+
+.success h2 {
+    padding-top: 30px;
+    color: #999999;
+}
+
+.success p {
+    color: #999999;
+}
+
+.success img {
+    margin-top: 50px;
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    max-width: 100%;
+}
+
+.success button {
+    background-color: #DF9974;
+    border: none;
+    color: #FFFFFF;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    font: 1em/1em 'Roboto', Arial, Sans-serif;
+    margin-top: 20px;
 }
 
 /* SUCSSESSFUL RESERVATION END */

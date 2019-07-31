@@ -15,13 +15,13 @@
             </div>
             <div class="col-xs-12 col-md-9 info-box">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-2">
+                    <div class="nav-element">
                         <a class="about-us" asp-area="" asp-controller="Home" asp-action="About" title="Какво е STUDIOTO.BG">какво е studito.bg?</a>
                     </div>
-                    <div class="col-xs-12 col-sm-2">
+                    <div class="nav-element">
                         <a asp-area="" asp-controller="Home" asp-action="Steps" title="Как да резервирам">как да резервирам</a>
                     </div>
-                    <div class="col-xs-12 col-sm-2 contacts">
+                    <div class="nav-element">
                         <a asp-area="" asp-controller="Home" asp-action="Contacts" title="Контакти">контакти</a>
                     </div>
                     
@@ -29,18 +29,18 @@
                     {
                         @if (this.User.IsInRole("Administrator"))
                         {
-                            <div class="col-xs-12 col-sm-2 contacts">
+                            <div class="nav-element">
                                 <a asp-area="Administrator" asp-controller="Admin" asp-action="Index">Администратор</a>
                             </div>
                         }
                         else 
                         {
-                            <div class="col-xs-12 col-sm-2 contacts">
+                            <div class="nav-element">
                                 <!-- <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a> -->
                                 <a asp-area="" asp-controller="User" asp-action="Profile" asp-route-id="@UserManager.GetUserId(this.User)" title="Manage">Профил</a>
                             </div>
                         }                        
-                        <div class="col-xs-12 col-sm-2">
+                        <div class="nav-element">
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" >Изход</button>
                             </form>
@@ -48,10 +48,10 @@
                     }
                     else
                     {
-                        <div class="col-xs-12 col-sm-2">
+                        <div class="nav-element">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
                         </div>
-                        <div class="col-xs-12 col-sm-2">
+                        <div class="nav-element">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Вход</a>
                         </div>
                     }
