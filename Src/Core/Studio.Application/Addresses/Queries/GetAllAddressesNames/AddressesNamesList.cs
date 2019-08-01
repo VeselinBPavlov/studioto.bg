@@ -51,7 +51,7 @@
         {
             return new AddressesNamesListViewModel
             {
-                Addresses = await this.context.Addresses.Where(a => a.Location == null && a.IsDeleted != true).ProjectTo<AddressNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Addresses = await this.context.Addresses.Where(a => a.Location == null && a.IsDeleted != true).OrderBy(x => x.City.Name).ProjectTo<AddressNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

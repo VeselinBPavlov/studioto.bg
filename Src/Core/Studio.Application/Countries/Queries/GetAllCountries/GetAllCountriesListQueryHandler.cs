@@ -24,7 +24,7 @@ namespace Studio.Application.Countries.Queries.GetAllCountries
         {
             return new CountriesListViewModel
             {
-                Countries = await this.context.Countries.Where(c => c.IsDeleted != true).ProjectTo<CountryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Countries = await this.context.Countries.Where(c => c.IsDeleted != true).OrderBy(x => x.Name).ProjectTo<CountryAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

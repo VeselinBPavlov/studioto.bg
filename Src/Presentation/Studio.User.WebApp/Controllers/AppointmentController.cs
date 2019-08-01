@@ -12,9 +12,10 @@ namespace Studio.User.WebApp.Controllers
     using Studio.Common;
     using WebApp.Models;
 
-    [Authorize(Roles=GConst.UserRole)]
+   
     public class AppointmentController : BaseController
     {
+        [Authorize(Roles=GConst.UserRole)]
         [HttpGet]
         public IActionResult Success()
         {
@@ -38,6 +39,7 @@ namespace Studio.User.WebApp.Controllers
             return Json(resultlist);
         }
 
+        [Authorize(Roles=GConst.UserRole)]
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm]DeleteAppointmentCommand command)
         {

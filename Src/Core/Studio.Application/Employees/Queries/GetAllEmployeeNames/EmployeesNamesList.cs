@@ -50,7 +50,7 @@
         {
             return new EmployeesNamesListViewModel
             {
-                Employees = await this.context.Employees.Where(c => c.IsDeleted != true).ProjectTo<EmployeeNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Employees = await this.context.Employees.Where(c => c.IsDeleted != true).OrderBy(x => x.FirstName).ProjectTo<EmployeeNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

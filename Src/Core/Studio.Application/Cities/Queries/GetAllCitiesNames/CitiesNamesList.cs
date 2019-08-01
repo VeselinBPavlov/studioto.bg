@@ -49,7 +49,7 @@
         {
             return new CitiesNamesListViewModel
             {
-                Cities = await this.context.Cities.Where(c => c.IsDeleted != true).ProjectTo<CityNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Cities = await this.context.Cities.Where(c => c.IsDeleted != true).OrderBy(x => x.Name).ProjectTo<CityNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

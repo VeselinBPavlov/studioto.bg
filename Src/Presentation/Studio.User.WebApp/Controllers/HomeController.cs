@@ -9,6 +9,11 @@
 
     public class HomeController : BaseController
     {
+
+        [HttpGet]
+        [Route("/")]
+        [Route("Home/Index")]
+        [Route("/appointment/create")]
         public async Task<IActionResult> Index()
         {
             var result = await Mediator.Send(new GetFilteredLocationsListQuery());

@@ -49,7 +49,7 @@
         {
             return new IndustriesNamesListViewModel
             {
-                Industries = await this.context.Industries.Where(c => c.IsDeleted != true).ProjectTo<IndustryNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Industries = await this.context.Industries.Where(c => c.IsDeleted != true).OrderBy(x => x.Name).ProjectTo<IndustryNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }
