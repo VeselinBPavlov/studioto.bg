@@ -29,10 +29,10 @@ Follow these steps to get your development environment set up:
      ```
      dotnet build
      ``` 
-  4. Once the front end has started, within the `Northwind.WebUI` directory, launch the back end by running:
+  4. In the `Studio.User.WebUI` directory, launch the back end by running:
      ```
-	   dotnet run
-	   ```
+     dotnet run
+     ```
   5. Launch in your browser.
   6. First registered user will be with role "Administrator". Any other user will be with role "User".
 
