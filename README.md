@@ -41,6 +41,7 @@ Follow these steps to get your development environment set up:
 * ASP.NET Core 2.2
 * ASP.NET Core WebAPI 2.2
 * Entity Framework Core 2.2
+* xUnit, MyTested.AspNetCore.Mvc
 * CQRS, MediatR, Automapper, SendGrid, View Components, jQuery, Bootstrap
 
 ## License
