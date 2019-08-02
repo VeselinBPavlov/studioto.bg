@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+.no-padding{
+    padding: 0!important;
+}
+
+.wrapper{
+    max-width: 1920px;
+    margin: 0 auto;
+}
+/*#region Header*/
+header{
+    padding: 50px 0;
+    background: url(images/header-background.jpg) no-repeat;
+}
+
+.header-logo-container a{
+    display: inline-block;
+}
+
+.header-logo-container a img{
+    display: block;
+    width: 250px;
+    height: 65px;
+    max-width: 100%;
+}
+
+.info-box{
+    margin-top: 18px;
+    text-align: right;
+}
+
+.info-box a{
+    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 10px #FFFFFF;
+    transition: all ease-in-out .3s;
+}
+
+.info-box a:hover,
+.info-box a:active,
+.info-box a:focus{
+    color: #ee2624;
+}
+
+.contacts{
+    text-align: center;
+}
+
+.enter{
+    position: relative;
+    padding-left: 25px;
+}
+
+.enter::before{
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 20px;
+    top:0;
+    left: 0;
+    background: url(images/sign-in-alt-solid.svg);
+}
+
+/*#endregion Header*/
+
+/*#region Main*/
+
+main{
+    padding: 130px 0;
+}
+
+.hair-dressing-salon{
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;    
+}
+
+.hair-dressing-salon-logo img{
+    display: block;
+    width: 260px;
+    height: 97px;
+}
+
+.hair-dressing-salon-name h2{
+    color: #4a4a4a;
+    font: 400 1.7em/1em 'Roboto', Arial, Sans-serif;
+}
+
+
+
+.hair-dressing-salon-info{
+    margin-bottom: 40px;
+}
+
+.hair-dressing-salon-info h4{
+    color: #4a4a4a;
+    font: 400 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.hair-dressing-salon-info p{
+    color: #696969;
+    font: 400 1em/1.2em 'Roboto', Arial, Sans-serif;
+}
+
+.salon-address-wt{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;    
+}
+
+.salon-address-wt div{
+    flex: 0 0 30%;
+}
+
+.salon-address-wt span{
+    color: #df9974;
+    font: 700 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.address-phone p,
+.work-time p{
+    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+}
+
+
+.venera-studio-big{
+    margin-top: 125px;
+    margin-bottom: 50px;
+}
+
+.venera-gallery img{
+    max-width: 100%;
+    display: block;
+    border-radius: 25px;
+}
+
+.hairdresser-wrapper{
+    margin-top: 70px;
+}
+
+.hairdresser-info{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;    
+    align-items: center;
+    text-align: center;
+}
+
+.hairdresser-info div{
+    flex: 0 0 50%;
+    margin: 0 auto;
+}
+
+.hairdresser{
+    background: #df9974;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.hairdresser-info span{
+    font: 700 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.hairdresser-name{
+    position: relative;
+    display: block;
+    width: 220px;
+    padding-top: 250px;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.hairdresser-name::before{
+    position: absolute;
+    content: "";
+    width: 220px;
+    height: 220px;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: url(images/genov.JPG);
+    background-size: contain;
+}
+
+.hairdresser2::before{
+    position: absolute;
+    content: "";
+    width: 220px;
+    height: 220px;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: url(images/Ralica.JPG);
+    background-size: contain;
+}
+
+.hairdresser3::before{
+    position: absolute;
+    content: "";
+    width: 220px;
+    height: 220px;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: url(images/Vesko.JPG);
+    background-size: contain;
+}
+
+.hairdresser a{
+    display: inline-block;
+    color: #4a4a4a;
+    font: 700 1em/1em 'Roboto', Arial, Sans-serif;
+    padding: 13px 30px;
+    border-radius: 17px;
+    background: #fff;
+    text-transform: uppercase;
+    transition: all ease-in-out .3s;
+}
+
+.hairdresser a:hover,
+.hairdresser a:active,
+.hairdresser a:focus{
+    text-decoration: none;
+    color: #fff;
+    background: #4a4a4a;
+}
+
+
+.worker{
+    display: block;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+/*#endregion Main*/
+
+
+/*#region Footer*/
+    footer{
+        padding: 80px 0 20px;
+        background: #b76c44;
+    }
+
+    .footer-info{
+        padding-bottom: 50px;
+        border-bottom: 1px solid #bb9682;
+    }
+
+    .footer-info span{
+        position: relative;
+        display: block;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        color: #fff;
+        font: 700 1.7em/1em 'Roboto', Arial, Sans-serif;
+    }
+
+    .footer-info span::before{
+        position: absolute;
+        content: "";
+        bottom: 0;
+        width: 52px;
+        height: 2px;
+        border: 2px solid #bb9682;
+    }
+
+    .footer-info a{
+        display: inline-block;
+        vertical-align: middle;
+        color: #fff;
+        margin-bottom: 17px;
+        font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+        transition: all ease-in-out 0.3s;
+    }
+
+    .footer-info a:hover,
+    .footer-info a:active,
+    .footer-info a:focus{
+        color: rgb(36, 29, 51);
+        text-decoration: none;
+    }
+
+    footer p{
+        color: #fff;
+        font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+    }
+
+    .contact-us-wrapper{
+        text-align: right;
+    }
+
+    .contact-us a{
+        margin-right: 79px;
+    }
+
+    .footer-disclaimers{
+        padding-top: 20px;
+    }
+
+    .copyrights{
+        text-align: right;
+    }
+
+    .copyrights p{
+        position: relative;
+        display: inline-block;
+        padding-left: 30px;
+    }
+
+    .copyrights p::before{
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        left: 0;
+        background: url(images/copyright-regular.svg);
+    }
+
+
+
+/*#endregion Footer*/

@@ -580,6 +580,16 @@ main {
     text-align: center;
 }
 
+.appointment h4 {
+    color: #df9974;
+    font: 700 1.5em/1.2em 'Roboto', Arial, Sans-serif;
+    padding-bottom: 30px;
+}
+
+.appointment form {
+    width: 60%;
+}
+
 .makeapp-img {
     display: block;
     max-width: 100%;
@@ -594,38 +604,36 @@ main {
     margin: 0 auto;
 }
 
-    .book-online-box img {
-        display: inline-block;
-        max-width: 100%;
-        width: 450px;
-    }
+.book-online-box img {
+    display: inline-block;
+    max-width: 100%;
+    width: 450px;
+}
+.book-online-box p {
+    color: #df9974;
+    font: 700 1.2em/1.3em 'Roboto', Arial, Sans-serif;
+}
+.book-online-box a {
+    display: block;
+    max-width: 240px;
+    width: 100%;
+    padding: 10px 15px;
+    margin: 30px auto;
+    color: #fff;
+    border-radius: 20px;
+    font: 700 1.2em/1.5em 'Roboto', Arial, Sans-serif;
+    background: #df9974;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all ease-in-out .3s;
+}
 
-    .book-online-box p {
-        color: #df9974;
-        font: 700 1.2em/1.3em 'Roboto', Arial, Sans-serif;
-    }
-
-    .book-online-box a {
-        display: block;
-        max-width: 240px;
-        width: 100%;
-        padding: 10px 15px;
-        margin: 30px auto;
-        color: #fff;
-        border-radius: 20px;
-        font: 700 1.2em/1.5em 'Roboto', Arial, Sans-serif;
-        background: #df9974;
-        text-align: center;
-        text-transform: uppercase;
-        transition: all ease-in-out .3s;
-    }
-
-        .book-online-box a:hover,
-        .book-online-box a:active,
-        .book-online-box a:focus {
-            color: #232222;
-            text-decoration: none;
-        }
+.book-online-box a:hover,
+.book-online-box a:active,
+.book-online-box a:focus {
+    color: #232222;
+    text-decoration: none;
+}
 
 /*#endregion Appointment Wrapper*/
 
@@ -748,7 +756,6 @@ q {
     text-align: center;
 }
 
-
 .appointment button {
     background-color: #DF9974;
     border: none;
@@ -762,7 +769,7 @@ q {
 
 .appointment form input {
     margin-bottom: 20px;
-    padding: 25px 20px;
+    /* padding: 25px 20px; */
     border-radius: 5px;
     font: 1em/1em 'Roboto', Arial, Sans-serif;
 }
@@ -806,6 +813,191 @@ q {
 }
 
 /* PROFILE PAGE END */
+
+/* LOCATION PAGE START */
+
+.hair-dressing-salon {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;    
+    padding-bottom: 10px;
+}
+
+.hair-dressing-salon-logo img {
+    display: block;
+    width: 260px;
+    height: 97px;
+}
+
+.hair-dressing-salon-name h2 {
+    color: #4a4a4a;
+    font: 400 1.7em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.hair-dressing-salon-info {
+    margin-bottom: 40px;
+}
+
+.hair-dressing-salon-info h4 {
+    color: #4a4a4a;
+    font: 400 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.hair-dressing-salon-info p {
+    color: #696969;
+    font: 400 1em/1.2em 'Roboto', Arial, Sans-serif;
+}
+
+.salon-address-wt {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;    
+}
+
+.salon-address-wt div {
+    flex: 0 0 30%;
+}
+
+.salon-address-wt span {
+    color: #df9974;
+    font: 700 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.address-phone p,
+.work-time p {
+    font: 400 1em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.venera-studio-big {
+    margin-top: 125px;
+    margin-bottom: 50px;
+}
+
+.venera-gallery img {
+    max-width: 100%;
+    display: block;
+    border-radius: 25px;
+}
+
+.hairdresser-wrapper {
+    margin-top: 70px;
+}
+
+.hairdresser-info {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;    
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hairdresser-info:last-child {
+    margin-bottom: 130px;
+}
+
+.employee-info:last-child {    
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-bottom: 150px;
+}
+
+.hairdresser-info div {
+    flex: 0 0 50%;
+    margin: 0 auto;
+}
+
+.hairdresser {
+    background: #df9974;
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.employee {
+    margin-top: 30px;
+    height: 320px;
+}
+
+.hairdresser img {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 25px auto;
+    border-radius: 50%;   
+    background-size: contain;
+}
+
+.employee img {
+    width: 180px;
+    height: 180px;
+    left: 43px;
+}
+
+.arrow {
+    display: inline-block;
+}
+
+.hairdresser-info span {
+    font: 700 1.2em/1em 'Roboto', Arial, Sans-serif;
+}
+
+.hairdresser-name {
+    position: relative;
+    display: block;
+    width: 220px;
+    padding-top: 250px;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.employee-name {
+    width: 180px;
+    padding-top: 200px;
+}
+
+.hairdresser-name::before {
+    position: absolute;
+    content: "";
+    width: 220px;
+    height: 220px;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 50%;   
+    background-size: contain;
+}
+
+.hairdresser a {
+    display: inline-block;
+    color: #4a4a4a;
+    font: 700 1em/1em 'Roboto', Arial, Sans-serif;
+    padding: 13px 30px;
+    border-radius: 17px;
+    background: #fff;
+    text-transform: uppercase;
+    transition: all ease-in-out .3s;
+}
+
+.hairdresser a:hover,
+.hairdresser a:active,
+.hairdresser a:focus {
+    text-decoration: none;
+    color: #fff;
+    background: #4a4a4a;
+}
+
+
+.worker {
+    display: block;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+/* LOCATION PAGE END */
 
 /* FOOTER START */
 
