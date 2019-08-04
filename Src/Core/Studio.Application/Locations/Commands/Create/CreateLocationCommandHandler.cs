@@ -1,6 +1,7 @@
 ﻿namespace Studio.Application.Locations.Commands.Create
 {
     using System;
+    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
@@ -57,6 +58,8 @@
             this.context.Locations.Add(location);
 
             await this.context.SaveChangesAsync(cancellationToken);
+
+            Directory.CreateDirectory($"../Studio.User.WebApp/wwwroot/img/locations/{location.Id}");
 
             return Unit.Value;
         }

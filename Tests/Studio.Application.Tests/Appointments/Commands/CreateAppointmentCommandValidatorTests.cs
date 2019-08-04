@@ -36,11 +36,5 @@
         {
             createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.TimeBlockHelper, string.Empty);
         }
-
-        [Fact]
-        public void AppointmentShouldReturnErrorIfReservationDateIsPassed()
-        {
-            createValidator.ShouldHaveValidationErrorFor(createCommand => createCommand.ReservationDate, DateTime.UtcNow.AddDays(-1));
-        }
     }
 }

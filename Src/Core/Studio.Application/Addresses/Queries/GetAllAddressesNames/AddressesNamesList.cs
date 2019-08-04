@@ -51,7 +51,32 @@
         {
             return new AddressesNamesListViewModel
             {
-                Addresses = await this.context.Addresses.Where(a => a.Location == null && a.IsDeleted != true).OrderBy(x => x.City.Name).ProjectTo<AddressNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                Addresses = await this.context.Addresses.Where(a => (a.Location == null || a.Location.IsDeleted == true) && a.IsDeleted != true).OrderBy(x => x.City.Name).ProjectTo<AddressNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+            };
+        }
+    }
+
+    public class GetAddressesNamesForEditListQuery : IRequest<AddressesNamesListViewModel>
+    {
+        public int LocationId { get; set; }
+    }
+
+    public class GetAddressesNamesForEditListQueryHandler : IRequestHandler<GetAddressesNamesForEditListQuery, AddressesNamesListViewModel>
+    {
+        private readonly IStudioDbContext context;
+        private readonly IMapper mapper;
+
+        public GetAddressesNamesForEditListQueryHandler(IStudioDbContext context, IMapper mapper)
+        {
+            this.context = context;
+            this.mapper = mapper;
+        }
+
+        public async Task<AddressesNamesListViewModel> Handle(GetAddressesNamesForEditListQuery request, CancellationToken cancellationToken)
+        {
+            return new AddressesNamesListViewModel
+            {
+                Addresses = await this.context.Addresses.Where(a => (a.Location == null || a.Location.IsDeleted == true || a.Location.Id == request.LocationId) && a.IsDeleted != true).OrderBy(x => x.City.Name).ProjectTo<AddressNameViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

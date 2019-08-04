@@ -835,9 +835,9 @@ q {
 
 .hair-dressing-salon-logo img {
     display: block;
-    width: 260px;
+    width: 180px;
     height: 97px;
-    margin: 0px 60px 0 350px;
+    margin: 0px 60px 0 0;
 }
 
 .hair-dressing-salon-name h2 {
@@ -888,6 +888,7 @@ q {
     max-width: 100%;
     display: block;
     border-radius: 25px;
+    margin-bottom: 20px;
 }
 
 .hairdresser-wrapper {

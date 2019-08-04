@@ -27,6 +27,14 @@
             return Ok(result);
         }
 
+        // GET: api/Addresses/GetAllNamesForEditLocation/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AddressesNamesListViewModel>> GetAllNamesForEditLocation(int id)
+        {
+            var result = await Mediator.Send(new GetAddressesNamesForEditListQuery { LocationId = id });
+            return Ok(result);
+        }
+
         // GET: api/Addresses/Get/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AddressViewModel>> Get(int id)

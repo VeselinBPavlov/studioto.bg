@@ -56,7 +56,7 @@
             data: formLocation,
             success: function () {
 
-                Message("Бизнесът е запазен успешно!", 'success');
+                Message("Обектът е запазен успешно!", 'success');
 
                 GenerateGridList();
             },
@@ -83,7 +83,7 @@
             url: "/api/Locations/Delete/" + id,
             success: function () {
                 GenerateGridList();
-                Message('Бизнесът е изтрит успешно!', 'success');
+                Message('Обектът е изтрит успешно!', 'success');
             },
             error: function (response) {                     
                 var message = "";
@@ -105,9 +105,8 @@
 
 
         if (id != null && id > 0) {
-
-            FillAddressesDropdown()
-            FillClientsDropdown()
+            FillAddressesDropdownForEdit(id);
+            FillClientsDropdown();
 
             $.ajax({
                 type: "GET",
@@ -151,7 +150,7 @@
 
                 $('#id').val(0);
 
-                Message('Бизнесът е променен успешно!', 'success');
+                Message('Обектът е променен успешно!', 'success');
 
                 GenerateGridList();
             },
@@ -206,6 +205,22 @@
 
             type: "GET",
             url: "/api/Addresses/GetAllNames",
+            success: function (result) {
+                var options = $('#addressId');
+                options.empty();
+                //don't forget error handling!
+                $(result['addresses']).each(function (i) {
+                    options.append($("<option />").val(result['addresses'][i].id).text(result['addresses'][i].name));
+                });
+            }
+        });
+    }
+
+    function FillAddressesDropdownForEdit(id) {
+        $.ajax({
+
+            type: "GET",
+            url: "/api/Addresses/GetAllNamesForEditLocation/" + id,
             success: function (result) {
                 var options = $('#addressId');
                 options.empty();
