@@ -18,6 +18,8 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
 
         public string Possitions { get; set; }
 
+        public int LocationId { get; set; }
+
         public string LocationName { get; set; }
 
         public string LocationAddress { get; set; }
@@ -48,6 +50,7 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
                     Possitions = string.Join(", ", employee.EmployeeServices.Select(es => es.Service.Industry.Possition).Distinct()),
+                    LocationId = employee.Location.Id,
                     LocationName = employee.Location.Name,
                     LocationAddress = employee.Location.Address.AddressFormat.ToString(),
                     LocationPhone = employee.Location.Phone,

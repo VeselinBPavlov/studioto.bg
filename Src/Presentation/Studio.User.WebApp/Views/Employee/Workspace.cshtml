@@ -15,9 +15,9 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 hair-dressing-salon">
+            <div class="col-xs-12 hair-dressing-salon employee-dressing-salon">
                 <div class="hair-dressing-salon-logo">
-                    <img src="~/img/locations/venera-logo.png" alt="Venera Studio Logo" />
+                    <img src="~/img/locations/@employee.LocationId/logo.jpg" alt="studio-logo" />
                 </div>
                 <div class="hair-dressing-salon-name">
                     <h2>@employee.LocationName</h2>
@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-md-3 hairdresser-info employee-info employee-profile">
                         <div class="hairdresser employee">
-                            <img src="~/img/locations/employee1.jpg" alt="employee" />
+                            <img src="~/img/locations/@employee.LocationId/employees/@employee.Id/profile-picture.jpg" alt="employee" />
                             <span class="hairdresser-name employee-name">@employee.FirstName @employee.LastName</span>
                             <span class="worker">@employee.Possitions</span>
                         </div>

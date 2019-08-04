@@ -846,12 +846,13 @@ q {
 }
 
 .hair-dressing-salon-info {
-    margin-bottom: 40px;
+    margin: 20px 0 40px 0;
 }
 
 .hair-dressing-salon-info h4 {
     color: #4a4a4a;
     font: 400 1.2em/1em 'Roboto', Arial, Sans-serif;
+    margin-bottom: 20px;
 }
 
 .hair-dressing-salon-info p {
@@ -943,6 +944,10 @@ q {
 .employee img {
     width: 180px;
     height: 180px;
+}
+
+.employee-dressing-salon {
+    margin-left: 230px;
 }
 
 .hairdresser-info span {

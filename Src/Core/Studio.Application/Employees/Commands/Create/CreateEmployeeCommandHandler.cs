@@ -1,6 +1,7 @@
 ﻿namespace Studio.Application.Employees.Commands.Create
 {
     using System;
+    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using Common;
@@ -41,6 +42,8 @@
             this.context.Employees.Add(employee);
 
             await this.context.SaveChangesAsync(cancellationToken);
+
+            Directory.CreateDirectory($"../Studio.User.WebApp/wwwroot/img/locations/{location.Id}/employees/{employee.Id}");
 
             return Unit.Value;
         }

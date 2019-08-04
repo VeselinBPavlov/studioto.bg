@@ -70,7 +70,7 @@
                 {                    
                     <div class="col-xs-12 col-md-3 hairdresser-info employee-info">
                         <div class="hairdresser">
-                            <img src=~/img/locations/employee1.jpg alt="employee" />
+                            <img src=~/img/locations/@Model.Id/employees/@employee.EmployeeId/profile-picture.jpg alt="employee" />
                             <span class="hairdresser-name">@employee.EmployeeName</span>
                             <span class="worker">@employee.Possitions</span>
                             <a asp-controller="Employee" asp-action="Workspace" asp-route-id="@employee.EmployeeId" title="Запази час">Запази час</a>
