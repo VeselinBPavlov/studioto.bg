@@ -35,9 +35,10 @@
     color: #FFFFFF;
     width: 380px;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 17px;
     font: 1em/1em 'Roboto', Arial, Sans-serif;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .loginWrapper form button:hover {
@@ -744,9 +745,10 @@ q {
     color: #FFFFFF;
     width: 200px;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 17px;
     font: 1em/1em 'Roboto', Arial, Sans-serif;
     margin-top: 20px;
+    text-transform: uppercase;
 }
 
 /* SUCSSESSFUL RESERVATION END */
@@ -754,6 +756,7 @@ q {
 /* EMPLOYEE PAGE START */
 .appointment {
     text-align: center;
+    padding-bottom: 130px;
 }
 
 .appointment button {
@@ -762,9 +765,20 @@ q {
     color: #FFFFFF;
     width: 200px;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 17px;
     font: 1em/1em 'Roboto', Arial, Sans-serif;
     margin-top: 20px;
+    text-transform: uppercase;
+    font-weight:700;
+}
+
+.appointment button:hover, 
+.loginWrapper form button:hover, 
+.success button:hover,
+.profile button:hover
+{
+    background-color: #DF9974;
+    color: #000000;
 }
 
 .appointment form input {
@@ -789,10 +803,6 @@ q {
     padding-bottom: 20px;
 }
 
-.profile .table {
-    padding-bottom: 30px;
-}
-
 .profile .table th {
     color: #DF9974;
 }
@@ -807,9 +817,10 @@ q {
     color: #FFFFFF;
     width: 150px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 17px;
     border: none;
     font: 0.8em/0.8em 'Roboto', Arial, Sans-serif;
+    text-transform: uppercase;
 }
 
 /* PROFILE PAGE END */
@@ -818,7 +829,6 @@ q {
 
 .hair-dressing-salon {
     display: flex;
-    justify-content: space-evenly;
     flex-flow: row wrap;    
     padding-bottom: 10px;
 }
@@ -827,6 +837,7 @@ q {
     display: block;
     width: 260px;
     height: 97px;
+    margin: 0px 60px 0 350px;
 }
 
 .hair-dressing-salon-name h2 {
@@ -896,9 +907,7 @@ q {
     margin-bottom: 130px;
 }
 
-.employee-info:last-child {    
-    margin-top: 30px;
-    margin-left: 150px;
+.employee-info:last-child {   
     margin-bottom: 150px;
 }
 
@@ -933,11 +942,6 @@ q {
 .employee img {
     width: 180px;
     height: 180px;
-    left: 43px;
-}
-
-.arrow {
-    display: inline-block;
 }
 
 .hairdresser-info span {
@@ -958,16 +962,29 @@ q {
     padding-top: 200px;
 }
 
+.employee-profile {
+    margin-left: 150px;
+    margin-top: 36px;
+}
+
+.arrow {
+    padding-top: 136px;
+}
+
+.arrow img {
+    width: 200px;
+}
+
 .hairdresser-name::before {
     position: absolute;
     content: "";
     width: 220px;
     height: 220px;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
-    border-radius: 50%;   
+    border-radius: 50%;
     background-size: contain;
 }
 

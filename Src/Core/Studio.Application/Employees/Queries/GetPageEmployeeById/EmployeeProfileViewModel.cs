@@ -47,7 +47,7 @@ namespace Studio.Application.Employees.Queries.GetPageEmployeeById
                     Id = employee.Id,
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
-                    Possitions = string.Join(", ", employee.EmployeeServices.Select(es => es.Service.Industry.Possition)),
+                    Possitions = string.Join(", ", employee.EmployeeServices.Select(es => es.Service.Industry.Possition).Distinct()),
                     LocationName = employee.Location.Name,
                     LocationAddress = employee.Location.Address.AddressFormat.ToString(),
                     LocationPhone = employee.Location.Phone,

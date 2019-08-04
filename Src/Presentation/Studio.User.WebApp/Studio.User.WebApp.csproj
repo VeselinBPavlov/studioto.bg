@@ -9,9 +9,17 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Administration\**" />
+    <Compile Remove="wwwroot\img\Clients\**" />
+    <Compile Remove="wwwroot\img\Users\**" />
     <Content Remove="Areas\Administration\**" />
+    <Content Remove="wwwroot\img\Clients\**" />
+    <Content Remove="wwwroot\img\Users\**" />
     <EmbeddedResource Remove="Areas\Administration\**" />
+    <EmbeddedResource Remove="wwwroot\img\Clients\**" />
+    <EmbeddedResource Remove="wwwroot\img\Users\**" />
     <None Remove="Areas\Administration\**" />
+    <None Remove="wwwroot\img\Clients\**" />
+    <None Remove="wwwroot\img\Users\**" />
   </ItemGroup>
 
 
@@ -29,12 +37,6 @@
     <ProjectReference Include="..\..\Common\Studio.Common\Studio.Common.csproj" />
     <ProjectReference Include="..\..\Core\Studio.Domain\Studio.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Studio.Persistence\Studio.Persistence.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\img\Clients\" />
-    <Folder Include="wwwroot\img\Users\" />
   </ItemGroup>
 
 </Project>

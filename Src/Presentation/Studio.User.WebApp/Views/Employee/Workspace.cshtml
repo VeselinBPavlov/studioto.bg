@@ -13,84 +13,67 @@
 }
 <partial name="_Header" />
 <main>
-<div class="container">
-    <div class="row">
-        <div class="col-xs-7 hair-dressing-salon">
-             <div class="hair-dressing-salon-logo">
-                 <img src="~/img/locations/venera-logo.png" alt="Venera Studio Logo"/> 
-             </div>
-             <div class="hair-dressing-salon-name">
-                     <h2>@employee.LocationName</h2>
-             </div>
-        </div>     
-        <div class="col-xs-6">
-            <div class="row">                          
-
-                        <div class="col-xs-6 col-md-3 hairdresser-info employee-info">
-                            <div class="hairdresser employee">
-                                <img src="~/img/locations/employee1.jpg" alt="employee" />
-                                <span class="hairdresser-name employee-name">@employee.FirstName @employee.LastName</span>
-                                <span class="worker">@employee.Possitions</span>                                
-                            </div>     
-                            <div class="arrow">
-                                <img src="~/img/locations/black-arrow.svg" alt="arrow"/>                               
-                            </div>                
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 hair-dressing-salon">
+                <div class="hair-dressing-salon-logo">
+                    <img src="~/img/locations/venera-logo.png" alt="Venera Studio Logo" />
+                </div>
+                <div class="hair-dressing-salon-name">
+                    <h2>@employee.LocationName</h2>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6 col-md-3 hairdresser-info employee-info employee-profile">
+                        <div class="hairdresser employee">
+                            <img src="~/img/locations/employee1.jpg" alt="employee" />
+                            <span class="hairdresser-name employee-name">@employee.FirstName @employee.LastName</span>
+                            <span class="worker">@employee.Possitions</span>
                         </div>
+                    </div>
 
-                        
-
-                        <!-- <div class="col-xs-12 hair-dressing-salon-info">
-                            <h4>@employee.LocationSlogan</h4>
-                            <p>@employee.LocationDescription</p>                                
+                    <div class="col-xs-1 col-md-2">
+                        <div class="arrow">
+                            <img src="~/img/locations/black-arrow.jpg" alt="arrow" />
                         </div>
+                    </div>
 
-                        <div class="col-xs-12 salon-address-wt">
-                            <div class="address-phone">
-                                <span>Адрес</span>
-                                <p>@employee.LocationAddress</p>
-                                <span>Телефон</span>
-                                <p>@employee.LocationPhone</p>
+                    <div class="col-xs-5 appointment">
+                        <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
+                            <h4>Форма за резервация</h4>
+                            <div class="form-group">
+                                <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control form-control-lg" placeholder="Избери дата" />
                             </div>
-                            <div class="work-time">
-                                <span>Работно време</span>
-                                <p>@employee.LocationStartDay - @employee.LocationEndDay</p>
-                                <p>@employee.LocationStartHour:00 - @employee.LocationEndHour:00</p>    
-                            </div>   
-                        </div> -->
-                    </div>             
-        </div>
-        <div class="col-xs-6 appointment">
-            <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
-                <h4>Форма за резервация</h4>
-                <div class="form-group">
-                    <input id="ReservationDate" name="ReservationDate" type="date" asp-format="dd-MM-yyyy" class="form-control" placeholder="Избери дата" />
-                </div>
-                <div class="form-group">
-                    <select id="ServiceId" name="ServiceId" class="browser-default custom-select form-control form-control-lg">
-                        <option value="0">Избери услуга</option>
-                        @foreach (var service in @employee.Services)
-                        {
-                            <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName - @service.Price лв.</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select form-control form-control-lg"></select>    
-                </div>
-                <div class="form-group">
-                    <textarea id="Comment" name="Comment" rows="4" cols="50" class="form-control" placeholder="Коментар"> </textarea>
-                </div>
-                <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id"  type="hidden" />
-                <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" type="hidden" />           
-                <button type="submit" class="btn btn-primary">Резервирай</button>
-            </form>
+                            <div class="form-group">
+                                <select id="ServiceId" name="ServiceId" class="browser-default custom-select form-control form-control-lg">
+                                    <option value="0">Избери услуга</option>
+                                    @foreach (var service in @employee.Services)
+                                    {
+                                        <option value="@service.ServiceId" duration="@service.Duration">@service.ServiceName - @service.Price лв.</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select id="TimeBlockHelper" name="TimeBlockHelper" class="browser-default custom-select form-control form-control-lg"></select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="Comment" name="Comment" rows="4" cols="50" class="form-control form-control-lg" placeholder="Коментар"> </textarea>
+                            </div>
+                            <input id="EmployeeId" name="EmployeeId" class="form-control" value="@employee.Id" type="hidden" />
+                            <input id="UserId" name="UserId" class="form-control" value="@UserManager.GetUserId(this.User)" type="hidden" />
+                            <button type="submit" class="btn btn-primary">Резервирай</button>
+                        </form>
+                    </div>
+
+                </div>                
+            </div>
         </div>
     </div>
-</div>
 </main>
 
 @section Scripts{
-<environment include="Development,Staging,Production">
-    <script src="~/js/appointment.js"></script>
-</environment>
+    <environment include="Development,Staging,Production">
+        <script src="~/js/appointment.js"></script>
+    </environment>
 }
