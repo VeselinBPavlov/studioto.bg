@@ -2,9 +2,11 @@
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
+    using Studio.Application.Employees.Commands.UploadFile;
     using Studio.Application.Locations.Commands.Create;
     using Studio.Application.Locations.Commands.Delete;
     using Studio.Application.Locations.Commands.Update;
+    using Studio.Application.Locations.Commands.UploadFile;
     using Studio.Application.Locations.Queries.GetAllLocations;
     using Studio.Application.Locations.Queries.GetAllNames;
     using Studio.Application.Locations.Queries.GetLocationById;
@@ -59,6 +61,15 @@
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteLocationCommand { Id = id });
+
+            return NoContent();
+        }
+
+        // POST: api/Locations/UploadFile
+        [HttpPost]
+        public async Task<ActionResult> UploadFile([FromForm]UploadLocationFileCommand command)
+        {
+            await Mediator.Send(command);
 
             return NoContent();
         }

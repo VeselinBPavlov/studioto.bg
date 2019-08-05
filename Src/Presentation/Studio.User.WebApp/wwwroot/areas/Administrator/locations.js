@@ -4,6 +4,7 @@
     window.DeleteData = DeleteData;
     window.EditData = EditData;
     window.UpdateData = UpdateData;
+    window.UploadFile = UploadFile;
 
     GenerateGridList();
 
@@ -36,6 +37,18 @@
 
                         tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['locations'][i].id + ")>" + "Промени";
                         tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['locations'][i].id + ")>" + "Изтрий";
+                        tr += "<td>" + "<form method='post' enctype='multipart/form-data' id='formUploadLocationFile'>" + 
+                            "<div class='form-group'>" +
+                                "<div class='col-md-12'>" +
+                            `<input type='file' name='file' id='${result['locations'][i].id}' />` +
+                                "</div>" +
+                            "</div>" + 
+                            "<div class='form-group'>" +
+                                "<div class='col-md-12'>" +
+                            "<input type='submit' class='btn btn-warning btn-xs' value='Качи' onclick=UploadFile(" + result['locations'][i].id + ") />" +
+                                "</div>" +
+                            "</div>" +
+                        "</form >"
                         tbody.append(tr);
                     });
                 }
@@ -163,6 +176,42 @@
                     } else {
                     Object.keys(errors).forEach(function(key) {
                         message += `${errors[key]}!<br/>`;                        
+                    });
+                }
+                Message(message);
+            }
+        });
+    }
+
+    function UploadFile(id) {
+        var file = $(`#${id}`)[0].files[0];
+        var locationId = id;
+        var formData = new FormData();
+        formData.append("files", file);
+        formData.append("id", locationId);   
+
+        $.ajax({
+            type: "POST",
+            url: "/api/Locations/UploadFile",
+            contentType: false,
+            data: formData,
+            dataType: "json",
+            cache: false,
+            processData: false,
+            async: true,
+            success: function () {
+                GenerateGridList();
+                Message('Снимката е записана успешно!', 'success');
+            },
+            error: function (response) {
+                var message = "";
+                var errors = response["responseJSON"]["errors"];
+                var error = response["responseJSON"]["error"];
+                if (error !== undefined) {
+                    message += error;
+                } else {
+                    Object.keys(errors).forEach(function (key) {
+                        message += `${errors[key]}!<br/>`;
                     });
                 }
                 Message(message);

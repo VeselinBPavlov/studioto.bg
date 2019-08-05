@@ -26,6 +26,7 @@
         public const string ErrorVatNumberMessage = "Невалиден формат на данъчния номер. Примери: 123456789, BG123456789";
         public const string ErrorEmailMessage = "Невалиден email формат. Пример: user@provider.com";
         public const string ErrorPriceMessage = "Цената трябва да е по-голяма от 0.00";
+        public const string PuctureErrorMessage = "Нямате прикачена снимка!";
 
 
         #endregion

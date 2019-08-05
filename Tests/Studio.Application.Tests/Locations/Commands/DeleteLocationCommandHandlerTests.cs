@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using MediatR;
     using Studio.Application.Locations.Commands.Delete;
+    using Studio.Application.Locations.Commands.UploadFile;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using Studio.Domain.Entities;

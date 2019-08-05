@@ -5,6 +5,7 @@
     using Studio.Application.Employees.Commands.Create;
     using Studio.Application.Employees.Commands.Delete;
     using Studio.Application.Employees.Commands.Update;
+    using Studio.Application.Employees.Commands.UploadFile;
     using Studio.Application.Employees.Queries.GetAllEmployees;
     using Studio.Application.Employees.Queries.GetAllNames;
     using Studio.Application.Employees.Queries.GetEmployeeById;
@@ -62,5 +63,14 @@
 
             return NoContent();
         }
+
+        // POST: api/Employees/UploadFile
+        [HttpPost]
+        public async Task<ActionResult> UploadFile([FromForm]UploadEmployeeFileCommand command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        } 
     }
 }
