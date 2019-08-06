@@ -37,7 +37,7 @@
 
                         tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['locations'][i].id + ")>" + "Промени";
                         tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['locations'][i].id + ")>" + "Изтрий";
-                        tr += "<td>" + "<form method='post' enctype='multipart/form-data' id='formUploadLocationFile'>" + 
+                        tr += "<td>" + "<form method='post' class='upload-picture' enctype='multipart/form-data' id='formUploadLocationFile'>" + 
                             "<div class='form-group'>" +
                                 "<div class='col-md-12'>" +
                             `<input type='file' name='file' id='${result['locations'][i].id}' />` +

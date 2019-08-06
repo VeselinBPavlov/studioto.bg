@@ -6,6 +6,7 @@
     public class CreateCityCommandValidator : AbstractValidator<CreateCityCommand>
     {
         public const string Name = "Име";
+
         public CreateCityCommandValidator()
         {
             RuleFor(c => c.Name)

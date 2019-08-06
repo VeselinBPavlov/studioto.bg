@@ -84,7 +84,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
                 return availableAppointments;
             }
 
-            itemsList.Add(new SelectListItem() { Text = "No Appointments Available", Value = GConst.AllHoursBusy });
+            itemsList.Add(new SelectListItem() { Text = GConst.NotAvalableAppointments, Value = GConst.AllHoursBusy });
 
             availableAppointments.AvailableAppointments = itemsList;
             return availableAppointments;

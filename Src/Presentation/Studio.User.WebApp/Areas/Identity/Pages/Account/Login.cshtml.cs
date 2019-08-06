@@ -1,20 +1,24 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using Studio.Domain.Entities;
-
-namespace Studio.User.WebApp.Areas.Identity.Pages.Account
+﻿namespace Studio.User.WebApp.Areas.Identity.Pages.Account
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Domain.Entities;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private const string EmailRequiredMessage = "Полето \"Email\" е задължително!";
+        private const string EmailFormatMessage = "Невалиден Email формат!";
+        private const string PasswordRequiredMessage = "Полето \"Парола\" е задължително!";
+
         private readonly SignInManager<StudioUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -36,11 +40,11 @@ namespace Studio.User.WebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = EmailRequiredMessage)]
+            [EmailAddress(ErrorMessage = EmailFormatMessage)]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = PasswordRequiredMessage)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

@@ -1,0 +1,23 @@
+﻿@page
+@using Studio.Domain.Entities;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<StudioUser> UserManager;
+@inject SignInManager<StudioUser> SignInManager
+@model AccessDeniedModel
+
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<header>
+    <div class="success">
+        <div class="row">
+            <img src="~/img/logo/logo-black.png" />
+            <h2>Възникна грешка!</h2>
+            <p>Нямате права за извършването на тази операция!</p>
+            <form asp-action="Index" asp-controller="Home" method="get">
+                <button type="submit" class="btn btn-primary">Начало</button>
+            </form>
+        </div>
+    </div>
+</header>

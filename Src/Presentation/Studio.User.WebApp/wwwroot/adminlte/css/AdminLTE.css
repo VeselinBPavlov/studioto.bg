@@ -4980,3 +4980,16 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+/* ÌAIN CSS */
+.upload-picture {
+    position: relative;
+    top: -15px;
+    left: -15px;
+}
+
+.upload-picture input {
+    margin-bottom: 5px;
+}
+/* ÌAIN CSS */
+

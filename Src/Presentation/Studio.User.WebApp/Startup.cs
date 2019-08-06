@@ -26,6 +26,7 @@
     using Studio.User.WebApp.FIlters;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Studio.Application.Infrastructure.SendGrid;
+    using Studio.Application.Infrastructure.Validatior;
 
     public class Startup
     {
@@ -76,15 +77,22 @@
                 .AddEntityFrameworkStores<StudioDbContext>();
 
             services.AddRouting(options => options.LowercaseUrls = true);
-            
+
             services
-                .AddMvc(options => 
+                .AddMvc(options =>
                 {
                     options.Filters.Add(typeof(CustomExceptionFilterAttribute));
                     //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>())
+                .AddFluentValidation(fv =>
+                {
+                    fv.RegisterValidatorsFromAssemblyContaining<CreateClientCommandValidator>();
+                    fv.ConfigureClientsideValidation(clientSideValidation =>
+                    {
+                        clientSideValidation.Add(typeof(RequiredIfValidator), (context, rule, validator) => new RequiredIfClientValidator(rule, validator));
+                    });
+                }) 
                 .AddRazorPagesOptions(options =>
                 {
                     options.AllowAreas = true;
@@ -136,6 +144,7 @@
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseStatusCodePagesWithRedirects("~/Home/Error/{0}");
 
             app.UseMvc(routes =>
             {

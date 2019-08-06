@@ -35,7 +35,7 @@
                         tr += "<td>" + result['employees'][i].possitions;
                         tr += "<td>" + "<button class='btn btn-info btn-xs' onclick=EditData(" + result['employees'][i].id + ")>" + "Промяна";
                         tr += "<td>" + "<button class='btn btn-danger btn-xs' onclick=DeleteData(" + result['employees'][i].id + ")>" + "Изтриване";
-                        tr += "<td>" + "<form method='post' enctype='multipart/form-data' id='formUploadEmployeeFile'>" +
+                        tr += "<td>" + "<form method='post' class='upload-picture' enctype='multipart/form-data' id='formUploadEmployeeFile'>" +
                             "<div class='form-group'>" +
                                 "<div class='col-md-12'>" +
                             `<input type='file' name='file' id='${result['employees'][i].id}' />` +

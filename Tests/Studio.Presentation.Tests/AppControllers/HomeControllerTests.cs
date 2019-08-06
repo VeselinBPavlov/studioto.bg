@@ -53,11 +53,7 @@
                     Message = GConst.ValidName
                 }))
                 .ShouldHave()
-                .ValidModelState()
-                .AndAlso()
-                .ShouldReturn()
-                .Redirect(redirect => redirect
-                    .To<HomeController>(c => c.Index()));
+                .ValidModelState();
     }
 }
 

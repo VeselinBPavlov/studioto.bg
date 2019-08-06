@@ -16,7 +16,7 @@
         public const string SenderName = "studioto.bg";
         public const string SenderSubject = "Получено запитване.";
         public const string SenderMessage = "Вашето запитване е получено успешно. Очаквайте свързване с администратор.";
-        public const string ApiKey = "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";
+        public const string ApiKey = "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";
         public const string AppointmentSubject = "Успешна резервация в Studioto.bg!";
         public const string AppointmentMessage = "Вие успешно резервирахте час за {0} в {1} от {2} часа.";  
         public const string ErrorRequiredMessage = "Полето \"{0}\" e задължително";
@@ -27,7 +27,8 @@
         public const string ErrorEmailMessage = "Невалиден email формат. Пример: user@provider.com";
         public const string ErrorPriceMessage = "Цената трябва да е по-голяма от 0.00";
         public const string PuctureErrorMessage = "Нямате прикачена снимка!";
-
+        public const string ReservationDateError = "Няма свободни часове за избраната дата.";
+        public const string ClashAppointmentMessage = "{0} вече има запазен час на {1} от {2} часа. Моля, опитайте с друг час.";
 
         #endregion
 
@@ -107,6 +108,7 @@
         public const string UniqueNameExceptionMessage = "Възникна грешка при {0} на \"{1}\" ({2}). Съшествува {3} със същото име.";
         public const string ValueObjectExceptionMessage = "Невалиден {0}.";
         public const string NotAvalableHours = "Няма свободни часове за {0}";
+        public const string NotAvalableAppointments = "Няма свободни часове";
         public const int AvailableAppointmentsCount = 20;
 
         #endregion
@@ -116,7 +118,11 @@
         public const string AdministratorRole = "Administrator";
         public const string AdministratorArea = "Administrator";
         public const string UserRole = "User";
-
+        public const string Email = "Email";
+        public const string FirstName = "Име";
+        public const string LastName = "Фамилия";
+        public const string Phone = "Телефон";
+        public const string Password = "Парола";
 
         #endregion
     }

@@ -1,20 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using Studio.Domain.Entities;
-
-namespace Studio.User.WebApp.Areas.Identity.Pages.Account
+﻿namespace Studio.User.WebApp.Areas.Identity.Pages.Account
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Domain.Entities;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private const string EmailRequiredMessage = "Полето \"Email\" е задължително!";
+        private const string FirstNameRequiredMessage = "Полето \"Име\" е задължително!";
+        private const string LastNameRequiredMessage = "Полето \"Фамилия\" е задължително!";
+        private const string PhoneRequiredMessage = "Полето \"Телефон\" е задължително!";
+        private const string PasswordRequiredMessage = "Полето \"Парола\" е задължително!";
+        private const string EmailFormatMessage = "Невалиден Email формат!";
+        private const string PhoneFormatMessage = "Невалиден телефонен формат!";
+        private const string UnconfirmedPasswordMessage = "Паролите не съвпадат!";
+        private const string LenghtRequirementMessage = "Полето \"{0}\" трябва да е с дължина от {2} до {1} символа.";
+
+
+
         private readonly SignInManager<StudioUser> _signInManager;
         private readonly UserManager<StudioUser> _userManager;
         private readonly RoleManager<StudioRole> _roleManager;
@@ -39,37 +49,37 @@ namespace Studio.User.WebApp.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Required(ErrorMessage = FirstNameRequiredMessage)]
+            [StringLength(50, ErrorMessage = LenghtRequirementMessage, MinimumLength = 2)]
             [MinLength(2), MaxLength(50)]
             [Display(Name = "First Name")]
-            public string FirstName { get; set; } 
+            public string FirstName { get; set; }
 
-            [Required]
-            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Required(ErrorMessage = LastNameRequiredMessage)]
+            [StringLength(50, ErrorMessage = LenghtRequirementMessage, MinimumLength = 2)]
             [MinLength(2), MaxLength(50)]
             [Display(Name = "Last Name")]
-            public string LastName { get; set; }    
+            public string LastName { get; set; }
 
-            [Required]
-            [RegularExpression(@"^(\+359|0)(\d{9})$", ErrorMessage = "Invalid phone format!")]
+            [Required(ErrorMessage = PhoneRequiredMessage)]
+            [RegularExpression(@"^(\+359|0)(\d{9})$", ErrorMessage = PhoneFormatMessage)]
             [Display(Name = "Phone")]
             public string PhoneNumber { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = EmailRequiredMessage)]
+            [EmailAddress(ErrorMessage = EmailFormatMessage)]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = PasswordRequiredMessage)]
+            [StringLength(100, ErrorMessage = LenghtRequirementMessage, MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = UnconfirmedPasswordMessage)]
             public string ConfirmPassword { get; set; }
         }
 
