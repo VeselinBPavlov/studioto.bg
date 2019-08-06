@@ -1,2 +1,3 @@
-# my-studio.bg
-my-studio.bg
+﻿# Common Layer
+
+This will contain all cross-cutting concerns like global constants.
