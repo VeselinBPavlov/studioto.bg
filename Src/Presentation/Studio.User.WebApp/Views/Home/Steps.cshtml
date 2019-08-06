@@ -2,9 +2,75 @@
     ViewData["Title"] = "Steps";
 }
 <partial name="_Header" />
-<main>
 
-<div class="text-center">
-    <h1 class="display-4">How to reservate</h1>
-</div>
+<main>
+    <div class="app-steps">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 hidden-xs hidden-sm make-app-img">
+                    <img src="~/img/steps/app1.jpg" alt="Make App" />
+                </div>
+                <div class="col-xs-12 col-md-5 col-md-offset-1 ">
+                    <div class="make-app-box">
+                        <h3> Стъпка 1 - изберете студио</h3>
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-5">
+                    <div class="make-app-box">
+                        <h3> Стъпка 2 - изберете услуга</h3>
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 hidden-xs hidden-sm col-md-6 col-md-offset-1  make-app-img">
+                    <img src="~/img/steps/app2.jpg" alt="Make App" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 hidden-xs hidden-sm col-md-6 make-app-img">
+                    <img src="~/img/steps/app3.jpg" alt="Make App" />
+                </div>
+                <div class="col-xs-12 col-md-5 col-md-offset-1 ">
+                    <div class="make-app-box">
+                        <h3> Стъпка 3 - изберете ден</h3>
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-5">
+                    <div class="make-app-box">
+                        <h3> Стъпка 4 - изберете час</h3>
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p>
+                    </div>
+                </div>
+                <div class="col-xs-12 hidden-xs hidden-sm col-md-6 make-app-img col-md-offset-1 ">
+                    <img src="~/img/steps/app4.jpg" alt="Make App" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 hidden-xs hidden-sm col-md-6 make-app-img">
+                    <img src="~/img/steps/app5.jpg" alt="Make App" />
+                </div>
+                <div class="col-xs-12 col-md-5 col-md-offset-1 ">
+                    <div class="make-app-box">
+                        <h3> Стъпка 5 - потвърдете регистрацията</h3>
+                        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="appointment-wrapper">
+        <img class="makeapp-img" src="~/img/index/apple.png" alt="Резервация" />
+        <div class="book-online-box">
+            <img src="~/img/logo/logo-black.png" alt="Logo Image" />
+            <p>Book online, enjoy at the place!</p>
+            <a asp-controller="Location" asp-action="All" class="make-app" title="Резервирай">Резервирай</a>
+        </div>
+    </div>
 </main>
