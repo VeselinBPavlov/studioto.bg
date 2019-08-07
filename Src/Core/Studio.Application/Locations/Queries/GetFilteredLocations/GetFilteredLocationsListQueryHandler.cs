@@ -25,7 +25,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
 
         public async Task<LocationsFilteredListViewModel> Handle(GetFilteredLocationsListQuery request, CancellationToken cancellationToken)
         {
-            var locations = this.context.Locations.OrderByDescending(l => l.CreatedOn).AsQueryable();
+            var locations = this.context.Locations.Where(l => l.IsDeleted != true).OrderByDescending(l => l.CreatedOn).AsQueryable();
 
             if (request.CityId != 0 && request.CityId != null) 
             {

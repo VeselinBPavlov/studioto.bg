@@ -27,14 +27,14 @@
                 throw new NotFoundException(GConst.Employee, request.Id);
             }
 
-            var hasAppointments = this.context.Appointments.Any(a => a.EmployeeId == employee.Id && a.Employee.IsDeleted == false);
+            var hasAppointments = this.context.Appointments.Where(a => a.IsDeleted != true).Any(a => a.EmployeeId == employee.Id && a.Employee.IsDeleted != true);
 
             if (hasAppointments)
             {
                 throw new DeleteFailureException(GConst.Employee, request.Id, string.Format(GConst.DeleteException, GConst.Appointments, GConst.EmployeeLower));
             }   
 
-            var hasServices = this.context.EmployeeServices.Any(a => a.EmployeeId == employee.Id && a.Employee.IsDeleted == false);
+            var hasServices = this.context.EmployeeServices.Where(es => es.IsDeleted != true).Any(a => a.EmployeeId == employee.Id && a.Employee.IsDeleted == false);
 
             if (hasServices)
             {

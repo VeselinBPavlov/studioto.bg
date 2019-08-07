@@ -29,7 +29,7 @@
                 throw new NotFoundException(GConst.Country, request.Id);
             }
 
-            var hasCities = this.context.Cities.Any(c => c.CountryId == country.Id && c.Country.IsDeleted == false);
+            var hasCities = this.context.Cities.Where(c => c.IsDeleted != true).Any(c => c.CountryId == country.Id && c.Country.IsDeleted == false);
 
             if (hasCities)
             {

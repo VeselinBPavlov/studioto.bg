@@ -27,7 +27,7 @@
                 throw new NotFoundException(GConst.Address, request.Id);
             }
 
-            var hasLocation = this.context.Locations.Any(l => l.AddressId == address.Id && l.Address.IsDeleted == false);
+            var hasLocation = this.context.Locations.Where(l => l.IsDeleted != true).Any(l => l.AddressId == address.Id && l.Address.IsDeleted == false);
 
             if (hasLocation)
             {

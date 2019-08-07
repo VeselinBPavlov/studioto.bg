@@ -30,7 +30,7 @@
                 throw new NotFoundException(GConst.Client, request.Id);
             }
 
-            var hasLocations = this.context.Locations.Any(l => l.ClientId == client.Id && l.Client.IsDeleted == false);
+            var hasLocations = this.context.Locations.Where(l => l.IsDeleted != true).Any(l => l.ClientId == client.Id && l.Client.IsDeleted == false);
 
             if (hasLocations)
             {

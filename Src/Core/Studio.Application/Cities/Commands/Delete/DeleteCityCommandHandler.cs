@@ -28,7 +28,7 @@
                 throw new NotFoundException(GConst.City, request.Id);
             }
 
-            var hasAddresses = this.context.Addresses.Any(a => a.CityId == city.Id && a.City.IsDeleted == false);
+            var hasAddresses = this.context.Addresses.Where(a => a.IsDeleted != true).Any(a => a.CityId == city.Id && a.City.IsDeleted == false);
 
             if (hasAddresses)
             {

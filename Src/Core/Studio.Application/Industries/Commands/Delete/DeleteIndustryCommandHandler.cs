@@ -29,14 +29,14 @@
                 throw new NotFoundException(GConst.Industry, request.Id);
             }
 
-            var hasServices = this.context.Services.Any(s => s.IndustryId == industry.Id && s.Industry.IsDeleted == false);
+            var hasServices = this.context.Services.Where(s => s.IsDeleted != true).Any(s => s.IndustryId == industry.Id && s.Industry.IsDeleted == false);
 
             if (hasServices)
             {
                 throw new DeleteFailureException(GConst.Industry, request.Id, string.Format(GConst.DeleteException, GConst.Services, GConst.IndustryLower));
             }
 
-            var hasLocations = this.context.LocationIndustries.Any(li => li.IndustryId == industry.Id && li.Industry.IsDeleted == false);
+            var hasLocations = this.context.LocationIndustries.Where(l => l.IsDeleted != true).Any(li => li.IndustryId == industry.Id && li.Industry.IsDeleted == false);
 
             if (hasLocations)
             {

@@ -28,14 +28,14 @@
                 throw new NotFoundException(GConst.Location, request.Id);
             }
 
-            var hasEmployees = this.context.Employees.Any(e => e.LocationId == location.Id && e.Location.IsDeleted == false);
+            var hasEmployees = this.context.Employees.Where(e => e.IsDeleted != true).Any(e => e.LocationId == location.Id && e.Location.IsDeleted == false);
 
             if (hasEmployees)
             {
                 throw new DeleteFailureException(Common.GConst.Location, request.Id, string.Format(GConst.DeleteException, GConst.Employees, GConst.LocationLower));
             }   
 
-            var hasIndustries = this.context.LocationIndustries.Any(e => e.LocationId == location.Id && e.Location.IsDeleted == false);
+            var hasIndustries = this.context.LocationIndustries.Where(li => li.IsDeleted != true).Any(e => e.LocationId == location.Id && e.Location.IsDeleted == false);
 
             if (hasIndustries)
             {
