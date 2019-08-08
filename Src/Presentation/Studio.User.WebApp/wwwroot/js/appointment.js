@@ -2,6 +2,7 @@
     $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Избери дата и услуга"));
     $('#TimeBlockHelper').val("placeholder");
     $("#TimeBlockHelper").prop("disabled", true);
+    $('#appointment-btn').hide();
     $("#ReservationDate, #ServiceId").change(function () {
         var now = new Date();
         var date = new Date($("#ReservationDate").val());
@@ -23,6 +24,14 @@
                }
                 $("#TimeBlockHelper").find('[value="placeholder"]').remove();
                 $("#TimeBlockHelper").prop("disabled", false);
+
+                if ($("#TimeBlockHelper").val() != "busy") {
+                    $('#appointment-btn').show();
+                }
+                else {
+                    $('#appointment-btn').hide();
+                }
+
             },
             error: function () { alert("Error retrieving available appointments!"); }
         });
@@ -32,6 +41,7 @@
             $('#TimeBlockHelper').append($("<option></option>").val("placeholder").text("Избери дата и услуга"));
             $('#TimeBlockHelper').val("placeholder");
             $("#TimeBlockHelper").prop("disabled", true);
+            $('#appointment-btn').hide();
         }
     });
 });

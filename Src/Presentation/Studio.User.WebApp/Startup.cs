@@ -24,7 +24,6 @@
     using FluentValidation.AspNetCore;
     using Studio.Application.Clients.Commands.Create;
     using Studio.User.WebApp.FIlters;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Studio.Application.Infrastructure.SendGrid;
     using Studio.Application.Infrastructure.Validatior;
 
@@ -82,7 +81,6 @@
                 .AddMvc(options =>
                 {
                     options.Filters.Add(typeof(CustomExceptionFilterAttribute));
-                    //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv =>
