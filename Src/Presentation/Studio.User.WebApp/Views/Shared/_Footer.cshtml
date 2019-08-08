@@ -3,23 +3,23 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-3">
                 <span>Приложението</span>
-                <a href="javascript:void(0)" title="Какво е STUDIOTO.BG">Какво е studioto.bg?</a>
+                <a asp-controller="Home" asp-action="About" title="Какво е STUDIOTO.BG?">Какво е studioto.bg?</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 col-md-offset-1 customers">
                 <span>Потребители</span>
-                <a href="javascript:void(0)" title="Как да реагирам">Как да реагирам?</a>
+                <a asp-controller="Home" asp-action="Steps" title="Как да резервирам?">Как да резервирам?</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 col-md-offset-1">
                 <span>Бизнеса</span>
-                <a href="javascript:void(0)" title="Оптимизация">Оптимизация</a>
-                </br>
-                <a href="javascript:void(0)" title="Мнения">Мнения</a>
+                <a asp-controller="Home" asp-action="About" asp-fragment="AboutBusiness" title="Оптимизация">Оптимизация</a>
+                <br/>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="Comments" title="Мнения">Мнения</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-2 col-md-offset-1">
                 <div class="contact-us">
                     <span>Възка с нас</span>
                     <p>contact@studioto.bg</p>
-                    <a href="javascript:void(0)" title="Контакти">Контакти</a>
+                    <a asp-controller="Home" asp-action="Contacts" title="Контакти">Контакти</a>
                 </div>
             </div>
         </div>

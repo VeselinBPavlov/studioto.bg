@@ -1184,6 +1184,13 @@ footer p {
     }
 }
 
+@media all and (min-width: 1224px) and (max-width: 1619px) {
+    .make-app-box p {
+        padding: 16px;
+        font-size: 1em;
+    }
+}
+
 @media all and (min-width: 992px) and (max-width: 1223px) {
     .book-online-box img {
         width: 280px;
@@ -1200,6 +1207,22 @@ footer p {
 
     .contact-us-wrapper {
         text-align: left;
+    }
+
+    .make-app-img img,
+    .make-app-box {
+        margin-top: 30px;
+        height: 330px;
+    }
+
+    .make-app-box h3 {
+        padding: 23px 20px 20px 30px;
+        font: 400 1.5em/1.1em 'Roboto', Arial, Sans-serif;
+    }
+    
+    .make-app-box p {
+        padding: 10px 10px 20px 10px;
+        font-size: 0.9em;
     }
 }
 
@@ -1270,6 +1293,10 @@ footer p {
         max-width: 200px;
         font-size: 1em;
         margin: 0 auto;
+    }
+
+    .make-app-box {
+        margin-bottom: 40px;
     }
 }
 
@@ -1365,6 +1392,13 @@ footer p {
         .book-online-box img {
             width: 270px;
         }
+
+    .make-app-img img,
+    .make-app-box {
+        margin-top: 30px;
+        height: auto;
+        margin-bottom: 30px;
+    }
 }
 
 @media all and (min-width: 320px) and (max-width: 550px) {
