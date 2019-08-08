@@ -10,7 +10,11 @@
         {
             builder.HasKey(es => new { es.EmployeeId, es.ServiceId });
 
-            builder.Property(es => es.DurationInMinutes).IsRequired();
+            builder.Property(a => a.Price)
+                   .HasColumnType("decimal(16, 2)"); 
+
+            builder.Property(es => es.DurationInMinutes)
+                   .IsRequired();
         }
     }
 }

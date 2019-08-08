@@ -300,26 +300,26 @@ namespace Studio.Persistence.Context
 
             var addresses = new[]
             {
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[0], Longitude = 10.00M, Latitude = 10.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[1], Longitude = 20.00M, Latitude = 20.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[2], Longitude = 30.00M, Latitude = 30.00M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[3], Longitude = 40.00M, Latitude = 40.00M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[4], Longitude = 50.00M, Latitude = 50.00M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[5], Longitude = 60.00M, Latitude = 60.00M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[6], Longitude = 70.00M, Latitude = 70.00M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[7], Longitude = 80.00M, Latitude = 80.00M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[8], Longitude = 90.00M, Latitude = 90.00M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[9], Longitude = 10.10M, Latitude = 10.10M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[10], Longitude = 10.20M, Latitude = 10.20M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[11], Longitude = 10.30M, Latitude = 10.30M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[12], Longitude = 10.40M, Latitude = 10.40M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[13], Longitude = 10.50M, Latitude = 10.50M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[14], Longitude = 10.60M, Latitude = 10.60M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[15], Longitude = 10.70M, Latitude = 10.70M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[16], Longitude = 10.80M, Latitude = 10.80M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[17], Longitude = 10.90M, Latitude = 10.90M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[18], Longitude = 10.11M, Latitude = 10.11M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new Address { AddressFormat = (AddressFormat)inputAddressesData[19], Longitude = 10.12M, Latitude = 10.12M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[0], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[1], Longitude = 20.000000M, Latitude = 20.000000M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[2], Longitude = 30.000000M, Latitude = 30.000000M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[3], Longitude = 40.000000M, Latitude = 40.000000M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[4], Longitude = 50.000000M, Latitude = 50.000000M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[5], Longitude = 60.000000M, Latitude = 60.000000M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[6], Longitude = 70.000000M, Latitude = 70.000000M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[7], Longitude = 80.000000M, Latitude = 80.000000M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[8], Longitude = 90.000000M, Latitude = 90.000000M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[9], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[10], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[11], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[12], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[13], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 7, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[14], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 1, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[15], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 2, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[16], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 3, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[17], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 4, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[18], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 5, CreatedOn = DateTime.UtcNow, IsDeleted = false },
+                new Address { AddressFormat = (AddressFormat)inputAddressesData[19], Longitude = 10.000000M, Latitude = 10.000000M, CityId = 6, CreatedOn = DateTime.UtcNow, IsDeleted = false }
             };
 
             context.Addresses.AddRange(addresses);
