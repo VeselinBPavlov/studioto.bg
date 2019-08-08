@@ -1,27 +1,27 @@
 ﻿namespace Studio.Application.Infrastructure.Validatior
 {
     using FluentValidation;
+    using FluentValidation.AspNetCore;
     using FluentValidation.Internal;
     using FluentValidation.Resources;
     using FluentValidation.Validators;
-    using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
     public class RequiredIfClientValidator : ClientValidatorBase
     {
-        RequiredIfValidator RequiredIfValidator
-        {
-            get { return (RequiredIfValidator)Validator; }
-        }
-
         public RequiredIfClientValidator(PropertyRule rule, IPropertyValidator validator) : base(rule, validator)
         {
+        }
+
+        public RequiredIfValidator RequiredIfValidator
+        {
+            get { return (RequiredIfValidator)Validator; }
         }
 
         public override void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-requiredif", GetErrorMessage(context));
+            MergeAttribute(context.Attributes, "data-val-requiredif", this.GetErrorMessage(context));
             MergeAttribute(context.Attributes, "data-val-requiredif-dependentproperty", RequiredIfValidator.DependentProperty);
             MergeAttribute(context.Attributes, "data-val-requiredif-targetvalue", RequiredIfValidator.TargetValue.ToString());
         }
@@ -38,6 +38,7 @@
             {
                 messageTemplate = ValidatorOptions.LanguageManager.GetStringForValidator<NotEmptyValidator>();
             }
+
             var message = formatter.BuildMessage(messageTemplate);
             return message;
         }

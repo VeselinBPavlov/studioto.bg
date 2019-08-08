@@ -1,38 +1,13 @@
-﻿namespace Studio.Application.Industries.Queries.GetAllNames
+﻿namespace Studio.Application.Industries.Queries.GetAllIndustriesNames
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Studio.Application.Interfaces.Mapping;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Domain.Entities;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
-    public class IndustriesNamesListViewModel
-    {
-        public IList<IndustryNameViewModel> Industries { get; set; }        
-    }
-
-    public class IndustryNameViewModel : IHaveCustomMapping
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public void CreateMappings(Profile configuration)
-        {
-            configuration.CreateMap<Industry, IndustryNameViewModel>();
-        }
-    }
-
-    public class GetIndustriesNamesListQuery : IRequest<IndustriesNamesListViewModel>
-    {
-    }
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class GetIndustriesNamesListQueryHandler : IRequestHandler<GetIndustriesNamesListQuery, IndustriesNamesListViewModel>
     {

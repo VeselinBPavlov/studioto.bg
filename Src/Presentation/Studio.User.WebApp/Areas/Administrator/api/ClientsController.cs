@@ -6,7 +6,7 @@
     using Studio.Application.Clients.Commands.Delete;
     using Studio.Application.Clients.Commands.Update;
     using Studio.Application.Clients.Queries.GetAllClients;
-    using Studio.Application.Clients.Queries.GetAllNames;
+    using Studio.Application.Clients.Queries.GetAllClientsNames;
     using Studio.Application.Clients.Queries.GetClientById;
 
     public class ClientsController : BaseApiController

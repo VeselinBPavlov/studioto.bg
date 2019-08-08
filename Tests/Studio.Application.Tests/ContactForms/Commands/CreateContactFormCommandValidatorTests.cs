@@ -7,8 +7,8 @@
 
     public class CreateContactFormCommandValidatorTests
     {
-        private CreateContactFormCommandValidator createValidator;
-        private CreateContactFormCommand createCommand;
+        private readonly CreateContactFormCommandValidator createValidator;
+        private readonly CreateContactFormCommand createCommand;
 
         public CreateContactFormCommandValidatorTests()
         {

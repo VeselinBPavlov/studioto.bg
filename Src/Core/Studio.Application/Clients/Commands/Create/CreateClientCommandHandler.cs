@@ -3,10 +3,10 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Interfaces.Persistence;
-    using MediatR;
     using Domain.Entities;
     using Domain.ValueObjects;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class CreateClientCommandHandler : IRequestHandler<CreateClientCommand, Unit>
     {

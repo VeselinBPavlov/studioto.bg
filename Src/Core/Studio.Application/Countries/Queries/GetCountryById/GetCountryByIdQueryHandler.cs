@@ -1,12 +1,11 @@
 namespace Studio.Application.Countries.Queries.GetCountryById
 {
-    using AutoMapper;
-    using MediatR;
-    using Studio.Application.Exceptions;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Common;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class GetCountryByIdQueryHandler : IRequestHandler<GetCountryByIdQuery, CountryViewModel>
     {

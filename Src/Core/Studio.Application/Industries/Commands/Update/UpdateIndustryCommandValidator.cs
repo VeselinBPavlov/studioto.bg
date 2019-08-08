@@ -7,6 +7,7 @@
     {
         private const string Name = "Име";
         private const string Possition = "Професия";
+
         public UpdateIndustryCommandValidator()
         {
             RuleFor(i => i.Name)

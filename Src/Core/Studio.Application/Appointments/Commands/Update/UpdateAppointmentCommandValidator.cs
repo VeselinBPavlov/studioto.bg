@@ -1,8 +1,8 @@
 ﻿namespace Studio.Application.Appointments.Commands.Update
 {
-    using FluentValidation;
-    using Studio.Common;
     using System;
+    using Common;
+    using FluentValidation;
 
     public class UpdateAppointmentCommandValidator : AbstractValidator<UpdateAppointmentCommand>
     {

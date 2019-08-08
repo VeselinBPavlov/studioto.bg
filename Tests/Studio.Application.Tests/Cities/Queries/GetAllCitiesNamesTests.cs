@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Clients.Queries
 {
     using Shouldly;
-    using Studio.Application.Clients.Queries.GetAllNames;
+    using Studio.Application.Clients.Queries.GetAllClientsNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllClientsNames : QueryTestFixture
     {
-        private GetClientsNamesListQueryHandler sut;
+        private readonly GetClientsNamesListQueryHandler sut;
 
         public GetAllClientsNames()
         {

@@ -3,11 +3,11 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
     using Exceptions;
     using Interfaces.Persistence;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
-    using Common;
 
     public class UpdateLocationIndustryCommandHandler : IRequestHandler<UpdateLocationIndustryCommand, Unit>
     {

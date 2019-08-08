@@ -1,15 +1,14 @@
 ﻿namespace Studio.User.WebApp.Areas.Administrator.api
 {
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.Employees.Commands.UploadFile;
     using Studio.Application.Locations.Commands.Create;
     using Studio.Application.Locations.Commands.Delete;
     using Studio.Application.Locations.Commands.Update;
     using Studio.Application.Locations.Commands.UploadFile;
     using Studio.Application.Locations.Queries.GetAllLocations;
-    using Studio.Application.Locations.Queries.GetAllNames;
+    using Studio.Application.Locations.Queries.GetAllLocationsNames;
     using Studio.Application.Locations.Queries.GetLocationById;
+    using System.Threading.Tasks;
 
     public class LocationsController : BaseApiController
     {

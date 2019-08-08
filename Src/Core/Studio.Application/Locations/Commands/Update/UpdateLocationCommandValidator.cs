@@ -40,9 +40,9 @@
                 .WithMessage(string.Format(GConst.ErrorInvalidMessage, StartHour));
             RuleFor(l => l.EndHour)
                 .NotEmpty()
-                .WithMessage(string.Format(GConst.ErrorRequiredMessage, StartHour))
+                .WithMessage(string.Format(GConst.ErrorRequiredMessage, EndHour))
                 .Must(this.BeValidHour)
-                .WithMessage(string.Format(GConst.ErrorInvalidMessage, StartHour));
+                .WithMessage(string.Format(GConst.ErrorInvalidMessage, EndHour));
             RuleFor(c => c.Phone)
                 .Matches(@"^(\+359|0)(\d{9})$")
                 .WithMessage(GConst.ErrorPhoneMessage)

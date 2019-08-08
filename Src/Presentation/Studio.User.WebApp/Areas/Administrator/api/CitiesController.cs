@@ -6,7 +6,7 @@
     using Studio.Application.Cities.Commands.Delete;
     using Studio.Application.Cities.Commands.Update;
     using Studio.Application.Cities.Queries.GetAllCities;
-    using Studio.Application.Cities.Queries.GetAllNames;
+    using Studio.Application.Cities.Queries.GetAllCitiesNames;
     using Studio.Application.Cities.Queries.GetCityById;
 
     public class CitiesController : BaseApiController

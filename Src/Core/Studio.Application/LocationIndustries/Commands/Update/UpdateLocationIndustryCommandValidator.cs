@@ -6,6 +6,7 @@
     public class UpdateLocationIndustryCommandValidator : AbstractValidator<UpdateLocationIndustryCommand>
     {
         public const string Description = "Описание";
+
         public UpdateLocationIndustryCommandValidator()
         {
             RuleFor(es => es.LocationId).NotEqual(0);

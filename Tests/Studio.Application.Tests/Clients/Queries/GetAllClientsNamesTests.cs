@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Cities.Queries
 {
     using Shouldly;
-    using Studio.Application.Cities.Queries.GetAllNames;
+    using Studio.Application.Cities.Queries.GetAllCitiesNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllCitiesNames : QueryTestFixture
     {
-        private GetCitiesNamesListQueryHandler sut;
+        private readonly GetCitiesNamesListQueryHandler sut;
 
         public GetAllCitiesNames()
         {

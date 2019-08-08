@@ -7,6 +7,7 @@
     public class CreateEmployeeServiceCommandValidator : AbstractValidator<CreateEmployeeServiceCommand>
     {
         private const string Duration = "Продължителност на услугата";
+
         public CreateEmployeeServiceCommandValidator()
         {
             RuleFor(es => es.Price)

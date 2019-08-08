@@ -1,14 +1,12 @@
 ﻿namespace Studio.Application.Appointments.Commands.Delete
 {
-    using MediatR;
-    using Studio.Application.Exceptions;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Common;
-    using Studio.Domain.Entities;
     using System;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
 
     public class DeleteAppointmentCommandHandler : IRequestHandler<DeleteAppointmentCommand>
     {

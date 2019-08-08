@@ -1,11 +1,10 @@
-
 namespace Studio.User.WebApp.FIlters
 {    
     using System;
     using System.Net;
+    using Application.Exceptions;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
-    using Studio.Application.Exceptions;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute

@@ -1,14 +1,12 @@
 namespace Studio.Application.Clients.Queries.GetClientById
 {
-    using AutoMapper;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Studio.Application.Exceptions;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Common;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
+    using Exceptions;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class GetClientByIdQueryHandler : IRequestHandler<GetClientByIdQuery, ClientViewModel>
     {

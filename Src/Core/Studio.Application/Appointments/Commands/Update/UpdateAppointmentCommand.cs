@@ -1,8 +1,8 @@
 ﻿namespace Studio.Application.Appointments.Commands.Update
 {
-    using MediatR;
-    using Studio.Application.Interfaces.Core;
     using System;
+    using Interfaces.Core;
+    using MediatR;
 
     public class UpdateAppointmentCommand : IRequest, IAppointmentCommand, IModifiedCommand
     {

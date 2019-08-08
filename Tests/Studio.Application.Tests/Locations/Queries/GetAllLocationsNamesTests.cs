@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Locations.Queries
 {
     using Shouldly;
-    using Studio.Application.Locations.Queries.GetAllNames;
+    using Studio.Application.Locations.Queries.GetAllLocationsNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllLocationsNames : QueryTestFixture
     {
-        private GetLocationsNamesListQueryHandler sut;
+        private readonly GetLocationsNamesListQueryHandler sut;
 
         public GetAllLocationsNames()
         {

@@ -1,38 +1,13 @@
-﻿namespace Studio.Application.Cities.Queries.GetAllNames
+﻿namespace Studio.Application.Cities.Queries.GetAllCitiesNames
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Studio.Application.Interfaces.Mapping;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Domain.Entities;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
-    public class CitiesNamesListViewModel
-    {
-        public IList<CityNameViewModel> Cities { get; set; }        
-    }
-
-    public class CityNameViewModel : IHaveCustomMapping
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public void CreateMappings(Profile configuration)
-        {
-            configuration.CreateMap<City, CityNameViewModel>();
-        }
-    }
-
-    public class GetCitiesNamesListQuery : IRequest<CitiesNamesListViewModel>
-    {
-    }
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class GetCitiesNamesListQueryHandler : IRequestHandler<GetCitiesNamesListQuery, CitiesNamesListViewModel>
     {

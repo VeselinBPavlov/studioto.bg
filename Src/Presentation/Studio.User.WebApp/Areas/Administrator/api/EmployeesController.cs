@@ -6,8 +6,8 @@
     using Studio.Application.Employees.Commands.Delete;
     using Studio.Application.Employees.Commands.Update;
     using Studio.Application.Employees.Commands.UploadFile;
+    using Studio.Application.Employees.Queries.GetAllEmployeeNames;
     using Studio.Application.Employees.Queries.GetAllEmployees;
-    using Studio.Application.Employees.Queries.GetAllNames;
     using Studio.Application.Employees.Queries.GetEmployeeById;
 
     public class EmployeesController : BaseApiController

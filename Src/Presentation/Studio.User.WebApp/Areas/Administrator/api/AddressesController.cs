@@ -7,7 +7,7 @@
     using Studio.Application.Addresses.Commands.Update;
     using Studio.Application.Addresses.Queries.GetAddressById;
     using Studio.Application.Addresses.Queries.GetAllAddresses;
-    using Studio.Application.Addresses.Queries.GetAllNames;
+    using Studio.Application.Addresses.Queries.GetAllAddressesNames;
 
     public class AddressesController : BaseApiController
     {

@@ -1,13 +1,13 @@
 ﻿namespace Studio.Application.Industries.Commands.Update
 {
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Common;
     using Exceptions;
     using Interfaces.Persistence;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
-    using Studio.Common;
-    using System;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand, Unit>
     {

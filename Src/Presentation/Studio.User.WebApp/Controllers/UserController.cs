@@ -1,10 +1,10 @@
 namespace Studio.User.WebApp.Controllers
 {
     using System.Threading.Tasks;
+    using Application.Appointments.Queries.GetAppointmentsByUserId;
+    using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.Appointments.Queries.GetAppointmentsByUserId;
-    using Studio.Common;
 
     [Authorize(Roles = GConst.UserRole)]
     public class UserController : BaseController

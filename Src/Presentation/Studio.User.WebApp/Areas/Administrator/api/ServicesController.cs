@@ -6,7 +6,7 @@
     using Studio.Application.Services.Commands.Delete;
     using Studio.Application.Services.Commands.Update;
     using Studio.Application.Services.Queries.GetAllServices;
-    using Studio.Application.Services.Queries.GetAllNames;
+    using Studio.Application.Services.Queries.GetAllServicesNames;
     using Studio.Application.Services.Queries.GetServiceById;
 
     public class ServicesController : BaseApiController

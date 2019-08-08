@@ -1,21 +1,18 @@
 namespace Studio.User.WebApp.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Application.Appointments.Commands.Create;
+    using Application.Appointments.Commands.Delete;
+    using Application.Appointments.Queries.GetAvailableAppointments;
+    using Common;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Studio.Application.Appointments.Commands.Create;
-    using Studio.Application.Appointments.Commands.Delete;
-    using Studio.Application.Appointments.Queries.GetAvailableAppointments;
-    using Studio.Common;
-    using WebApp.Models;
 
-   
     public class AppointmentController : BaseController
     {
-        [Authorize(Roles=GConst.UserRole)]
+        [Authorize(Roles = GConst.UserRole)]
         [HttpGet]
         public IActionResult Success()
         {
@@ -39,7 +36,7 @@ namespace Studio.User.WebApp.Controllers
             return Json(resultlist);
         }
 
-        [Authorize(Roles=GConst.UserRole)]
+        [Authorize(Roles = GConst.UserRole)]
         [HttpPost]
         public async Task<IActionResult> Delete([FromForm]DeleteAppointmentCommand command)
         {

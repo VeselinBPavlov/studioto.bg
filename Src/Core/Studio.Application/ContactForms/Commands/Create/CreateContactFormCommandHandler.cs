@@ -3,12 +3,12 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using Common;
+    using Domain.Entities;
+    using Interfaces.Infrastructure;
     using Interfaces.Persistence;
     using MediatR;
     using Microsoft.Extensions.Logging;
-    using Interfaces.Infrastructure;
-    using Common;
-    using Domain.Entities;
 
     public class CreateContactFormCommandHandler : IRequestHandler<CreateContactFormCommand, Unit>
     {

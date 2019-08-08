@@ -1,37 +1,13 @@
-﻿namespace Studio.Application.Services.Queries.GetAllNames
+﻿namespace Studio.Application.Services.Queries.GetAllServicesNames
 {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Domain.Entities;
-    using Interfaces.Mapping;
     using Interfaces.Persistence;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
-
-    public class ServicesNamesListViewModel
-    {
-        public IList<ServiceNameViewModel> Services { get; set; }        
-    }
-
-    public class ServiceNameViewModel : IHaveCustomMapping
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public void CreateMappings(Profile configuration)
-        {
-            configuration.CreateMap<Service, ServiceNameViewModel>();
-        }
-    }
-
-    public class GetServicesNamesListQuery : IRequest<ServicesNamesListViewModel>
-    {
-    }
 
     public class GetServicesNamesListQueryHandler : IRequestHandler<GetServicesNamesListQuery, ServicesNamesListViewModel>
     {

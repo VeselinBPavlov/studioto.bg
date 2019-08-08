@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Employees.Queries
 {
     using Shouldly;
-    using Studio.Application.Employees.Queries.GetAllNames;
+    using Studio.Application.Employees.Queries.GetAllEmployeeNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllEmployeesNames : QueryTestFixture
     {
-        private GetEmployeesNamesListQueryHandler sut;
+        private readonly GetEmployeesNamesListQueryHandler sut;
 
         public GetAllEmployeesNames()
         {

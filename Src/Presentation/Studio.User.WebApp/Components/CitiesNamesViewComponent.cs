@@ -1,14 +1,13 @@
 namespace Studio.User.WebApp.Components
 {
-    using MediatR;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.Cities.Queries.GetAllNames;
     using System.Threading.Tasks;
+    using Application.Cities.Queries.GetAllCitiesNames;
+    using MediatR;
+    using Microsoft.AspNetCore.Mvc;
 
     public class CitiesNamesViewComponent : ViewComponent
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
 
         public CitiesNamesViewComponent(IMediator mediator)
         {

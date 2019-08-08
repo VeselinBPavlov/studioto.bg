@@ -2,8 +2,8 @@ namespace Studio.User.WebApp.Controllers
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.Locations.Queries.GetFilteredLocations;
-    using Studio.Application.Locations.Queries.GetLocationByIdPage;
+    using Application.Locations.Queries.GetFilteredLocations;
+    using Application.Locations.Queries.GetLocationByIdPage;
 
     public class LocationController : BaseController
     {

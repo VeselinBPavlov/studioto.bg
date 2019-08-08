@@ -74,6 +74,19 @@
         public const string Update = "промяната";
 
         #endregion
+        
+        #region Studio.User.WebApp
+
+        public const string AdministratorRole = "Administrator";
+        public const string AdministratorArea = "Administrator";
+        public const string UserRole = "User";
+        public const string Email = "Email";
+        public const string FirstName = "Име";
+        public const string LastName = "Фамилия";
+        public const string Phone = "Телефон";
+        public const string Password = "Парола";
+
+        #endregion
 
         #region Studio.Application.Tests
 
@@ -110,19 +123,6 @@
         public const string NotAvalableHours = "Няма свободни часове за {0}";
         public const string NotAvalableAppointments = "Няма свободни часове";
         public const int AvailableAppointmentsCount = 20;
-
-        #endregion
-
-        #region Studio.User.WebApp
-
-        public const string AdministratorRole = "Administrator";
-        public const string AdministratorArea = "Administrator";
-        public const string UserRole = "User";
-        public const string Email = "Email";
-        public const string FirstName = "Име";
-        public const string LastName = "Фамилия";
-        public const string Phone = "Телефон";
-        public const string Password = "Парола";
 
         #endregion
     }

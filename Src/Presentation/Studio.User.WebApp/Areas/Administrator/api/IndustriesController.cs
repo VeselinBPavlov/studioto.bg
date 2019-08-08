@@ -6,7 +6,7 @@
     using Studio.Application.Industries.Commands.Delete;
     using Studio.Application.Industries.Commands.Update;
     using Studio.Application.Industries.Queries.GetAllIndustries;
-    using Studio.Application.Industries.Queries.GetAllNames;
+    using Studio.Application.Industries.Queries.GetAllIndustriesNames;
     using Studio.Application.Industries.Queries.GetIndustryById;
 
     public class IndustriesController : BaseApiController

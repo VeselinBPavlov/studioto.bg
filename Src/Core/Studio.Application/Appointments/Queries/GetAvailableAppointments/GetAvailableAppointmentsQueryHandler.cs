@@ -36,19 +36,19 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             var endHour = employee.Location.EndHour;
             var duration = employeeService.DurationInMinutes;
 
-            int a, s, e;
-            a = int.Parse(duration);
-            s = int.Parse(startHour);
-            e = int.Parse(endHour);
+            int time, start, end;
+            time = int.Parse(duration);
+            start = int.Parse(startHour);
+            end = int.Parse(endHour);
 
-            TimeBlock timeBlock = new TimeBlockExtension(new DateTime(command.ReservationDate.Year, command.ReservationDate.Month, command.ReservationDate.Day, s, 0, 0), new TimeSpan(0, a, 0));
+            TimeBlock timeBlock = new TimeBlockExtension(new DateTime(command.ReservationDate.Year, command.ReservationDate.Month, command.ReservationDate.Day, start, 0, 0), new TimeSpan(0, time, 0));
 
             List<SelectListItem> itemsList = new List<SelectListItem>();
 
             // No Appointments for past!!
             while (timeBlock.Start.CompareTo(DateTime.Now) <= 0)
             {
-                timeBlock.Move(new TimeSpan(0, a, 0));
+                timeBlock.Move(new TimeSpan(0, time, 0));
                 if (!AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock))
                 {
                     break;
@@ -62,7 +62,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             {
                 foreach (var appointment in appointments)
                 {
-                    TimeBlock BookedTimeBlock = new TimeBlockExtension(appointment.ReservationDate.Date.Add(appointment.ReservationTime.TimeOfDay), new TimeSpan(0, a, 0));
+                    TimeBlock BookedTimeBlock = new TimeBlockExtension(appointment.ReservationDate.Date.Add(appointment.ReservationTime.TimeOfDay), new TimeSpan(0, time, 0));
                     if (BookedTimeBlock.OverlapsWith(timeBlock))
                     {
                         overlaps = true;
@@ -75,7 +75,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
                 }
 
                 overlaps = false;
-                timeBlock.Move(new TimeSpan(0, a, 0));
+                timeBlock.Move(new TimeSpan(0, time, 0));
             }
 
             if (itemsList.Count != 0)

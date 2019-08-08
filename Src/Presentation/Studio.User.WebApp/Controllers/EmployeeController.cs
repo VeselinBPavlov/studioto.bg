@@ -2,9 +2,9 @@ namespace Studio.User.WebApp.Controllers
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.Appointments.Commands.Create;
-    using Studio.Application.Employees.Queries.GetPageEmployeeById;
-    using Studio.User.WebApp.Models;
+    using Application.Appointments.Commands.Create;
+    using Application.Employees.Queries.GetPageEmployeeById;
+    using User.WebApp.Models;
 
     public class EmployeeController : BaseController
     {

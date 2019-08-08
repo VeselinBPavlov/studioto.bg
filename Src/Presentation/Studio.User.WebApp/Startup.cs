@@ -6,7 +6,6 @@
     using Application.Infrastructure.Logger;
     using Application.Interfaces.Infrastructure;
     using AutoMapper;
-    using Common;
     using Domain.Entities;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
@@ -59,7 +58,7 @@
 
             services.AddDbContext<StudioDbContext>(options =>
                 options.UseSqlServer(
-                    this.Configuration.GetConnectionString("StudioDBConnectionWork")));
+                    this.Configuration.GetConnectionString("StudioDBConnectionHome")));
             
             services.AddScoped<IStudioDbContext, StudioDbContext>();
 

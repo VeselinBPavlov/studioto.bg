@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Industries.Queries
 {
     using Shouldly;
-    using Studio.Application.Industries.Queries.GetAllNames;
+    using Studio.Application.Industries.Queries.GetAllIndustriesNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllIndustriesNames : QueryTestFixture
     {
-        private GetIndustriesNamesListQueryHandler sut;
+        private readonly GetIndustriesNamesListQueryHandler sut;
 
         public GetAllIndustriesNames()
         {

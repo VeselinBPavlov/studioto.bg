@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Tests.Addresses.Queries
 {
     using Shouldly;
-    using Studio.Application.Addresses.Queries.GetAllNames;
+    using Studio.Application.Addresses.Queries.GetAllAddressesNames;
     using Studio.Application.Tests.Infrastructure;
     using Studio.Common;
     using System.Threading;
@@ -11,7 +11,7 @@
     [Collection("QueryCollection")]
     public class GetAllAddressesNamesQueryHandlerTests : QueryTestFixture
     {
-        private GetAddressesNamesListQueryHandler sut;
+        private readonly GetAddressesNamesListQueryHandler sut;
 
         public GetAllAddressesNamesQueryHandlerTests()
         {

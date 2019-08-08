@@ -1,39 +1,13 @@
-﻿namespace Studio.Application.Clients.Queries.GetAllNames
+﻿namespace Studio.Application.Clients.Queries.GetAllClientsNames
 {
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Studio.Application.Interfaces.Mapping;
-    using Studio.Application.Interfaces.Persistence;
-    using Studio.Domain.Entities;
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-
-    public class ClientsNamesListViewModel
-    {
-        public IList<ClientNameViewModel> Clients { get; set; }        
-    }
-
-    public class ClientNameViewModel : IHaveCustomMapping
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
-        public void CreateMappings(Profile configuration)
-        {
-            configuration.CreateMap<Client, ClientNameViewModel>()
-                .ForMember(x => x.Name, y => y.MapFrom(src => src.CompanyName));
-        }
-    }
-
-    public class GetClientsNamesListQuery : IRequest<ClientsNamesListViewModel>
-    {
-    }
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+    using Interfaces.Persistence;
+    using MediatR;
+    using Microsoft.EntityFrameworkCore;
 
     public class GetClientsNamesListQueryHandler : IRequestHandler<GetClientsNamesListQuery, ClientsNamesListViewModel>
     {

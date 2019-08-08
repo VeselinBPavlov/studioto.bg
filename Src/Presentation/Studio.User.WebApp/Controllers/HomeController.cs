@@ -2,9 +2,9 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using Application.ContactForms.Commands.Create;
+    using Application.Locations.Queries.GetFilteredLocations;
     using Microsoft.AspNetCore.Mvc;
-    using Studio.Application.ContactForms.Commands.Create;
-    using Studio.Application.Locations.Queries.GetFilteredLocations;
     using WebApp.Models;
 
     public class HomeController : BaseController

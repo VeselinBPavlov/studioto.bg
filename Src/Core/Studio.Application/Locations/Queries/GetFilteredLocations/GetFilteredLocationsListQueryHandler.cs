@@ -48,8 +48,7 @@ namespace Studio.Application.Locations.Queries.GetFilteredLocations
                 {
                     locations = locations.Take(MaxLocationsCount);
                 }  
-            }
-                    
+            }                    
 
             return new LocationsFilteredListViewModel
             {

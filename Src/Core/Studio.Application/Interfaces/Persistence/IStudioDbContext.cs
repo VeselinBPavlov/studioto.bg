@@ -1,9 +1,9 @@
 ﻿namespace Studio.Application.Interfaces.Persistence
 {
-    using Domain.Entities;
-    using Microsoft.EntityFrameworkCore;
     using System.Threading;
     using System.Threading.Tasks;
+    using Domain.Entities;
+    using Microsoft.EntityFrameworkCore;
 
     public interface IStudioDbContext
     {

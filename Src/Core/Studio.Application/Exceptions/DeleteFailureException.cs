@@ -1,7 +1,7 @@
 ﻿namespace Studio.Application.Exceptions
 {
-    using Studio.Common;
     using System;
+    using Common;
 
     public class DeleteFailureException : Exception
     {
