@@ -60,9 +60,11 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             bool overlaps = false;
             while (AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock, employee))
             {
+                
                 foreach (var appointment in appointments)
                 {
-                    TimeBlock BookedTimeBlock = new TimeBlockExtension(appointment.ReservationDate.Date.Add(appointment.ReservationTime.TimeOfDay), new TimeSpan(0, time, 0));
+                    var serviceDuration = int.Parse(this.context.EmployeeServices.Find(appointment.EmployeeId, appointment.ServiceId).DurationInMinutes);
+                    TimeBlock BookedTimeBlock = new TimeBlockExtension(appointment.ReservationDate.Date.Add(appointment.ReservationTime.TimeOfDay), new TimeSpan(0, serviceDuration, 0));
                     if (BookedTimeBlock.OverlapsWith(timeBlock))
                     {
                         overlaps = true;

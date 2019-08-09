@@ -167,7 +167,7 @@ namespace Studio.Application.Tests.Infrastructure
         {
             Appointment appointment = new Appointment
             {
-                ReservationDate = new DateTime(2019, 09, 09),
+                ReservationDate = new DateTime(2021, 09, 09),
                 TimeBlockHelper = GConst.ValidHour,
             };
         
