@@ -25,7 +25,7 @@
             </div>
             <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-xs-6 col-md-3 hairdresser-info employee-info employee-profile">
+                    <div class="col-xs-12 col-md-3 hairdresser-info employee-info employee-profile">
                         <div class="hairdresser employee">
                             <img src="~/img/locations/@employee.LocationId/employees/@employee.Id/profile-picture.jpg" alt="employee" />
                             <span class="hairdresser-name employee-name">@employee.FirstName @employee.LastName</span>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-5 appointment">
+                    <div class="col-xs-12 col-md-5 appointment">
                         <form asp-controller="Appointment" asp-action="Create" method="post" id="FormAppointment">
                             <h4>Форма за резервация</h4>
                             <div class="form-group">
