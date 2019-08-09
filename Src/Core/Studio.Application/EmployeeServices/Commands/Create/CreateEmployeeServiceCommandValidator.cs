@@ -21,7 +21,7 @@
                 .NotEmpty()
                 .WithMessage(string.Format(GConst.ErrorRequiredMessage, Duration))                
                 .Must(this.BeValidDuration)
-                .WithMessage(GConst.ErrorInvalidMessage);                
+                .WithMessage(string.Format(GConst.ErrorInvalidMessage, Duration));                
         }
 
         private bool BeValidDuration(string duration)

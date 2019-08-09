@@ -21,15 +21,12 @@
         {
             var employeeService = await this.context.EmployeeServices.FindAsync(request.EmployeeId, request.ServiceId);
 
-            if (employeeService == null || employeeService.IsDeleted == true)
+            if (employeeService == null)
             {
                 throw new NotFoundException(GConst.EmployeeService, $"{request.EmployeeId} - {request.ServiceId}");
             }            
-
-            employeeService.DeletedOn = DateTime.UtcNow;
-            employeeService.IsDeleted = true;
             
-            this.context.EmployeeServices.Update(employeeService);
+            this.context.EmployeeServices.Remove(employeeService);
             await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

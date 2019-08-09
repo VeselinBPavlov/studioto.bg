@@ -24,7 +24,7 @@ namespace Studio.Application.EmployeeServices.Queries.GetAllEmployeeServices
         {
             return new EmployeeServicesListViewModel
             {
-                EmployeeServices = await this.context.EmployeeServices.Where(c => c.IsDeleted != true).ProjectTo<EmployeeServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
+                EmployeeServices = await this.context.EmployeeServices.ProjectTo<EmployeeServiceAllViewModel>(this.mapper.ConfigurationProvider).ToListAsync(cancellationToken)
             };
         }
     }

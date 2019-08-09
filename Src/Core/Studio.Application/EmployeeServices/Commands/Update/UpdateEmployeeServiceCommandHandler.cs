@@ -21,7 +21,7 @@
         public async Task<Unit> Handle(UpdateEmployeeServiceCommand request, CancellationToken cancellationToken)
         {
             var employeeService = await this.context.EmployeeServices
-                .SingleOrDefaultAsync(c => c.EmployeeId == request.EmployeeId && c.ServiceId == request.ServiceId && c.IsDeleted != true, cancellationToken);
+                .SingleOrDefaultAsync(c => c.EmployeeId == request.EmployeeId && c.ServiceId == request.ServiceId, cancellationToken);
 
             if (employeeService == null)
             {

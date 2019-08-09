@@ -34,7 +34,7 @@
                 throw new DeleteFailureException(GConst.Service, request.Id, string.Format(GConst.DeleteException, GConst.Appointments, GConst.ServiceLower));
             }
 
-            var hasEmployees = this.context.EmployeeServices.Where(es => es.IsDeleted != true).Any(s => s.ServiceId == service.Id && s.Employee.IsDeleted == false);
+            var hasEmployees = this.context.EmployeeServices.Any(s => s.ServiceId == service.Id && s.Employee.IsDeleted == false);
 
             if (hasEmployees)
             {

@@ -47,8 +47,7 @@
                 Industry = industry,
                 Description = request.Description,
                 IsActive = isActive,
-                CreatedOn = DateTime.UtcNow,
-                IsDeleted = false
+                CreatedOn = DateTime.UtcNow
             };
 
             this.context.LocationIndustries.Add(locationIndustry);

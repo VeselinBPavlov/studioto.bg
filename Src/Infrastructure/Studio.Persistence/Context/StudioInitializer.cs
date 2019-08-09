@@ -122,26 +122,26 @@ namespace Studio.Persistence.Context
         {
             var locationIndustries = new[]
             {
-                new LocationIndustry { LocationId = 1, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 1, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 2, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 2, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 3, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 3, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 4, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 4, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 5, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 6, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 7, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 8, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 9, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 10, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 10, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 11, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 12, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 13, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 14, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false },
-                new LocationIndustry { LocationId = 15, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow, IsDeleted = false }
+                new LocationIndustry { LocationId = 1, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 1, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 2, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 2, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 3, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 3, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 4, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 4, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 5, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 6, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 7, IndustryId = 2, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 8, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 9, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 10, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 10, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 11, IndustryId = 5, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 12, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 13, IndustryId = 1, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 14, IndustryId = 4, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow},
+                new LocationIndustry { LocationId = 15, IndustryId = 3, Description = "Висококчествени услуга на супер цена!", CreatedOn = DateTime.UtcNow}
             };
 
             context.LocationIndustries.AddRange(locationIndustries);

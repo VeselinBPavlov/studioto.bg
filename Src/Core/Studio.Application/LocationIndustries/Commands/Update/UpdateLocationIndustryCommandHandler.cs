@@ -21,7 +21,7 @@
         public async Task<Unit> Handle(UpdateLocationIndustryCommand request, CancellationToken cancellationToken)
         {
             var locationIndustry = await this.context.LocationIndustries
-                .SingleOrDefaultAsync(c => c.LocationId == request.LocationId && c.IndustryId == request.IndustryId && c.IsDeleted != true, cancellationToken);
+                .SingleOrDefaultAsync(c => c.LocationId == request.LocationId && c.IndustryId == request.IndustryId, cancellationToken);
 
             if (locationIndustry == null)
             {

@@ -35,7 +35,7 @@
                 throw new DeleteFailureException(GConst.Industry, request.Id, string.Format(GConst.DeleteException, GConst.Services, GConst.IndustryLower));
             }
 
-            var hasLocations = this.context.LocationIndustries.Where(l => l.IsDeleted != true).Any(li => li.IndustryId == industry.Id && li.Industry.IsDeleted == false);
+            var hasLocations = this.context.LocationIndustries.Any(li => li.IndustryId == industry.Id && li.Industry.IsDeleted == false);
 
             if (hasLocations)
             {

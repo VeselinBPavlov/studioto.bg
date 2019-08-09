@@ -44,8 +44,7 @@
                 Service = service,
                 Price = request.Price,
                 DurationInMinutes = request.DurationInMinutes,
-                CreatedOn = DateTime.UtcNow,
-                IsDeleted = false
+                CreatedOn = DateTime.UtcNow
             };
 
             this.context.EmployeeServices.Add(employeeService);
