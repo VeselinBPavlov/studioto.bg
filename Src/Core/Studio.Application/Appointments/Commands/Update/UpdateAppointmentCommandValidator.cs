@@ -21,9 +21,9 @@
                 .WithMessage(string.Format(GConst.ErrorRequiredMessage, TimeBlockHelper));
         }
 
-        private bool BeValidDate(DateTime reservationTime)
+        private bool BeValidDate(DateTime reservationDate)
         {
-            return reservationTime.Day >= DateTime.UtcNow.Day;
+            return reservationDate >= DateTime.UtcNow;
         }
     }
 }

@@ -1,14 +1,12 @@
 namespace Studio.Application.HelperMethods
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using Extensions;
+    using Common;
+    using Domain.Entities;
     using Interfaces.Core;
     using Interfaces.Persistence;
     using Itenso.TimePeriod;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Studio.Domain.Entities;
 
     public class AppointmentHelper
     {        
@@ -16,8 +14,11 @@ namespace Studio.Application.HelperMethods
         // Checking if InsideWorkingHours + Not Weekend
         public static bool IsInWorkingHours(IStudioDbContext context, Employee employee, DateTime start, DateTime end)
         {
-            // check Not Saturday or Sunday
-            if (start.DayOfWeek == DayOfWeek.Saturday || start.DayOfWeek == DayOfWeek.Sunday)
+            var startDay = ((int)start.DayOfWeek == 0) ? 7 : (int)start.DayOfWeek;
+            var endDay = ((int)end.DayOfWeek == 0) ? 7 : (int)end.DayOfWeek;
+            var locationEndDay = (int)employee.Location.EndDay;
+
+            if (startDay > locationEndDay || endDay > locationEndDay)
             {
                 return false;
             }
@@ -26,10 +27,13 @@ namespace Studio.Application.HelperMethods
             return workingHours.HasInside(new TimeRange(start, end));
         }
 
-        public static bool IsInWorkingHours(string startHour, string endHour, TimeBlock block)
+        public static bool IsInWorkingHours(string startHour, string endHour, TimeBlock block, Employee employee)
         {
-            // check Not Saturday or Sunday
-            if (block.Start.DayOfWeek == DayOfWeek.Saturday || block.Start.DayOfWeek == DayOfWeek.Sunday)
+            var start = ((int)block.Start.DayOfWeek == 0) ? 7 : (int)block.Start.DayOfWeek;
+            var end = ((int)block.Start.DayOfWeek == 0) ? 7 : (int)block.Start.DayOfWeek;
+            var locationEnd = (int)employee.Location.EndDay;
+
+            if (start > locationEnd || end > locationEnd)
             {
                 return false;
             }
@@ -47,7 +51,7 @@ namespace Studio.Application.HelperMethods
                 if (item.ReservationTime.ToShortTimeString() == appointment.ReservationTime.Value.ToShortTimeString() && item.ReservationDate.ToShortDateString() == appointment.ReservationDate.ToShortDateString())
                 {
                     string errorMessage = string.Format(
-                        "{0} already has an appointment on {1} on {2}.",
+                        GConst.ClashAppointmentMessage,
                         item.Employee.FirstName,
                         item.ReservationDate.ToShortDateString(),
                         item.ReservationTime.ToShortTimeString());

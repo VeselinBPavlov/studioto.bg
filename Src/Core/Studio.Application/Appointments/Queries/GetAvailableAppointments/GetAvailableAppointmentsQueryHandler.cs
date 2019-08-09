@@ -49,7 +49,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             while (timeBlock.Start.CompareTo(DateTime.Now) <= 0)
             {
                 timeBlock.Move(new TimeSpan(0, time, 0));
-                if (!AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock))
+                if (!AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock, employee))
                 {
                     break;
                 }
@@ -58,7 +58,7 @@ namespace Studio.Application.Appointments.Queries.GetAvailableAppointments
             var appointments = this.context.Appointments.Where(x => x.EmployeeId == command.EmployeeId && x.IsDeleted != true);
                                
             bool overlaps = false;
-            while (AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock))
+            while (AppointmentHelper.IsInWorkingHours(startHour, endHour, timeBlock, employee))
             {
                 foreach (var appointment in appointments)
                 {

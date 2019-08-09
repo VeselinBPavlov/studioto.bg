@@ -24,7 +24,7 @@
 
         private bool BeValidDate(DateTime reservationDate)
         {
-            return reservationDate >= DateTime.UtcNow && reservationDate.DayOfWeek != DayOfWeek.Saturday && reservationDate.DayOfWeek != DayOfWeek.Sunday;
+            return reservationDate >= DateTime.UtcNow;
         }
     }
 }
